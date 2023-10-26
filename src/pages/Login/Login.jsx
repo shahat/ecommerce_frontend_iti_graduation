@@ -12,6 +12,9 @@ function Login() {
   const navigateToRegister =()=>{
     navgiate('register');
   }
+  const navigateToHome = ()=>{
+    navgiate('home')
+  }
   return (
     <div className="container">
       <div className="row justify-content-center ">
@@ -19,11 +22,11 @@ function Login() {
           className={`col-md-6  col-sm-10  vh-80 mt-4 p-5 d-flex flex-column justify-content-center ${style.loginInformation}`}
         >
           <h4 className="text-center">LOGIN</h4>
-          <p>
+          <p className="text-center">
             If you don't have account please
             <a
               onClick={navigateToRegister}
-              className="text-decoration-none border-0 border-bottom ms-2"
+              className={`text-decoration-none border-0 border-bottom ms-2 ${style.register}`}
             >
               Register
             </a>
@@ -47,13 +50,14 @@ function Login() {
               <button
                 type="submit"
                 className={`form-control text-white px-4 py-2 btn-success ${style.loginBtn}`}
+                onClick={navigateToHome}
               >
                 Log in
               </button>
               <p className="text-center mt-3">
                 <a
                   onClick={navigateResetPass}
-                  className="text-decoration-none "
+                  className={`text-decoration-none  ${style.forgottenPassword}`}
                 >
                   Forgotten password?
                 </a>
