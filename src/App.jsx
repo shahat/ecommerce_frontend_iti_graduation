@@ -16,6 +16,7 @@ import Order from "./components/Order/Order";
 import Contact from "./components/Contact/Contact";
 import UserProfile from "./components/UserProfile/UserProfile";
 import NotFound from "./pages/notFound/NotFound";
+import Login from "./pages/Login/Login";
 
 // import components and page
 
@@ -26,7 +27,7 @@ function App() {
       element: <AppLayout />,
       children: [
         { index: true, element: <Home /> },
-        { path: "/login", element: <Shop /> },
+        { path: "/login", element: <Login /> },
         { path: "/register", element: <ProductDetails /> },
         { path: "/cart", element: <Cart /> },
         { path: "/wishlist", element: <WishList /> },
