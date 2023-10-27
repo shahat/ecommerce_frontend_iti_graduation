@@ -1,0 +1,19 @@
+.bottomNavContainer {
+  height: 10vh;
+  width: 100vw;
+  display: none;
+}
+.bottom_nav {
+  position: fixed;
+  width: 100vw;
+  top: 90vh;
+  background-color: black;
+  height: 10vh;
+  color: wheat;
+}
+
+@media screen and (max-width: 768px) {
+  .bottomNavContainer {
+    display: block;
+  }
+}

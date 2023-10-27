@@ -1,0 +1,51 @@
+.newArrival,
+.newArrival_second {
+  height: 80vh;
+}
+.leftSide,
+.rightSide {
+  height: 100%;
+}
+
+.newArrival img,
+.newArrival_second img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.rightSide .topRow {
+  width: 50%;
+  height: 38vh;
+}
+
+.rightSide .bottomRow {
+  margin-top: 2vh;
+  height: 38vh;
+}
+
+@media screen and (max-width: 769px) {
+  .newArrival,
+  .newArrival_second {
+    display: none;
+  }
+  .newArrival2,
+  .newArrival2_second {
+    display: block;
+  }
+}
+@media screen and (min-width: 770px) {
+  .newArrival2,
+  .newArrival2_second {
+    display: none;
+  }
+}
+.sa_element {
+  max-height: 60vh;
+  margin: 30px 20px;
+  overflow: hidden;
+}
+.secondArrival_img {
+  width: 100%;
+  object-fit: cover;
+}
