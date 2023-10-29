@@ -7,7 +7,7 @@ function Login() {
   const navgiate = useNavigate();
 
   const navigateResetPass =()=>{
-    navgiate('resetPassword');
+    navgiate('/resetPassword');
   }
   const navigateToRegister =()=>{
     navgiate('/register');
@@ -38,6 +38,7 @@ function Login() {
               placeholder="Email or Phone Number"
               type="text"
               id="password"
+              required
             />
             <label htmlFor="email" />
             <input
@@ -45,6 +46,7 @@ function Login() {
               placeholder="Password"
               type="email"
               id="email"
+              required
             />
             <div className=" mt-4">
               <button
