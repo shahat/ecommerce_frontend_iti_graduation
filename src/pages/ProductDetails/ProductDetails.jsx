@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import css from "./product.module.css";
+import { useEffect, useState } from "react";
+import css from "../../assets/style/product.module.css";
 import PhotoGallery from "../../components/productDetailsComps/photoGallery";
 import ProductReview from "../../components/productDetailsComps/productReview";
+import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import {
     FaFilter,
     FaStar,
@@ -42,10 +43,10 @@ function ProductDetails() {
     }, []);
 
     function inc() {
-        setQuantity(quantity+1)
+        setQuantity(quantity + 1);
     }
     function dec() {
-        quantity > 1 && setQuantity(quantity-1)
+        quantity > 1 && setQuantity(quantity - 1);
     }
 
     return (
@@ -62,7 +63,9 @@ function ProductDetails() {
                     {/* <!-- IMAGE PART --> */}
                     <PhotoGallery className="col-md-6 m-auto border rounded-4  shadow p-0" />
                     {/* <!-- DETAILS PART --> */}
-                    <div className={`${css["product_details"]} col-md-5 ps-5 align-content-between`}>
+                    <div
+                        className={`${css["product_details"]} col-md-5 ps-5 align-content-between`}
+                    >
                         <div className="fw-bold h5">
                             <p>Havic HV G-92 Gamepad</p>
                             <div
@@ -470,311 +473,309 @@ function ProductDetails() {
                     </div>
                 </div>
                 {/* <!-- Related Products PART --> */}
+                <RelatedProducts />
 
-                <div
-                    id="carouselMultiItemExample"
-                    className="carousel slide carousel-dark text-center mt-4 py-3 border rounded-3 col-10"
-                    data-mdb-ride="carousel"
-                >
-                    {/* <!-- Controls --> */}
-                    <div className="d-flex justify-content-center mb-4">
-                        <button
-                            className="carousel-control-prev position-relative"
-                            type="button"
-                            data-mdb-target="#carouselMultiItemExample"
-                            data-mdb-slide="prev"
-                        >
-                            <span
-                                className="carousel-control-prev-icon"
-                                aria-hidden="true"
-                            ></span>
-                            <span className="visually-hidden">Previous</span>
-                        </button>
-                        <button
-                            className="carousel-control-next position-relative"
-                            type="button"
-                            data-mdb-target="#carouselMultiItemExample"
-                            data-mdb-slide="next"
-                        >
-                            <span
-                                className="carousel-control-next-icon"
-                                aria-hidden="true"
-                            ></span>
-                            <span className="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                    {/* <!-- Inner --> */}
-                    <div className="carousel-inner py-4">
-                        {/* <!-- Single item --> */}
-                        <div className="carousel-item active">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-lg-4">
-                                        <div className="card">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/181.webp"
-                                                className="card-img-top"
-                                                alt="Waterfall"
-                                            />
-                                            <div className="card-body">
-                                                <h5 className="card-title">
-                                                    Card title
-                                                </h5>
-                                                <p className="card-text">
-                                                    Some quick example text to
-                                                    build on the card title and
-                                                    make up the bulk of the
-                                                    card&apos;s content.
-                                                </p>
-                                                <a
-                                                    href="#!"
-                                                    className="btn btn-primary"
-                                                >
-                                                    Button
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-lg-4 d-none d-lg-block">
-                                        <div className="card">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp"
-                                                className="card-img-top"
-                                                alt="Sunset Over the Sea"
-                                            />
-                                            <div className="card-body">
-                                                <h5 className="card-title">
-                                                    Card title
-                                                </h5>
-                                                <p className="card-text">
-                                                    Some quick example text to
-                                                    build on the card title and
-                                                    make up the bulk of the
-                                                    card&apos;s content.
-                                                </p>
-                                                <a
-                                                    href="#!"
-                                                    className="btn btn-primary"
-                                                >
-                                                    Button
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-lg-4 d-none d-lg-block">
-                                        <div className="card">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/183.webp"
-                                                className="card-img-top"
-                                                alt="Sunset over the Sea"
-                                            />
-                                            <div className="card-body">
-                                                <h5 className="card-title">
-                                                    Card title
-                                                </h5>
-                                                <p className="card-text">
-                                                    Some quick example text to
-                                                    build on the card title and
-                                                    make up the bulk of the
-                                                    card&apos;s content.
-                                                </p>
-                                                <a
-                                                    href="#!"
-                                                    className="btn btn-primary"
-                                                >
-                                                    Button
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* <!-- Single item --> */}
-                        <div className="carousel-item">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-lg-4 col-md-12">
-                                        <div className="card">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
-                                                className="card-img-top"
-                                                alt="Fissure in Sandstone"
-                                            />
-                                            <div className="card-body">
-                                                <h5 className="card-title">
-                                                    Card title
-                                                </h5>
-                                                <p className="card-text">
-                                                    Some quick example text to
-                                                    build on the card title and
-                                                    make up the bulk of the
-                                                    card&apos;s content.
-                                                </p>
-                                                <a
-                                                    href="#!"
-                                                    className="btn btn-primary"
-                                                >
-                                                    Button
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-lg-4 d-none d-lg-block">
-                                        <div className="card">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/185.webp"
-                                                className="card-img-top"
-                                                alt="Storm Clouds"
-                                            />
-                                            <div className="card-body">
-                                                <h5 className="card-title">
-                                                    Card title
-                                                </h5>
-                                                <p className="card-text">
-                                                    Some quick example text to
-                                                    build on the card title and
-                                                    make up the bulk of the
-                                                    card&apos;s content.
-                                                </p>
-                                                <a
-                                                    href="#!"
-                                                    className="btn btn-primary"
-                                                >
-                                                    Button
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-lg-4 d-none d-lg-block">
-                                        <div className="card">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/186.webp"
-                                                className="card-img-top"
-                                                alt="Hot Air Balloons"
-                                            />
-                                            <div className="card-body">
-                                                <h5 className="card-title">
-                                                    Card title
-                                                </h5>
-                                                <p className="card-text">
-                                                    Some quick example text to
-                                                    build on the card title and
-                                                    make up the bulk of the
-                                                    card&apos;s content.
-                                                </p>
-                                                <a
-                                                    href="#!"
-                                                    className="btn btn-primary"
-                                                >
-                                                    Button
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* <!-- Single item --> */}
-                        <div className="carousel-item">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                                        <div className="card">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/187.webp"
-                                                className="card-img-top"
-                                                alt="Peaks Against the Starry Sky"
-                                            />
-                                            <div className="card-body">
-                                                <h5 className="card-title">
-                                                    Card title
-                                                </h5>
-                                                <p className="card-text">
-                                                    Some quick example text to
-                                                    build on the card title and
-                                                    make up the bulk of the
-                                                    card&apos;s content.
-                                                </p>
-                                                <a
-                                                    href="#!"
-                                                    className="btn btn-primary"
-                                                >
-                                                    Button
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-lg-4 mb-4 mb-lg-0 d-none d-lg-block">
-                                        <div className="card">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/188.webp"
-                                                className="card-img-top"
-                                                alt="Bridge Over Water"
-                                            />
-                                            <div className="card-body">
-                                                <h5 className="card-title">
-                                                    Card title
-                                                </h5>
-                                                <p className="card-text">
-                                                    Some quick example text to
-                                                    build on the card title and
-                                                    make up the bulk of the
-                                                    card&apos;s content.
-                                                </p>
-                                                <a
-                                                    href="#!"
-                                                    className="btn btn-primary"
-                                                >
-                                                    Button
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-lg-4 mb-4 mb-lg-0 d-none d-lg-block">
-                                        <div className="card">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/standard/nature/189.webp"
-                                                className="card-img-top"
-                                                alt="Purbeck Heritage Coast"
-                                            />
-                                            <div className="card-body">
-                                                <h5 className="card-title">
-                                                    Card title
-                                                </h5>
-                                                <p className="card-text">
-                                                    Some quick example text to
-                                                    build on the card title and
-                                                    make up the bulk of the
-                                                    card&apos;s content.
-                                                </p>
-                                                <a
-                                                    href="#!"
-                                                    className="btn btn-primary"
-                                                >
-                                                    Button
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {/* <!-- Inner --> */}
-                </div>
-                {/* <!-- Carousel wrapper --> */}
+                {/* <NewRelatedProducts     /> */}
             </div>
         </>
     );
 }
 
 export default ProductDetails;
+
+function NewRelatedProducts() {
+    return (
+        <div
+            id="carouselMultiItemExample"
+            className="carousel slide carousel-dark text-center mt-4 py-3 border rounded-3 col-10"
+            data-mdb-ride="carousel"
+        >
+            {/* <!-- Controls --> */}
+            <div className="d-flex justify-content-center mb-4">
+                <button
+                    className="carousel-control-prev position-relative"
+                    type="button"
+                    data-mdb-target="#carouselMultiItemExample"
+                    data-mdb-slide="prev"
+                >
+                    <span
+                        className="carousel-control-prev-icon"
+                        aria-hidden="true"
+                    ></span>
+                    <span className="visually-hidden">Previous</span>
+                </button>
+                <button
+                    className="carousel-control-next position-relative"
+                    type="button"
+                    data-mdb-target="#carouselMultiItemExample"
+                    data-mdb-slide="next"
+                >
+                    <span
+                        className="carousel-control-next-icon"
+                        aria-hidden="true"
+                    ></span>
+                    <span className="visually-hidden">Next</span>
+                </button>
+            </div>
+            {/* <!-- Inner --> */}
+            <div className="carousel-inner py-4">
+                {/* <!-- Single item --> */}
+                <div className="carousel-item active">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-4">
+                                <div className="card">
+                                    <img
+                                        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/181.webp"
+                                        className="card-img-top"
+                                        alt="Waterfall"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            Card title
+                                        </h5>
+                                        <p className="card-text">
+                                            Some quick example text to build on
+                                            the card title and make up the bulk
+                                            of the card&apos;s content.
+                                        </p>
+                                        <a
+                                            href="#!"
+                                            className="btn btn-primary"
+                                        >
+                                            Button
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-4 d-none d-lg-block">
+                                <div className="card">
+                                    <img
+                                        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp"
+                                        className="card-img-top"
+                                        alt="Sunset Over the Sea"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            Card title
+                                        </h5>
+                                        <p className="card-text">
+                                            Some quick example text to build on
+                                            the card title and make up the bulk
+                                            of the card&apos;s content.
+                                        </p>
+                                        <a
+                                            href="#!"
+                                            className="btn btn-primary"
+                                        >
+                                            Button
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-4 d-none d-lg-block">
+                                <div className="card">
+                                    <img
+                                        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/183.webp"
+                                        className="card-img-top"
+                                        alt="Sunset over the Sea"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            Card title
+                                        </h5>
+                                        <p className="card-text">
+                                            Some quick example text to build on
+                                            the card title and make up the bulk
+                                            of the card&apos;s content.
+                                        </p>
+                                        <a
+                                            href="#!"
+                                            className="btn btn-primary"
+                                        >
+                                            Button
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* <!-- Single item --> */}
+                <div className="carousel-item">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-4 col-md-12">
+                                <div className="card">
+                                    <img
+                                        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
+                                        className="card-img-top"
+                                        alt="Fissure in Sandstone"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            Card title
+                                        </h5>
+                                        <p className="card-text">
+                                            Some quick example text to build on
+                                            the card title and make up the bulk
+                                            of the card&apos;s content.
+                                        </p>
+                                        <a
+                                            href="#!"
+                                            className="btn btn-primary"
+                                        >
+                                            Button
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-4 d-none d-lg-block">
+                                <div className="card">
+                                    <img
+                                        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/185.webp"
+                                        className="card-img-top"
+                                        alt="Storm Clouds"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            Card title
+                                        </h5>
+                                        <p className="card-text">
+                                            Some quick example text to build on
+                                            the card title and make up the bulk
+                                            of the card&apos;s content.
+                                        </p>
+                                        <a
+                                            href="#!"
+                                            className="btn btn-primary"
+                                        >
+                                            Button
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-4 d-none d-lg-block">
+                                <div className="card">
+                                    <img
+                                        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/186.webp"
+                                        className="card-img-top"
+                                        alt="Hot Air Balloons"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            Card title
+                                        </h5>
+                                        <p className="card-text">
+                                            Some quick example text to build on
+                                            the card title and make up the bulk
+                                            of the card&apos;s content.
+                                        </p>
+                                        <a
+                                            href="#!"
+                                            className="btn btn-primary"
+                                        >
+                                            Button
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* <!-- Single item --> */}
+                <div className="carousel-item">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                                <div className="card">
+                                    <img
+                                        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/187.webp"
+                                        className="card-img-top"
+                                        alt="Peaks Against the Starry Sky"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            Card title
+                                        </h5>
+                                        <p className="card-text">
+                                            Some quick example text to build on
+                                            the card title and make up the bulk
+                                            of the card&apos;s content.
+                                        </p>
+                                        <a
+                                            href="#!"
+                                            className="btn btn-primary"
+                                        >
+                                            Button
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-4 mb-4 mb-lg-0 d-none d-lg-block">
+                                <div className="card">
+                                    <img
+                                        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/188.webp"
+                                        className="card-img-top"
+                                        alt="Bridge Over Water"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            Card title
+                                        </h5>
+                                        <p className="card-text">
+                                            Some quick example text to build on
+                                            the card title and make up the bulk
+                                            of the card&apos;s content.
+                                        </p>
+                                        <a
+                                            href="#!"
+                                            className="btn btn-primary"
+                                        >
+                                            Button
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-4 mb-4 mb-lg-0 d-none d-lg-block">
+                                <div className="card">
+                                    <img
+                                        src="https://mdbcdn.b-cdn.net/img/new/standard/nature/189.webp"
+                                        className="card-img-top"
+                                        alt="Purbeck Heritage Coast"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            Card title
+                                        </h5>
+                                        <p className="card-text">
+                                            Some quick example text to build on
+                                            the card title and make up the bulk
+                                            of the card&apos;s content.
+                                        </p>
+                                        <a
+                                            href="#!"
+                                            className="btn btn-primary"
+                                        >
+                                            Button
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* <!-- Inner --> */}
+            {/* <!-- Carousel wrapper --> */}
+        </div>
+    );
+}

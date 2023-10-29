@@ -1,8 +1,9 @@
-import css from "../../pages/Cart/cart.module.css";
+// import css from "../../pages/Cart/cart.module.css";
+import css from "../../assets/style/product.module.css";
 import { useState } from "react";
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa6";
 
-function cartProduct(props) {
+function CartProduct(props) {
     const [quantity, setQuantity] = useState(1);
 
     function inc() {
@@ -67,4 +68,4 @@ function cartProduct(props) {
     );
 }
 
-export default cartProduct;
+export default CartProduct;

@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // redux
-import { Provider } from "react-redux";
+// import { Provider } from "react-redux";
 // import { store } from "./store/store";
 import AppLayout from "./pages/AppLayout/AppLayout";
 import Home from "./components/Home/Home";

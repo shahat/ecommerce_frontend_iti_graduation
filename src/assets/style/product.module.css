@@ -83,8 +83,8 @@
    }
 }
 
-/* ================================= Cart-CSS ================================================= 
-/* .cart_product_details h3,
+/* ================================= Cart-CSS ================================================= */
+.cart_product_details h3,
 h4,
 h5 {
    font-weight: 600;
@@ -270,7 +270,7 @@ h5 {
 
 }
 
-// ================================= Wish-CSS =================================================
+/* ================================= Wish-CSS ================================================= */
 .wish_product_right * {
    gap: .5em;
    font-size: 1rem;
@@ -309,4 +309,17 @@ h5 {
    .wish_product_right i {
       font-size: 1em;
    }
-} */
+} 
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.example::-webkit-scrollbar {
+   display: none;
+ }
+
+ /* Hide scrollbar for IE, Edge and Firefox */
+ .example {
+   -ms-overflow-style: none; /* IE and Edge */
+   scrollbar-width: none; /* Firefox */
+   margin-bottom: 50px;
+ }
