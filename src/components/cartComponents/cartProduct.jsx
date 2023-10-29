@@ -1,6 +1,6 @@
 import css from "../../pages/Cart/cart.module.css";
 import { useState } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa6";
+import { FaMinus, FaPlus, FaTrash } from "react-icons/fa6";
 
 function cartProduct(props) {
     const [quantity, setQuantity] = useState(1);
@@ -41,7 +41,7 @@ function cartProduct(props) {
                     className={`${css["cart_product_right"]} d-flex align-items-end align-content-between col-3`}
                 >
                     <button className="btn text-danger fs-5">
-                        <i className="fa-solid fa-trash-can"></i>
+                        <FaTrash/>
                     </button>
                     <div className="d-flex">
                         <button
