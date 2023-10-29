@@ -4,16 +4,25 @@
   box-sizing: border-box;
 }
 
-.signupInfo{
+.signupInfo {
   -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
 }
 .accountCreation {
-  background-color: #005268;
+  background-color: #005268 !important;
 }
 .googleIcon {
   color: red !important;
 }
-.register:hover{
+.register:hover {
+  cursor: pointer;
+  text-decoration: underline !important;
+}
+.no_list_style {
+  list-style-type: none;
+  margin-bottom: 5px;
+}
+.loginBtn:hover {
+  cursor: pointer;
   text-decoration: underline !important;
 }

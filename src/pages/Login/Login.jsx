@@ -10,10 +10,10 @@ function Login() {
     navgiate('resetPassword');
   }
   const navigateToRegister =()=>{
-    navgiate('register');
+    navgiate('/register');
   }
   const navigateToHome = ()=>{
-    navgiate('home')
+    navgiate('/home')
   }
   return (
     <div className="container">
