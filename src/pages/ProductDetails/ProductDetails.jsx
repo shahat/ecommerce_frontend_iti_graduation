@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./product.module.css";
 import PhotoGallery from "../../components/productDetailsComps/photoGallery";
 import ProductReview from "../../components/productDetailsComps/productReview";
@@ -13,22 +13,23 @@ import {
 } from "react-icons/fa6";
 
 function ProductDetails() {
+    const [quantity, setQuantity] = useState(1);
 
-    useEffect(()=>{
+    useEffect(() => {
         var toggelButtons = document.getElementsByClassName("toggel");
         var toggelPages = document.querySelectorAll("div[id*='tab-pane-']");
-    
+
         for (var i = 0; i < toggelButtons.length; i++) {
             toggelButtons[i].addEventListener("click", switchPages);
             // Add a custom data attribute to store the index
             toggelButtons[i].setAttribute("button-index", i);
         }
-    
+
         function switchPages(e) {
             var button = e.target;
             // Get the index from the data attribute
             var index = button.getAttribute("button-index");
-    
+
             for (var i = 0; i < toggelButtons.length; i++) {
                 toggelButtons[i].classList.remove("border-bottom-0", "border");
                 toggelButtons[i].classList.add("border-bottom");
@@ -38,9 +39,14 @@ function ProductDetails() {
             button.classList.remove("border-bottom");
             toggelPages[index].classList.remove("d-none");
         }
-    }, [])
+    }, []);
 
-   
+    function inc() {
+        setQuantity(quantity+1)
+    }
+    function dec() {
+        quantity > 1 && setQuantity(quantity-1)
+    }
 
     return (
         <>
@@ -54,9 +60,9 @@ function ProductDetails() {
                     style={{ top: "100px" }}
                 >
                     {/* <!-- IMAGE PART --> */}
-                    <PhotoGallery className="col-6 border rounded-4  shadow p-0" />
+                    <PhotoGallery className="col-md-6 m-auto border rounded-4  shadow p-0" />
                     {/* <!-- DETAILS PART --> */}
-                    <div className="product_details col-md-5 ps-5 align-content-between">
+                    <div className={`${css["product_details"]} col-md-5 ps-5 align-content-between`}>
                         <div className="fw-bold h5">
                             <p>Havic HV G-92 Gamepad</p>
                             <div
@@ -117,7 +123,7 @@ function ProductDetails() {
                             <div className="mb-4">
                                 <span className="me-3">Size: </span>
                                 <div
-                                    className="btn-group"
+                                    className={`${css["btn-group"]} btn-group`}
                                     role="group"
                                     aria-label="Basic radio toggle button group"
                                 >
@@ -128,13 +134,13 @@ function ProductDetails() {
                                         }}
                                         className={`btn ${css.myBtn} ${css.myBtnDisabled} rounded-1 me-3 fw-semibold fs-6 p-3 shadow-sm text-secondary`}
                                     >
-                                        <input
+                                        {/* <input
                                             type="radio"
                                             className="btn-check"
                                             name="btnradio"
                                             id="btnradio1"
                                             autoComplete="off"
-                                        />
+                                        /> */}
                                         <label
                                             className="m-3"
                                             htmlFor="btnradio1"
@@ -234,35 +240,37 @@ function ProductDetails() {
                                 </div>
                             </div>
 
-                            <div className="wrapDiv mb-4 d-flex">
+                            <div className={`${css.wrapDiv} mb-4 d-flex`}>
                                 <div
-                                    className="btn-group inc-dec w-50"
+                                    className={`${css["btn-group"]} btn-group ${css["inc-dec"]} w-50`}
                                     role="group"
                                     aria-label="Basic outlined example"
                                 >
                                     <button
                                         type="button"
+                                        onClick={dec}
                                         className={`btn ${css.myBtn}`}
                                     >
                                         <FaMinus />
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn w-50 border bg-white px-4"
+                                        type=""
+                                        className="w-50 border bg-white px-4"
                                     >
-                                        1
+                                        {quantity}
                                     </button>
                                     <button
                                         type="button"
+                                        onClick={inc}
                                         className={`btn ${css.myBtn}`}
                                     >
                                         <FaPlus />
                                     </button>
                                 </div>
-                                <div className="nomargin d-flex">
+                                <div className={`${css.nomargin} d-flex`}>
                                     <button
                                         type="button"
-                                        className={`${css.myBtn} buynow mx-2`}
+                                        className={`${css.myBtn} ${css.buynow} mx-2`}
                                     >
                                         Buy Now
                                     </button>
@@ -414,12 +422,12 @@ function ProductDetails() {
                                 <div
                                     className={`${css["reviews-individuals"]} d-flex flex-md-row flex-column flex-wrap justify-content-center`}
                                 >
-                                    < ProductReview />
-                                    < ProductReview />
-                                    < ProductReview />
-                                    < ProductReview />
-                                    < ProductReview />
-                                    < ProductReview />
+                                    <ProductReview />
+                                    <ProductReview />
+                                    <ProductReview />
+                                    <ProductReview />
+                                    <ProductReview />
+                                    <ProductReview />
                                 </div>
                             </div>
                             <div id="tab-pane-3" className="d-none">
