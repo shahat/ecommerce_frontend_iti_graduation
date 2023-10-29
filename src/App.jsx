@@ -16,8 +16,8 @@ import Order from "./components/Order/Order";
 import Contact from "./components/Contact/Contact";
 import UserProfile from "./components/UserProfile/UserProfile";
 import NotFound from "./pages/notFound/NotFound";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register.Jsx";
+import Login from "./pages/Login/Login.jsx";
+import Register from "./pages/Register/Register.jsx";
 
 // import components and page
 
@@ -29,7 +29,7 @@ function App() {
       children: [
         { index: true, element: <Home /> },
         { path: "/login", element: <Login /> },
-        { path: "/register", element: <Register/> },
+        { path: "/register", element: <Register /> },
         { path: "/shop", element: <Shop /> },
         { path: "product", element: <ProductDetails /> },
         { path: "/cart", element: <Cart /> },
@@ -47,7 +47,6 @@ function App() {
     // <Provider store={store}>
     <RouterProvider router={router} />
     // </Provider>
-    
   );
 }
 

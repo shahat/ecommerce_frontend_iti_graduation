@@ -40,13 +40,12 @@ function Register() {
 
   const handleEmailInput = (e) => {
     setEmail(e.target.value);
-      if (!emailRegx.test(email)) {
-        setEmailError(true);
-      } else {
-        setEmailError(false);
-      }
+    if (!emailRegx.test(email)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
   };
-
 
   const handlePassword = (e) => {
     const newPassword = e.target.value;
@@ -63,9 +62,6 @@ function Register() {
     }
   };
 
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -78,7 +74,7 @@ function Register() {
         >
           <h4 className="mt-4 p-1">Create an account</h4>
           <p>Enter your details below</p>
-          <div className="formElements ">
+          <div className="formElements">
             <form
               action="#"
               onSubmit={(e) => {
@@ -135,10 +131,10 @@ function Register() {
                   required
                   value={password}
                 />
-              
+
                 {passwordError && (
                   <div>
-                      <p> Your password must meet the following criteria:</p>
+                    <p> Your password must meet the following criteria:</p>
                     <ul className="text-danger">
                       {!passwordRegx.test(password) && (
                         <li>At least 8 characters</li>
