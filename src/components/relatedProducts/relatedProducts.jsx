@@ -29,7 +29,7 @@ export default function RelatedProducts() {
                 >
                     <div className="card card-item border-0">
                         <img
-                            src="./assets/images/products-images/accessories.jpg"
+                            src="src/assets/images/products-images/accessories.jpg"
                             className="card-img-top"
                             alt="..."
                         />
@@ -142,7 +142,7 @@ export default function RelatedProducts() {
                 >
                     <div className="card card-item border-0">
                         <img
-                            src="./assets/images/products-images/accessories.jpg"
+                            src="src/assets/images/products-images/accessories.jpg"
                             className="card-img-top"
                             alt="..."
                         />
@@ -255,7 +255,7 @@ export default function RelatedProducts() {
                 >
                     <div className="card card-item border-0">
                         <img
-                            src="./assets/images/products-images/accessories.jpg"
+                            src="src/assets/images/products-images/accessories.jpg"
                             className="card-img-top"
                             alt="..."
                         />
@@ -368,7 +368,7 @@ export default function RelatedProducts() {
                 >
                     <div className="card card-item border-0">
                         <img
-                            src="./assets/images/products-images/accessories.jpg"
+                            src="src/assets/images/products-images/accessories.jpg"
                             className="card-img-top"
                             alt="..."
                         />
@@ -481,7 +481,7 @@ export default function RelatedProducts() {
                 >
                     <div className="card card-item border-0">
                         <img
-                            src="./assets/images/products-images/accessories.jpg"
+                            src="src/assets/images/products-images/accessories.jpg"
                             className="card-img-top"
                             alt="..."
                         />
@@ -594,7 +594,7 @@ export default function RelatedProducts() {
                 >
                     <div className="card card-item border-0">
                         <img
-                            src="./assets/images/products-images/accessories.jpg"
+                            src="src/assets/images/products-images/accessories.jpg"
                             className="card-img-top"
                             alt="..."
                         />
