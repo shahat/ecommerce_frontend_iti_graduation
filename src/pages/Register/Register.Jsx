@@ -40,19 +40,18 @@ function Register() {
 
   const handleEmailInput = (e) => {
     setEmail(e.target.value);
-      if (!emailRegx.test(email)) {
-        setEmailError(true);
-      } else {
-        setEmailError(false);
-      }
+    if (!emailRegx.test(email)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
   };
-
 
   const handlePassword = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
     if (
-      newPassword.length < 8 ||
+      newPassword.length <= 7 ||
       !lowerCaseRegx.test(password) ||
       !upperCaseRegx.test(password) ||
       !specialCharacterRegx.test(password)
@@ -62,9 +61,6 @@ function Register() {
       setPasswordError(false);
     }
   };
-
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -130,15 +126,15 @@ function Register() {
                   }}
                   className="form-control "
                   placeholder="Password"
-                  type="password"
+                  type="text"
                   id="Password"
                   required
                   value={password}
                 />
-              
+
                 {passwordError && (
                   <div>
-                      <p> Your password must meet the following criteria:</p>
+                    <p> Your password must meet the following criteria:</p> 
                     <ul className="text-danger">
                       {!passwordRegx.test(password) && (
                         <li>At least 8 characters</li>
