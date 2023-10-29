@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import AppLayout from "./pages/AppLayout/AppLayout";
 import Home from "./components/Home/Home";
 import Shop from "./components/Shop/Shop";
-import ProductDetails from "./components/ProductDetails/ProductDetails";
+import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Cart from "./components/Cart/Cart";
 import WishList from "./components/WishList/WishList";
 import Order from "./components/Order/Order";
@@ -26,17 +26,17 @@ function App() {
       element: <AppLayout />,
       children: [
         { index: true, element: <Home /> },
-        { path: "/login", element: <Shop /> },
-        { path: "/register", element: <ProductDetails /> },
-        { path: "/cart", element: <Cart /> },
-        { path: "/wishlist", element: <WishList /> },
-        { path: "/contact", element: <Contact /> },
+        { path: "login", element: <Shop /> },
+        { path: "product", element: <ProductDetails /> },
+        { path: "cart", element: <Cart /> },
+        { path: "wishlist", element: <WishList /> },
+        { path: "contact", element: <Contact /> },
         // protected route user should be loged in
-        { path: "/Order", element: <Order /> },
-        { path: "/userprofile", element: <UserProfile /> },
+        { path: "Order", element: <Order /> },
+        { path: "userprofile", element: <UserProfile /> },
       ],
     },
-    { path: "/*", element: <NotFound /> },
+    { path: "*", element: <NotFound /> },
   ]);
 
   return (
