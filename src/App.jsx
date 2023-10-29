@@ -17,6 +17,7 @@ import Contact from "./components/Contact/Contact";
 import UserProfile from "./components/UserProfile/UserProfile";
 import NotFound from "./pages/notFound/NotFound";
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register.Jsx";
 
 // import components and page
 
@@ -28,7 +29,7 @@ function App() {
       children: [
         { index: true, element: <Home /> },
         { path: "/login", element: <Login /> },
-        { path: "/register", element: <ProductDetails /> },
+        { path: "/register", element: <Register/> },
         { path: "/cart", element: <Cart /> },
         { path: "/wishlist", element: <WishList /> },
         { path: "/contact", element: <Contact /> },
@@ -44,6 +45,7 @@ function App() {
     // <Provider store={store}>
     <RouterProvider router={router} />
     // </Provider>
+    
   );
 }
 
