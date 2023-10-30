@@ -1,0 +1,65 @@
+.filterstyle {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 500;
+}
+.componentcontainer {
+  position: relative;
+}
+.hidenbtn {
+  display: none;
+
+  @media (max-width: 991px) {
+    display: block;
+  }
+}
+.hidenfilter {
+  display: block;
+
+  @media (max-width: 991px) {
+    display: none;
+  }
+}
+.rate {
+  color: #ffad33;
+  font-size: 19px;
+  cursor: pointer;
+}
+.cardwidth {
+  @media (max-width: 575px) {
+    width: 300px;
+    margin: auto;
+  }
+}
+/* .formbutton {
+  background-color: rgb(1, 85, 110) !important;
+  color: white !important;
+} */
+.cardbutton {
+  background-color: #f79e1b;
+  border: none;
+  &:hover {
+    background-color: #ff9900;
+  }
+}
+.categoryimage {
+  width: 120px;
+  height: 120px;
+}
+.filterbut {
+  background-color: rgb(1, 85, 110);
+  border: none;
+}
+.filterheader {
+  color: #ffad33 !important;
+}
+.paginationitems {
+  background-color: rgb(1, 85, 110);
+  color: white;
+  &:hover {
+    background-color: #ff9900;
+    color: black;
+  }
+}

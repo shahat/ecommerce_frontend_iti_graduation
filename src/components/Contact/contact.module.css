@@ -1,0 +1,29 @@
+.contactinfospan {
+  padding: 7px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgb(1, 85, 110);
+}
+.contactinfoi {
+  color: white;
+  font-size: 20px;
+}
+.formbutton {
+  background-color: rgb(1, 85, 110);
+  color: white;
+  &:hover {
+    background-color: rgb(1, 85, 110);
+    color: white;
+  }
+}
+.formbutton2 {
+  @media (max-width: 989px) {
+    justify-content: center !important;
+  }
+}
+.input {
+  @media (max-width: 989px) {
+    width: 100%;
+  }
+}

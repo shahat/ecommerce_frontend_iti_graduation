@@ -132,19 +132,19 @@ function Nav() {
               {/* ----- cart ----- */}
               <li className="nav-item ms-3">
                 <span className={`${styles.icon_container}`}>
-                  <a className="nav-link text-center" href="#">
+                  <Link to="/cart" className="nav-link text-center" href="#">
                     <BsCart3 className={`${styles.icon} fs-4 }`}></BsCart3>
-                  </a>
+                  </Link>
                 </span>
               </li>{" "}
               {/* ----- wishList ----- */}
               <li className="nav-item mx-3">
                 <span className={`${styles.icon_container}`}>
-                  <a className="nav-link text-center" href="#">
+                  <Link to="/wishlist" className="nav-link text-center">
                     <MdOutlineFavoriteBorder
                       className={`${styles.icon} fs-4 }`}
                     ></MdOutlineFavoriteBorder>
-                  </a>
+                  </Link>
                 </span>
               </li>
             </ul>
