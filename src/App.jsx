@@ -16,6 +16,7 @@ import Order from "./components/Order/Order";
 import Contact from "./components/Contact/Contact";
 import UserProfile from "./components/UserProfile/UserProfile";
 import NotFound from "./pages/notFound/NotFound";
+import CheckOut from "./components/CheckOut/CheckOut";
 
 // import components and page
 
@@ -34,6 +35,8 @@ function App() {
         // protected route user should be loged in
         { path: "/Order", element: <Order /> },
         { path: "/userprofile", element: <UserProfile /> },
+        { path: "/checkout", element: <CheckOut /> },
+
       ],
     },
     { path: "/*", element: <NotFound /> },
