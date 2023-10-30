@@ -28,8 +28,6 @@ function App() {
       element: <AppLayout />,
       children: [
         { index: true, element: <Home /> },
-        { path: "/login", element: <Login /> },
-        { path: "/register", element: <Register /> },
         { path: "/shop", element: <Shop /> },
         { path: "product", element: <ProductDetails /> },
         { path: "/cart", element: <Cart /> },
@@ -41,6 +39,8 @@ function App() {
       ],
     },
     { path: "*", element: <NotFound /> },
+    { path: "/login", element: <Login /> },
+    { path: "/register", element: <Register /> },
   ]);
 
   return (

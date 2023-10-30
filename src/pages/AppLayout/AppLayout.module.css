@@ -12,6 +12,11 @@
   color: wheat;
 }
 
+.fixed_nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 @media screen and (max-width: 768px) {
   .bottomNavContainer {
     display: block;

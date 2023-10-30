@@ -5,11 +5,14 @@ function NewArrival() {
   return (
     <>
       <div className="container  my-5 ">
-        <div className="MainHeader d-inline-block bg-primary  py-2 px-1"></div>
-        <span className="h5">Latest Furniture Designs</span>
+        {/* <div className="MainHeader d-inline-block bg-primary  py-2 px-1"></div> */}
+        <h2 className=" text-center m-5 text-black-50 fw-bold ">
+          Latest Furniture Designs
+        </h2>
 
         {/* Latest Furniture Designs */}
-        <div className={`row p-0 m-0 mt-3 ${newArrival.newArrival}  bg-danger`}>
+
+        <div className={`row p-0 m-0 mt-3 ${newArrival.newArrival}  `}>
           {/* left side image col1 */}
           <div
             className={`col-12 col-sm-12 col-md-4 col-lg-4 position-relative ${newArrival.leftSide}`}
@@ -27,7 +30,7 @@ function NewArrival() {
           </div>
           {/* right side images col2 */}
           <div
-            className={`col-12 col-sm-12 col-md-8 col-lg-8 p-0 m-0 bg-primary over-flow-hidden ${newArrival.rightSide}`}
+            className={`col-12 col-sm-12 col-md-8 col-lg-8 p-0 m-0  over-flow-hidden ${newArrival.rightSide}`}
           >
             {" "}
             <div
@@ -149,7 +152,7 @@ function NewArrival() {
 
       {/*------------  Latest Clothes Designs ------------  */}
       <div className="container my-5">
-        <div className="MainHeader d-inline-block bg-primary  py-2 px-1"></div>
+        <div className="MainHeader d-inline-block   py-2 px-1"></div>
         <span className="h5">Latest Clothes Designs</span>
         <div className={`row p-0 m-0 mt-3 ${newArrival.newArrival_second}`}>
           <div

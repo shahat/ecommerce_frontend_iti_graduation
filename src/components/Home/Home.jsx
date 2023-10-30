@@ -11,8 +11,10 @@ export default function Home() {
 
       <div>
         <div className="container my-5 w-100 h-25">
-          <span className=" w-25 h-100 bg-danger"> </span>
-          <h2 id="medo">Popular Category</h2>
+          <span className=" w-25 h-100 "> </span>
+          <h2 id="medo" className="text-center m-5 text-black-50 fw-bold ">
+            Popular Category
+          </h2>
         </div>
         <section className="container">
           <div className="row justify-content-center my-5">

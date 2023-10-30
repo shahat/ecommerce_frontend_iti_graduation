@@ -3,6 +3,9 @@ import { BsSearch, BsFillPersonFill, BsCart3 } from "react-icons/bs";
 import { MdOutlineFavoriteBorder, MdOutlinePerson } from "react-icons/md";
 // import React from "react";
 import { Link } from "react-router-dom";
+const handleLogout = () => {
+  alert("you are loged out ");
+};
 function Nav() {
   return (
     <>
@@ -96,7 +99,7 @@ function Nav() {
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <Link to="login" className="dropdown-item" href="#">
+                    <Link to="login" className="dropdown-item">
                       Login
                     </Link>
                   </li>
@@ -104,25 +107,25 @@ function Nav() {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link to="register" className="dropdown-item">
                       register
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link to="/profile" className="dropdown-item">
                       Profile
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" onClick={handleLogout}>
                       LogOut
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>

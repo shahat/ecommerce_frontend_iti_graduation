@@ -8,7 +8,10 @@ export default function AppLayout() {
   return (
     <>
       <div className="postion-relative">
-        <Nav></Nav>
+        <div className={`${styles.fixed_nav} w-100`}>
+          <Nav></Nav>
+        </div>
+
         <Outlet></Outlet>
         <Footer></Footer>
         <div className={`${styles.bottomNavContainer}`}>
@@ -17,4 +20,4 @@ export default function AppLayout() {
       </div>
     </>
   );
-  }
+}
