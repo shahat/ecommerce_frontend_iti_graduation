@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import './checkout.css'
 const CheckOut = () => {
   let inputs 

@@ -1,5 +1,16 @@
 .mainNavbar {
-  background-color: #005268;
+  /* background: #2193b0;  fallback for old browsers 
+  background: -webkit-linear-gradient(
+    to right,
+    #6dd5ed,
+    #2193b0
+  ); 
+  background: linear-gradient(
+    to right,
+    #6dd5ed,
+    #2193b0
+  ); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   height: 56px;
 }
 .navbarIcons {
@@ -47,7 +58,7 @@
   height: 40px;
   width: 40px;
   border-radius: 50% !important;
-  background-color: red;
+  background-color: rgba(81, 80, 80, 0.491);
 }
 
 @media screen and (max-width: 768px) {

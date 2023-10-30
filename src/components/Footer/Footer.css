@@ -2,6 +2,19 @@
   background-color: #f7f7fa;
 }
 
+.icon_container {
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  /* border-radius: 50% !important; */
+  text-align: center;
+  vertical-align: middle;
+}
+/* .icon {
+  height: 100%;
+  line-height: 40px;
+} */
+
 footer.nb-footer {
   background: #222;
   /* border-top: 4px solid teal; */

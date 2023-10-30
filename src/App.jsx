@@ -38,7 +38,6 @@ function App() {
         { path: "/Order", element: <Order /> },
         { path: "/userprofile", element: <UserProfile /> },
         { path: "/checkout", element: <CheckOut /> },
-
       ],
     },
     { path: "/login", element: <Login /> },

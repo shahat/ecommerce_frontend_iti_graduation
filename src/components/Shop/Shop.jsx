@@ -5,6 +5,7 @@ import Card from "./card";
 import Categoy from "./categoy";
 import style from "./shop.module.css";
 import "./chechbox.css";
+import Caarousel from "../Carousel/Caarousel";
 
 function Shop() {
   var [isVisible, setIsVisible] = useState(false);
@@ -13,6 +14,9 @@ function Shop() {
   };
   return (
     <div className={style.componentcontainer}>
+      <div className="container">
+        <Caarousel></Caarousel>
+      </div>
       {/* filter layaout  */}
       {isVisible && (
         <div className={style.filterstyle}>

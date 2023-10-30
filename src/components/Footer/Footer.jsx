@@ -1,4 +1,12 @@
 import React from "react";
+import {
+  BsHeadset,
+  BsPersonExclamation,
+  BsEnvelopeExclamation,
+  BsTelephone,
+} from "react-icons/bs";
+import { Link } from "react-router-dom";
+
 import "./Footer.css";
 function Footer() {
   return (
@@ -8,43 +16,43 @@ function Footer() {
           <div className="container justify-content-center ">
             <div className="row justify-content-center justify-content-lg-between align-items-center  w-100">
               <div className="col-lg-4  d-flex align-items-center mb-3 mb-lg-0 ">
-                <p className="my-0 py-0 ">
-                  <i className="mx-4 fa-solid fs-3 fa-solid fa-headset" />
+                <p className="my-0 py-0   ">
+                  <BsHeadset className="icon fs-3"></BsHeadset>
                 </p>
-                <p className="my-0 py-0  ">
+                <p className="my-0 py-0 px-4">
                   We’re Always Here To Help Reach out to us through any of these
                   support channels
                 </p>
               </div>
               <div className="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
-                <p className="my-0 py-0  ">
-                  <i className=" mx-4 fa-solid fs-3 fa-exclamation text-dark" />
+                <p className="my-0 py-0">
+                  <Link to="/contact">
+                    {" "}
+                    <BsPersonExclamation className="icon fs-3"></BsPersonExclamation>
+                  </Link>
                 </p>
-                <p className="my-0 py-0  contact-us">
+                <p className="my-0 py-0  contact-us  px-4">
                   Help Center help.noon.com
                 </p>
               </div>
               <div className="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                 <p className="my-0 py-0  ">
-                  <a
-                    href="contact.html"
-                    id="contact"
-                    className="text-decoration-none text-dark"
-                  >
-                    <i className=" mx-4 fa-solid fs-3 fa-envelope" />
-                  </a>
+                  <BsEnvelopeExclamation className="icon fs-3" />
                 </p>
-                <p className="my-0 py-0  contact-us">
+                <p className="my-0 py-0  contact-us px-4">
                   EMAIL SUPPORT egypt@Emarket.com{" "}
                 </p>
               </div>
               <div className="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                 <div className="circle-container">
                   <div className="contact-icon">
-                    <i className=" mx-4 fa-solid fs-3 fa-phone text-dark" />
+                    <BsTelephone className="icon fs-3"></BsTelephone>
                   </div>
                 </div>
-                <p className="my-0 py-0  contact-us"> PHONE SUPPORT 16358 </p>
+                <p className="my-0 py-0  contact-us px-4">
+                  {" "}
+                  PHONE SUPPORT 16358{" "}
+                </p>
               </div>
             </div>
           </div>

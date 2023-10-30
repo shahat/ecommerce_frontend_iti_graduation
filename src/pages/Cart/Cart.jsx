@@ -3,6 +3,7 @@ import CartProduct from "../../components/cartComponents/cartProduct";
 import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 // import css from "./cart.module.css";
 import css from "../../assets/style/product.module.css";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const [products, setProducts] = useState([
@@ -87,7 +88,8 @@ function Cart() {
                 <button
                   className={`${css.goToCheck} btn ${css.myBtn} rounded-pill col-12 mt-4 p-3 fs-6`}
                 >
-                  Go to Checkout
+                  <Link to="/checkout"> Go to Checkout</Link>
+
                   <i className="fa-solid fa-arrow-right ms-3"></i>
                 </button>
               </div>

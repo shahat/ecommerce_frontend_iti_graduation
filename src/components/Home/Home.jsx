@@ -1,7 +1,9 @@
 import React from "react";
-import style from "./Home.module.css";
+// import style from "./Home.module.css";
 import Caarousel from "../Carousel/Caarousel";
 import NewArrival from "./NewArrival";
+import Categoy from "../Shop/categoy";
+import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <>
@@ -19,88 +21,59 @@ export default function Home() {
         <section className="container">
           <div className="row justify-content-center my-5">
             <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              <img
-                className={`${style.category_image} rounded-circle border border-4`}
-                src="../../assets/images/products-images/phone.jpg"
-                alt="Mobile"
-              />
-              <div className="mt-2 fs-5 fw-bold">Mobile</div>
+              <Link to="/shop">
+                <Categoy name="mobile" src="./assets/images/phone.jpg" />{" "}
+              </Link>
             </div>
             <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              <img
-                className={`${style.category_image} rounded-circle border border-5`}
-                src="../../assets/images/products-images/prfiom.jpg"
-                alt="Beauty"
-              />
-              <div className="mt-2 fs-5 fw-bold">Beauty</div>
+              {" "}
+              <Categoy name="Beauty" src="./assets/images/prfiom.jpg" />
+            </div>
+
+            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
+              {" "}
+              <Categoy name="furniture" src="./assets/images/accessories.jpg" />
             </div>
             <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              <img
-                className={`${style.category_image} rounded-circle border border-5`}
-                src="../../assets/images/products-images/accessories.jpg"
-                alt="Furniture"
-              />
-              <div className="mt-2 fs-5 fw-bold">Furniture</div>
+              {" "}
+              <Categoy name="accessories" src="./assets/images/watches.jpg" />
             </div>
             <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              <img
-                className={`${style.category_image} rounded-circle border border-5`}
-                src="../../assets/images/products-images/watches.jpg"
-                alt="Accessories"
-              />
-              <div className="mt-2 fs-5 fw-bold">Accessories</div>
+              {" "}
+              <Categoy name="laptop" src="./assets/images/labtop.jpeg" />{" "}
             </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2   d-flex flex-column justify-content-center align-items-center">
-              <img
-                className={`${style.category_image} rounded-circle border border-5`}
-                src="../../assets/images/products-images/labtop.jpeg"
-                alt="Laptop"
-              />
-              <div className="mt-2 fs-5 fw-bold">Laptop</div>
+            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
+              <Categoy name="mobile" src="./assets/images/phone.jpg" />{" "}
             </div>
+            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
+              {" "}
+              <Categoy name="Beauty" src="./assets/images/prfiom.jpg" />
+            </div>
+
+            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
+              {" "}
+              <Categoy name="furniture" src="./assets/images/accessories.jpg" />
+            </div>
+            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
+              {" "}
+              <Categoy name="accessories" src="./assets/images/watches.jpg" />
+            </div>
+            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
+              {" "}
+              <Categoy name="laptop" src="./assets/images/labtop.jpeg" />{" "}
+            </div>
+
             {/*  */}
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2   d-flex flex-column justify-content-center align-items-center">
-              <img
-                className={`${style.category_image} rounded-circle border border-5`}
-                src="../../assets/images/products-images/prfiom.jpg"
-                alt="Beauty"
-              />
-              <div className="mt-2 fs-5 fw-bold">Beauty</div>
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2   d-flex flex-column justify-content-center align-items-center">
-              <img
-                className={`${style.category_image} rounded-circle border border-5`}
-                src="../../assets/images/products-images/labtop.jpeg"
-                alt="Laptop"
-              />
-              <div className="mt-2 fs-5 fw-bold">Laptop</div>
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2   d-flex flex-column justify-content-center align-items-center">
-              <img
-                className={`${style.category_image} rounded-circle border border-5`}
-                src="../../assets/images/products-images/accessories.jpg"
-                alt="Furniture"
-              />
-              <div className="mt-2 fs-5 fw-bold">Furniture</div>
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2   d-flex flex-column justify-content-center align-items-center">
-              <img
-                className={`${style.category_image} rounded-circle border border-4`}
-                src="../../assets/images/products-images/phone.jpg"
-                alt="Mobile"
-              />
-              <div className="mt-2 fs-5 fw-bold">Mobile</div>
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2   d-flex flex-column justify-content-center align-items-center">
-              <img
-                className={`${style.category_image} rounded-circle border border-5`}
-                src="../../assets/images/products-images/watches.jpg"
-                alt="Accessories"
-              />
-              <div className="mt-2 fs-5 fw-bold">Accessories</div>
-            </div>
           </div>
         </section>
+
+        {/* 
+
+
+Accessories
+../../assets/images/products-images/watches.jpg
+*/}
+
         {/* ================================== End Category ==================================  */}
         <NewArrival />
       </div>

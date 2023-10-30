@@ -153,7 +153,9 @@ function NewArrival() {
       {/*------------  Latest Clothes Designs ------------  */}
       <div className="container my-5">
         <div className="MainHeader d-inline-block   py-2 px-1"></div>
-        <span className="h5">Latest Clothes Designs</span>
+        <h2 className=" text-center m-5 text-black-50 fw-bold ">
+          Latest Clothes Designs{" "}
+        </h2>
         <div className={`row p-0 m-0 mt-3 ${newArrival.newArrival_second}`}>
           <div
             className={`col-12 col-sm-12 col-md-4 col-lg-4 position-relative ${newArrival.leftSide}`}

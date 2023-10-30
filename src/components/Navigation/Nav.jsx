@@ -115,7 +115,7 @@ function Nav() {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link to="/profile" className="dropdown-item">
+                    <Link to="/userprofile" className="dropdown-item">
                       Profile
                     </Link>
                   </li>
