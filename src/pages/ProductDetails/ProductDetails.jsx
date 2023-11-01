@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import css from "../../assets/style/product.module.css";
 import PhotoGallery from "../../components/productDetailsComps/photoGallery";
-import ProductReview from "../../components/productDetailsComps/productReview";
 import RelatedProducts from "../../components/relatedProducts/relatedProducts";
+import { Link, Outlet } from "react-router-dom";
+
+
 import {
-    FaFilter,
     FaStar,
     FaMinus,
     FaPlus,
@@ -17,28 +18,18 @@ function ProductDetails() {
     const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
-        var toggelButtons = document.getElementsByClassName("toggel");
-        var toggelPages = document.querySelectorAll("div[id*='tab-pane-']");
+        var toggleButtons = document.getElementsByClassName("toggle");
 
-        for (var i = 0; i < toggelButtons.length; i++) {
-            toggelButtons[i].addEventListener("click", switchPages);
-            // Add a custom data attribute to store the index
-            toggelButtons[i].setAttribute("button-index", i);
+        for (var i = 0; i < toggleButtons.length; i++) {
+            toggleButtons[i].addEventListener("click", switchPages);
         }
 
         function switchPages(e) {
             var button = e.target;
-            // Get the index from the data attribute
-            var index = button.getAttribute("button-index");
-
-            for (var i = 0; i < toggelButtons.length; i++) {
-                toggelButtons[i].classList.remove("border-bottom-0", "border");
-                toggelButtons[i].classList.add("border-bottom");
-                toggelPages[i].classList.add("d-none");
+            for (var i = 0; i < toggleButtons.length; i++) {
+                toggleButtons[i].classList.remove("border-bottom-0", "border");
             }
             button.classList.add("border-bottom-0", "border");
-            button.classList.remove("border-bottom");
-            toggelPages[index].classList.remove("d-none");
         }
     }, []);
 
@@ -329,146 +320,29 @@ function ProductDetails() {
                     className={`${css.details} product row d-flex col-md-10 justify-content-center m-0 p-0`}
                 >
                     <div className="row col-10">
-                        <button
-                            // href="#tab-pane-1"
-                            className="toggel btn pb-2 mb-4 text-danger border-bottom rounded-bottom-0 col"
+                        <Link
+                            to="product/description"
+                            className="toggle btn pb-2 mb-4 text-danger border-bottom rounded-bottom-0 col"
                         >
                             Product Details
-                        </button>
-                        <button
-                            // href="#tab-pane-2"
-                            className="toggel btn pb-2 mb-4 text-danger rounded-bottom-0 border-bottom-0 col border"
+                        </Link>
+                        <Link
+                            to="product/reviews"
+                            className="toggle btn pb-2 mb-4 text-danger border-bottom rounded-bottom-0 col border-bottom-0 border"
                         >
                             Ratings & Reviews
-                        </button>
-                        <button
-                            // href="#tab-pane-3"
-                            className="toggel btn pb-2 mb-4 text-danger border-bottom rounded-bottom-0 col"
+                        </Link>
+                        <Link
+                            to="product/faq"
+                            className="toggle btn pb-2 mb-4 text-danger border-bottom rounded-bottom-0 col"
                         >
                             FAQs
-                        </button>
+                        </Link>
                     </div>
 
                     <div className="container">
                         <div className="container col-12 justify-content-center">
-                            <div id="tab-pane-1" className="d-none">
-                                <div className="tab-headding pb-4">
-                                    <h2 className="d-inline">
-                                        Product Description
-                                    </h2>
-                                </div>
-                                <div className="tab-body">
-                                    <p>
-                                        Eos no lorem eirmod diam diam, eos elitr
-                                        et gubergren diam sea. Consetetur vero
-                                        aliquyam invidunt duo dolores et duo
-                                        sit. Vero diam ea vero et dolore rebum,
-                                        dolor rebum eirmod consetetur invidunt
-                                        sed sed et, lorem duo et eos elitr,
-                                        sadipscing kasd ipsum rebum diam. Dolore
-                                        diam stet rebum sed tempor kasd eirmod.
-                                        Takimata kasd ipsum accusam sadipscing,
-                                        eos dolores sit no ut diam consetetur
-                                        duo justo est, sit sanctus diam tempor
-                                        aliquyam eirmod nonumy rebum dolor
-                                        accusam, ipsum kasd eos consetetur at
-                                        sit rebum, diam kasd invidunt tempor
-                                        lorem, ipsum lorem elitr sanctus eirmod
-                                        takimata dolor ea invidunt.
-                                    </p>
-                                    <p>
-                                        Dolore magna est eirmod sanctus dolor,
-                                        amet diam et eirmod et ipsum. Amet
-                                        dolore tempor consetetur sed lorem dolor
-                                        sit lorem tempor. Gubergren amet amet
-                                        labore sadipscing clita clita diam
-                                        clita. Sea amet et sed ipsum lorem elitr
-                                        et, amet et labore voluptua sit rebum.
-                                        Ea erat sed et diam takimata sed justo.
-                                        Magna takimata justo et amet magna et.
-                                    </p>
-                                </div>
-                            </div>
-                            <div id="tab-pane-2" className="">
-                                <div className="tab-headding pb-4 d-flex justify-content-sm-between justify-content-center flex-sm-row flex-column">
-                                    <h2 className="d-inline">
-                                        Reviews
-                                        <span
-                                            id="review-count"
-                                            className="fs-6 text-secondary"
-                                        >
-                                            (24)
-                                        </span>
-                                    </h2>
-                                    <div className="d-flex">
-                                        <button
-                                            className={`btn ${css.myBtnDisabled} rounded-circle`}
-                                        >
-                                            <FaFilter />
-                                        </button>
-                                        <select
-                                            className={`btn ${css.myBtnDisabled} border-1 rounded-pill mx-3`}
-                                            aria-label="Default select example"
-                                        >
-                                            <option defaultValue>Latest</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                        <button
-                                            className={`btn ${css.myBtn} rounded-pill fs-6 px-3`}
-                                        >
-                                            Write a Review
-                                        </button>
-                                    </div>
-                                </div>
-                                <div
-                                    className={`${css["reviews-individuals"]} d-flex flex-md-row flex-column flex-wrap justify-content-center`}
-                                >
-                                    <ProductReview />
-                                    <ProductReview />
-                                    <ProductReview />
-                                    <ProductReview />
-                                    <ProductReview />
-                                    <ProductReview />
-                                </div>
-                            </div>
-                            <div id="tab-pane-3" className="d-none">
-                                <h2 className="mb-4">FAQs</h2>
-                                <div className="qustion">
-                                    <p className="qustion fw-bold">
-                                        Eos no lorem eirmod diam diam, eos
-                                        elitr?
-                                    </p>
-                                    <p className="answer">
-                                        Eos no lorem eirmod diam diam, eos elitr
-                                        et gubergren diam sea. Consetetur vero
-                                        aliquyam invidunt duo
-                                    </p>
-                                </div>
-                                <div className="qustion">
-                                    <p className="qustion fw-bold">
-                                        Eos no lorem eirmod diam diam, eos
-                                        elitr?
-                                    </p>
-                                    <p className="answer">
-                                        Eos no lorem eirmod diam diam, eos elitr
-                                        et gubergren diam sea. Consetetur vero
-                                        aliquyam invidunt duo
-                                    </p>
-                                </div>
-                                <div className="qustion">
-                                    <p className="qustion fw-bold">
-                                        Eos no lorem eirmod diam diam, eos
-                                        elitr?
-                                    </p>
-                                    <p className="answer">
-                                        Eos no lorem eirmod diam diam, eos elitr
-                                        et gubergren diam sea. Consetetur vero
-                                        aliquyam invidunt duo
-                                    </p>
-                                </div>
-                            </div>
+                            <Outlet></Outlet>
                         </div>
                     </div>
                 </div>

@@ -19,37 +19,49 @@ import NotFound from "./pages/notFound/NotFound";
 import CheckOut from "./components/CheckOut/CheckOut";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register.jsx";
+import Description from "./components/productDetailsComps/description";
+import ReviewsContainer from "./components/productDetailsComps/reviewsContainer";
+import FAQ from "./components/productDetailsComps/faqComponent";
 
 // import components and page
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <AppLayout />,
-      children: [
-        { index: true, element: <Home /> },
-        { path: "/shop", element: <Shop /> },
-        { path: "product", element: <ProductDetails /> },
-        { path: "/cart", element: <Cart /> },
-        { path: "/wishlist", element: <WishList /> },
-        { path: "/contact", element: <Contact /> },
-        // protected route user should be loged in
-        { path: "/Order", element: <Order /> },
-        { path: "/userprofile", element: <UserProfile /> },
-        { path: "/checkout", element: <CheckOut /> },
-      ],
-    },
-    { path: "/login", element: <Login /> },
-    { path: "/register", element: <Register /> },
-    { path: "**", element: <NotFound /> },
-  ]);
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <AppLayout />,
+            children: [
+                { index: true, element: <Home /> },
+                { path: "/shop", element: <Shop /> },
+                {
+                    path: "/product",
+                    element: <ProductDetails />,
+                    children: [
+                        {index: true, element: <ReviewsContainer />},
+                        { path: "product/description", element: <Description /> },
+                        { path: "product/reviews", element: <ReviewsContainer /> },
+                        { path: "product/faq", element: <FAQ /> },
+                    ],
+                },
+                { path: "/cart", element: <Cart /> },
+                { path: "/wishlist", element: <WishList /> },
+                { path: "/contact", element: <Contact /> },
+                // protected route user should be loged in
+                { path: "/Order", element: <Order /> },
+                { path: "/userprofile", element: <UserProfile /> },
+                { path: "/checkout", element: <CheckOut /> },
+            ],
+        },
+        { path: "/login", element: <Login /> },
+        { path: "/register", element: <Register /> },
+        { path: "**", element: <NotFound /> },
+    ]);
 
-  return (
-    // <Provider store={store}>
-    <RouterProvider router={router} />
-    // </Provider>
-  );
+    return (
+        // <Provider store={store}>
+        <RouterProvider router={router} />
+        // </Provider>
+    );
 }
 
 export default App;
