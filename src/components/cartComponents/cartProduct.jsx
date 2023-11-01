@@ -12,7 +12,6 @@ function CartProduct(props) {
     function dec() {
         quantity > 1 && setQuantity(quantity - 1);
     }
-    console.log("b");
     return (
         <>
             <div className={`${css["single_product"]} w-100 d-flex flex-wrap`}>
