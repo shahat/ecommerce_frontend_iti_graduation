@@ -1,0 +1,10 @@
+in redux thunk : 
+ 1 -  we import  createAsyncThunk ,  createSlice from "@reduxjs/toolkit"
+ 2 -  if you use axios u import instance  from "../../axiosConfig/instance";
+ 3 -    
+
+
+// 
+for making file  => 
+multer  
+cloudinary 

@@ -17,16 +17,15 @@ function Login() {
     navigate("/register");
   };
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  if (email.trim() === "" || password.trim() === "") {
-    setFormValid(false);
-  } else {
-    setFormValid(true);
-    navigateToHome();
-  }
-};
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email.trim() === "" || password.trim() === "") {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+      navigateToHome();
+    }
+  };
 
   const navigateToHome = () => {
     if (formValid) {
@@ -34,16 +33,16 @@ const handleSubmit = (e) => {
     }
   };
 
-    const handlePasswordChange = (e) => {
-      const newPassword = e.target.value;
-      console.log(e.target.value)
-      setPassword(newPassword);
-      if (email.trim() !== "" && newPassword.trim() !== "") {
-        setFormValid(true);
-      } else {
-        setFormValid(false);
-      }
-    };
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    console.log(e.target.value);
+    setPassword(newPassword);
+    if (email.trim() !== "" && newPassword.trim() !== "") {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    }
+  };
 
   return (
     <div className="container">
