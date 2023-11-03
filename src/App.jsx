@@ -4,8 +4,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // redux
-// import { Provider } from "react-redux";
-// import { store } from "./store/store";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 import AppLayout from "./pages/AppLayout/AppLayout";
 import Home from "./components/Home/Home";
 import Shop from "./components/Shop/shop";
@@ -37,9 +37,15 @@ function App() {
                     path: "/product",
                     element: <ProductDetails />,
                     children: [
-                        {index: true, element: <ReviewsContainer />},
-                        { path: "product/description", element: <Description /> },
-                        { path: "product/reviews", element: <ReviewsContainer /> },
+                        { index: true, element: <ReviewsContainer /> },
+                        {
+                            path: "product/description",
+                            element: <Description />,
+                        },
+                        {
+                            path: "product/reviews",
+                            element: <ReviewsContainer />,
+                        },
                         { path: "product/faq", element: <FAQ /> },
                     ],
                 },
@@ -58,9 +64,9 @@ function App() {
     ]);
 
     return (
-        // <Provider store={store}>
-        <RouterProvider router={router} />
-        // </Provider>
+        <Provider store={store}>
+            <RouterProvider router={router} />
+        </Provider>
     );
 }
 
