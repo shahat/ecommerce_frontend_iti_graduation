@@ -1,5 +1,8 @@
 import styles from "./Nav.module.css";
 import { BsSearch, BsFillPersonFill, BsCart3 } from "react-icons/bs";
+
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { MdOutlineFavoriteBorder, MdOutlinePerson } from "react-icons/md";
 // import React from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +10,20 @@ const handleLogout = () => {
   alert("you are loged out ");
 };
 function Nav() {
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+
+  // ============== handle input change ==============
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+  };
+  // ============== handle form submit   ==============
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    navigate(`/shop/${query}`);
+  };
+
+  // ============== handle return   ==============
   return (
     <>
       <nav
@@ -28,12 +45,18 @@ function Nav() {
 
             <div className="col col-md-4 ">
               {" "}
-              <form className="d-flex align-items-center  ">
+              <form
+                className="d-flex align-items-center  "
+                onSubmit={handleFormSubmit}
+              >
                 <input
-                  className={`form-control border border-success rounded-0  flex-grow-1 ${styles.form_search} ${styles.form_search_input}`}
+                  className={`form-control border  rounded-0  flex-grow-1 
+                  ${styles.form_search} 
+                  ${styles.form_search_input}`}
                   type="search"
-                  placeholder=" Search for the products "
-                  aria-label="Search"
+                  placeholder="Search..."
+                  value={query}
+                  onChange={handleInputChange}
                 />
                 <button
                   className={`btn rounded-0 ${styles.form_search} ${styles.form_search_button} bg-warning`}
@@ -42,7 +65,6 @@ function Nav() {
                   <BsSearch
                     className={`${styles.icon} font-weight-bold`}
                   ></BsSearch>
-                  {/* Search */}
                 </button>
               </form>
             </div>

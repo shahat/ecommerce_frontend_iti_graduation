@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { categoryAction } from "../../store/slices/categories";
 export default function Home() {
   const categories = useSelector((state) => state.categories.categories);
-  // console.log("categories ", categories);
+  console.log("categories from home component ", categories);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(categoryAction());
@@ -35,14 +35,53 @@ export default function Home() {
                 className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center"
               >
                 <Link to="/shop">
-                  <Categoy name={category.name} src={category.image} />{" "}
+                  <Categoy name={category.name} src={category.img} />{" "}
                 </Link>
               </div>
             ))}
           </div>
         </section>
-
         {/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Accessories

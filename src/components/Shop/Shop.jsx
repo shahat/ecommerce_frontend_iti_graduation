@@ -1,17 +1,40 @@
-// import React from "react";
-
-import { useState } from "react";
+import React from "react";
 import Card from "./card";
 import Categoy from "./categoy";
 import style from "./shop.module.css";
 import "./chechbox.css";
 import Caarousel from "../Carousel/Caarousel";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import instance from "../../axiosConfig/instance";
 
 function Shop() {
+  const { productName } = useParams();
+  const [searchedProducts, setSearchedProducts] = useState([]);
   var [isVisible, setIsVisible] = useState(false);
   var toggelFilter = () => {
     setIsVisible(!isVisible);
   };
+
+  const getsearchedProduct = async () => {
+    try {
+      const res = await instance.get(`/product?keyword=${productName}`);
+      const result = res.data.data;
+      setSearchedProducts(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getsearchedProduct();
+    console.log("Updated searchedProducts data:", searchedProducts);
+  }, []);
+
+  useEffect(() => {
+    console.log("Updated searchedProducts data:", searchedProducts);
+  }, [searchedProducts]); // This effect will run when searchedProducts changes.
+
   return (
     <div className={style.componentcontainer}>
       <div className="container">
@@ -602,18 +625,15 @@ function Shop() {
           {/* product card */}
           <div className="product-card col-lg-8 col-md-10  mt-4 m-auto">
             <div className="row row-cols-1 row-cols-lg-3 row-cols-md-3 row-cols-sm-2">
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
-              <Card src="./assets/images/accessories.jpg" />
+              {searchedProducts.map((product, index) => (
+                <Card
+                  key={index}
+                  title={product.title}
+                  img={product.images[0]}
+                  price={product.price}
+                  afterDiscout={product.priceAfterDescount}
+                />
+              ))}
             </div>
           </div>
         </div>
