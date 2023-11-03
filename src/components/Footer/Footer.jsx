@@ -67,43 +67,43 @@ function Footer() {
                   <h2 className="title">Electornics</h2>
                   <ul className="list-unstyled">
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         {" "}
                         Mobile
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         {" "}
                         Tablets
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         {" "}
                         Labtops
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         {" "}
                         Camera
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         {" "}
                         Televisions
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         {" "}
                         HeadPhones
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         {" "}
                         Home Appliances
                       </a>
@@ -116,35 +116,35 @@ function Footer() {
                   <h2 className="title">Fashion</h2>
                   <ul className="list-unstyled ">
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         Women's Fashion
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         {" "}
                         men's Fashion
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         {" "}
                         Girl's Fashion
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         {" "}
                         men's watches{" "}
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         Women's watches
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         Eyewear{" "}
                       </a>
                     </li>
@@ -156,35 +156,35 @@ function Footer() {
                   <h2 className="title">Home And Kitchen </h2>
                   <ul className="list-unstyled  w-100 ">
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         Kitchen &amp; Dining{" "}
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Bedding{" "}
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Bath
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Home Decor
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         Home Applicances
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Home improvement
                       </a>
@@ -197,36 +197,36 @@ function Footer() {
                   <h2 className="title">Beaut </h2>
                   <ul className="list-unstyled  w-100 ">
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Women's Fragrance
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Men's Fragrance{" "}
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Make-Up
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Skincare
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         Personal Care
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Tools &amp; Accessories
                       </a>
@@ -239,36 +239,36 @@ function Footer() {
                   <h2 className="title">Security &amp; privacy</h2>
                   <ul className="list-unstyled">
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Women's Fragrance
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Men's Fragrance{" "}
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Make-Up
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Skincare
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         Personal Care
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Tools &amp; Accessories
                       </a>
@@ -281,36 +281,36 @@ function Footer() {
                   <h2 className="title">Security &amp; privacy</h2>
                   <ul className="list-unstyled">
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Strollers &amp; Accessories
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Car Seats{" "}
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Baby Clothing
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Feeding
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         Bathing &amp; Skincare
                       </a>
                     </li>
                     <li>
-                      <a className href="#" title>
+                      <a className="" href="#" title="">
                         {" "}
                         Baby &amp; Toddler Toys
                       </a>
@@ -327,22 +327,22 @@ function Footer() {
                   <h3 className="fs-5"> Contact Us </h3>
                   <ul className="list-inline d-flex m-1 justify-content-center">
                     <li>
-                      <a className="text-decoration-none" href="#" title>
+                      <a className="text-decoration-none" href="#" title="">
                         <i className="fa-brands fa-facebook fs-4 px-2 text-warning" />
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         <i className="fa-brands fa-twitter fs-4 px-2 text-warning " />
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         <i className="fa-brands fa-google-plus-g  fs-4 px-2 text-warning" />
                       </a>
                     </li>
                     <li>
-                      <a href="#" title>
+                      <a href="#" title="">
                         <i className="fa-brands fa-linkedin-in fs-4 px-2 text-warning" />
                       </a>
                     </li>
@@ -353,18 +353,18 @@ function Footer() {
                   <div>
                     <img
                       src="./assets/images/paymentOption/card-amex.svg"
-                      alt
+                      // alt
                     />
                     <img
                       src="./assets/images/paymentOption/card-mastercard.svg"
-                      alt
+                      // alt
                     />
                     <img
                       src="./assets/images/paymentOption/card-visa.svg"
-                      alt
+                      // alt
                     />
-                    <img src="./assets/images/paymentOption/cod-en.svg" alt />
-                    <img src="./assets/images/paymentOption/valu.svg" alt />
+                    <img src="./assets/images/paymentOption/cod-en.svg"  />
+                    <img src="./assets/images/paymentOption/valu.svg"  />
                   </div>
                 </div>
               </div>

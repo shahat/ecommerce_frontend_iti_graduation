@@ -1,6 +1,7 @@
 .carousel-item {
+  /* display: block; */
   width: 100%;
-  min-height: 85vh;
+  height: 70vh;
 }
 #first-Carousel-Image {
   background-image: url(../../../public/assets/images/imageFive.jpg);
