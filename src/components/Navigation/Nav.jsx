@@ -1,12 +1,15 @@
+import { useContext } from "react";
 import styles from "./Nav.module.css";
 import { BsSearch, BsFillPersonFill, BsCart3 } from "react-icons/bs";
 import { MdOutlineFavoriteBorder, MdOutlinePerson } from "react-icons/md";
 // import React from "react";
 import { Link } from "react-router-dom";
+import { authContext } from "../../contexts/authContext";
 const handleLogout = () => {
   alert("you are loged out ");
 };
 function Nav() {
+  const { isLogin, setLogin } = useContext(authContext);
   return (
     <>
       <nav
@@ -98,19 +101,36 @@ function Nav() {
                   className={`dropdown-menu ${styles.number_one} position-absolute `}
                   aria-labelledby="navbarDropdown"
                 >
-                  <li>
-                    <Link to="login" className="dropdown-item">
-                      Login
-                    </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <Link to="register" className="dropdown-item">
-                      register
-                    </Link>
-                  </li>
+                  {isLogin ? (
+                    <li>
+                      <Link
+                        to="/login"
+                        onClick={() => {
+                          localStorage.removeItem("token");
+                          setLogin(false);
+                        }}
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                  ) : (
+                    <>
+                      <li>
+                        <Link to="login" className="dropdown-item">
+                          Login
+                        </Link>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <Link to="register" className="dropdown-item">
+                          register
+                        </Link>
+                      </li>
+                    </>
+                  )}
+
                   <li>
                     <hr className="dropdown-divider" />
                   </li>

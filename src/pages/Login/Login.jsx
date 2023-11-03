@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import style from "./login.module.css";
 import { BsGoogle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { loginAuth } from "../../Services/auth";
+import { authContext } from "../../contexts/authContext";
+import toast, { Toaster } from "react-hot-toast";
 
 function Login() {
+  const { setLogin } = useContext(authContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formValid, setFormValid] = useState(true);
 
   const navigate = useNavigate();
+
+  const navigateToHome = () => {
+    if (formValid) {
+      navigate("/");
+    }
+  };
 
   const navigateResetPass = () => {
     navigate("/resetPassword");
@@ -17,33 +27,46 @@ function Login() {
     navigate("/register");
   };
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  if (email.trim() === "" || password.trim() === "") {
-    setFormValid(false);
-  } else {
-    setFormValid(true);
-    navigateToHome();
-  }
-};
+  const handleDataRequest = async () => {
+    if (!formValid) {
+      toast.error("email or password is incorrect", { position: "top-center" });
+    } else {
+      try {
+        const response = await loginAuth(email, password);
+        console.log(response);
+        localStorage.setItem("token", res.data.token);
+        setLogin(true);
+        navigateToHome();
 
-
-  const navigateToHome = () => {
-    if (formValid) {
-      navigate("/home");
+      } catch (error) {
+        toast.error("Please try again!", {
+          position: "top-center",
+        });
+      }
     }
   };
 
-    const handlePasswordChange = (e) => {
-      const newPassword = e.target.value;
-      console.log(e.target.value)
-      setPassword(newPassword);
-      if (email.trim() !== "" && newPassword.trim() !== "") {
-        setFormValid(true);
-      } else {
-        setFormValid(false);
-      }
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email.trim() === "" || password.trim() === "") {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+      navigateToHome();
+    }
+    handleDataRequest();
+  };
+
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    console.log(e.target.value);
+    setPassword(newPassword);
+    if (email.trim() !== "" && newPassword.trim() !== "") {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    }
+  };
 
   return (
     <div className="container">
@@ -115,6 +138,7 @@ const handleSubmit = (e) => {
           </form>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }
