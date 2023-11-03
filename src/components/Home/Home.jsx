@@ -7,13 +7,16 @@ import Categoy from "../Shop/categoy";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { categoryAction } from "../../store/slices/categories";
+import { cartAction } from "../../store/slices/cart";
 export default function Home() {
   const categories = useSelector((state) => state.categories.categories);
   // console.log("categories ", categories);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(categoryAction());
+    dispatch(cartAction());
   }, []);
+  
   return (
     <>
       {/* ==================================  Caarousel start  ================================== */}
@@ -31,7 +34,7 @@ export default function Home() {
           <div className="row justify-content-center my-5">
             {categories.map((category) => (
               <div
-                key={category.id}
+                key={category._id}
                 className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center"
               >
                 <Link to="/shop">

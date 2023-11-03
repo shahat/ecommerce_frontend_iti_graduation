@@ -60,7 +60,7 @@ function App() {
         },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
-        { path: "**", element: <NotFound /> },
+        { path: "*/*", element: <NotFound /> },
     ]);
 
     return (

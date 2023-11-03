@@ -5,9 +5,9 @@ import instance from "../../axiosConfig/instance";
 export const categoryAction = createAsyncThunk(
   "categories/getAll",
   async () => {
-    console.log("giting all the categories");
+    // console.log("giting all the categories");
     const res = await instance.get(`/categories/`);
-    console.log("this is the result", res.data.data);
+    // console.log("this is the result", res.data.data);
     // console.log()
     return res.data.data;
   }

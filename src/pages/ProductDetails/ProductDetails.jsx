@@ -3,7 +3,8 @@ import css from "../../assets/style/product.module.css";
 import PhotoGallery from "../../components/productDetailsComps/photoGallery";
 import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import { Link, Outlet } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { addToBothCartsAction } from "../../store/slices/cart";
 
 import {
     FaStar,
@@ -16,8 +17,11 @@ import {
 
 function ProductDetails() {
     const [quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
 
+    
     useEffect(() => {
+        
         var toggleButtons = document.getElementsByClassName("toggle");
 
         for (var i = 0; i < toggleButtons.length; i++) {
@@ -38,6 +42,9 @@ function ProductDetails() {
     }
     function dec() {
         quantity > 1 && setQuantity(quantity - 1);
+    }
+    function addToCart(id){
+        dispatch(addToBothCartsAction(id));
     }
 
     return (
@@ -264,9 +271,10 @@ function ProductDetails() {
                                 <div className={`${css.nomargin} d-flex`}>
                                     <button
                                         type="button"
+                                        onClick={addToCart}
                                         className={`${css.myBtn} ${css.buynow} mx-2`}
                                     >
-                                        Buy Now
+                                        Add To Cart
                                     </button>
                                     {/* <!-- heart button --> */}
                                     <a
