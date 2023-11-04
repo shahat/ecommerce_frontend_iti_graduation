@@ -83,6 +83,22 @@ function Register() {
     if (!passwordError) {
       navigateToLogin();
     }
+
+      if (NameError || emailError || passwordError) {
+        toast.error("Validation Error", { position: "top-center" });
+      } else {
+        try {
+          // these parameters should be matched with the keys identified in the schema model
+          const response = await registerAuth(name, email, password);
+          console.log(response);
+          navigate("/login");
+        } catch (error) {
+          // should be customized error
+          toast.error("Sorry the server couldn't proceed with your request!", {
+            position: "top-center",
+          });
+        }
+      }
     // if (userPassword.password === userPassword.confirmPassword) {
     //   navigateToLogin();
     //   setPasswordError(false);
@@ -91,21 +107,7 @@ function Register() {
     // }
   };
 
-  // if (NameError || emailError || passwordError) {
-  //   toast.error("Validation Error", { position: "top-center" });
-  // } else {
-  //   try {
-  //     // these parameters should be matched with the keys identified in the schema model
-  //     const response = await registerAuth(name, email, password);
-  //     console.log(response);
-  //     navigate("/login");
-  //   } catch (error) {
-  //     // should be customized error
-  //     toast.error("Sorry the server couldn't proceed with your request!", {
-  //       position: "top-center",
-  //     });
-  //   }
-  // }
+
   const validatePassword = () => {
     const { password, confirmPassword } = userPassword;
    
