@@ -19,10 +19,18 @@ import NotFound from "./pages/notFound/NotFound";
 import CheckOut from "./components/CheckOut/CheckOut";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register.jsx";
+import SendCode from "./pages/SendCode/SendCode";
+import ResetPass from "./pages/Resetpassword/ResetPass";
+import ResetCode from "./pages/ResetCode/ResetCode";
+import { AuthProvider } from "./contexts/authContext";
+import { useState } from "react";
 
 // import components and page
 
 function App() {
+  const [isLogin, setLogin] = useState(
+    localStorage.getItem("token") ? true : false
+  );
   const router = createBrowserRouter([
     {
       path: "/",
@@ -42,13 +50,22 @@ function App() {
     },
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
+    { path: "/emailRecovery", element: <SendCode /> },
+    { path: "/resetCode", element: <ResetCode /> },
+    { path: "/resetPassword", element: <ResetPass /> },
     { path: "**", element: <NotFound /> },
   ]);
 
   return (
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    // <Provider store={store}>
+
+    <AuthProvider value={{ isLogin, setLogin }}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </AuthProvider>
+
+    // </Provider>
   );
 }
 

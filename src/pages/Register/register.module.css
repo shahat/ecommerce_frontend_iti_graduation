@@ -14,10 +14,11 @@
 .googleIcon {
   color: red !important;
 }
-.register:hover {
-  cursor: pointer;
-  text-decoration: underline !important;
+.register {
+  color: black !important;
+
 }
+
 .no_list_style {
   list-style-type: none;
   margin-bottom: 5px;
