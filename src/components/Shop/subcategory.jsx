@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import style from "./shop.module.css";
-function Categoy(props) {
+function SubCategoy(props) {
   return (
     <>
       <div className=" mt-4 m-auto d-flex flex-column justify-content-center align-items-center">
@@ -15,4 +15,4 @@ function Categoy(props) {
   );
 }
 
-export default Categoy;
+export default SubCategoy;

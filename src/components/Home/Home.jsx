@@ -1,8 +1,8 @@
-import React from "react";
+// import React from "react";
 // import style from "./Home.module.css";
 import Caarousel from "../Carousel/Caarousel";
 import NewArrival from "./NewArrival";
-import Categoy from "../Shop/categoy";
+import Categoy from "../Shop/subcategory";
 import { Link } from "react-router-dom";
 export default function Home() {
   return (
@@ -67,8 +67,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 
-
+        {/*
 
 Accessories
 ../../assets/images/products-images/watches.jpg
