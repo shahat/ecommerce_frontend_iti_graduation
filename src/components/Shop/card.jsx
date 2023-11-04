@@ -14,6 +14,7 @@ function Card({ title, img, price, afterDiscout }) {
               <span className="text-decoration-line-through ms-2  ">
                 {price} $
               </span>
+              
               <div className={`product-rate mb-2 ps-3 ${style.rate}`}>
                 <FaStar className=" ps-1" />
                 <FaStar className=" ps-1" />

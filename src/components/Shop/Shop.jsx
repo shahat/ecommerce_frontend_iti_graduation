@@ -10,6 +10,7 @@ import instance from "../../axiosConfig/instance";
 
 function Shop() {
   const { productName } = useParams();
+
   const [searchedProducts, setSearchedProducts] = useState([]);
   var [isVisible, setIsVisible] = useState(false);
   var toggelFilter = () => {

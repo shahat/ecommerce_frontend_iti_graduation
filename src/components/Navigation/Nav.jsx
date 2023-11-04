@@ -6,6 +6,7 @@ import { useState } from "react";
 import { MdOutlineFavoriteBorder, MdOutlinePerson } from "react-icons/md";
 // import React from "react";
 import { Link } from "react-router-dom";
+import SecondNav from "../SecondNav/SecondNav";
 const handleLogout = () => {
   alert("you are loged out ");
 };
@@ -173,6 +174,7 @@ function Nav() {
           </div>
         </div>
       </nav>
+      <SecondNav></SecondNav>
     </>
   );
 }
