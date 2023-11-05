@@ -46,6 +46,7 @@ function ProductDetails() {
     function addToCart(id){
         dispatch(addToBothCartsAction(id));
     }
+    console.log(window.location.pathname);
 
     return (
         <>

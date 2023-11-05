@@ -4,6 +4,7 @@ import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 // import css from "./cart.module.css";
 import css from "../../assets/style/product.module.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Cart() {
   const [products, setProducts] = useState([
@@ -11,6 +12,8 @@ function Cart() {
     "src/assets/images/wish-list/t-shirt.jpeg",
     "src/assets/images/wish-list/tra.jpeg",
   ]);
+
+  var cartList = useSelector((state)=> state.cart.cartProducts)
 
   return (
     <>
@@ -24,14 +27,22 @@ function Cart() {
           <div
             className={`${css["cart_products"]} col-md-7 col-11 border rounded-4 p-4 d-flex flex-column bg-white`}
           >
-            {products.map((prod, index) => {
+            {cartList.length && cartList.map((prod, index) => {
+              return (
+                <>
+                  <CartProduct key={index} product={prod} />
+                    {index < cartList.length - 1 && <hr className="my-4 w-100" />}
+                </>
+              );
+            })}
+            {/* {products.map((prod, index) => {
               return (
                 <>
                   <CartProduct key={index} src={prod} />
                   {index < products.length - 1 && <hr className="my-4 w-100" />}
                 </>
               );
-            })}
+            })} */}
           </div>
 
           {/* <!-- Checkout PART --> */}

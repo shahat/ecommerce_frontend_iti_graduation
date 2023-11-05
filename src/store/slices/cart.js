@@ -9,7 +9,7 @@ export const cartAction = createAsyncThunk("cart/getAll", async () => {
 export const addToCartAction = createAsyncThunk(
     "cart/addProduct",
     async (id) => {
-        const status = await instance.post("/cart/product", { productId: id });
+        const status = await instance.post(`/cart/${id}`);
         return status;
     }
 );
@@ -22,15 +22,27 @@ export function addToBothCartsAction(id) {
     };
 }
 
+export const removeFromCartAction = createAsyncThunk(
+    "cart/addProduct",
+    async (id) => {
+        const status = await instance.patch(`/cart/${id}`);
+        return status;
+    }
+);
+
 const cartSlice = createSlice({
     name: "cart",
     initialState: { cartProducts: [] },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(cartAction.fulfilled, (state, action) => {
             state.cartProducts = action.payload;
         });
-        builder.addCase(addToCartAction.fulfilled, (state, action) => {
-            // state.cartProducts.push(action.payload.config.data)
+        builder.addCase(removeFromCartAction.fulfilled, (state, action) => {
+            // removes the item from the cart using its id I got from "action.meta.arg"
+            state.cartProducts = state.cartProducts.filter(
+                (item) => item._id._id != action.meta.arg
+            );
         });
     },
 });
