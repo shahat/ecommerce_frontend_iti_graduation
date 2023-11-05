@@ -11,11 +11,11 @@
   cursor: pointer;
 }
 .loginBtn {
-  background-color: #1877f2;
+  background-color: #1877f2 !important;
 }
 .forgottenPassword {
   cursor: pointer;
 }
 .btnGoogle {
-  background-color: #ea4335;
+  background-color: #ea4335 !important;
 }

@@ -1,10 +1,16 @@
+import { useContext } from "react";
 import { useEffect } from "react";
 import styles from "./Nav.module.css";
-import { BsSearch, BsFillPersonFill, BsCart3 } from "react-icons/bs";
+import { BsSearch, BsCart3 } from "react-icons/bs";
+
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { MdOutlineFavoriteBorder, MdOutlinePerson } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 // import React from "react";
 import { Link } from "react-router-dom";
+import { authContext } from "../../contexts/authContext";
+import SecondNav from "../SecondNav/SecondNav";
 import { cartAction } from "../../store/slices/cart";
 
 import Badge from 'react-bootstrap/Badge';
@@ -23,6 +29,21 @@ function Nav() {
   },[])
   var cartList = useSelector((state)=> state.cart.cartProducts)
   
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+
+  // ============== handle input change ==============
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+  };
+  // ============== handle form submit   ==============
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    navigate(`/shop/${query}`);
+  };
+
+  // ============== handle return   ==============
+  const { isLogin, setLogin } = useContext(authContext);
   return (
     <>
       <nav
@@ -44,12 +65,18 @@ function Nav() {
 
             <div className="col col-md-4 ">
               {" "}
-              <form className="d-flex align-items-center  ">
+              <form
+                className="d-flex align-items-center  "
+                onSubmit={handleFormSubmit}
+              >
                 <input
-                  className={`form-control border border-success rounded-0  flex-grow-1 ${styles.form_search} ${styles.form_search_input}`}
+                  className={`form-control border  rounded-0  flex-grow-1 
+                  ${styles.form_search} 
+                  ${styles.form_search_input}`}
                   type="search"
-                  placeholder=" Search for the products "
-                  aria-label="Search"
+                  placeholder="Search..."
+                  value={query}
+                  onChange={handleInputChange}
                 />
                 <button
                   className={`btn rounded-0 ${styles.form_search} ${styles.form_search_button} bg-warning`}
@@ -58,7 +85,6 @@ function Nav() {
                   <BsSearch
                     className={`${styles.icon} font-weight-bold`}
                   ></BsSearch>
-                  {/* Search */}
                 </button>
               </form>
             </div>
@@ -114,19 +140,36 @@ function Nav() {
                   className={`dropdown-menu ${styles.number_one} position-absolute `}
                   aria-labelledby="navbarDropdown"
                 >
-                  <li>
-                    <Link to="login" className="dropdown-item">
-                      Login
-                    </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <Link to="register" className="dropdown-item">
-                      register
-                    </Link>
-                  </li>
+                  {isLogin ? (
+                    <li>
+                      <Link
+                        to="/login"
+                        onClick={() => {
+                          localStorage.removeItem("token");
+                          setLogin(false);
+                        }}
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                  ) : (
+                    <>
+                      <li>
+                        <Link to="login" className="dropdown-item">
+                          Login
+                        </Link>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <Link to="register" className="dropdown-item">
+                          register
+                        </Link>
+                      </li>
+                    </>
+                  )}
+
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
@@ -183,6 +226,7 @@ function Nav() {
           </div>
         </div>
       </nav>
+      <SecondNav></SecondNav>
     </>
   );
 }

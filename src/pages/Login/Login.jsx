@@ -1,20 +1,48 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import style from "./login.module.css";
 import { BsGoogle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { loginAuth } from "../../Services/auth";
+import { authContext } from "../../contexts/authContext";
+import toast, { Toaster } from "react-hot-toast";
 
 function Login() {
+  const { setLogin } = useContext(authContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formValid, setFormValid] = useState(true);
 
   const navigate = useNavigate();
 
+  const navigateToHome = () => {
+    if (formValid) {
+      navigate("/");
+    }
+  };
+
   const navigateResetPass = () => {
     navigate("/resetPassword");
   };
   const navigateToRegister = () => {
     navigate("/register");
+  };
+
+  const handleDataRequest = async () => {
+    if (!formValid) {
+      toast.error("email or password is incorrect", { position: "top-center" });
+    } else {
+      try {
+        const response = await loginAuth(email, password);
+        console.log(response);
+        localStorage.setItem("token", res.data.token);
+        setLogin(true);
+        navigateToHome();
+      } catch (error) {
+        toast.error("Please try again!", {
+          position: "top-center",
+        });
+      }
+    }
   };
 
   const handleSubmit = (e) => {
@@ -25,12 +53,7 @@ function Login() {
       setFormValid(true);
       navigateToHome();
     }
-  };
-
-  const navigateToHome = () => {
-    if (formValid) {
-      navigate("/home");
-    }
+    handleDataRequest();
   };
 
   const handlePasswordChange = (e) => {
@@ -114,6 +137,7 @@ function Login() {
           </form>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

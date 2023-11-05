@@ -22,17 +22,25 @@ import Register from "./pages/Register/Register.jsx";
 import Description from "./components/productDetailsComps/description";
 import ReviewsContainer from "./components/productDetailsComps/reviewsContainer";
 import FAQ from "./components/productDetailsComps/faqComponent";
+import SendCode from "./pages/SendCode/SendCode";
+import ResetPass from "./pages/Resetpassword/ResetPass";
+import ResetCode from "./pages/ResetCode/ResetCode";
+import { AuthProvider } from "./contexts/authContext";
+import { useState } from "react";
 
 // import components and page
 
 function App() {
-    const router = createBrowserRouter([
+    const [isLogin, setLogin] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+  const router = createBrowserRouter([
         {
             path: "/",
             element: <AppLayout />,
             children: [
                 { index: true, element: <Home /> },
-                { path: "/shop", element: <Shop /> },
+                { path: "/shop/:productName?", element: <Shop /> },
                 {
                     path: "/product",
                     element: <ProductDetails />,
@@ -60,14 +68,23 @@ function App() {
         },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
-        { path: "*/*", element: <NotFound /> },
+        { path: "/emailRecovery", element: <SendCode /> },
+    { path: "/resetCode", element: <ResetCode /> },
+    { path: "/resetPassword", element: <ResetPass /> },
+    { path: "*/*", element: <NotFound /> },
     ]);
 
-    return (
-        <Provider store={store}>
-            <RouterProvider router={router} />
-        </Provider>
-    );
+  return (
+    // <Provider store={store}>
+
+    <AuthProvider value={{ isLogin, setLogin }}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </AuthProvider>
+
+    // </Provider>
+  );
 }
 
 export default App;
