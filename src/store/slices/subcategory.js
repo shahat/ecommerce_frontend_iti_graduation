@@ -3,8 +3,10 @@ import axios from "axios";
 
 export var subCategoryAction = createAsyncThunk(
   "subCategories/getAll",
-  async () => {
-    var res = await axios.get(`https://openmarket.onrender.com/subcategories`);
+  async (currentPage2) => {
+    var res = await axios.get(
+      `https://openmarket.onrender.com/subcategories?page=${currentPage2}`
+    );
     // console.log(res);
     // console.log(res.data.data);
     return res.data.data;

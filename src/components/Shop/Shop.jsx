@@ -18,13 +18,15 @@ function Shop() {
   var products = useSelector((state) => state.products.products);
   var SubCategoies = useSelector((state) => state.subCategories.subCategories);
   var [currentPage, setCurrentPage] = useState(1);
+  var [currentPage2, setCurrentPage2] = useState(1);
   ////////////////////////////////////////////////////////////////
-  async function getSubCategoryProducts(subCategoryId) {
+  async function getSubCategoryProducts(subCategoryName) {
     console.log("inside  subcategory");
+    console.log(subCategoryName);
+    var id = subCategoryName;
     try {
-      const data = await axios.get(
-        `http://localhost:4000/subcategories/${subCategoryId}`
-      );
+      const data = await axios.get(`http://localhost:5000/subcategories/${id}`);
+      console.log(data);
       const res = data.data.data;
       console.log("hhhhhhhhh", res);
       setSubCategoryProduct(res);
@@ -33,14 +35,14 @@ function Shop() {
     }
   }
 
-  useEffect(() => {
-    getSubCategoryProducts();
-    console.log("ay haja", subCategoryProduct);
-  }, []);
+  // useEffect(() => {
+  //   getSubCategoryProducts();
+  //   console.log("ay haja", subCategoryProduct);
+  // }, []);
 
-  useEffect(() => {
-    products = [...subCategoryProduct];
-  }, [subCategoryProduct]);
+  // useEffect(() => {
+  //   console.log("ay haja", subCategoryProduct);
+  // }, [subCategoryProduct]);
   // async function getSubCategoryProducts() {
   //   try {
   //     var data = await axios.get(
@@ -80,8 +82,8 @@ function Shop() {
   //////////////////////////////////////////////////////////////////
   useEffect(() => {
     dispatch(productAction(currentPage));
-    dispatch(subCategoryAction());
-  }, [currentPage]);
+    dispatch(subCategoryAction(currentPage2));
+  }, [currentPage, currentPage2]);
 
   //=============================
   //////////////////////////////////////////////////////////////////
@@ -446,15 +448,34 @@ function Shop() {
           {SubCategoies &&
             SubCategoies.map((supcategory) => (
               <div
+                className={`me-4 ms-4 ${style.subcategorydiv}`}
                 key={supcategory._id}
-                onClick={() =>
-                  getSubCategoryProducts("654399e024728d15d5153843")
-                }
+                onClick={() => getSubCategoryProducts(supcategory.name)}
               >
                 <SubCategoy name={supcategory.name} img={supcategory.img} />
               </div>
             ))}
         </div>
+        <nav aria-label="Page navigation example" className="mt-5">
+          <ul className="pagination justify-content-center">
+            <li
+              className="page-item disabled"
+              onClick={() => setCurrentPage2(currentPage2 - 1)}
+            >
+              <a className="page-link" tabIndex={-1} aria-disabled="true">
+                Previous
+              </a>
+            </li>
+            <li className={`page-item ${currentPage2 > 1 ? "disabled" : ""}`}>
+              <a
+                className={`page-link ${style.paginationitems}`}
+                onClick={() => setCurrentPage2(currentPage2 + 1)}
+              >
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
         {/* filter */}
         <div className="row px-xl-5 mt-4">
           <div className={style.hidenbtn}>
@@ -619,16 +640,25 @@ function Shop() {
           {/* product card */}
           <div className="product-card col-lg-8 col-md-10  mt-4 m-auto">
             <div className="row row-cols-1 row-cols-lg-3 row-cols-md-3 row-cols-sm-2">
-              {products &&
-                products.map((product) => (
-                  <Card
-                    key={product.id}
-                    title={product.title}
-                    price={product.price}
-                    priceAfterDescount={product.priceAfterDescount}
-                    img={product.thumbnail}
-                  />
-                ))}
+              {subCategoryProduct && subCategoryProduct.length > 0
+                ? subCategoryProduct.map((product) => (
+                    <Card
+                      key={product.id}
+                      title={product.title}
+                      price={product.price}
+                      priceAfterDiscount={product.priceAfterDiscount}
+                      img={product.thumbnail}
+                    />
+                  ))
+                : products.map((product) => (
+                    <Card
+                      key={product.id}
+                      title={product.title}
+                      price={product.price}
+                      priceAfterDiscount={product.priceAfterDiscount}
+                      img={product.thumbnail}
+                    />
+                  ))}
             </div>
           </div>
         </div>

@@ -57,7 +57,7 @@
     background-color: #ff9900;
   }
 }
-.categoryimage {
+.subcategoryimage {
   width: 120px;
   height: 120px;
 }
@@ -77,4 +77,7 @@
     background-color: #ff9900;
     color: black;
   }
+}
+.subcategorydiv {
+  cursor: pointer;
 }
