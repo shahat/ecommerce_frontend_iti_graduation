@@ -47,14 +47,14 @@ function App() {
                     children: [
                         { index: true, element: <ReviewsContainer /> },
                         {
-                            path: "product/description",
+                            path: "/product/description",
                             element: <Description />,
                         },
                         {
-                            path: "product/reviews",
+                            path: "/product/reviews",
                             element: <ReviewsContainer />,
                         },
-                        { path: "product/faq", element: <FAQ /> },
+                        { path: "/product/faq", element: <FAQ /> },
                     ],
                 },
                 { path: "/cart", element: <Cart /> },

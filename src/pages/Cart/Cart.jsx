@@ -3,6 +3,8 @@ import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import css from "../../assets/style/product.module.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaArrowRight } from "react-icons/fa6";
+// import { useEffect } from "react";
 
 function Cart() {
   var cartList = useSelector((state) => state.cart.cartProducts);
@@ -77,7 +79,7 @@ function Cart() {
               >
                 <input
                   type="text"
-                  className="btn rounded-pill col-md-8 col-sm-11 bg-secondary-subtle text-start"
+                  className="border-0 px-3 text-dark rounded-pill col-md-8 col-sm-11 bg-secondary-subtle text-start"
                   placeholder="Add Promo Code"
                 />
                 <div className={`col ${css.hide}`}></div>
@@ -86,13 +88,13 @@ function Cart() {
                 >
                   Apply
                 </button>
-                <button
-                  className={`${css.goToCheck} btn ${css.myBtn} rounded-pill col-12 mt-4 p-3 fs-6`}
+                <Link to="/checkout"
+                  className={`${css.goToCheck} btn ${css.myBtn} rounded-pill text-decoration-none col-12 mt-4 p-3 fs-3`}
                 >
-                  <Link to="/checkout"> Go to Checkout</Link>
+                  Go to Checkout
 
-                  <i className="fa-solid fa-arrow-right ms-3"></i>
-                </button>
+                  < FaArrowRight className="ms-3 fs-5"/>
+                </Link>
               </div>
             </div>
           </div>

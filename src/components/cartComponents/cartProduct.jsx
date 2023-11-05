@@ -23,7 +23,7 @@ function CartProduct({ product }) {
     }
     async function removeFromcart(productId) {
         console.log("remove");
-        dispatch(removeFromCartAction(productId))
+        dispatch(removeFromCartAction(productId));
     }
 
     return (
@@ -43,16 +43,18 @@ function CartProduct({ product }) {
                         />
                     </div>
                     <div
-                        className={`${css["cart_product_details"]} float-start px-2 d-flex flex-column`}
+                        className={`${css["cart_product_details"]} float-start col-8 px-2 d-flex flex-column`}
                     >
                         <h4>{product._id.title}</h4>
                         <p>
-                            Size: <span className="text-secondary">Large</span>
+                            <span className="text-secondary">{product._id.description}</span>
                         </p>
-                        <p>
+                        {/* <p>
                             Color: <span className="text-secondary">Blue</span>
-                        </p>
-                        <h3 className="mt-auto mb-0">{product._id.price}EGP</h3>
+                        </p> */}
+                        <h3 className="mt-auto mb-0">
+                            {product._id.price * quantity} EGP
+                        </h3>
                     </div>
                 </div>
                 <div
@@ -71,7 +73,10 @@ function CartProduct({ product }) {
                             onClick={() => {
                                 dec(product._id._id);
                             }}
-                            className={`${css.myBtn} rounded-0 rounded-start-5 w-25`}
+                            className={
+                                `${css.myBtn} rounded-0 rounded-start-5 w-25 ` +
+                                (quantity === 1 && ` bg-secondary-subtle border-0`)
+                            }
                         >
                             <FaMinus />
                         </button>
@@ -99,7 +104,6 @@ function CartProduct({ product }) {
 
 export default CartProduct;
 
-
 CartProduct.propTypes = {
-    product: PropTypes.object
+    product: PropTypes.object,
 };

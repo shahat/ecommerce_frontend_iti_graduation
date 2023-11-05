@@ -4,9 +4,16 @@ import Footer from "../../components/Footer/Footer";
 import { Outlet } from "react-router-dom";
 import Nav from "../../components/Navigation/Nav";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import { BsSearch, BsFillPersonFill, BsCart3 } from "react-icons/bs";
 import { MdOutlineFavoriteBorder, MdOutlinePerson } from "react-icons/md";
+import Badge from 'react-bootstrap/Badge';
+import Stack from 'react-bootstrap/Stack';
 export default function AppLayout() {
+
+  var cartList = useSelector((state)=> state.cart.cartProducts)
+
   const handleLogout = () => {
     alert("you are loged out ");
   };
@@ -106,6 +113,14 @@ export default function AppLayout() {
                 <span className={`${styles.icon_container}`}>
                   <Link to="/cart" className="nav-link text-center" href="#">
                     <BsCart3 className={`${styles.icon} fs-4 }`}></BsCart3>
+                     {/* Cart items counter above the cart icon */}
+                     {cartList.length > 0 && (
+                      <Stack direction="horizontal">
+                        <Badge pill bg="danger position-absolute top-0 ms-4">
+                          {cartList.length}
+                        </Badge>
+                      </Stack>
+                    )}
                   </Link>
                 </span>
               </li>{" "}
