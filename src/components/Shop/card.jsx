@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { FaStar } from "react-icons/fa";
 import style from "./shop.module.css";
-function Card({  props}) {
+function Card(props) {
   return (
     <div className={style.cardwidth}>
       <div className={`card-div col mb-4 ${style.card}`}>
