@@ -1,9 +1,9 @@
-import React from "react";
+// import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import style from "./Home.module.css";
 import Caarousel from "../Carousel/Caarousel";
 import NewArrival from "./NewArrival";
-import Categoy from "../Shop/categoy";
+import Categoy from "../Shop/subcategory";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { categoryAction } from "../../store/slices/categories";
@@ -41,6 +41,7 @@ export default function Home() {
             ))}
           </div>
         </section>
+
         {/* 
 
 
