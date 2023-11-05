@@ -5,20 +5,48 @@ import { useNavigate } from "react-router-dom";
 import { loginAuth } from "../../Services/auth";
 import { authContext } from "../../contexts/authContext";
 import toast, { Toaster } from "react-hot-toast";
+import image from "../../assets/images/150x80 logo.png";
 
 function Login() {
   const { setLogin } = useContext(authContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [formValid, setFormValid] = useState(true);
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
-  const navigate = useNavigate();
+  const [errors, setErrors] = useState({
+    passwordError: "",
+    emailError: "",
+    nameError: "",
+  });
 
-  const navigateToHome = () => {
-    if (formValid) {
-      navigate("/");
+  const handleValidation = (e) => {
+    if (e.target.name == "password") {
+      setUser({ ...user, password: e.target.value });
+      setErrors({
+        ...errors,
+        passwordError:
+          e.target.value.length == 0
+            ? "Password is required"
+            : e.target.value.length <= 3
+            ? "Password must be at least 4 characters "
+            : "",
+      });
+    } else if (e.target.name == "email") {
+      setUser({ ...user, email: e.target.value });
+      setErrors({
+        ...errors,
+        emailError:
+          e.target.value.length == 0
+            ? "Email is required"
+            : e.target.value.length <= 3
+            ? "Email must be at least 4 characters"
+            : "",
+      });
     }
   };
+
+  const navigate = useNavigate();
 
   const navigateResetPass = () => {
     navigate("/resetPassword");
@@ -26,50 +54,44 @@ function Login() {
   const navigateToRegister = () => {
     navigate("/register");
   };
+  const navigateToHome = () => {
+    navigate("/");
+  };
 
-  const handleDataRequest = async () => {
-    if (!formValid) {
-      toast.error("email or password is incorrect", { position: "top-center" });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Loooool");
+
+    if (errors.emailError || errors.passwordError) {
+      toast.error("Email or password is incorrect"),
+        {
+          position: "top-center",
+        };
     } else {
       try {
-        const response = await loginAuth(email, password);
-        console.log(response);
-        localStorage.setItem("token", res.data.token);
+        const result = await loginAuth(user);
+        console.log(result);
+        localStorage.setItem("token", result.data.token);
         setLogin(true);
-        navigateToHome();
-
+        navigate("/");
       } catch (error) {
-        toast.error("Please try again!", {
-          position: "top-center",
-        });
+        toast.error("Sorry, we couldn't proceed your request"),
+          {
+            position: "top-center",
+          };
       }
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email.trim() === "" || password.trim() === "") {
-      setFormValid(false);
-    } else {
-      setFormValid(true);
-      navigateToHome();
-    }
-    handleDataRequest();
-  };
-
-  const handlePasswordChange = (e) => {
-    const newPassword = e.target.value;
-    console.log(e.target.value);
-    setPassword(newPassword);
-    if (email.trim() !== "" && newPassword.trim() !== "") {
-      setFormValid(true);
-    } else {
-      setFormValid(false);
     }
   };
 
   return (
     <div className="container">
+      <div className="d-flex justify-content-center">
+        <img
+          src={image}
+          className={`${style.logoImage}`}
+          onClick={navigateToHome}
+        />
+      </div>
       <div className="row justify-content-center ">
         <div
           className={`col-sm-12 col-md-7 col-lg-5 col-xl-5  vh-80 mt-4 p-5 d-flex flex-column justify-content-center ${style.loginInformation}`}
@@ -93,23 +115,33 @@ function Login() {
             <label htmlFor="email" />
             <input
               onChange={(e) => {
-                setEmail(e.target.value);
+                handleValidation(e);
               }}
-              className="form-control"
-              placeholder="Email or Phone Number"
+              className={`form-control ${
+                errors.emailError && "border-danger shadow-none"
+              }`}
+              placeholder="Email..."
               type="email"
               id="email"
-              required
+              name="email"
             />
+            <p className="text-danger">{errors.emailError}</p>
+
             <label htmlFor="password" />
             <input
-              onChange={handlePasswordChange}
-              className="form-control"
+              onChange={(e) => {
+                handleValidation(e);
+              }}
+              className={`form-control ${
+                errors.passwordError && "border-danger shadow-none"
+              }`}
               placeholder="Password"
               type="password"
               id="password"
-              required
+              name="password"
             />
+            <p className="text-danger">{errors.passwordError}</p>
+
             <div className=" mt-4">
               <button
                 type="submit"
@@ -142,5 +174,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;

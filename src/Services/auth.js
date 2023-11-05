@@ -3,9 +3,9 @@
 import instance from "../axiosConfig/instance"
 
 export const registerAuth= (data)=>{
-  return  instance.post("/user/signup",data)
+  return instance.post("/users/signup", data);
 }
 
 export const loginAuth = (data)=>{
-    return instance.post("/user/login",data)
+    return instance.post("/users/signin", data);
 }

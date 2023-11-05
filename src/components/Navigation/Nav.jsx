@@ -5,11 +5,14 @@ import { MdOutlineFavoriteBorder, MdOutlinePerson } from "react-icons/md";
 // import React from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../../contexts/authContext";
-const handleLogout = () => {
-  alert("you are loged out ");
-};
+import toast, { Toaster } from "react-hot-toast";
+
+// const handleLogout = () => {
+//   alert("you are loged out ");
+// };
 function Nav() {
   const { isLogin, setLogin } = useContext(authContext);
+
   return (
     <>
       <nav
@@ -104,10 +107,14 @@ function Nav() {
                   {isLogin ? (
                     <li>
                       <Link
-                        to="/login"
+                        to="/"
+                        className="dropdown-item"
                         onClick={() => {
                           localStorage.removeItem("token");
                           setLogin(false);
+                          toast.success("Successfully logged out!", {
+                            position: "top-right",
+                          });
                         }}
                       >
                         Logout
@@ -142,11 +149,6 @@ function Nav() {
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
-                  <li>
-                    <Link className="dropdown-item" onClick={handleLogout}>
-                      LogOut
-                    </Link>
-                  </li>
                 </ul>
               </li>
               {/* ----- cart ----- */}
@@ -171,6 +173,7 @@ function Nav() {
           </div>
         </div>
       </nav>
+      <Toaster />
     </>
   );
 }
