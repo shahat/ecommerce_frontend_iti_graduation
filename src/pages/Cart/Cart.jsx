@@ -1,19 +1,11 @@
-import { useState } from "react";
 import CartProduct from "../../components/cartComponents/cartProduct";
 import RelatedProducts from "../../components/relatedProducts/relatedProducts";
-// import css from "./cart.module.css";
 import css from "../../assets/style/product.module.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Cart() {
-  const [products, setProducts] = useState([
-    "src/assets/images/wish-list/shirt.png",
-    "src/assets/images/wish-list/t-shirt.jpeg",
-    "src/assets/images/wish-list/tra.jpeg",
-  ]);
-
-  var cartList = useSelector((state)=> state.cart.cartProducts)
+  var cartList = useSelector((state) => state.cart.cartProducts);
 
   return (
     <>
@@ -27,22 +19,20 @@ function Cart() {
           <div
             className={`${css["cart_products"]} col-md-7 col-11 border rounded-4 p-4 d-flex flex-column bg-white`}
           >
-            {cartList.length && cartList.map((prod, index) => {
-              return (
-                <>
-                  <CartProduct key={index} product={prod} />
-                    {index < cartList.length - 1 && <hr className="my-4 w-100" />}
-                </>
-              );
-            })}
-            {/* {products.map((prod, index) => {
-              return (
-                <>
-                  <CartProduct key={index} src={prod} />
-                  {index < products.length - 1 && <hr className="my-4 w-100" />}
-                </>
-              );
-            })} */}
+            {cartList.length ? (
+              cartList.map((prod, index) => {
+                return (
+                  <>
+                    <CartProduct key={index} product={prod} />
+                    {index < cartList.length - 1 && (
+                      <hr className="my-4 w-100" />
+                    )}
+                  </>
+                );
+              })
+            ) : (
+              <h3 className="text-center fw-semibold">Your cart is empty!</h3>
+            )}
           </div>
 
           {/* <!-- Checkout PART --> */}

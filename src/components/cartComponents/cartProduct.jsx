@@ -1,9 +1,10 @@
 // import css from "../../pages/Cart/cart.module.css";
 import css from "../../assets/style/product.module.css";
-import { useEffect, useState } from "react";
-import { FaMinus, FaPlus, FaTrash } from "react-icons/fa6";
+import PropTypes from "prop-types";
 import instance from "../../axiosConfig/instance";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { FaMinus, FaPlus, FaTrash } from "react-icons/fa6";
 import { removeFromCartAction } from "../../store/slices/cart";
 
 function CartProduct({ product }) {
@@ -97,3 +98,8 @@ function CartProduct({ product }) {
 }
 
 export default CartProduct;
+
+
+CartProduct.propTypes = {
+    product: PropTypes.object
+};
