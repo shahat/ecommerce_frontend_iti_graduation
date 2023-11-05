@@ -37,7 +37,7 @@ function App() {
       element: <AppLayout />,
       children: [
         { index: true, element: <Home /> },
-        { path: "/shop/:productName", element: <Shop /> },
+        { path: "/shop/:productName?", element: <Shop /> },
         { path: "product", element: <ProductDetails /> },
         { path: "/cart", element: <Cart /> },
         { path: "/wishlist", element: <WishList /> },
