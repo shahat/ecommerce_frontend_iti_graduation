@@ -1,12 +1,28 @@
+import { useEffect } from "react";
 import styles from "./Nav.module.css";
 import { BsSearch, BsFillPersonFill, BsCart3 } from "react-icons/bs";
 import { MdOutlineFavoriteBorder, MdOutlinePerson } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 // import React from "react";
 import { Link } from "react-router-dom";
+import { cartAction } from "../../store/slices/cart";
+
+import Badge from 'react-bootstrap/Badge';
+import Stack from 'react-bootstrap/Stack';
+
+
+
 const handleLogout = () => {
   alert("you are loged out ");
 };
 function Nav() {
+
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(cartAction())
+  },[])
+  var cartList = useSelector((state)=> state.cart.cartProducts)
+  
   return (
     <>
       <nav
@@ -134,6 +150,14 @@ function Nav() {
                 <span className={`${styles.icon_container}`}>
                   <Link to="/cart" className="nav-link text-center" href="#">
                     <BsCart3 className={`${styles.icon} fs-4 }`}></BsCart3>
+                    {/* Cart items counter above the cart icon */}
+                    {cartList.length > 0 && (
+                      <Stack direction="horizontal">
+                        <Badge pill bg="danger position-absolute top-0 ms-4">
+                          {cartList.length}
+                        </Badge>
+                      </Stack>
+                    )}
                   </Link>
                 </span>
               </li>{" "}
@@ -144,6 +168,14 @@ function Nav() {
                     <MdOutlineFavoriteBorder
                       className={`${styles.icon} fs-4 }`}
                     ></MdOutlineFavoriteBorder>
+                    {/* Wish list items counter above the heart icon */}
+                    {/* {wishList.length > 0 && (
+                      <Stack direction="horizontal">
+                        <Badge pill bg="danger position-absolute top-0 ms-4">
+                          {wishList.length}
+                        </Badge>
+                      </Stack>
+                    )} */}
                   </Link>
                 </span>
               </li>

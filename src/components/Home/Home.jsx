@@ -7,14 +7,12 @@ import Categoy from "../Shop/categoy";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { categoryAction } from "../../store/slices/categories";
-import { cartAction } from "../../store/slices/cart";
 export default function Home() {
   const categories = useSelector((state) => state.categories.categories);
   // console.log("categories ", categories);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(categoryAction());
-    dispatch(cartAction());
   }, []);
   
   return (
