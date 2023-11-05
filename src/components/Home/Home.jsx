@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(categoryAction());
   }, []);
-  
+
   return (
     <>
       {/* ==================================  Caarousel start  ================================== */}
@@ -36,7 +36,7 @@ export default function Home() {
                 className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center"
               >
                 <Link to="/shop">
-                  <Categoy name={category.name} src={category.img} />{" "}
+                  <Categoy name={category.name} src={category.image} />{" "}
                 </Link>
               </div>
             ))}
