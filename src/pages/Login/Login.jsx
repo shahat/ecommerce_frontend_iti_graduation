@@ -28,9 +28,7 @@ function Login() {
         passwordError:
           e.target.value.length == 0
             ? "Password is required"
-            : e.target.value.length <= 3
-            ? "Password must be at least 4 characters "
-            : "",
+            : ""
       });
     } else if (e.target.name == "email") {
       setUser({ ...user, email: e.target.value });
@@ -39,9 +37,7 @@ function Login() {
         emailError:
           e.target.value.length == 0
             ? "Email is required"
-            : e.target.value.length <= 3
-            ? "Email must be at least 4 characters"
-            : "",
+            :"",
       });
     }
   };
@@ -60,7 +56,6 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Loooool");
 
     if (errors.emailError || errors.passwordError) {
       toast.error("Email or password is incorrect"),
@@ -75,10 +70,13 @@ function Login() {
         setLogin(true);
         navigate("/");
       } catch (error) {
-        toast.error("Sorry, we couldn't proceed your request"),
-          {
+        if (error.response) {
+          const errorMessage = error.response.data.message;
+
+          toast.error(errorMessage, {
             position: "top-center",
-          };
+          });
+        }
       }
     }
   };
@@ -108,6 +106,7 @@ function Login() {
           </p>
           <form
             action="#"
+            autoComplete="off"
             onSubmit={(e) => {
               handleSubmit(e);
             }}

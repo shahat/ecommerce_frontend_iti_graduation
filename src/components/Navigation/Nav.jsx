@@ -7,9 +7,7 @@ import { Link } from "react-router-dom";
 import { authContext } from "../../contexts/authContext";
 import toast, { Toaster } from "react-hot-toast";
 
-// const handleLogout = () => {
-//   alert("you are loged out ");
-// };
+
 function Nav() {
   const { isLogin, setLogin } = useContext(authContext);
 
