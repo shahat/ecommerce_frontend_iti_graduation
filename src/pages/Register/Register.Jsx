@@ -102,10 +102,11 @@ function Register() {
     try {
       const res = await registerAuth(user);
       navigate("/login");
+      console.log(res)
     } catch (error) {
       if (error.response) {
         const errorMessage = error.response.data.message;
-        console.log(errorMessage)
+        // console.log(errorMessage)
 
         toast.error(errorMessage, {
           position: "top-center",
@@ -186,7 +187,7 @@ function Register() {
                     errors.passwordError && "border-danger shadow-none"
                   }`}
                   placeholder="Password"
-                  type="text"
+                  type="password"
                   id="password"
                   name="firstPassword"
                   value={user.password}
@@ -210,7 +211,7 @@ function Register() {
                       "border-danger shadow-none mt-4"
                     }`}
                     placeholder="Confirm Password"
-                    type="text"
+                    type="password"
                     id="confirmPassRecovery"
                     name="secondPassword"
                     value={user.confirmPassword}
