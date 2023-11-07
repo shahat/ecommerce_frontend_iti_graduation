@@ -37,8 +37,10 @@ function Cart() {
             {cartList.length ? (
               cartList.map((prod, index) => {
                 sub(prod.priceWhenAdded * prod.quantity)
+                sub(prod.priceWhenAdded * prod.quantity)
                 return (
                   <>
+                    <CartProduct key={index} product={prod} sub={sub} />
                     <CartProduct key={index} product={prod} sub={sub} />
                     {index < cartList.length - 1 && (
                       <hr className="my-4 w-100" />
