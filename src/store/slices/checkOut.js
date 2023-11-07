@@ -1,25 +1,25 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import instance from "../../axiosConfig/instance";
+import { createSlice } from "@reduxjs/toolkit";
 
 
 const checkOutSlice = createSlice({
     name: "checkOut",
     initialState: { 
-        totalPrice : 0,
-        discount : 0
-     },
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(cartAction.fulfilled, (state, action) => {
-            state.cartProducts = action.payload;
-        });
-        builder.addCase(removeFromCartAction.fulfilled, (state, action) => {
-            // removes the item from the cart using its id I got from "action.meta.arg"
-            state.cartProducts = state.cartProducts.filter(
-                (item) => item._id._id != action.meta.arg
-            );
-        });
+        subTotal : 0,
+        discount : 0,
+        total: 0
+    },
+    reducers: {
+        changeSubTotal: (state, action)=>{
+            isNaN(action.payload) && (state.subTotal = state.subTotal + action.payload)
+            state.total = state.subTotal
+        },
+        addDiscount: (state, action)=>{
+            isNaN(action.payload) && (state.discount = action.payload/100)
+            state.subTotal = state.subTotal * (1 - state.discount)
+        }
     },
 });
 
-export default cartSlice.reducer;
+
+export const { changeSubTotal } = checkOutSlice.actions
+export default checkOutSlice.reducer;

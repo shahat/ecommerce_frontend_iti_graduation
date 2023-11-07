@@ -32,42 +32,42 @@ export default function SecondNav() {
                   Dresses <i className="fa fa-angle-right float-right mt-1" />
                 </a>
                 <div className="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                  <a href className="dropdown-item">
+                  <a href="#"className="dropdown-item">
                     Men's Dresses
                   </a>
-                  <a href className="dropdown-item">
+                  <a href="#"className="dropdown-item">
                     Women's Dresses
                   </a>
-                  <a href className="dropdown-item">
+                  <a href="#"className="dropdown-item">
                     Baby's Dresses
                   </a>
                 </div>
               </div>
-              <a href className="nav-item nav-link">
+              <a href="#"className="nav-item nav-link">
                 Shirts
               </a>
-              <a href className="nav-item nav-link">
+              <a href="#"className="nav-item nav-link">
                 Jeans
               </a>
-              <a href className="nav-item nav-link">
+              <a href="#"className="nav-item nav-link">
                 Swimwear
               </a>
-              <a href className="nav-item nav-link">
+              <a href="#"className="nav-item nav-link">
                 Sleepwear
               </a>
-              <a href className="nav-item nav-link">
+              <a href="#"className="nav-item nav-link">
                 Sportswear
               </a>
-              <a href className="nav-item nav-link">
+              <a href="#"className="nav-item nav-link">
                 Jumpsuits
               </a>
-              <a href className="nav-item nav-link">
+              <a href="#"className="nav-item nav-link">
                 Blazers
               </a>
-              <a href className="nav-item nav-link">
+              <a href="#"className="nav-item nav-link">
                 Jackets
               </a>
-              <a href className="nav-item nav-link">
+              <a href="#"className="nav-item nav-link">
                 Shoes
               </a>
             </div>
@@ -75,7 +75,7 @@ export default function SecondNav() {
         </div>
         <div className="col-lg-9">
           <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-            <a href className="text-decoration-none d-block d-lg-none">
+            <a href="#"className="text-decoration-none d-block d-lg-none">
               <span className="h1 text-uppercase text-dark bg-light px-2">
                 Multi
               </span>
@@ -127,7 +127,7 @@ export default function SecondNav() {
                 </a>
               </div>
               <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
-                <a href className="btn px-0">
+                <a href="#"className="btn px-0">
                   <i className="fas fa-heart text-primary" />
                   <span
                     className="badge text-secondary border border-secondary rounded-circle"
@@ -136,7 +136,7 @@ export default function SecondNav() {
                     0
                   </span>
                 </a>
-                <a href className="btn px-0 ml-3">
+                <a href="#"className="btn px-0 ml-3">
                   <i className="fas fa-shopping-cart text-primary" />
                   <span
                     className="badge text-secondary border border-secondary rounded-circle"

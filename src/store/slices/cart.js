@@ -23,7 +23,7 @@ export function addToBothCartsAction(id) {
 }
 
 export const removeFromCartAction = createAsyncThunk(
-    "cart/addProduct",
+    "cart/removeProduct",
     async (id) => {
         const status = await instance.patch(`/cart/${id}`);
         return status;
@@ -33,7 +33,6 @@ export const removeFromCartAction = createAsyncThunk(
 const cartSlice = createSlice({
     name: "cart",
     initialState: { cartProducts: [] },
-    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(cartAction.fulfilled, (state, action) => {
             state.cartProducts = action.payload;

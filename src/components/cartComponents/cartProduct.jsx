@@ -7,18 +7,20 @@ import { useDispatch } from "react-redux";
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa6";
 import { removeFromCartAction } from "../../store/slices/cart";
 
-function CartProduct({ product }) {
+function CartProduct({ product, sub }) {
     var [quantity, setQuantity] = useState(product.quantity);
     const dispatch = useDispatch();
 
     function inc(productId) {
-        setQuantity(++quantity);
         instance.patch("/cart", { productId, quantity });
+        setQuantity(++quantity);
+        sub(product._id.price)
     }
     function dec(productId) {
         if (quantity > 1) {
-            setQuantity(--quantity);
             instance.patch("/cart", { productId, quantity });
+            setQuantity(--quantity);
+            sub( - product._id.price)
         }
     }
     async function removeFromcart(productId) {
@@ -106,4 +108,5 @@ export default CartProduct;
 
 CartProduct.propTypes = {
     product: PropTypes.object,
+    sub: PropTypes.func
 };

@@ -2,12 +2,18 @@ import CartProduct from "../../components/cartComponents/cartProduct";
 import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import css from "../../assets/style/product.module.css";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa6";
-// import { useEffect } from "react";
+import { changeSubTotal } from "../../store/slices/checkOut";
 
 function Cart() {
   var cartList = useSelector((state) => state.cart.cartProducts);
+  var checkOutStatus = useSelector((state) => state.checkOut);
+
+  const dispatch = useDispatch
+  function sub(price){
+    dispatch(changeSubTotal(price))
+  }
 
   return (
     <>
@@ -23,9 +29,10 @@ function Cart() {
           >
             {cartList.length ? (
               cartList.map((prod, index) => {
+                sub(prod.priceWhenAdded * prod.quantity)
                 return (
                   <>
-                    <CartProduct key={index} product={prod} />
+                    <CartProduct key={index} product={prod} sub={sub} />
                     {index < cartList.length - 1 && (
                       <hr className="my-4 w-100" />
                     )}
@@ -50,7 +57,7 @@ function Cart() {
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
                 >
                   <p className="fs-5 text-muted">Subtotal</p>
-                  <h5>$565</h5>
+                  <h5>{ checkOutStatus.subTotal } EGP</h5>
                 </div>
                 <div
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
@@ -58,20 +65,20 @@ function Cart() {
                   <p className="fs-5 text-muted">
                     Discount <span className="fs-6">(-20%)</span>
                   </p>
-                  <h5 className="text-danger">-$113</h5>
+                  <h5 className="text-danger">- { checkOutStatus.discount }</h5>
                 </div>
                 <div
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
                 >
                   <p className="fs-5 text-muted">Delivery Fee</p>
-                  <h5>$15</h5>
+                  <h5>20 EGP</h5>
                 </div>
                 <hr />
                 <div
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
                 >
                   <p className="fs-4 text-muted">Total</p>
-                  <h4>$467</h4>
+                  <h4> { checkOutStatus.total } </h4>
                 </div>
               </div>
               <div
