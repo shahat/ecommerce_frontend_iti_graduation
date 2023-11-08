@@ -9,14 +9,13 @@ export const cartAction = createAsyncThunk("cart/getAll", async () => {
 export const addToCartAction = createAsyncThunk(
   "cart/addProduct",
   async (id) => {
-    console.log("hhhhhhhhhhhhhhhhhhhhhh", id);
     const status = await instance.post(`/cart/${id}`);
     return status;
   }
 );
 
 export function addToBothCartsAction(id) {
-  console.log(id);
+  console.log("hhhhhhhhhhhhhhhhhhhhhh", id);
   return (dispatch) => {
     dispatch(addToCartAction(id)).then(() => {
       dispatch(cartAction());

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 // import { addToCartAction } from "../../store/slices/cart";
 import { addToBothCartsAction } from "./../../store/slices/cart";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 function Card(props) {
   var dispatch = useDispatch();
   var x = useNavigate();
@@ -12,6 +13,7 @@ function Card(props) {
 
   var addtocart = (id) => {
     console.log(id);
+    toast.success(`product added to the cart successifuly`);
     dispatch(addToBothCartsAction(id));
   };
   return (
@@ -26,9 +28,7 @@ function Card(props) {
           <div className>
             <div
               className={style.cardtitlediv}
-              onClick={() => {
-                x(`/product/${props.id}`);
-              }}
+              onClick={() => x(`/product/${props.id}`)}
             >
               <h5 className={`card-title ps-3 my-2 fs-6 ${style.cardtitle}`}>
                 {props.title}
@@ -58,6 +58,7 @@ function Card(props) {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

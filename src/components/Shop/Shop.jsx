@@ -15,7 +15,6 @@ import instance from "../../axiosConfig/instance";
 import Colorfilter from "./colorfilter";
 
 function Shop() {
-  // var [subCategoryProduct, setSubCategoryProduct] = useState([]);
   var dispatch = useDispatch();
   var [products, setproducts] = useState([]);
   var SubCategoies = useSelector((state) => state.subCategories.subCategories);
@@ -48,7 +47,7 @@ function Shop() {
   useEffect(() => {
     // dispatch(productAction(currentPage));
     dispatch(subCategoryAction(currentPage2));
-  }, [currentPage, currentPage2]);
+  }, [currentPage2]);
 
   //=============================
   //////////////////////////////////////////////////////////////////
@@ -76,19 +75,16 @@ function Shop() {
       console.log("fffffffffffffffffffffffffffff");
       getsearchedProduct();
     } else {
-      getProducts();
+      getProducts(currentPage);
     }
     // console.log("Updated searchedProducts data:", searchedProducts);
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     // console.log("Updated searchedProducts data:", searchedProducts);
   }, [products]); // This effect will run when searchedProducts changes.
   return (
     <div className={style.componentcontainer}>
-      <div className="container">
-        <Caarousel></Caarousel>
-      </div>
       {/* filter layaout  */}
       {isVisible && (
         <div className={style.filterstyle}>
@@ -131,10 +127,8 @@ function Shop() {
                   >
                     <div className="accordion-body">
                       <Pricefilter
-                        setSelectedRanges={setSelectedRanges}
-                        selectedRanges={selectedRanges}
+                        setproducts={setproducts}
                         currentPage={currentPage}
-                        isVisible={isVisible}
                       />
                     </div>
                   </div>
@@ -159,8 +153,7 @@ function Shop() {
                   >
                     <div className="accordion-body">
                       <Colorfilter
-                        setSelectedColor={setSelectedColor}
-                        selectedColor={selectedColor}
+                        setproducts={setproducts}
                         currentPage={currentPage}
                       />
                     </div>
@@ -200,10 +193,22 @@ function Shop() {
           </div>
         </div>
       )}
+      <div className="container">
+        <Caarousel></Caarousel>
+      </div>
       {/* category &filter &product container */}
       <div className="col-md-10 container">
         {/*subCategory */}
         <div className=" d-flex justify-content-center align-items-center flex-wrap">
+          <div
+            onClick={() => getProducts(currentPage)}
+            className={style.subcategorydiv}
+          >
+            <SubCategoy
+              name="All subcategory"
+              img="./assets/images/products-images/images.jpeg"
+            />
+          </div>
           {SubCategoies &&
             SubCategoies.map((supcategory) => (
               <div

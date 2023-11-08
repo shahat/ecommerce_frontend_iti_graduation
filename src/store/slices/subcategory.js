@@ -5,7 +5,7 @@ export var subCategoryAction = createAsyncThunk(
   "subCategories/getAll",
   async (currentPage2) => {
     var res = await axios.get(
-      `https://openmarket.onrender.com/subcategories?page=${currentPage2}`
+      `http://localhost:5000/subcategories?page=${currentPage2}`
     );
     // console.log(res);
     // console.log(res.data.data);
