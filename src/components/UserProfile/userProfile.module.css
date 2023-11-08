@@ -11,33 +11,44 @@ form input[type=submit] {
 }
 
 
-
-#manageMyAccount{
-    
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
+         -webkit-appearance: none;
 }
-#manageMyAccount #manageLinks ul{
+.manageMyAccount{
+}
+.manageMyAccount .manageLinks ul{
     list-style: none;
     
     
 }
-#manageMyAccount #manageLinks ul li{
+.manageMyAccount .manageLinks ul li{
     padding: 0;
     height: 40px;
 
 }
-#manageMyAccount #manageLinks ul li button{
+
+.link{
     height: 30px;
     width: fit-content;
     margin: 3px auto;
     background-color: transparent;
     border: 0px solid transparent;
     color: #999;
+    
+    text-decoration: none;
 
 }
-#manageMyAccount #manageLinks ul li button.active{
+.linkActive{
     color: #DB4444;
+    height: 30px;
+    width: fit-content;
+    margin: 3px auto;
+    background-color: transparent;
+    border: 0px solid transparent;    
+    text-decoration: none;
+
 }
-#card{
+.cardHolder{
     border-radius: 4px;
     background: var(#FFF, #FFF);
     width: 95%;
@@ -49,24 +60,20 @@ form input[type=submit] {
 
 
 }
-#card .card-container{
+.cardContainer{
     width: 100%;
     position: absolute;
-    height: 0%;
+    height: 100%;
     overflow: hidden;
     background-color: #fff;
     transition: all 0.5s ease-in-out;
-    opacity: 0.3;
-    z-index: 0;
+    opacity: 1;
+    z-index: 99;
     padding: 50px;
 
 }
-#card .card-container.active{
-    height: 100%;
-    opacity: 1;
-    z-index: 99;
-}
-#card .card-container h6{
+
+.cardContainer h6{
     color: #005268;
     font-size: 20px;
     font-style: normal;
@@ -74,7 +81,7 @@ form input[type=submit] {
     line-height: 28px;
 }
 
-#card .card-container form button{
+ .cardContainer form button{
     display: inline-block;
     width: 49% !important;
     margin: 8px auto;
@@ -85,7 +92,7 @@ form input[type=submit] {
     background-color: transparent !important;
     color: #005268;
 }
-#card .card-container form input[type=submit] {
+ .cardContainer form input[type=submit] {
     display: inline-block;
     width: 49% !important;
     margin: 8px auto;
@@ -100,14 +107,14 @@ form input[type=submit] {
 
 
 @media screen and (max-width: 1200px) {
-    #card .card-container{
+    .cardContainer{
         
         padding: 15px;
     
     }
 }
 @media screen and (max-width: 992px) {
-    #card .card-container{
+    .cardContainer{
         
         padding: 10px;
     
@@ -116,7 +123,7 @@ form input[type=submit] {
 @media screen and (max-width: 768px) {
 }
 @media screen and (max-width: 600px) {
-    #manageMyAccount #manageLinks ul li button{
+    link{
         font-size: 0.9em;
     }
 }
