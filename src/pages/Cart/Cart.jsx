@@ -5,22 +5,20 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa6";
 import { changeSubTotal } from "../../store/slices/checkOut";
+// import { useEffect } from "react";
 
 function Cart() {
-  var cartList = useSelector((state) => state.cart.cartProducts);
-  var checkOutStatus = useSelector((state) => state.checkOut);
-  console.log(checkOutStatus);
-  var subTotal = 0
-  var discount = 0
-  var shipping = 21
-  var total = subTotal * discount + shipping
+  const cartList = useSelector((state) => state.cart.cartProducts);
+  const checkOutStatus = useSelector((state) => state.checkOut);
 
-  cartList.map((item)=> subTotal = subTotal + (item.quantity * item. priceWhenAdded))
-
-  const dispatch = useDispatch
-  function sub(price){
-    dispatch(changeSubTotal(price))
-  }
+  // const dispatch = useDispatch
+  // function sub(price){
+  //   changeSubTotal(price)
+  //   console.log(checkOutStatus, price);
+  // }
+  // function changeSubTotal(price){
+  //   dispatch(changeSubTotal(price))
+  // }
 
   return (
     <>
@@ -37,10 +35,8 @@ function Cart() {
             {cartList.length ? (
               cartList.map((prod, index) => {
                 sub(prod.priceWhenAdded * prod.quantity)
-                sub(prod.priceWhenAdded * prod.quantity)
                 return (
                   <>
-                    <CartProduct key={index} product={prod} sub={sub} />
                     <CartProduct key={index} product={prod} sub={sub} />
                     {index < cartList.length - 1 && (
                       <hr className="my-4 w-100" />
@@ -66,7 +62,7 @@ function Cart() {
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
                 >
                   <p className="fs-5 text-muted">Subtotal</p>
-                  <h5>{ checkOutStatus.subTotal } {subTotal} EGP</h5>
+                  <h5>{ checkOutStatus.subTotal } EGP</h5>
                 </div>
                 <div
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
@@ -74,20 +70,20 @@ function Cart() {
                   <p className="fs-5 text-muted">
                     Discount <span className="fs-6">(0%)</span>
                   </p>
-                  <h5 className="text-danger">- { checkOutStatus.discount } {discount}</h5>
+                  <h5 className="text-danger">- { checkOutStatus.discount } </h5>
                 </div>
                 <div
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
                 >
                   <p className="fs-5 text-muted">Delivery Fee</p>
-                  <h5>{shipping} EGP</h5>
+                  <h5> EGP</h5>
                 </div>
                 <hr />
                 <div
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
                 >
                   <p className="fs-4 text-muted">Total</p>
-                  <h4> { checkOutStatus.total } {total} </h4>
+                  <h4> { checkOutStatus.total }  </h4>
                 </div>
               </div>
               <div

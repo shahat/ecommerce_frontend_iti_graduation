@@ -10,11 +10,12 @@ const checkOutSlice = createSlice({
     },
     reducers: {
         changeSubTotal: (state, action)=>{
-            isNaN(action.payload) && (state.subTotal = state.subTotal + action.payload)
-            state.total = state.subTotal
+            console.log(action.payload);
+            !isNaN(action.payload) && (state.subTotal = state.subTotal + action.payload)
+            state.total = state.subTotal * (1 - state.discount)
         },
         addDiscount: (state, action)=>{
-            isNaN(action.payload) && (state.discount = action.payload/100)
+            !isNaN(action.payload) && (state.discount = action.payload/100)
             state.subTotal = state.subTotal * (1 - state.discount)
         }
     },
