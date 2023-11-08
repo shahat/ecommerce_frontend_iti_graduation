@@ -27,11 +27,24 @@
   font-size: 19px;
   cursor: pointer;
 }
+.card {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
 .cardwidth {
   @media (max-width: 575px) {
     width: 300px;
     margin: auto;
   }
+}
+.cardimg {
+  height: 150px;
+}
+.cardtitle {
+  font-size: 14px;
+  font-weight: bold;
+}
+.cardtitlediv {
+  height: 40px;
 }
 /* .formbutton {
   background-color: rgb(1, 85, 110) !important;
@@ -58,6 +71,8 @@
 .paginationitems {
   background-color: rgb(1, 85, 110);
   color: white;
+  cursor: pointer;
+  &:active,
   &:hover {
     background-color: #ff9900;
     color: black;

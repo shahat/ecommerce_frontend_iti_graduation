@@ -35,40 +35,25 @@ function App() {
     localStorage.getItem("token") ? true : false
   );
   const router = createBrowserRouter([
-        {
-            path: "/",
-            element: <AppLayout />,
-            children: [
-                { index: true, element: <Home /> },
-                { path: "/shop/:productName?", element: <Shop /> },
-                {
-                    path: "/product",
-                    element: <ProductDetails />,
-                    children: [
-                        { index: true, element: <ReviewsContainer /> },
-                        {
-                            path: "product/description",
-                            element: <Description />,
-                        },
-                        {
-                            path: "product/reviews",
-                            element: <ReviewsContainer />,
-                        },
-                        { path: "product/faq", element: <FAQ /> },
-                    ],
-                },
-                { path: "/cart", element: <Cart /> },
-                { path: "/wishlist", element: <WishList /> },
-                { path: "/contact", element: <Contact /> },
-                // protected route user should be loged in
-                { path: "/Order", element: <Order /> },
-                { path: "/userprofile", element: <UserProfile /> },
-                { path: "/checkout", element: <CheckOut /> },
-            ],
-        },
-        { path: "/login", element: <Login /> },
-        { path: "/register", element: <Register /> },
-        { path: "/emailRecovery", element: <SendCode /> },
+    {
+      path: "/",
+      element: <AppLayout />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: "/shop/:productName?/:category?/:subcategory?", element: <Shop /> },
+        { path: "product", element: <ProductDetails /> },
+        { path: "/cart", element: <Cart /> },
+        { path: "/wishlist", element: <WishList /> },
+        { path: "/contact", element: <Contact /> },
+        // protected route user should be loged in
+        { path: "/Order", element: <Order /> },
+        { path: "/userprofile", element: <UserProfile /> },
+        { path: "/checkout", element: <CheckOut /> },
+      ],
+    },
+    { path: "/login", element: <Login /> },
+    { path: "/register", element: <Register /> },
+    { path: "/emailRecovery", element: <SendCode /> },
     { path: "/resetCode", element: <ResetCode /> },
     { path: "/resetPassword", element: <ResetPass /> },
     { path: "*/*", element: <NotFound /> },
