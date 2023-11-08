@@ -7,12 +7,28 @@ import Categoy from "../Shop/subcategory";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { categoryAction } from "../../store/slices/categories";
+import { subCategoryAction } from "../../store/slices/subcategory";
+import HomeCategory from "./HomeCategory";
 export default function Home() {
   const categories = useSelector((state) => state.categories.categories);
+  var subCategoies = useSelector((state) => state.subCategories.subCategories);
+
   console.log("categories from home component ", categories);
+  console.log("subcategory  from home component ", subCategoies);
   const dispatch = useDispatch();
+
+  // categoryToSub => to make dropdown in second nav
+  const categoryToSub = {};
+  categories.forEach(
+    (category) =>
+      (categoryToSub[category.name] = subCategoies.filter(
+        (subcategory) => subcategory.parentCategory === category.name
+      ))
+  );
+  console.log(categoryToSub);
   useEffect(() => {
     dispatch(categoryAction());
+    dispatch(subCategoryAction());
   }, []);
   return (
     <>
@@ -20,78 +36,24 @@ export default function Home() {
       <Caarousel></Caarousel>
       {/* ================================== Start of Category ==================================  */}
 
-      <div>
-        <div className="container my-5 w-100 h-25">
-          <span className=" w-25 h-100 "> </span>
-          <h2 id="medo" className="text-center m-5 text-black-50 fw-bold ">
-            Popular Category
-          </h2>
+      <div className="container-fluid pt-5">
+        <h2 className=" position-relative text-uppercase mx-xl-5 mb-4">
+          <span className="pr-3">Categories</span>
+        </h2>
+        <div className="row px-xl-5 pb-3">
+          {categories.map((category) => (
+            <HomeCategory
+              key={category._id}
+              image={category.image}
+              name={category.name}
+              categoryToSub={categoryToSub[category.name]}
+            ></HomeCategory>
+          ))}
         </div>
-        <section className="container">
-          <div className="row justify-content-center my-5">
-            {categories.map((category) => (
-              <div
-                key={category.id}
-                className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center"
-              >
-                <Link to="/shop">
-                  <Categoy name={category.name} src={category.img} />{" "}
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Accessories
-../../assets/images/products-images/watches.jpg
-*/}
-
-        {/* ================================== End Category ==================================  */}
-        <NewArrival />
       </div>
+
+      <NewArrival clothes={categoryToSub.clothes} />
+      <NewArrival electronics={categoryToSub.electronics} />
     </>
   );
 }

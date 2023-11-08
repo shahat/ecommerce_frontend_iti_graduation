@@ -42,43 +42,7 @@ function Shop() {
   useEffect(() => {
     products = [...subCategoryProduct];
   }, [subCategoryProduct]);
-  // async function getSubCategoryProducts() {
-  //   try {
-  //     var data = await axios.get(
-  //       `http://localhost:4000/subcategories/6543994124728d15d5153841`
-  //     );
-  //     var res = data.data.data;
-  //     console.log("inside category products", res);
-  //     setSubCategoryProduct(res);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-  // useEffect(() => {
-  //   getSubCategoryProducts();
-  // }, []);
-  // useEffect(() => {
-  //   console.log("Updated subCategoryProduct data:", subCategoryProduct);
-  // }, [subCategoryProduct]);
-  // const getsearchedProduct = async () => {
-  //   try {
-  //     const res = await instance.get(`/product?keyword=${productName}`);
-  //     const result = res.data.data;
-  //     setSearchedProducts(result);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
-  // useEffect(() => {
-  //   getsearchedProduct();
-  //   console.log("Updated searchedProducts data:", searchedProducts);
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log("Updated searchedProducts data:", searchedProducts);
-  // }, [searchedProducts]); // This effect will run when searchedProducts changes.
-  //////////////////////////////////////////////////////////////////
   useEffect(() => {
     dispatch(productAction(currentPage));
     dispatch(subCategoryAction());
@@ -87,7 +51,14 @@ function Shop() {
   //=============================
   //////////////////////////////////////////////////////////////////
 
-  const { productName } = useParams();
+  const { productName, category, subCategory } = useParams();
+  console.log("this is the use params from shop", useParams());
+  console.log(
+    "this is the use params parameters from shop",
+    productName,
+    category,
+    subCategory
+  );
 
   const [searchedProducts, setSearchedProducts] = useState([]);
   var [isVisible, setIsVisible] = useState(false);
