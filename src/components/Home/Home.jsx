@@ -1,13 +1,23 @@
 // import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 // import style from "./Home.module.css";
 import Caarousel from "../Carousel/Caarousel";
 import NewArrival from "./NewArrival";
 import Categoy from "../Shop/subcategory";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { categoryAction } from "../../store/slices/categories";
 export default function Home() {
+  const categories = useSelector((state) => state.categories.categories);
+  console.log("categories from home component ", categories);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(categoryAction());
+  }, []);
+
   return (
     <>
-      {/* Caarousel start  */}
+      {/* ==================================  Caarousel start  ================================== */}
       <Caarousel></Caarousel>
       {/* ================================== Start of Category ==================================  */}
 
@@ -20,54 +30,60 @@ export default function Home() {
         </div>
         <section className="container">
           <div className="row justify-content-center my-5">
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              <Link to="/shop">
-                <Categoy name="mobile" src="./assets/images/phone.jpg" />{" "}
-              </Link>
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              {" "}
-              <Categoy name="Beauty" src="./assets/images/prfiom.jpg" />
-            </div>
-
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              {" "}
-              <Categoy name="furniture" src="./assets/images/accessories.jpg" />
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              {" "}
-              <Categoy name="accessories" src="./assets/images/watches.jpg" />
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              {" "}
-              <Categoy name="laptop" src="./assets/images/labtop.jpeg" />{" "}
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              <Categoy name="mobile" src="./assets/images/phone.jpg" />{" "}
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              {" "}
-              <Categoy name="Beauty" src="./assets/images/prfiom.jpg" />
-            </div>
-
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              {" "}
-              <Categoy name="furniture" src="./assets/images/accessories.jpg" />
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              {" "}
-              <Categoy name="accessories" src="./assets/images/watches.jpg" />
-            </div>
-            <div className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center">
-              {" "}
-              <Categoy name="laptop" src="./assets/images/labtop.jpeg" />{" "}
-            </div>
-
-            {/*  */}
+            {categories.map((category) => (
+              <div
+                key={category._id}
+                className="col-sx-2 col-sm-4 col-md-4 col-lg-2 mx-lg-1 my-2 border-5   d-flex flex-column justify-content-center align-items-center"
+              >
+                <Link to="/shop">
+                  <Categoy name={category.name} src={category.img} />{" "}
+                </Link>
+              </div>
+            ))}
           </div>
         </section>
+        {/* 
 
-        {/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Accessories
 ../../assets/images/products-images/watches.jpg

@@ -1,12 +1,49 @@
+import { useContext } from "react";
+import { useEffect } from "react";
 import styles from "./Nav.module.css";
-import { BsSearch, BsFillPersonFill, BsCart3 } from "react-icons/bs";
+import { BsSearch, BsCart3 } from "react-icons/bs";
+
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { MdOutlineFavoriteBorder, MdOutlinePerson } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 // import React from "react";
 import { Link } from "react-router-dom";
+import { authContext } from "../../contexts/authContext";
+import SecondNav from "../SecondNav/SecondNav";
+import { cartAction } from "../../store/slices/cart";
+
+import Badge from 'react-bootstrap/Badge';
+import Stack from 'react-bootstrap/Stack';
+
+
+
 const handleLogout = () => {
   alert("you are loged out ");
 };
 function Nav() {
+
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(cartAction())
+  },[])
+  var cartList = useSelector((state)=> state.cart.cartProducts)
+  
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+
+  // ============== handle input change ==============
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+  };
+  // ============== handle form submit   ==============
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    navigate(`/shop/${query}`);
+  };
+
+  // ============== handle return   ==============
+  const { isLogin, setLogin } = useContext(authContext);
   return (
     <>
       <nav
@@ -28,12 +65,18 @@ function Nav() {
 
             <div className="col col-md-4 ">
               {" "}
-              <form className="d-flex align-items-center  ">
+              <form
+                className="d-flex align-items-center  "
+                onSubmit={handleFormSubmit}
+              >
                 <input
-                  className={`form-control border border-success rounded-0  flex-grow-1 ${styles.form_search} ${styles.form_search_input}`}
+                  className={`form-control border  rounded-0  flex-grow-1 
+                  ${styles.form_search} 
+                  ${styles.form_search_input}`}
                   type="search"
-                  placeholder=" Search for the products "
-                  aria-label="Search"
+                  placeholder="Search..."
+                  value={query}
+                  onChange={handleInputChange}
                 />
                 <button
                   className={`btn rounded-0 ${styles.form_search} ${styles.form_search_button} bg-warning`}
@@ -42,7 +85,6 @@ function Nav() {
                   <BsSearch
                     className={`${styles.icon} font-weight-bold`}
                   ></BsSearch>
-                  {/* Search */}
                 </button>
               </form>
             </div>
@@ -98,19 +140,36 @@ function Nav() {
                   className={`dropdown-menu ${styles.number_one} position-absolute `}
                   aria-labelledby="navbarDropdown"
                 >
-                  <li>
-                    <Link to="login" className="dropdown-item">
-                      Login
-                    </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <Link to="register" className="dropdown-item">
-                      register
-                    </Link>
-                  </li>
+                  {isLogin ? (
+                    <li>
+                      <Link
+                        to="/login"
+                        onClick={() => {
+                          localStorage.removeItem("token");
+                          setLogin(false);
+                        }}
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                  ) : (
+                    <>
+                      <li>
+                        <Link to="login" className="dropdown-item">
+                          Login
+                        </Link>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <Link to="register" className="dropdown-item">
+                          register
+                        </Link>
+                      </li>
+                    </>
+                  )}
+
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
@@ -134,6 +193,14 @@ function Nav() {
                 <span className={`${styles.icon_container}`}>
                   <Link to="/cart" className="nav-link text-center" href="#">
                     <BsCart3 className={`${styles.icon} fs-4 }`}></BsCart3>
+                    {/* Cart items counter above the cart icon */}
+                    {cartList.length > 0 && (
+                      <Stack direction="horizontal">
+                        <Badge pill bg="danger position-absolute top-0 ms-4">
+                          {cartList.length}
+                        </Badge>
+                      </Stack>
+                    )}
                   </Link>
                 </span>
               </li>{" "}
@@ -144,6 +211,14 @@ function Nav() {
                     <MdOutlineFavoriteBorder
                       className={`${styles.icon} fs-4 }`}
                     ></MdOutlineFavoriteBorder>
+                    {/* Wish list items counter above the heart icon */}
+                    {/* {wishList.length > 0 && (
+                      <Stack direction="horizontal">
+                        <Badge pill bg="danger position-absolute top-0 ms-4">
+                          {wishList.length}
+                        </Badge>
+                      </Stack>
+                    )} */}
                   </Link>
                 </span>
               </li>
@@ -151,6 +226,7 @@ function Nav() {
           </div>
         </div>
       </nav>
+      <SecondNav></SecondNav>
     </>
   );
 }

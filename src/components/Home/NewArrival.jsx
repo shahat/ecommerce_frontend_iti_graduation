@@ -20,7 +20,7 @@ function NewArrival() {
             <img
               src="../../assets/images/newarrival/firstFurnitureImage.jpg"
               style={{ borderTopLeftRadius: "80px 80px" }}
-              alt
+              alt=""
             />
             <div className="position-absolute top-0 p-4 text-white text-bold">
               <p>5 items</p>
@@ -103,7 +103,7 @@ function NewArrival() {
             <img
               className={newArrival.secondArrival_img}
               src="./../../assets/images/newarrival/firstFurnitureImage.jpg"
-              alt
+              alt=""
             />
             <div className="position-absolute top-0 p-4 text-white text-bold">
               <p>5 items</p>
@@ -163,7 +163,7 @@ function NewArrival() {
             <img
               src="../../assets/images/newarrival-images/long-image.jpg"
               style={{ borderTopLeftRadius: "80px 80px" }}
-              alt
+              alt=""
             />
             <div className="position-absolute top-0 p-4 text-white text-bold">
               <p>5 items</p>
@@ -242,7 +242,7 @@ function NewArrival() {
             <img
               className={newArrival.secondArrival_img}
               src="../../assets/images/newarrival-images/long-image.jpg"
-              alt
+              alt=""
             />
             <div className="position-absolute top-0 p-4 text-white text-bold">
               <p>5 items</p>

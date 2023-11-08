@@ -1,16 +1,13 @@
-import { useState } from "react";
 import CartProduct from "../../components/cartComponents/cartProduct";
 import RelatedProducts from "../../components/relatedProducts/relatedProducts";
-// import css from "./cart.module.css";
 import css from "../../assets/style/product.module.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { FaArrowRight } from "react-icons/fa6";
+// import { useEffect } from "react";
 
 function Cart() {
-  const [products, setProducts] = useState([
-    "src/assets/images/wish-list/shirt.png",
-    "src/assets/images/wish-list/t-shirt.jpeg",
-    "src/assets/images/wish-list/tra.jpeg",
-  ]);
+  var cartList = useSelector((state) => state.cart.cartProducts);
 
   return (
     <>
@@ -24,14 +21,20 @@ function Cart() {
           <div
             className={`${css["cart_products"]} col-md-7 col-11 border rounded-4 p-4 d-flex flex-column bg-white`}
           >
-            {products.map((prod, index) => {
-              return (
-                <>
-                  <CartProduct key={index} src={prod} />
-                  {index < products.length - 1 && <hr className="my-4 w-100" />}
-                </>
-              );
-            })}
+            {cartList.length ? (
+              cartList.map((prod, index) => {
+                return (
+                  <>
+                    <CartProduct key={index} product={prod} />
+                    {index < cartList.length - 1 && (
+                      <hr className="my-4 w-100" />
+                    )}
+                  </>
+                );
+              })
+            ) : (
+              <h3 className="text-center fw-semibold">Your cart is empty!</h3>
+            )}
           </div>
 
           {/* <!-- Checkout PART --> */}
@@ -76,7 +79,7 @@ function Cart() {
               >
                 <input
                   type="text"
-                  className="btn rounded-pill col-md-8 col-sm-11 bg-secondary-subtle text-start"
+                  className="border-0 px-3 text-dark rounded-pill col-md-8 col-sm-11 bg-secondary-subtle text-start"
                   placeholder="Add Promo Code"
                 />
                 <div className={`col ${css.hide}`}></div>
@@ -85,13 +88,13 @@ function Cart() {
                 >
                   Apply
                 </button>
-                <button
-                  className={`${css.goToCheck} btn ${css.myBtn} rounded-pill col-12 mt-4 p-3 fs-6`}
+                <Link to="/checkout"
+                  className={`${css.goToCheck} btn ${css.myBtn} rounded-pill text-decoration-none col-12 mt-4 p-3 fs-3`}
                 >
-                  <Link to="/checkout"> Go to Checkout</Link>
+                  Go to Checkout
 
-                  <i className="fa-solid fa-arrow-right ms-3"></i>
-                </button>
+                  < FaArrowRight className="ms-3 fs-5"/>
+                </Link>
               </div>
             </div>
           </div>

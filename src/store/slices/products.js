@@ -5,7 +5,7 @@ export var productAction = createAsyncThunk(
   "products/getAll",
   async (currentPage) => {
     var res = await axios.get(
-      `https://openmarket.onrender.com/product?page=${currentPage}`
+      `http://localhost:5000/product?page=${currentPage}`
     );
     // console.log(res);
     // console.log(res.data.data);

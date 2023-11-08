@@ -1,11 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productsReducer from "./slices/products";
-// import subCategoryProductsReducer from "./slices/subcategoryproducts";
+import categoryReducer from "./slices/categories";
+import cartReducer from "./slices/cart";
 import subCategoriesReducer from "./slices/subcategory";
+
+// import allMatchedProductsReducer from "./slices/allProducts";
 export var store = configureStore({
   reducer: {
     products: productsReducer,
-    // subCategoryProducts: subCategoryProductsReducer,
+    categories: categoryReducer,
+    cart: cartReducer,
     subCategories: subCategoriesReducer,
+    // allMatchedProducts: allMatchedProductsReducer,
   },
 });

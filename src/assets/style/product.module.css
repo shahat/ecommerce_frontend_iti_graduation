@@ -28,7 +28,7 @@
 .myBtnDisabled:hover {
    background-color: white;
    border: 1px solid #005268;
-   color: black;
+   color: rgb(128, 128, 128);
 }
 
 .details {

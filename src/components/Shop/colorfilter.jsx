@@ -1,22 +1,23 @@
-// import React from "react";
+// import React from 'react';
 import "./chechbox.css";
-import axios from "axios";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { useState } from "react";
 
-const Pricefilter = ({ setproducts, currentPage }) => {
+const Colorfilter = ({ setproducts, currentPage }) => {
   const [checkedId, setCheckedId] = useState(null);
   var info = [
-    { id: 1, min: 0, max: 500 },
-    { id: 2, min: 600, max: 1000 },
-    { id: 3, min: 1000, max: 5000 },
-    { id: 4, min: 5000, max: 10000 },
-    { id: 5, min: 10000, max: 50000 },
+    { id: 1, name: "black" },
+    { id: 2, name: "white" },
+    { id: 3, name: "red" },
+    { id: 4, name: "blue" },
+    { id: 5, name: "green" },
   ];
-  var click = async (min, max, id) => {
+  var colorFilter = async (color, id) => {
+    console.log(color);
     try {
       const data = await axios.get(
-        `http://localhost:5000/product?priceMin=${min}&priceMax=${max}`
+        `http://localhost:5000/product?color=${color}`
       );
       const res = data.data.data;
       setproducts(res);
@@ -37,44 +38,44 @@ const Pricefilter = ({ setproducts, currentPage }) => {
       console.log(err);
     }
   };
-
   return (
     <div>
       <div className="border-bottom mb-4 pb-4">
         <h5 className="font-weight-semi-bold mb-4 fs-6 fs-6">
-          Filter by price
+          Filter by Color
         </h5>
         <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
           <input
             type="checkbox"
             className="custom-control-input"
-            id="price-all"
             checked={checkedId === null}
+            id="color-all"
             onChange={() => handleSelectAll(currentPage)}
           />
-          <label className="custom-control-label" htmlFor="price-all">
-            All price
+          <label className="custom-control-label" htmlFor="color-all">
+            All Color
           </label>
         </div>
         <form>
           {info &&
-            info.map((price) => (
+            info.map((color) => (
               <div
-                key={price.id}
+                key={color.id}
                 className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"
               >
                 <input
                   type="checkbox"
                   className="custom-control-input"
-                  checked={checkedId === price.id}
-                  id={`price-${price.id}`}
-                  onChange={() => click(price.min, price.max, price.id)}
+                  checked={checkedId === color.id}
+                  id={`color-${color.id}`}
+                  onChange={() => colorFilter(color.name, color.id)}
+                  value={color}
                 />
                 <label
                   className="custom-control-label"
-                  htmlFor={`price-${price.id}`}
+                  htmlFor={`color-${color.id}`}
                 >
-                  {`${price.min}-${price.max}`}
+                  {color.name}
                 </label>
               </div>
             ))}
@@ -83,9 +84,9 @@ const Pricefilter = ({ setproducts, currentPage }) => {
     </div>
   );
 };
-Pricefilter.propTypes = {
+Colorfilter.propTypes = {
   setproducts: PropTypes.array.isRequired,
-  currentPage: PropTypes.number.isRequired,
+  currentPage: PropTypes.array.isRequired,
 };
 
-export default Pricefilter;
+export default Colorfilter;

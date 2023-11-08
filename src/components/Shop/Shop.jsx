@@ -1,97 +1,89 @@
 // import React from "react";
-
-import { useState } from "react";
 import Card from "./card";
 import style from "./shop.module.css";
 import "./chechbox.css";
 import Caarousel from "../Carousel/Caarousel";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { productAction } from "../../store/slices/products";
+// import { productAction } from "../../store/slices/products";
 import { subCategoryAction } from "../../store/slices/subcategory";
 import SubCategoy from "./subcategory";
 import axios from "axios";
 import Pricefilter from "./pricefilter";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import instance from "../../axiosConfig/instance";
+import Colorfilter from "./colorfilter";
+
 function Shop() {
-  var [subCategoryProduct, setSubCategoryProduct] = useState([]);
+  // var [subCategoryProduct, setSubCategoryProduct] = useState([]);
   var dispatch = useDispatch();
-  var products = useSelector((state) => state.products.products);
+  var [products, setproducts] = useState([]);
   var SubCategoies = useSelector((state) => state.subCategories.subCategories);
   var [currentPage, setCurrentPage] = useState(1);
   var [currentPage2, setCurrentPage2] = useState(1);
   ////////////////////////////////////////////////////////////////
   async function getSubCategoryProducts(subCategoryName) {
-    console.log("inside  subcategory");
-    console.log(subCategoryName);
     var id = subCategoryName;
     try {
       const data = await axios.get(`http://localhost:5000/subcategories/${id}`);
-      console.log(data);
       const res = data.data.data;
-      console.log("hhhhhhhhh", res);
-      setSubCategoryProduct(res);
+      setproducts(res);
     } catch (err) {
       console.log(err);
     }
   }
 
-  // useEffect(() => {
-  //   getSubCategoryProducts();
-  //   console.log("ay haja", subCategoryProduct);
-  // }, []);
+  async function getProducts(currentPage) {
+    try {
+      const data = await axios.get(
+        `http://localhost:5000/product?page=${currentPage}`
+      );
+      const res = data.data.data;
+      setproducts(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  // useEffect(() => {
-  //   console.log("ay haja", subCategoryProduct);
-  // }, [subCategoryProduct]);
-  // async function getSubCategoryProducts() {
-  //   try {
-  //     var data = await axios.get(
-  //       `http://localhost:4000/subcategories/6543994124728d15d5153841`
-  //     );
-  //     var res = data.data.data;
-  //     console.log("inside category products", res);
-  //     setSubCategoryProduct(res);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-  // useEffect(() => {
-  //   getSubCategoryProducts();
-  // }, []);
-  // useEffect(() => {
-  //   console.log("Updated subCategoryProduct data:", subCategoryProduct);
-  // }, [subCategoryProduct]);
-  // const getsearchedProduct = async () => {
-  //   try {
-  //     const res = await instance.get(`/product?keyword=${productName}`);
-  //     const result = res.data.data;
-  //     setSearchedProducts(result);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getsearchedProduct();
-  //   console.log("Updated searchedProducts data:", searchedProducts);
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log("Updated searchedProducts data:", searchedProducts);
-  // }, [searchedProducts]); // This effect will run when searchedProducts changes.
-  //////////////////////////////////////////////////////////////////
   useEffect(() => {
-    dispatch(productAction(currentPage));
+    // dispatch(productAction(currentPage));
     dispatch(subCategoryAction(currentPage2));
   }, [currentPage, currentPage2]);
 
   //=============================
   //////////////////////////////////////////////////////////////////
 
+  const { productName } = useParams();
+
+  // const [searchedProducts, setSearchedProducts] = useState([]);
   var [isVisible, setIsVisible] = useState(false);
   var toggelFilter = () => {
     setIsVisible(!isVisible);
   };
+
+  const getsearchedProduct = async () => {
+    try {
+      const res = await instance.get(`/product?keyword=${productName}`);
+      const result = res.data.data;
+      setproducts(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (productName) {
+      console.log("fffffffffffffffffffffffffffff");
+      getsearchedProduct();
+    } else {
+      getProducts();
+    }
+    // console.log("Updated searchedProducts data:", searchedProducts);
+  }, []);
+
+  useEffect(() => {
+    // console.log("Updated searchedProducts data:", searchedProducts);
+  }, [products]); // This effect will run when searchedProducts changes.
   return (
     <div className={style.componentcontainer}>
       <div className="container">
@@ -138,87 +130,12 @@ function Shop() {
                     aria-labelledby="filterPrice"
                   >
                     <div className="accordion-body">
-                      <form>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            defaultChecked
-                            id="price-all"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="price-all"
-                          >
-                            All Price
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="price-1"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="price-1"
-                          >
-                            $0 - $100
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="price-2"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="price-2"
-                          >
-                            $100 - $200
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="price-3"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="price-3"
-                          >
-                            $200 - $300
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="price-4"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="price-4"
-                          >
-                            $300 - $400
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="price-5"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="price-5"
-                          >
-                            $400 - $500
-                          </label>
-                        </div>
-                      </form>
+                      <Pricefilter
+                        setSelectedRanges={setSelectedRanges}
+                        selectedRanges={selectedRanges}
+                        currentPage={currentPage}
+                        isVisible={isVisible}
+                      />
                     </div>
                   </div>
                 </div>
@@ -241,87 +158,11 @@ function Shop() {
                     aria-labelledby="filterColor"
                   >
                     <div className="accordion-body">
-                      <form>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            defaultChecked
-                            id="color-all"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="price-all"
-                          >
-                            All Color
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="color-1"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="color-1"
-                          >
-                            Black
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="color-2"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="color-2"
-                          >
-                            White
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="color-3"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="color-3"
-                          >
-                            Red
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="color-4"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="color-4"
-                          >
-                            Blue
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="color-5"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="color-5"
-                          >
-                            Green
-                          </label>
-                        </div>
-                      </form>
+                      <Colorfilter
+                        setSelectedColor={setSelectedColor}
+                        selectedColor={selectedColor}
+                        currentPage={currentPage}
+                      />
                     </div>
                   </div>
                 </div>
@@ -335,7 +176,7 @@ function Shop() {
                       aria-expanded="false"
                       aria-controls="panelsStayOpen-collapseThree"
                     >
-                      Filter By Size
+                      Filter By prand
                     </button>
                   </h2>
                   <div
@@ -343,89 +184,7 @@ function Shop() {
                     className="accordion-collapse collapse"
                     aria-labelledby="filterSize"
                   >
-                    <div className="accordion-body">
-                      <form>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            defaultChecked
-                            id="size-all"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="size-all"
-                          >
-                            All Size
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="size-1"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="size-1"
-                          >
-                            XS
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="size-2"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="size-2"
-                          >
-                            S
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="size-3"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="size-3"
-                          >
-                            M
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="size-4"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="size-4"
-                          >
-                            L
-                          </label>
-                        </div>
-                        <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="size-5"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="size-5"
-                          >
-                            XL
-                          </label>
-                        </div>
-                      </form>
-                    </div>
+                    <div className="accordion-body"></div>
                   </div>
                 </div>
               </div>
@@ -452,7 +211,7 @@ function Shop() {
                 key={supcategory._id}
                 onClick={() => getSubCategoryProducts(supcategory.name)}
               >
-                <SubCategoy name={supcategory.name} img={supcategory.img} />
+                <SubCategoy name={supcategory.name} img={supcategory.image} />
               </div>
             ))}
         </div>
@@ -466,7 +225,7 @@ function Shop() {
                 Previous
               </a>
             </li>
-            <li className={`page-item ${currentPage2 > 1 ? "disabled" : ""}`}>
+            <li className={`page-item ${currentPage2 > 2 ? "disabled" : ""}`}>
               <a
                 className={`page-link ${style.paginationitems}`}
                 onClick={() => setCurrentPage2(currentPage2 + 1)}
@@ -493,172 +252,24 @@ function Shop() {
           <div
             className={`filter col-lg-2 mt-4 border-end ${style.hidenfilter}`}
           >
-            <Pricefilter />
-            {/* Price End */}
-            {/* Color Start */}
-            <div className="border-bottom mb-4 pb-4">
-              <h5 className="font-weight-semi-bold mb-4 fs-6">
-                Filter by color
-              </h5>
-              <form>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    defaultChecked
-                    id="color-all"
-                  />
-                  <label className="custom-control-label" htmlFor="price-all">
-                    All Color
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="color-1"
-                  />
-                  <label className="custom-control-label" htmlFor="color-1">
-                    Black
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="color-2"
-                  />
-                  <label className="custom-control-label" htmlFor="color-2">
-                    White
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="color-3"
-                  />
-                  <label className="custom-control-label" htmlFor="color-3">
-                    Red
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="color-4"
-                  />
-                  <label className="custom-control-label" htmlFor="color-4">
-                    Blue
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="color-5"
-                  />
-                  <label className="custom-control-label" htmlFor="color-5">
-                    Green
-                  </label>
-                </div>
-              </form>
-            </div>
-            {/* Color End */}
-            {/* Size Start */}
-            <div className="mb-5">
-              <h5 className="font-weight-semi-bold mb-4 fs-6">
-                Filter by size
-              </h5>
-              <form>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    defaultChecked
-                    id="size-all"
-                  />
-                  <label className="custom-control-label" htmlFor="size-all">
-                    All Size
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="size-1"
-                  />
-                  <label className="custom-control-label" htmlFor="size-1">
-                    XS
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="size-2"
-                  />
-                  <label className="custom-control-label" htmlFor="size-2">
-                    S
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="size-3"
-                  />
-                  <label className="custom-control-label" htmlFor="size-3">
-                    M
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="size-4"
-                  />
-                  <label className="custom-control-label" htmlFor="size-4">
-                    L
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="size-5"
-                  />
-                  <label className="custom-control-label" htmlFor="size-5">
-                    XL
-                  </label>
-                </div>
-              </form>
-            </div>
-            {/* Size End */}
+            <Pricefilter setproducts={setproducts} currentPage={currentPage} />
+            <Colorfilter setproducts={setproducts} currentPage={currentPage} />
           </div>
           {/* Shop Sidebar End */}
           {/* product card */}
           <div className="product-card col-lg-8 col-md-10  mt-4 m-auto">
             <div className="row row-cols-1 row-cols-lg-3 row-cols-md-3 row-cols-sm-2">
-              {subCategoryProduct && subCategoryProduct.length > 0
-                ? subCategoryProduct.map((product) => (
-                    <Card
-                      key={product.id}
-                      title={product.title}
-                      price={product.price}
-                      priceAfterDiscount={product.priceAfterDiscount}
-                      img={product.thumbnail}
-                    />
-                  ))
-                : products.map((product) => (
-                    <Card
-                      key={product.id}
-                      title={product.title}
-                      price={product.price}
-                      priceAfterDiscount={product.priceAfterDiscount}
-                      img={product.thumbnail}
-                    />
-                  ))}
+              {products &&
+                products.map((product) => (
+                  <Card
+                    key={product._id}
+                    id={product._id}
+                    title={product.title}
+                    price={product.price}
+                    priceAfterDiscount={product.priceAfterDescount}
+                    img={product.thumbnail}
+                  />
+                ))}
             </div>
           </div>
         </div>
