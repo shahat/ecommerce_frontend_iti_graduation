@@ -18,9 +18,9 @@ import Stack from 'react-bootstrap/Stack';
 
 
 
-const handleLogout = () => {
-  alert("you are loged out ");
-};
+import toast, { Toaster } from "react-hot-toast";
+
+
 function Nav() {
 
   const dispatch = useDispatch()
@@ -44,6 +44,7 @@ function Nav() {
 
   // ============== handle return   ==============
   const { isLogin, setLogin } = useContext(authContext);
+
   return (
     <>
       <nav
@@ -143,10 +144,14 @@ function Nav() {
                   {isLogin ? (
                     <li>
                       <Link
-                        to="/login"
+                        to="/"
+                        className="dropdown-item"
                         onClick={() => {
                           localStorage.removeItem("token");
                           setLogin(false);
+                          toast.success("Successfully logged out!", {
+                            position: "top-right",
+                          });
                         }}
                       >
                         Logout
@@ -180,11 +185,6 @@ function Nav() {
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" onClick={handleLogout}>
-                      LogOut
-                    </Link>
                   </li>
                 </ul>
               </li>
@@ -227,6 +227,7 @@ function Nav() {
         </div>
       </nav>
       <SecondNav></SecondNav>
+      <Toaster />
     </>
   );
 }
