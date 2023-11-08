@@ -9,8 +9,16 @@ export const cartAction = createAsyncThunk("cart/getAll", async () => {
 export const addToCartAction = createAsyncThunk(
     "cart/addProduct",
     async (id) => {
-        const status = await instance.post(`/cart/${id}`);
-        return status;
+        let token = localStorage.getItem("token")
+        // let fakTok = localStorage.getItem("fakTok")
+        // console.log(fakTok);
+        if (token) {
+            const status = await instance.post(`/cart/${id}`, { token });
+            return status;
+        }
+        
+        // !token && localStorage.setItem("fakTok", { userId: status.userId, cartId: status.cartId })
+
     }
 );
 
@@ -25,6 +33,7 @@ export function addToBothCartsAction(id) {
 export const removeFromCartAction = createAsyncThunk(
     "cart/removeProduct",
     async (id) => {
+        console.log("front");
         const status = await instance.patch(`/cart/${id}`);
         return status;
     }
@@ -35,6 +44,7 @@ const cartSlice = createSlice({
     initialState: { cartProducts: [] },
     extraReducers: (builder) => {
         builder.addCase(cartAction.fulfilled, (state, action) => {
+            console.log(action.payload);
             state.cartProducts = action.payload;
         });
         builder.addCase(removeFromCartAction.fulfilled, (state, action) => {
