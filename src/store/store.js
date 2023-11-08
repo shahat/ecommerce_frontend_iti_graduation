@@ -14,7 +14,7 @@ export var store = configureStore({
     subCategories: subCategoriesReducer,
     // products: productsReducer,
     categories: categoryReducer,
-    cart: cartReducer
+    cart: cartReducer,
     // allMatchedProducts: allMatchedProductsReducer,
   },
 });

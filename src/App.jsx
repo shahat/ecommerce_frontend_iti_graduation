@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import AppLayout from "./pages/AppLayout/AppLayout";
 import Home from "./components/Home/Home";
-import Shop from "./components/Shop/shop";
+import Shop from "./components/Shop/Shop";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Cart from "./pages/Cart/Cart";
 import WishList from "./pages/WishList/WishList";
@@ -31,7 +31,7 @@ import { useState } from "react";
 // import components and page
 
 function App() {
-    const [isLogin, setLogin] = useState(
+  const [isLogin, setLogin] = useState(
     localStorage.getItem("token") ? true : false
   );
   const router = createBrowserRouter([
@@ -40,8 +40,23 @@ function App() {
       element: <AppLayout />,
       children: [
         { index: true, element: <Home /> },
-        { path: "/shop/:productName?/:category?/:subcategory?", element: <Shop /> },
-        { path: "product", element: <ProductDetails /> },
+        { path: "/shop/:productName?", element: <Shop /> },
+        {
+          path: "/product",
+          element: <ProductDetails />,
+          children: [
+            { index: true, element: <ReviewsContainer /> },
+            {
+              path: "/product/description",
+              element: <Description />,
+            },
+            {
+              path: "/product/reviews",
+              element: <ReviewsContainer />,
+            },
+            { path: "/product/faq", element: <FAQ /> },
+          ],
+        },
         { path: "/cart", element: <Cart /> },
         { path: "/wishlist", element: <WishList /> },
         { path: "/contact", element: <Contact /> },
@@ -57,7 +72,7 @@ function App() {
     { path: "/resetCode", element: <ResetCode /> },
     { path: "/resetPassword", element: <ResetPass /> },
     { path: "*/*", element: <NotFound /> },
-    ]);
+  ]);
 
   return (
     // <Provider store={store}>

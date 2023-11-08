@@ -44,7 +44,8 @@
   font-weight: bold;
 }
 .cardtitlediv {
-  height: 40px;
+  height: 55px;
+  cursor: pointer;
 }
 /* .formbutton {
   background-color: rgb(1, 85, 110) !important;
@@ -57,7 +58,7 @@
     background-color: #ff9900;
   }
 }
-.categoryimage {
+.subcategoryimage {
   width: 120px;
   height: 120px;
 }
@@ -77,4 +78,7 @@
     background-color: #ff9900;
     color: black;
   }
+}
+.subcategorydiv {
+  cursor: pointer;
 }

@@ -1,11 +1,11 @@
 import React from "react";
 import style from "./Home.module.css";
-
+import { Link } from "react-router-dom";
 function HomeCategory(props) {
   //   console.log("this is the props ", props);
   return (
     <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-      <a className="text-decoration-none" href>
+      <Link className="text-decoration-none" to={`/shop/${props.name}`}>
         <div
           className={` d-flex align-items-center mb-4  ${style.categoryCard} ${style.category_body}`}
         >
@@ -24,7 +24,7 @@ function HomeCategory(props) {
             </small>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

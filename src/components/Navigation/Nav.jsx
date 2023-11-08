@@ -15,22 +15,19 @@ import { authContext } from "../../contexts/authContext";
 import SecondNav from "./SecondNav/SecondNav";
 import { cartAction } from "../../store/slices/cart";
 
-import Badge from 'react-bootstrap/Badge';
-import Stack from 'react-bootstrap/Stack';
-
-
+import Badge from "react-bootstrap/Badge";
+import Stack from "react-bootstrap/Stack";
 
 const handleLogout = () => {
   alert("you are loged out ");
 };
 function Nav() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(cartAction());
+  }, []);
+  var cartList = useSelector((state) => state.cart.cartProducts);
 
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(cartAction())
-  },[])
-  var cartList = useSelector((state)=> state.cart.cartProducts)
-  
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
@@ -41,7 +38,7 @@ function Nav() {
   // ============== handle form submit   ==============
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    navigate(`/shop/${`query`}`);
+    navigate(`/shop/${query}`);
   };
 
   // ============== handle return   ==============
@@ -206,7 +203,7 @@ function Nav() {
               </li>{" "}
               {/* ----- wishList ----- */}
               <li className="nav-item mx-3">
-              <span className={`${styles.icon_container} position-relative `}>
+                <span className={`${styles.icon_container} position-relative `}>
                   <Link to="/wishlist" className="nav-link text-center">
                     <MdOutlineFavoriteBorder
                       className={`${styles.icon} fs-4 }`}
@@ -220,7 +217,7 @@ function Nav() {
                       </Stack>
                     )} */}
                   </Link>
-                  
+
                   <span
                     className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
                   >

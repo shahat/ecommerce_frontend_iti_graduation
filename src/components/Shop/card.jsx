@@ -1,23 +1,45 @@
 /* eslint-disable react/prop-types */
 import { FaStar } from "react-icons/fa";
 import style from "./shop.module.css";
+import { useDispatch } from "react-redux";
+// import { addToCartAction } from "../../store/slices/cart";
+import { addToBothCartsAction } from "./../../store/slices/cart";
+import { useNavigate } from "react-router-dom";
 function Card(props) {
+  var dispatch = useDispatch();
+  var x = useNavigate();
+  // var cart = useSelector((state) => state.cart.cart);
+
+  var addtocart = (id) => {
+    console.log(id);
+    dispatch(addToBothCartsAction(id));
+  };
   return (
     <div className={style.cardwidth}>
       <div className={`card-div col mb-4 ${style.card}`}>
         <div className="card card-item border-0">
-          <img className={style.cardimg} src={props.img} alt={props.title} />
-          <div>
-            <div className={style.cardtitlediv}>
-              <h5 className={` ps-3 my-2 ${style.cardtitle}`}>
-                {props.title}{" "}
+          <img
+            src={props.img}
+            className={`card-img-top imageOverLay ${style.cardimg}`}
+            alt="..."
+          />
+          <div className>
+            <div
+              className={style.cardtitlediv}
+              onClick={() => {
+                x(`/product/${props.id}`);
+              }}
+            >
+              <h5 className={`card-title ps-3 my-2 fs-6 ${style.cardtitle}`}>
+                {props.title}
               </h5>
             </div>
-            <div className="card-text my-2">
-              <span className="text-danger ps-3">{props.price} $</span>
-              <span className="text-decoration-line-through ms-2  ">
-                {props.priceAfterDescount} $
+            <div className="card-text ms-2">
+              <span className="ps-3">{props.price} $</span>
+              <span className="text-decoration-line-through text-danger ms-2  ">
+                {props.priceAfterDiscount} $
               </span>
+
               <div className={`product-rate mb-2 ps-3 ${style.rate}`}>
                 <FaStar className=" ps-1" />
                 <FaStar className=" ps-1" />
@@ -29,6 +51,7 @@ function Card(props) {
             <button
               className={`btn btn-primary w-100 card-button border-top-0 ${style.cardbutton}`}
               type="button"
+              onClick={() => addtocart(props.id)}
             >
               Add to Cart
             </button>

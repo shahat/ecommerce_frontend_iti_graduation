@@ -46,7 +46,7 @@ function ProductDetails() {
     function addToCart(id){
         dispatch(addToBothCartsAction(id));
     }
-    console.log(window.location.pathname);
+    console.log(window.location);
 
     return (
         <>
@@ -330,19 +330,19 @@ function ProductDetails() {
                 >
                     <div className="row col-10">
                         <Link
-                            to="product/description"
+                            to="description"
                             className="toggle btn pb-2 mb-4 text-danger border-bottom rounded-bottom-0 col"
                         >
                             Product Details
                         </Link>
                         <Link
-                            to="product/reviews"
+                            to="reviews"
                             className="toggle btn pb-2 mb-4 text-danger border-bottom rounded-bottom-0 col border-bottom-0 border"
                         >
                             Ratings & Reviews
                         </Link>
                         <Link
-                            to="product/faq"
+                            to="faq"
                             className="toggle btn pb-2 mb-4 text-danger border-bottom rounded-bottom-0 col"
                         >
                             FAQs

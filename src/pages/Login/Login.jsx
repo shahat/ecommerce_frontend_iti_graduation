@@ -75,7 +75,7 @@ function Login() {
         >
           <h4 className="text-center">LOGIN</h4>
           <p className="text-center">
-            If you don't have account please
+            If you dont have account please
             <a
               onClick={navigateToRegister}
               className={`text-decoration-none border-0 border-bottom ms-2 ${style.register}`}
