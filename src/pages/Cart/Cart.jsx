@@ -10,15 +10,9 @@ import { changeSubTotal } from "../../store/slices/checkOut";
 function Cart() {
   const cartList = useSelector((state) => state.cart.cartProducts);
   const checkOutStatus = useSelector((state) => state.checkOut);
+  const token = localStorage.getItem("token")
+  console.log(checkOutStatus);
 
-  // const dispatch = useDispatch
-  // function sub(price){
-  //   changeSubTotal(price)
-  //   console.log(checkOutStatus, price);
-  // }
-  // function changeSubTotal(price){
-  //   dispatch(changeSubTotal(price))
-  // }
 
   return (
     <>
@@ -34,10 +28,10 @@ function Cart() {
           >
             {cartList.length ? (
               cartList.map((prod, index) => {
-                sub(prod.priceWhenAdded * prod.quantity)
+                // sub(prod.priceWhenAdded * prod.quantity)
                 return (
                   <>
-                    <CartProduct key={index} product={prod} sub={sub} />
+                    <CartProduct key={index} product={prod}  />
                     {index < cartList.length - 1 && (
                       <hr className="my-4 w-100" />
                     )}
@@ -76,7 +70,7 @@ function Cart() {
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
                 >
                   <p className="fs-5 text-muted">Delivery Fee</p>
-                  <h5> EGP</h5>
+                  <h5>{checkOutStatus.delivery} EGP</h5>
                 </div>
                 <hr />
                 <div
@@ -100,7 +94,7 @@ function Cart() {
                 >
                   Apply
                 </button>
-                <Link to="/checkout"
+                <Link to={token? "/checkout" : ""}
                   className={`${css.goToCheck} btn ${css.myBtn} rounded-pill text-decoration-none col-12 mt-4 p-3 fs-3`}
                 >
                   Go to Checkout

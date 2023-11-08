@@ -2,25 +2,28 @@
 import css from "../../assets/style/product.module.css";
 import PropTypes from "prop-types";
 import instance from "../../axiosConfig/instance";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa6";
 import { removeFromCartAction } from "../../store/slices/cart";
+import { changeSubTotal } from "../../store/slices/checkOut";
 
-function CartProduct({ product, sub }) {
+function CartProduct({ product }) {
     var [quantity, setQuantity] = useState(product.quantity);
     const dispatch = useDispatch();
-
+    useEffect(()=>{
+        dispatch(changeSubTotal(changeSubTotal(product.priceWhenAdded * product.quantity)))
+    }, [])
     function inc(productId) {
         instance.patch("/cart", { productId, quantity });
         setQuantity(++quantity);
-        sub(product._id.price)
+        dispatch(changeSubTotal(product._id.price))
     }
     function dec(productId) {
         if (quantity > 1) {
             instance.patch("/cart", { productId, quantity });
             setQuantity(--quantity);
-            sub( - product._id.price)
+            dispatch(changeSubTotal( - product._id.price))
         }
     }
     async function removeFromcart(productId) {
