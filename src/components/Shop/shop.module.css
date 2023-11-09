@@ -65,6 +65,10 @@
 .filterbut {
   background-color: rgb(1, 85, 110);
   border: none;
+  &:hover {
+    background-color: #ff9900;
+    color: black;
+  }
 }
 .filterheader {
   color: #ffad33 !important;

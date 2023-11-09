@@ -31,7 +31,7 @@ export const addToCartAction = createAsyncThunk(
 );
 
 export function addToBothCartsAction(id) {
-  console.log(id);
+  console.log("hhhhhhhhhhhhhhhhhhhhhh", id);
   return (dispatch) => {
     dispatch(addToCartAction(id)).then(() => {
       dispatch(cartAction());
