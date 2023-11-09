@@ -10,25 +10,32 @@ import { changeSubTotal } from "../../store/slices/checkOut";
 
 function CartProduct({ product }) {
     var [quantity, setQuantity] = useState(product.quantity);
+    let token = localStorage.getItem("token")
     const dispatch = useDispatch();
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(changeSubTotal(changeSubTotal(product.priceWhenAdded * product.quantity)))
     }, [])
+
     function inc(productId) {
-        instance.patch("/cart", { productId, quantity });
-        setQuantity(++quantity);
-        dispatch(changeSubTotal(product._id.price))
-    }
-    function dec(productId) {
-        if (quantity > 1) {
-            instance.patch("/cart", { productId, quantity });
-            setQuantity(--quantity);
-            dispatch(changeSubTotal( - product._id.price))
+        if (quantity < product._id.quantity) {
+            setQuantity(++quantity);
+            instance.patch("/cart", { productId, quantity, token });
+            dispatch(changeSubTotal(product._id.price))
         }
     }
+    
+    function dec(productId) {
+        if (quantity > 1) {
+            setQuantity(--quantity);
+            instance.patch("/cart", { productId, quantity, token });
+            dispatch(changeSubTotal(- product._id.price))
+        }
+    }
+
     async function removeFromcart(productId) {
         console.log("remove");
         dispatch(removeFromCartAction(productId));
+        dispatch(changeSubTotal(- (product._id.price * quantity)));
     }
 
     return (

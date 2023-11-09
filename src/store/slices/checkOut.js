@@ -19,7 +19,8 @@ const checkOutSlice = createSlice({
         addDiscount: (state, action) => {
             !isNaN(action.payload) && (state.discount = action.payload / 100)
             state.subTotal = state.subTotal * (1 - state.discount)
-        }
+        },
+        
     },
 });
 

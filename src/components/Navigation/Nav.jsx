@@ -28,6 +28,7 @@ function Nav() {
     dispatch(cartAction())
   },[])
   var cartList = useSelector((state)=> state.cart.cartProducts)
+  console.log(cartList);
   
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
@@ -194,13 +195,13 @@ function Nav() {
                   <Link to="/cart" className="nav-link text-center" href="#">
                     <BsCart3 className={`${styles.icon} fs-4 }`}></BsCart3>
                     {/* Cart items counter above the cart icon */}
-                    {cartList.length > 0 && (
+                    {cartList? cartList.length > 0 && (
                       <Stack direction="horizontal">
                         <Badge pill bg="danger position-absolute top-0 ms-4">
                           {cartList.length}
                         </Badge>
                       </Stack>
-                    )}
+                    ):""}
                   </Link>
                 </span>
               </li>{" "}
