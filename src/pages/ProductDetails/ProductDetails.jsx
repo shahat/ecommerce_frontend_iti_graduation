@@ -44,7 +44,7 @@ function ProductDetails() {
         quantity > 1 && setQuantity(quantity - 1);
     }
     function addToCart(id){
-        dispatch(addToBothCartsAction(id));
+        dispatch(addToBothCartsAction("65439e9824728d15d515384d"));
     }
     console.log(window.location);
 
