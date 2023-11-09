@@ -1,10 +1,8 @@
-// import React from "react";
 import "./chechbox.css";
 import axios from "axios";
-import PropTypes from "prop-types";
 import { useState } from "react";
-
-const Pricefilter = ({ setproducts, currentPage }) => {
+import instance from "../../axiosConfig/instance";
+const Pricefilter = ({ setproducts, currentPage, setIsVisible }) => {
   const [checkedId, setCheckedId] = useState(null);
   var info = [
     { id: 1, min: 0, max: 500 },
@@ -13,26 +11,29 @@ const Pricefilter = ({ setproducts, currentPage }) => {
     { id: 4, min: 5000, max: 10000 },
     { id: 5, min: 10000, max: 50000 },
   ];
-  var click = async (min, max, id) => {
+  let url = "/product?";
+
+
+  // =================== Filter Price  ===================
+  var filterProductByPrice = async ({
+    filterPice,
+    min,
+    max,
+    id,
+    currentPage,
+  }) => {
+    if (filterPice) {
+      url = url + `priceMin=${min}&priceMax=${max}`;
+    } else {
+      url = url + `page=${currentPage}`;
+    }
+
     try {
-      const data = await axios.get(
-        `http://localhost:5000/product?priceMin=${min}&priceMax=${max}`
-      );
+      const data = await instance.get(`${url}`);
       const res = data.data.data;
       setproducts(res);
       setCheckedId(id);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  var handleSelectAll = async (currentPage) => {
-    try {
-      const data = await axios.get(
-        `http://localhost:5000/product?page=${currentPage}`
-      );
-      const res = data.data.data;
-      setproducts(res);
-      setCheckedId(null);
+      setIsVisible(false);
     } catch (err) {
       console.log(err);
     }
@@ -50,7 +51,13 @@ const Pricefilter = ({ setproducts, currentPage }) => {
             className="custom-control-input"
             id="price-all"
             checked={checkedId === null}
-            onChange={() => handleSelectAll(currentPage)}
+            onChange={() =>
+              filterProductByPrice({
+                filterPice: false,
+                id: null,
+                currentPage,
+              })
+            }
           />
           <label className="custom-control-label" htmlFor="price-all">
             All price
@@ -68,7 +75,14 @@ const Pricefilter = ({ setproducts, currentPage }) => {
                   className="custom-control-input"
                   checked={checkedId === price.id}
                   id={`price-${price.id}`}
-                  onChange={() => click(price.min, price.max, price.id)}
+                  onChange={() =>
+                    filterProductByPrice({
+                      filterPice: true,
+                      min: price.min,
+                      max: price.max,
+                      id: price.id,
+                    })
+                  }
                 />
                 <label
                   className="custom-control-label"
@@ -83,9 +97,10 @@ const Pricefilter = ({ setproducts, currentPage }) => {
     </div>
   );
 };
-Pricefilter.propTypes = {
-  setproducts: PropTypes.array.isRequired,
-  currentPage: PropTypes.number.isRequired,
-};
+// Pricefilter.propTypes = {
+//   setProducts: PropTypes.array.isRequired,
+//   currentPage: PropTypes.number.isRequired,
+//   isVisible: PropTypes.func.isRequired,
+// };
 
 export default Pricefilter;

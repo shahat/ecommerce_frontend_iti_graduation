@@ -86,3 +86,30 @@
 .subcategorydiv {
   cursor: pointer;
 }
+
+/* mobile nav  */
+
+.bottomNavContainer {
+  height: 10vh;
+  width: 100vw;
+  display: none;
+}
+
+.bottom_nav {
+  position: fixed;
+  width: 100vw;
+  top: 90vh;
+  height: 10vh;
+  color: wheat;
+}
+@media screen and (max-width: 768px) {
+  .bottomNavContainer {
+    display: block;
+  }
+}
+
+.notify {
+  top: 0;
+  right: 0;
+  margin-left: 7px;
+}

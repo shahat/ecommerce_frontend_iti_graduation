@@ -6,7 +6,9 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { categoryAction } from "../../../store/slices/categories";
 import { subCategoryAction } from "../../../store/slices/subcategory";
 import { useEffect } from "react";
+
 import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
+import { Link } from "react-router-dom";
 export default function SecondNav() {
   const categories = useSelector((state) => state.categories.categories);
   var subCategoies = useSelector((state) => state.subCategories.subCategories);
@@ -68,18 +70,18 @@ export default function SecondNav() {
             <nav className="navbar  bg-dark navbar-dark   py-0 px-0">
               <div className=" justify-content-between" id="navbarCollapse">
                 <div className="navbar-nav d-flex flex-row   mr-auto py-0">
-                  <a href="index.html" className="nav-item nav-link active">
+                  <Link to="/" className="nav-item nav-link active">
                     Home
-                  </a>
-                  <a href="shop.html" className="nav-item mx-3 nav-link">
+                  </Link>
+                  <Link to="/shop" className="nav-item mx-3 nav-link">
                     Shop
-                  </a>
-                  <a href="checkout.html" className="nav-item mx-3 nav-link">
+                  </Link>
+                  <Link to="/checkout" className="nav-item mx-3 nav-link">
                     Checkout
-                  </a>
-                  <a href="contact.html" className="nav-item mx-3 nav-link">
+                  </Link>
+                  <Link to="/contact" className="nav-item mx-3 nav-link">
                     Contact
-                  </a>
+                  </Link>
                 </div>
               </div>
             </nav>

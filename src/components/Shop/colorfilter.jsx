@@ -1,10 +1,9 @@
 // import React from 'react';
 import "./chechbox.css";
-import PropTypes from "prop-types";
 import axios from "axios";
 import { useState } from "react";
 
-const Colorfilter = ({ setproducts, currentPage }) => {
+const Colorfilter = ({ setproducts, currentPage, setIsVisible }) => {
   const [checkedId, setCheckedId] = useState(null);
   var info = [
     { id: 1, name: "black" },
@@ -17,11 +16,12 @@ const Colorfilter = ({ setproducts, currentPage }) => {
     console.log(color);
     try {
       const data = await axios.get(
-        `http://localhost:5000/product?color=${color}`
+        `http://localhost:4000/product?color=${color}`
       );
       const res = data.data.data;
       setproducts(res);
       setCheckedId(id);
+      setIsVisible(false);
     } catch (err) {
       console.log(err);
     }
@@ -29,11 +29,12 @@ const Colorfilter = ({ setproducts, currentPage }) => {
   var handleSelectAll = async (currentPage) => {
     try {
       const data = await axios.get(
-        `http://localhost:5000/product?page=${currentPage}`
+        `http://localhost:4000/product?page=${currentPage}`
       );
       const res = data.data.data;
       setproducts(res);
       setCheckedId(null);
+      setIsVisible(false);
     } catch (err) {
       console.log(err);
     }
@@ -83,10 +84,6 @@ const Colorfilter = ({ setproducts, currentPage }) => {
       </div>
     </div>
   );
-};
-Colorfilter.propTypes = {
-  setproducts: PropTypes.array.isRequired,
-  currentPage: PropTypes.array.isRequired,
 };
 
 export default Colorfilter;

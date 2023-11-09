@@ -6,7 +6,6 @@ import Caarousel from "../Carousel/Caarousel";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import instance from "../../axiosConfig/instance";
-
 import { useDispatch, useSelector } from "react-redux";
 // import { productAction } from "../../store/slices/products";
 import { subCategoryAction } from "../../store/slices/subcategory";
@@ -14,6 +13,9 @@ import SubCategoy from "./subcategory";
 import axios from "axios";
 import Pricefilter from "./pricefilter";
 import Colorfilter from "./colorfilter";
+import Nav from "../Navigation/Nav";
+import Footer from "../Footer/Footer";
+import MobileNav from "../MobileNav/MobileNav";
 
 function Shop() {
   var dispatch = useDispatch();
@@ -21,7 +23,9 @@ function Shop() {
   var SubCategoies = useSelector((state) => state.subCategories.subCategories);
   var [currentPage, setCurrentPage] = useState(1);
   var [currentPage2, setCurrentPage2] = useState(1);
+
   ////////////////////////////////////////////////////////////////
+
   async function getSubCategoryProducts(subCategoryName) {
     var id = subCategoryName;
     try {
@@ -84,6 +88,7 @@ function Shop() {
   useEffect(() => {
     // console.log("Updated searchedProducts data:", searchedProducts);
   }, [products]); // This effect will run when searchedProducts changes.
+
   return (
     <div className={style.componentcontainer}>
       {/* filter layaout  */}
@@ -129,6 +134,7 @@ function Shop() {
                     <div className="accordion-body">
                       <Pricefilter
                         setproducts={setproducts}
+                        setIsVisible={setIsVisible}
                         currentPage={currentPage}
                       />
                     </div>
@@ -155,6 +161,7 @@ function Shop() {
                     <div className="accordion-body">
                       <Colorfilter
                         setproducts={setproducts}
+                        setIsVisible={setIsVisible}
                         currentPage={currentPage}
                       />
                     </div>
@@ -194,9 +201,9 @@ function Shop() {
           </div>
         </div>
       )}
-      <div className="container">
-        <Caarousel></Caarousel>
-      </div>
+      <Nav></Nav>
+      <Caarousel></Caarousel>
+
       {/* category &filter &product container */}
       <div className="col-md-10 container">
         {/*subCategory */}
@@ -324,6 +331,10 @@ function Shop() {
             </li>
           </ul>
         </nav>
+      </div>
+      <Footer></Footer>
+      <div className={`${style.bottomNavContainer}`}>
+        <MobileNav></MobileNav>
       </div>
     </div>
   );

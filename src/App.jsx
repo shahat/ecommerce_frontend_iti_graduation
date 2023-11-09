@@ -15,10 +15,9 @@ import WishList from "./pages/WishList/WishList";
 import Order from "./components/Order/Order";
 import Contact from "./components/Contact/Contact";
 import UserProfile from "./components/UserProfile/UserProfile";
-import NotFound from "./pages/NotFound/NotFound";
+import NotFound from "./pages/notFound/NotFound";
 import CheckOut from "./components/CheckOut/CheckOut";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register.jsx";
+// import Login from "./pages/Login/Login";
 import Description from "./components/productDetailsComps/description";
 import ReviewsContainer from "./components/productDetailsComps/reviewsContainer";
 import FAQ from "./components/productDetailsComps/faqComponent";
@@ -41,7 +40,7 @@ function App() {
       element: <AppLayout />,
       children: [
         { index: true, element: <Home /> },
-        { path: "/shop/:productName?", element: <Shop /> },
+
         {
           path: "/product",
           element: <ProductDetails />,
@@ -67,8 +66,9 @@ function App() {
         { path: "/checkout", element: <CheckOut /> },
       ],
     },
-    { path: "/login", element: <Login /> },
-    { path: "/register", element: <Register /> },
+    { path: "/shop/:productName?", element: <Shop /> },
+    // { path: "/login", element: <Login /> },
+    // { path: "/register", element: <Register /> },
     { path: "/emailRecovery", element: <SendCode /> },
     { path: "/resetCode", element: <ResetCode /> },
     { path: "/resetPassword", element: <ResetPass /> },
