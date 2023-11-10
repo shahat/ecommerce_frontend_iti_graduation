@@ -26,11 +26,9 @@ import toast, { Toaster } from "react-hot-toast";
 function Nav() {
 
   const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(cartAction())
-  },[])
+  dispatch(cartAction())
+
   var cartList = useSelector((state)=> state.cart.cartProducts)
-  console.log(cartList);
   
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
@@ -198,19 +196,13 @@ function Nav() {
                     <BsCart3 className={`${styles.icon} fs-4 }`}></BsCart3>
                     {/* Cart items counter above the cart icon */}
                     {cartList? cartList.length > 0 && (
-                       <span
-                       className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
-                     >
-                       {cartList.length}
-                     </span>
+                      <span
+                      className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
+                      >
+                      {cartList.length}
+                      </span>
                     ):""}
                   </Link>
-
-                  <span
-                    className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
-                  >
-                    0
-                  </span>
                 </span>
               </li>{" "}
               {/* ----- wishList ----- */}

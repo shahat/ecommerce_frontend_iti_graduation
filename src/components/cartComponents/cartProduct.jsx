@@ -10,32 +10,38 @@ import { changeSubTotal } from "../../store/slices/checkOut";
 
 function CartProduct({ product }) {
     var [quantity, setQuantity] = useState(product.quantity);
-    let token = localStorage.getItem("token")
+    let { token, token2 } = localStorage;
+    let headers = {};
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(changeSubTotal(changeSubTotal(product.priceWhenAdded * product.quantity)))
-    }, [])
+        dispatch(
+            changeSubTotal(
+                changeSubTotal(product.priceWhenAdded * product.quantity)
+            )
+        );
+    }, []);
 
     function inc(productId) {
         if (quantity < product._id.quantity) {
             setQuantity(++quantity);
-            instance.patch("/cart", { productId, quantity, token });
-            dispatch(changeSubTotal(product._id.price))
+            token ? (headers = { token }) : (headers = { token: token2 });
+            instance.patch("/cart", { productId, quantity }, { headers });
+            dispatch(changeSubTotal(product._id.price));
         }
     }
-    
+
     function dec(productId) {
         if (quantity > 1) {
             setQuantity(--quantity);
-            instance.patch("/cart", { productId, quantity, token });
-            dispatch(changeSubTotal(- product._id.price))
+            token ? (headers = { token }) : (headers = { token: token2 });
+            instance.patch("/cart", { productId, quantity }, { headers });
+            dispatch(changeSubTotal(-product._id.price));
         }
     }
 
     async function removeFromcart(productId) {
-        console.log("remove");
         dispatch(removeFromCartAction(productId));
-        dispatch(changeSubTotal(- (product._id.price * quantity)));
+        dispatch(changeSubTotal(-(product._id.price * quantity)));
     }
 
     return (
@@ -59,7 +65,9 @@ function CartProduct({ product }) {
                     >
                         <h4>{product._id.title}</h4>
                         <p>
-                            <span className="text-secondary">{product._id.description}</span>
+                            <span className="text-secondary">
+                                {product._id.description}
+                            </span>
                         </p>
                         {/* <p>
                             Color: <span className="text-secondary">Blue</span>
@@ -87,7 +95,8 @@ function CartProduct({ product }) {
                             }}
                             className={
                                 `${css.myBtn} rounded-0 rounded-start-5 w-25 ` +
-                                (quantity === 1 && ` bg-secondary-subtle border-0`)
+                                (quantity === 1 &&
+                                    ` bg-secondary-subtle border-0`)
                             }
                         >
                             <FaMinus />
@@ -118,5 +127,5 @@ export default CartProduct;
 
 CartProduct.propTypes = {
     product: PropTypes.object,
-    sub: PropTypes.func
+    sub: PropTypes.func,
 };
