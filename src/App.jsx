@@ -15,10 +15,9 @@ import WishList from "./pages/WishList/WishList";
 import Order from "./components/Order/Order";
 import Contact from "./components/Contact/Contact";
 import UserProfile from "./components/UserProfile/UserProfile";
-import NotFound from "./pages/NotFound/NotFound";
+import NotFound from "./pages/notFound/NotFound";
 import CheckOut from "./components/CheckOut/CheckOut";
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register.jsx";
 import Description from "./components/productDetailsComps/description";
 import ReviewsContainer from "./components/productDetailsComps/reviewsContainer";
 import FAQ from "./components/productDetailsComps/faqComponent";
@@ -32,48 +31,49 @@ import { useState } from "react";
 // import components and page
 
 function App() {
-    const [isLogin, setLogin] = useState(
+  const [isLogin, setLogin] = useState(
     localStorage.getItem("token") ? true : false
   );
   const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <AppLayout />,
+      children: [
+        { index: true, element: <Home /> },
+
         {
-            path: "/",
-            element: <AppLayout />,
-            children: [
-                { index: true, element: <Home /> },
-                { path: "/shop/:productName?", element: <Shop /> },
-                {
-                    path: "/product",
-                    element: <ProductDetails />,
-                    children: [
-                        { index: true, element: <ReviewsContainer /> },
-                        {
-                            path: "/product/description",
-                            element: <Description />,
-                        },
-                        {
-                            path: "/product/reviews",
-                            element: <ReviewsContainer />,
-                        },
-                        { path: "/product/faq", element: <FAQ /> },
-                    ],
-                },
-                { path: "/cart", element: <Cart /> },
-                { path: "/wishlist", element: <WishList /> },
-                { path: "/contact", element: <Contact /> },
-                // protected route user should be loged in
-                { path: "/Order", element: <Order /> },
-                { path: "/userprofile", element: <UserProfile /> },
-                { path: "/checkout", element: <CheckOut /> },
-            ],
+          path: "/product",
+          element: <ProductDetails />,
+          children: [
+            { index: true, element: <ReviewsContainer /> },
+            {
+              path: "/product/description",
+              element: <Description />,
+            },
+            {
+              path: "/product/reviews",
+              element: <ReviewsContainer />,
+            },
+            { path: "/product/faq", element: <FAQ /> },
+          ],
         },
-        { path: "/login", element: <Login /> },
-        { path: "/register", element: <Register /> },
-        { path: "/emailRecovery", element: <SendCode /> },
+        { path: "/cart", element: <Cart /> },
+        { path: "/wishlist", element: <WishList /> },
+        { path: "/contact", element: <Contact /> },
+        // protected route user should be loged in
+        { path: "/Order", element: <Order /> },
+        { path: "/userprofile", element: <UserProfile /> },
+        { path: "/checkout", element: <CheckOut /> },
+      ],
+    },
+    { path: "/shop/:productName?", element: <Shop /> },
+    { path: "/login", element: <Login /> },
+    // { path: "/register", element: <Register /> },
+    { path: "/emailRecovery", element: <SendCode /> },
     { path: "/resetCode", element: <ResetCode /> },
     { path: "/resetPassword", element: <ResetPass /> },
     { path: "*/*", element: <NotFound /> },
-    ]);
+  ]);
 
   return (
     // <Provider store={store}>

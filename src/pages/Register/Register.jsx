@@ -6,6 +6,22 @@ import { registerAuth } from "../../Services/auth";
 import toast, { Toaster } from "react-hot-toast";
 
 function Register() {
+  const navigate = useNavigate();
+
+  async function auth() {
+    try {
+      const response = await fetch("http://localhost:4000/request", {
+        method: "post",
+      });
+      const data = await response.json();
+      console.log("returned data", data);
+      navigate(data.url);
+      console.log("dataURL", data.url);
+    } catch (error) {
+      console.error("Error fetching Google auth URL", error);
+    }
+  }
+
   // userName with regx and errors
   const nameRegx = /^[a-zA-Z0-9 ]{3,20}$/;
 
@@ -32,17 +48,12 @@ function Register() {
     emailError: false,
     passwordError: false,
     confirmPasswordError: false,
-    passwordMatch:false ,
+    passwordMatch: false,
   });
-
-  // const [passwordMatch, setPasswordMatch] = useState(false);
-
-  const navigate = useNavigate();
 
   const navigateToLogin = () => {
     navigate("/login");
   };
-
 
   const handleValidation = (e) => {
     if (e.target.name == "firstPassword") {
@@ -67,17 +78,13 @@ function Register() {
             ? "Password must meet the specified criteria"
             : "",
       });
-    } 
-
-    else if (e.target.name == "email") {
+    } else if (e.target.name == "email") {
       setUser({ ...user, email: e.target.value });
       setErrors({
         ...errors,
         emailError: e.target.value.length == 0 ? "Email is Required" : "",
       });
-    } 
-
-    else if (e.target.name == "name") {
+    } else if (e.target.name == "name") {
       setUser({ ...user, name: e.target.value });
       setErrors({
         ...errors,
@@ -86,42 +93,39 @@ function Register() {
     }
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  if (
-    errors.nameError ||
-    errors.emailError ||
-    errors.passwordError ||
-    errors.confirmPasswordError
-  ) {
-    toast.error("Validation Error", { position: "top-center" });
-  } 
-  
-  else {
-    try {
-      const res = await registerAuth(user);
-      navigate("/login");
-      console.log(res)
-    } catch (error) {
-      if (error.response) {
-        const errorMessage = error.response.data.message;
-        // console.log(errorMessage)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        toast.error(errorMessage, {
-          position: "top-center",
-        });
+    if (
+      errors.nameError ||
+      errors.emailError ||
+      errors.passwordError ||
+      errors.confirmPasswordError
+    ) {
+      toast.error("Validation Error", { position: "top-center" });
+    } else {
+      try {
+        const res = await registerAuth(user);
+        navigate("/login");
+        console.log(res);
+      } catch (error) {
+        if (error.response) {
+          const errorMessage = error.response.data.message;
+          // console.log(errorMessage)
+
+          toast.error(errorMessage, {
+            position: "top-center",
+          });
+        }
       }
     }
-  }
 
-  if (user.password !== user.confirmPassword) {
-    setErrors({ ...errors, passwordMatch: "Passwords do not match!" });
-  } else {
-    setErrors({ ...errors, passwordMatch: "" });
-  }
-};
-
+    if (user.password !== user.confirmPassword) {
+      setErrors({ ...errors, passwordMatch: "Passwords do not match!" });
+    } else {
+      setErrors({ ...errors, passwordMatch: "" });
+    }
+  };
 
   return (
     <div className="container">
@@ -231,7 +235,12 @@ function Register() {
                 </button>
               </div>
               <div className="signupWithGoogle">
-                <button className="form-control  border mt-2 bg-white">
+                <button
+                  onClick={() => {
+                    auth();
+                  }}
+                  className="form-control  border mt-2 bg-white"
+                >
                   <span>
                     <AiOutlineGoogle className={`m-1 ${style.googleIcon}`} />
                   </span>

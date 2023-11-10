@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { useEffect } from "react";
 import styles from "./Nav.module.css";
+
+// import "./dropDorn.css"
 import { BsSearch, BsCart3 } from "react-icons/bs";
 
 import { useNavigate } from "react-router-dom";
@@ -10,11 +12,11 @@ import { useDispatch, useSelector } from "react-redux";
 // import React from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../../contexts/authContext";
-import SecondNav from "../SecondNav/SecondNav";
+import SecondNav from "./SecondNav/SecondNav";
 import { cartAction } from "../../store/slices/cart";
 
-import Badge from 'react-bootstrap/Badge';
-import Stack from 'react-bootstrap/Stack';
+import Badge from "react-bootstrap/Badge";
+import Stack from "react-bootstrap/Stack";
 
 
 
@@ -104,7 +106,7 @@ function Nav() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Language
+                  EN
                 </a>
                 <ul
                   className="dropdown-menu position-absolute "
@@ -112,7 +114,7 @@ function Nav() {
                 >
                   <li>
                     <a className="dropdown-item" href="#">
-                      English
+                      EN
                     </a>
                   </li>
                   <li>
@@ -120,7 +122,7 @@ function Nav() {
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
-                      Arabic
+                      AR
                     </a>
                   </li>
                 </ul>
@@ -191,23 +193,29 @@ function Nav() {
               </li>
               {/* ----- cart ----- */}
               <li className="nav-item ms-3">
-                <span className={`${styles.icon_container}`}>
+                <span className={`${styles.icon_container} position-relative `}>
                   <Link to="/cart" className="nav-link text-center" href="#">
                     <BsCart3 className={`${styles.icon} fs-4 }`}></BsCart3>
                     {/* Cart items counter above the cart icon */}
                     {cartList? cartList.length > 0 && (
-                      <Stack direction="horizontal">
-                        <Badge pill bg="danger position-absolute top-0 ms-4">
-                          {cartList.length}
-                        </Badge>
-                      </Stack>
+                       <span
+                       className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
+                     >
+                       {cartList.length}
+                     </span>
                     ):""}
                   </Link>
+
+                  <span
+                    className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
+                  >
+                    0
+                  </span>
                 </span>
               </li>{" "}
               {/* ----- wishList ----- */}
               <li className="nav-item mx-3">
-                <span className={`${styles.icon_container}`}>
+                <span className={`${styles.icon_container} position-relative `}>
                   <Link to="/wishlist" className="nav-link text-center">
                     <MdOutlineFavoriteBorder
                       className={`${styles.icon} fs-4 }`}
@@ -221,12 +229,19 @@ function Nav() {
                       </Stack>
                     )} */}
                   </Link>
+
+                  <span
+                    className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
+                  >
+                    0
+                  </span>
                 </span>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+  
       <SecondNav></SecondNav>
       <Toaster />
     </>

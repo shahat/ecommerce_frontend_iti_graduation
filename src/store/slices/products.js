@@ -1,22 +1,24 @@
-// import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import axios from "axios";
 
-// export var productAction = createAsyncThunk(
-//   "product/getAll",
-//   async (currentPage) => {
-//     var res = await axios.get(`https://api.url?page=${currentPage}`);
-//     return res.data;
-//   }
-// );
+export var productAction = createAsyncThunk(
+  "products/getAll",
+  async (currentPage) => {
+    var res = 
+      await instance.get(`/product?page=${currentPage}`
+    );
+    return res.data.data;
+  }
+);
 
-// var products = createSlice({
-//   name: "products",
-//   initialState: { products: [] },
-//   extraReducers: (builder) => {
-//     builder.addCase(productAction.fulfilled, (state, action) => {
-//       state.movies = action.payload;
-//     });
-//   },
-// });
+var products = createSlice({
+  name: "products",
+  initialState: { products: [] },
+  extraReducers: (builder) => {
+    builder.addCase(productAction.fulfilled, (state, action) => {
+      state.products = action.payload;
+    });
+  },
+});
 
-// export default products.reducer;
+export default products.reducer;

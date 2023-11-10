@@ -19,6 +19,11 @@
   height: 38vh;
 }
 
+.hover:hover {
+  width: 100%;
+  background-color: rgba(30, 28, 28, 0.466);
+}
+
 .rightSide .bottomRow {
   margin-top: 2vh;
   height: 38vh;
@@ -48,4 +53,51 @@
 .secondArrival_img {
   width: 100%;
   object-fit: cover;
+}
+
+.subCategoryWide,
+.subCategoryNarrow {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.subCategoryWide {
+  height: 400px;
+  width: 100%;
+  background-image: url(../../../public/assets/images/man-3.jpeg);
+}
+
+.first,
+.second {
+  height: 190px;
+  width: 100%;
+}
+.first {
+  margin-bottom: 20px;
+  background-image: url(../../../public/assets/images/woman-1.jpg);
+}
+
+.second {
+  background-image: url(../../../public/assets/images/kids-2.webp);
+}
+
+.custom_button {
+  /* background-color: transparent;
+  border: 1px solid #ffc107;
+  color: white;*/
+  transition: 0.2s;
+  color: black;
+  background-color: #ffc107;
+  border-radius: 0;
+  border: 0;
+}
+
+.custom_button:hover {
+  color: black;
+  background-color: #ffc107;
+  border-radius: 5px;
+}
+
+.subCategory_content {
+  background-color: rgba(0, 0, 0, 0.546);
 }

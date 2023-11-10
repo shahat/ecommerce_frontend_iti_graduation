@@ -9,50 +9,34 @@
   display: none;
 }
 .category_image {
-  width: 120px;
-  height: 120px;
+  width: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  transition: transform 0.3s ease-in-out; /* Add a transition for smooth animation */
 }
-@media (max-width: 760px) {
+
+.categoryCard {
+  overflow: hidden;
+  background-color: white;
+  transition: 0.2s;
+}
+.categoryCard:hover {
+  background-color: #ffc107;
+  cursor: pointer;
+}
+
+.categoryCard:hover .category_image {
+  transform: rotate(20deg);
+}
+
+/* @media (max-width: 760px) {
   .category_image {
     width: 90px;
     height: 90px;
   }
-}
+} */
 
 #medo {
   color: red;
-}
-
-.category_1 {
-  background-image: url("../../assets/images/products-images/phone.jpg");
-}
-.category_2 {
-  background-image: url("../../assets/images/products-images/prfiom.jpg");
-}
-.category_3 {
-  background-image: url("../../assets/images/products-images/accessories.jpg");
-}
-.category_4 {
-  background-image: url("../../assets/images/products-images/watches.jpg");
-}
-.category_5 {
-  background-image: url("../../assets/images/products-images/labtop.jpeg");
-}
-.category_6 {
-  background-image: url("../../assets/images/products-images/prfiom.jpg");
-}
-.category_7 {
-  background-image: url("../../assets/images/products-images/labtop.jpeg");
-}
-.category_8 {
-  background-image: url("../../assets/images/products-images/accessories.jpg");
-}
-.category_9 {
-  background-image: url("../../assets/images/products-images/phone.jpg");
-}
-.category_10 {
-  background-image: url("../../assets/images/products-images/watches.jpg");
 }

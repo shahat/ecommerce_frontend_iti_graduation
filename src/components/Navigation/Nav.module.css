@@ -58,7 +58,13 @@
   height: 40px;
   width: 40px;
   border-radius: 50% !important;
-  background-color: rgba(81, 80, 80, 0.491);
+  /* background-color: rgba(81, 80, 80, 0.491); */
+}
+.notify {
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 @media screen and (max-width: 768px) {

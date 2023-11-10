@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import image from "../../assets/images/150x80 logo.png";
 import style from "./resetPassword.module.css";
@@ -12,9 +12,9 @@ function ResetPass() {
 
   const navigate = useNavigate();
 
-  const navigateToHome=()=>{
-    navigate("/")
-  }
+  const navigateToHome = () => {
+    navigate("/");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
