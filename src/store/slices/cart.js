@@ -10,7 +10,6 @@ export const cartAction = createAsyncThunk("cart/getAll", async () => {
     return res.data.data.items;
   } else if (token2) {
     const res = await instance.get("/cart", { headers: { token: token2 } });
-    console.log(res);
     return res.data.data.items;
   }
 });
@@ -22,19 +21,14 @@ export const addToCartAction = createAsyncThunk(
     // let token2 = JSON.parse(localStorage.getItem("token2"));
     if (token) {
       const status = await instance.post(`/cart/${id}`, { headers: {token} });
-      console.log("token",status);
       return status;
     } else if (token2) {
       const status = await instance.post(`/cart/${id}`, { headers: { token: token2 } });
-      console.log("token2",status);
-    //   console.log(status.data);
       return status.data.data;
     } 
     const status = await instance.post(`/cart/${id}`);
-    console.log("no token", status.data.data);
     // returnData = status.data
     let stringToken = JSON.stringify({userId: status.data.data.userId, cartId: status.data.data._id})
-    console.log("returnData",stringToken);
     localStorage.setItem("token2", stringToken)
       return status.data.data;
   }
@@ -75,7 +69,6 @@ const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(cartAction.fulfilled, (state, action) => {
-      console.log("action.payload", action.payload);
       state.cartProducts = action.payload;
       // !token && localStorage.setItem("token2", { userId: status.userId, cartId: status.cartId })
     });
