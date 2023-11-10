@@ -26,7 +26,7 @@ function Cart() {
           <div
             className={`${css["cart_products"]} col-md-7 col-11 border rounded-4 p-4 d-flex flex-column bg-white`}
           >
-            {cartList.length ? (
+            {cartList? cartList.length && (
               cartList.map((prod, index) => {
                 // sub(prod.priceWhenAdded * prod.quantity)
                 return (
