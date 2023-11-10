@@ -6,8 +6,41 @@ import { loginAuth } from "../../Services/auth";
 import { authContext } from "../../contexts/authContext";
 import toast, { Toaster } from "react-hot-toast";
 import image from "../../assets/images/150x80 logo.png";
+import { GoogleLogin } from "@react-oauth/google";
 
-function Login() {
+function Login({ onSuccess, onError }) {
+  // function googleNav(url) {
+  //   window.location.href = url;
+  // }
+
+  // async function auth() {
+  //   try {
+  //     const response = await fetch("http://localhost:4000/request", {
+  //       method: "post",
+  //     });
+  //     const data = await response.json();
+  //     console.log(data);
+  //     googleNav(data.url);
+  //     console.log(data.url);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  // const clientId =
+  //   "197524292801-49dnp7601ctioie1pa9mtcgdkmcm52r0.apps.googleusercontent.com";
+
+  //   const handleLoginSuccess = (response) => {
+  //     console.log(response);
+  //   };
+
+  //   const handleLoginError = (error)=>{
+  //     console.log('Google login failed', error)
+  //   }
+
+  const google = () => {
+    window.open("http://localhost:4000/auth/google", "_self");
+  };
+
   const { setLogin } = useContext(authContext);
   const [user, setUser] = useState({
     email: "",
@@ -25,27 +58,21 @@ function Login() {
       setUser({ ...user, password: e.target.value });
       setErrors({
         ...errors,
-        passwordError:
-          e.target.value.length == 0
-            ? "Password is required"
-            : ""
+        passwordError: e.target.value.length == 0 ? "Password is required" : "",
       });
     } else if (e.target.name == "email") {
       setUser({ ...user, email: e.target.value });
       setErrors({
         ...errors,
-        emailError:
-          e.target.value.length == 0
-            ? "Email is required"
-            :"",
+        emailError: e.target.value.length == 0 ? "Email is required" : "",
       });
     }
   };
 
   const navigate = useNavigate();
 
-  const navigateResetPass = () => {
-    navigate("/resetPassword");
+  const navigateEmailRecovery = () => {
+    navigate("/emailRecovery");
   };
   const navigateToRegister = () => {
     navigate("/register");
@@ -90,6 +117,7 @@ function Login() {
           onClick={navigateToHome}
         />
       </div>
+
       <div className="row justify-content-center ">
         <div
           className={`col-sm-12 col-md-7 col-lg-5 col-xl-5  vh-80 mt-4 p-5 d-flex flex-column justify-content-center ${style.loginInformation}`}
@@ -150,7 +178,7 @@ function Login() {
               </button>
               <p className="text-center mt-3">
                 <a
-                  onClick={navigateResetPass}
+                  onClick={navigateEmailRecovery}
                   className={`text-decoration-none  ${style.forgottenPassword}`}
                 >
                   Forgotten password?
@@ -159,6 +187,7 @@ function Login() {
 
               <div className="">
                 <button
+                  onClick={google}
                   type="submit"
                   className={` py-2 form-control text-white  ${style.btnGoogle}`}
                 >
@@ -169,6 +198,13 @@ function Login() {
           </form>
         </div>
       </div>
+
+      {/* <GoogleLogin
+        clientId={clientId}
+        buttonText="Login with Google"
+        onSuccess={handleLoginSuccess}
+        onError={handleLoginError}
+      /> */}
       <Toaster />
     </div>
   );

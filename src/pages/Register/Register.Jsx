@@ -6,6 +6,24 @@ import { registerAuth } from "../../Services/auth";
 import toast, { Toaster } from "react-hot-toast";
 
 function Register() {
+ const navigate = useNavigate();
+
+
+  // async function auth() {
+
+  //   try {
+  //       const response = await fetch("http://localhost:4000/request", {
+  //         method: "post",
+  //       });
+  //       const data = await response.json();
+  //       console.log("returned data",data);
+  //       navigate(data.url)
+  //       console.log("dataURL",data.url);
+  //   } catch (error) {
+  //     console.error("Error fetching Google auth URL", error);
+  //   }
+  // }
+
   // userName with regx and errors
   const nameRegx = /^[a-zA-Z0-9 ]{3,20}$/;
 
@@ -35,9 +53,8 @@ function Register() {
     passwordMatch:false ,
   });
 
-  // const [passwordMatch, setPasswordMatch] = useState(false);
 
-  const navigate = useNavigate();
+ 
 
   const navigateToLogin = () => {
     navigate("/login");
@@ -231,7 +248,12 @@ function Register() {
                 </button>
               </div>
               <div className="signupWithGoogle">
-                <button className="form-control  border mt-2 bg-white">
+                <button
+                  onClick={() => {
+                    auth();
+                  }}
+                  className="form-control  border mt-2 bg-white"
+                >
                   <span>
                     <AiOutlineGoogle className={`m-1 ${style.googleIcon}`} />
                   </span>
