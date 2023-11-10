@@ -22,6 +22,7 @@ export const addToCartAction = createAsyncThunk(
         if (token) {
             const status = await instance.post(`/cart/${id}`, { token });
             return status;
+            
         } else if (token2){
             const status = await instance.post(`/cart/${id}`, { token2 });
             console.log(status.data);

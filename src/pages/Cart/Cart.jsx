@@ -10,9 +10,9 @@ import { changeSubTotal } from "../../store/slices/checkOut";
 function Cart() {
   const cartList = useSelector((state) => state.cart.cartProducts);
   const checkOutStatus = useSelector((state) => state.checkOut);
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
+  console.log("this is the cart list : ", cartList);
   console.log(checkOutStatus);
-
 
   return (
     <>
@@ -31,7 +31,7 @@ function Cart() {
                 // sub(prod.priceWhenAdded * prod.quantity)
                 return (
                   <>
-                    <CartProduct key={index} product={prod}  />
+                    <CartProduct key={index} product={prod} />
                     {index < cartList.length - 1 && (
                       <hr className="my-4 w-100" />
                     )}
@@ -56,7 +56,7 @@ function Cart() {
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
                 >
                   <p className="fs-5 text-muted">Subtotal</p>
-                  <h5>{ checkOutStatus.subTotal } EGP</h5>
+                  <h5>{checkOutStatus.subTotal} EGP</h5>
                 </div>
                 <div
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
@@ -64,7 +64,7 @@ function Cart() {
                   <p className="fs-5 text-muted">
                     Discount <span className="fs-6">(0%)</span>
                   </p>
-                  <h5 className="text-danger">- { checkOutStatus.discount } </h5>
+                  <h5 className="text-danger">- {checkOutStatus.discount} </h5>
                 </div>
                 <div
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
@@ -77,7 +77,7 @@ function Cart() {
                   className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
                 >
                   <p className="fs-4 text-muted">Total</p>
-                  <h4> { checkOutStatus.total }  </h4>
+                  <h4> {checkOutStatus.total} </h4>
                 </div>
               </div>
               <div
@@ -94,12 +94,12 @@ function Cart() {
                 >
                   Apply
                 </button>
-                <Link to={token? "/checkout" : ""}
+                <Link
+                  to={token ? "/checkout" : ""}
                   className={`${css.goToCheck} btn ${css.myBtn} rounded-pill text-decoration-none col-12 mt-4 p-3 fs-3`}
                 >
                   Go to Checkout
-
-                  < FaArrowRight className="ms-3 fs-5"/>
+                  <FaArrowRight className="ms-3 fs-5" />
                 </Link>
               </div>
             </div>

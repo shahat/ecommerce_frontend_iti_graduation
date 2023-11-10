@@ -17,7 +17,7 @@ import Contact from "./components/Contact/Contact";
 import UserProfile from "./components/UserProfile/UserProfile";
 import NotFound from "./pages/notFound/NotFound";
 import CheckOut from "./components/CheckOut/CheckOut";
-// import Login from "./pages/Login/Login";
+import Login from "./pages/Login/Login";
 import Description from "./components/productDetailsComps/description";
 import ReviewsContainer from "./components/productDetailsComps/reviewsContainer";
 import FAQ from "./components/productDetailsComps/faqComponent";
@@ -67,7 +67,7 @@ function App() {
       ],
     },
     { path: "/shop/:productName?", element: <Shop /> },
-    // { path: "/login", element: <Login /> },
+    { path: "/login", element: <Login /> },
     // { path: "/register", element: <Register /> },
     { path: "/emailRecovery", element: <SendCode /> },
     { path: "/resetCode", element: <ResetCode /> },
