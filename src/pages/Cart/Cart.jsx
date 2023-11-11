@@ -2,17 +2,14 @@ import CartProduct from "../../components/cartComponents/cartProduct";
 import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import css from "../../assets/style/product.module.css";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa6";
-import { changeSubTotal } from "../../store/slices/checkOut";
 // import { useEffect } from "react";
 
 function Cart() {
   const cartList = useSelector((state) => state.cart.cartProducts);
   const checkOutStatus = useSelector((state) => state.checkOut);
   const token = localStorage.getItem("token");
-  console.log("this is the cart list : ", cartList);
-  console.log(checkOutStatus);
 
   return (
     <>
@@ -26,7 +23,7 @@ function Cart() {
           <div
             className={`${css["cart_products"]} col-md-7 col-11 border rounded-4 p-4 d-flex flex-column bg-white`}
           >
-            {cartList? cartList.length && (
+            {cartList && cartList.length > 0? (
               cartList.map((prod, index) => {
                 // sub(prod.priceWhenAdded * prod.quantity)
                 return (

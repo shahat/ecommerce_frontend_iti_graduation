@@ -156,24 +156,20 @@ export default function MobileNav() {
         <li className="nav-item ms-3 position-relative">
           <span className={`${styles.icon_container} `}>
             <Link to="/cart" className="nav-link text-center " href="#">
-              <BsCart3 className={`${styles.icon} fs-4 }`}></BsCart3>
+              <BsCart3 className={`${styles.icon} fs-4 `}></BsCart3>
               {/* Cart items counter above the cart icon */}
               {cartList
                 ? cartList.length > 0 && (
-                    <Stack direction="horizontal">
-                      <Badge pill bg="danger position-absolute top-0 ms-4">
-                        {cartList.length}
-                      </Badge>
-                    </Stack>
+                  <span
+                  className={`badge badge-pill badge-warning position-absolute top-0 rounded-50 bg-warning rounded-circle ${styles.notify}`}
+                >
+                  {cartList.length}
+                </span>
                   )
                 : ""}
             </Link>
           </span>
-          <span
-            className={`badge badge-pill badge-warning position-absolute top-0 rounded-50 bg-warning rounded-circle ${styles.notify}`}
-          >
-            0
-          </span>
+          
         </li>{" "}
         {/* ----- wishList ----- */}
         <li className="nav-item mx-3 position-relative">
