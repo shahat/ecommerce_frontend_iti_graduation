@@ -15,7 +15,7 @@ import WishList from "./pages/WishList/WishList";
 import Order from "./components/Order/Order";
 import Contact from "./components/Contact/Contact";
 import UserProfile from "./components/UserProfile/UserProfile";
-import NotFound from "./pages/notFound/NotFound";
+import NotFound from "./pages/NotFound/NotFound";
 import CheckOut from "./components/CheckOut/CheckOut";
 import Login from "./pages/Login/Login";
 import Description from "./components/productDetailsComps/description";
