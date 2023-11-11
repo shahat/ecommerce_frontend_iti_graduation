@@ -26,6 +26,7 @@ import ResetPass from "./pages/Resetpassword/ResetPass";
 import ResetCode from "./pages/ResetCode/ResetCode";
 import { AuthProvider } from "./contexts/authContext";
 import { useState } from "react";
+import Register from "./pages/Register/Register";
 // import LoginTwo from "./pages/Login/LoginTwo";
 
 // import components and page
@@ -68,7 +69,7 @@ function App() {
     },
     { path: "/shop/:productName?", element: <Shop /> },
     { path: "/login", element: <Login /> },
-    // { path: "/register", element: <Register /> },
+    { path: "/register", element: <Register /> },
     { path: "/emailRecovery", element: <SendCode /> },
     { path: "/resetCode", element: <ResetCode /> },
     { path: "/resetPassword", element: <ResetPass /> },

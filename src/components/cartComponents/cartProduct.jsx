@@ -5,7 +5,7 @@ import instance from "../../axiosConfig/instance";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa6";
-import { removeFromCartAction } from "../../store/slices/cart";
+import { cartAction, removeFromCartAction } from "../../store/slices/cart";
 import { changeSubTotal } from "../../store/slices/checkOut";
 
 function CartProduct({ product }) {
@@ -21,25 +21,35 @@ function CartProduct({ product }) {
         );
     }, []);
 
-    function inc(productId) {
+     function inc(productId) {
         if (quantity < product._id.quantity) {
             setQuantity(++quantity);
-            token ? (headers = { token }) : (headers = { token: token2 });
-            instance.patch("/cart", { productId, quantity }, { headers });
-            dispatch(changeSubTotal(product._id.price));
+            headers = token ? { token } : { token: token2 };
+            // token ? (headers = { token }) : (headers = { token: token2 });
+            let data =  instance.patch("/cart", { productId, quantity }, { headers })
+                // .then((data) => {
+                    dispatch(changeSubTotal(product._id.price));
+                    dispatch(cartAction())
+                // }).catch(()=>{
+                //     dispatch(changeSubTotal(product._id.price));
+                //     dispatch(cartAction())
+                // })
+                
         }
     }
 
-    function dec(productId) {
+     function dec(productId) {
         if (quantity > 1) {
             setQuantity(--quantity);
             token ? (headers = { token }) : (headers = { token: token2 });
-            instance.patch("/cart", { productId, quantity }, { headers });
-            dispatch(changeSubTotal(-product._id.price));
+            let data =  instance.patch("/cart", { productId, quantity }, { headers })
+                    dispatch(changeSubTotal( - product._id.price));
+                    dispatch(cartAction())
+            // dispatch(changeSubTotal(-product._id.price));
         }
     }
 
-    async function removeFromcart(productId) {
+    function removeFromCart(productId) {
         dispatch(removeFromCartAction(productId));
         dispatch(changeSubTotal(-(product._id.price * quantity)));
     }
@@ -73,7 +83,7 @@ function CartProduct({ product }) {
                             Color: <span className="text-secondary">Blue</span>
                         </p> */}
                         <h3 className="mt-auto mb-0">
-                            {product._id.price * quantity} EGP
+                            {product._id.price} EGP
                         </h3>
                     </div>
                 </div>
@@ -83,7 +93,7 @@ function CartProduct({ product }) {
                     <button
                         className="btn text-danger fs-5"
                         onClick={() => {
-                            removeFromcart(product._id._id);
+                            removeFromCart(product._id._id);
                         }}
                     >
                         <FaTrash />

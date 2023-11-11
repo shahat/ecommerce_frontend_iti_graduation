@@ -15,9 +15,6 @@ import { authContext } from "../../contexts/authContext";
 import SecondNav from "./SecondNav/SecondNav";
 import { cartAction } from "../../store/slices/cart";
 
-import Badge from "react-bootstrap/Badge";
-import Stack from "react-bootstrap/Stack";
-
 
 
 import toast, { Toaster } from "react-hot-toast";
@@ -161,7 +158,7 @@ function Nav() {
                   ) : (
                     <>
                       <li>
-                        <Link to="login" className="dropdown-item">
+                        <Link to="/login" className="dropdown-item">
                           Login
                         </Link>
                       </li>
@@ -169,7 +166,7 @@ function Nav() {
                         <hr className="dropdown-divider" />
                       </li>
                       <li>
-                        <Link to="register" className="dropdown-item">
+                        <Link to="/register" className="dropdown-item">
                           register
                         </Link>
                       </li>
