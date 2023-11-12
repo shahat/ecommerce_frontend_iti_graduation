@@ -3,16 +3,16 @@ import AnimatedPage from "../animtedPage/AnimatedPage";
 import { useEffect } from "react";
 import { useNavigate  } from 'react-router-dom';
 
-import { orderAction } from '../../store/slices/orders';
+import { ordersAction } from '../../store/slices/orders';
 const UserComingOrders = () => {
     const orders = useSelector((state)=> state.orders.orders)
     const dispatch = useDispatch()
     const navigate=useNavigate()
 
-    useEffect(()=>{
-        dispatch(orderAction())
-    },[])
-    console.log(orders);
+    // useEffect(()=>{
+    //     dispatch(ordersAction())
+    // },[])
+    // console.log(orders);
 
    
     return (

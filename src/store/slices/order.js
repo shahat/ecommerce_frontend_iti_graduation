@@ -3,19 +3,19 @@ import axios from "axios";
 
 
 
-export const oneOrderAction = createAsyncThunk("orders/getAll" , async (id)=>{
+export const oneOrderAction = createAsyncThunk("get/oneOrder" , async (id)=>{
     const res = await axios.get(`http://localhost:4000/orders/${id}`)
+    console.log(res);
     return res.data.order
     
 } )
 
-const orderSlice = createSlice({
-    name : "order",
-    initialState : {order : {}},
+const oneOrderSlice = createSlice({
+    name : "oneOrder",
+    initialState : {oneOrder : {}},
     extraReducers:(builder)=>{
         builder.addCase(oneOrderAction.fulfilled,(state,action)=>{
-            console.log(action.payload);
-            state.order = action.payload
+            state.oneOrder = action.payload[0]
         })
         builder.addCase(oneOrderAction.rejected,(state,action)=>{
             console.log("rejected");
@@ -23,4 +23,4 @@ const orderSlice = createSlice({
     }
 })
 
-export default orderSlice.reducer
+export default oneOrderSlice.reducer

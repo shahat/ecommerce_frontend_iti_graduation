@@ -4,7 +4,7 @@ import { FiEdit } from "react-icons/fi";
 import { useEffect } from "react";
 import { useNavigate  } from 'react-router-dom';
 
-import { orderAction } from '../../store/slices/orders';
+import { ordersAction } from '../../store/slices/orders';
 
 
 
@@ -14,7 +14,7 @@ const UserOrders = () => {
     const navigate=useNavigate()
 
     useEffect(()=>{
-        dispatch(orderAction())
+        dispatch(ordersAction())
     },[])
     console.log(orders);
 
