@@ -93,6 +93,7 @@ function Login({ onSuccess, onError }) {
       try {
         const result = await loginAuth(user);
         console.log(result);
+        localStorage.removeItem("token2")
         localStorage.setItem("token", result.data.token);
         setLogin(true);
         navigate("/");

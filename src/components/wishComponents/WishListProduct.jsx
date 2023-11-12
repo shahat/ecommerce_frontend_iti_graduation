@@ -1,21 +1,36 @@
 import css from "../../assets/style/product.module.css";
 import { FaTrash } from "react-icons/fa6";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { addToBothCartsAction } from "../../store/slices/cart";
+import toast from "react-hot-toast";
+import instance from "../../axiosConfig/instance";
 
-function WishListProduct({src}) {
+function WishListProduct({ product, token }) {
+    var dispatch = useDispatch
+    var addToCart = (id) => {
+        toast.success(`Product added to the cart successfully`);
+        dispatch(addToBothCartsAction(id))
+        removeFromWishList(id)
+    }
+    var removeFromWishList = (id) => {
+        instance.delete("/wish/", {productId: id}, {headers: {token}}).then(()=>{
+            toast.success(`Product removed`);
+        })
+    }
+
+
     return (
         <div className={`${css["single_product"]} w-100 d-flex flex-wrap`}>
             <div
                 className={`${css["cart_product_left"]} float-start d-flex col-md-6 col-12`}
             >
                 <div
-                    className={`${css["cart_product_image"]} bg-light-subtle d-flex flex-column p-1`}
-                    style={{
-                        width: "7.75rem",
-                        height: "7.75rem",
-                    }}
+                    className={`${css["cart_product_image"]} bg-light-subtle d-flex flex-column p-1 overflow-hidden`}
+                    style={{ width: "7.75rem", height: "7.75rem" }}
                 >
                     <img
-                        src={src}
+                        src={product._id.thumbnail}
                         alt=""
                         className="h-100 m-auto"
                     />
@@ -23,26 +38,27 @@ function WishListProduct({src}) {
                 <div
                     className={`${css["cart_product_details"]} float-start px-2 d-flex flex-column`}
                 >
-                    <h4>Gradient Graphic T-shirt</h4>
+                    <h4>{product._id.title}</h4>
                     <p>
-                        Size: <span className="text-secondary">Large</span>
+                        details:{" "}
+                        <span className="text-secondary">
+                            {product._id.description}
+                        </span>
                     </p>
-                    <p>
-                        Color: <span className="text-secondary">Blue</span>
-                    </p>
-                    <h3 className="mt-auto mb-0">143$</h3>
+
+                    {/* <h3 className="mt-auto mb-0">{product.price}</h3> */}
                 </div>
             </div>
             <div
                 className={`${css["wish_product_right"]} d-flex flex-column flex-lg-row align-items-center col-md-6 col-12`}
             >
                 <div className="">
-                    <button className={`${css.myBtn} rounded-pill px-5 py-3`}>
-                        Add To Cart
+                    <button onClick={()=>{addToCart(product._id._id)}} className={`${css.myBtn} rounded-pill px-5 py-3`}>
+                        Move To Cart
                     </button>
                 </div>
                 <div className="">
-                    <button className={`${css.myBtn} rounded-pill px-5 py-3`}>
+                    <button onClick={()=>{removeFromWishList(product._id._id)}} className={`${css.myBtn} rounded-pill px-5 py-3`}>
                         <FaTrash className=" text-danger" />
                         <span>Remove</span>
                     </button>
@@ -53,3 +69,8 @@ function WishListProduct({src}) {
 }
 
 export default WishListProduct;
+
+WishListProduct.propTypes = {
+    product: PropTypes.object,
+    token: PropTypes.string,
+};

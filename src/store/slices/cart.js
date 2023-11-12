@@ -56,29 +56,32 @@ export function addToBothCartsAction(id) {
 export const removeFromCartRequestAction = createAsyncThunk(
     "cart/removeProduct",
     async (id) => {
-        console.log("removeFromCartRequestAction");
         let { token, token2 } = localStorage;
         let status
         if (token) {
             status = await instance.patch(
                 `/cart/${id}`,
-                {},
-                { headers: token }
+                // {},
+                // { headers: token }
+                { token }
             );
         } else if(token2){
             status = await instance.patch(
                 `/cart/${id}`,
-                {},
-                { headers: {token: token2} }
+                // {},
+                // { headers: {token: token2} }
+                {token: token2}
             );
         }
+        console.log(status);
         return status;
     }
 );
 
 export function removeFromCartAction(id) {
     return (dispatch) => {
-        dispatch(removeFromCartRequestAction(id)).then(() => {
+        dispatch(removeFromCartRequestAction(id)).then((data) => {
+            console.log("data", data);
             dispatch(cartAction());
         });
     };

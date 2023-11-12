@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import css from "../../assets/style/product.module.css";
 import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import WishListProduct from "../../components/wishComponents/WishListProduct";
+import instance from "../../axiosConfig/instance";
 
 function WishList() {
-    const [products, setProducts] = useState([
-        "src/assets/images/wish-list/shirt.png",
-        "src/assets/images/wish-list/t-shirt.jpeg",
-        "src/assets/images/wish-list/tra.jpeg",
-    ]);
+    const [wishList, setWishList] = useState([]);
+    let token = localStorage.getItem("token");
+
+    useEffect(() => {}, []);
+    instance
+        .get("/wish", { headers: token })
+        .then((data) => {
+            setWishList(data.data.data.items);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
 
     return (
         <>
@@ -22,28 +31,41 @@ function WishList() {
                     className={`${css.product} row d-flex col-md-10 justify-content-md-between justify-content-center m-0 p-0`}
                 >
                     {/* <!-- Wish-Products PART --> */}
-                    <div
-                        className={`${css.wish} col-12 border rounded-4 p-4 d-flex flex-column bg-white`}
-                    >
-                        {products.map((prod, index) => {
-                            return (
-                                <>
-                                    <WishListProduct key={index} src={prod} />
-                                    {index < products.length - 1 && (
-                                        <hr className="my-4 w-100" />
-                                    )}
-                                </>
-                            );
-                        })}
-                    </div>
-                    {/* <!-- ========================================================================= --> */}
-                    <div
-                        className={`${css.discount} d-flex col-12 mt-5 justify-content-center`}
-                    >
-                        <button className="border-0 rounded-pill col-md-3 col-8 mt-4 fs-5 bg-danger text-white">
-                            Clear Wish List
-                        </button>
-                    </div>
+                    {wishList && wishList.length > 0 ? (
+                        <>
+                            <div
+                                className={`${css.wish} col-12 border rounded-4 p-4 d-flex flex-column bg-white`}
+                            >
+                                {wishList && wishList.length > 0 &&
+                                    wishList.map((prod, index) => {
+                                        return (
+                                            <>
+                                                <WishListProduct
+                                                    key={index}
+                                                    product={prod}
+                                                    token={token}
+                                                />
+                                                {index <
+                                                    wishList.length - 1 && (
+                                                    <hr className="my-4 w-100" />
+                                                )}
+                                            </>
+                                        );
+                                    })}
+                            </div>
+                            <div
+                                className={`${css.discount} d-flex col-12 mt-5 justify-content-center`}
+                            >
+                                <button className="border-0 rounded-pill col-md-3 col-8 mt-4 fs-5 bg-danger text-white">
+                                    Clear Wish List
+                                </button>
+                            </div>
+                        </>
+                    ) : (
+                        <h3 className="text-center fw-semibold">
+                            Your Wish list is empty!
+                        </h3>
+                    )}
                 </div>
 
                 {/* <!-- Related Products PART --> */}
