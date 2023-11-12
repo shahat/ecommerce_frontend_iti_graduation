@@ -18,6 +18,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import NotFound from "./pages/notFound/NotFound";
 import CheckOut from "./components/CheckOut/CheckOut";
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 import Description from "./components/productDetailsComps/description";
 import ReviewsContainer from "./components/productDetailsComps/reviewsContainer";
 import FAQ from "./components/productDetailsComps/faqComponent";
@@ -29,7 +30,6 @@ import { useState } from "react";
 // import LoginTwo from "./pages/Login/LoginTwo";
 
 // import components and page
-
 function App() {
   const [isLogin, setLogin] = useState(
     localStorage.getItem("token") ? true : false
@@ -66,18 +66,15 @@ function App() {
         { path: "/checkout", element: <CheckOut /> },
       ],
     },
-    { path: "/shop/:productName?", element: <Shop /> },
+    { path: "/shop", element: <Shop /> },
     { path: "/login", element: <Login /> },
-    // { path: "/register", element: <Register /> },
+    { path: "/register", element: <Register /> },
     { path: "/emailRecovery", element: <SendCode /> },
     { path: "/resetCode", element: <ResetCode /> },
     { path: "/resetPassword", element: <ResetPass /> },
     { path: "*/*", element: <NotFound /> },
   ]);
-
   return (
-    // <Provider store={store}>
-
     <AuthProvider value={{ isLogin, setLogin }}>
       <Provider store={store}>
         <RouterProvider router={router} />

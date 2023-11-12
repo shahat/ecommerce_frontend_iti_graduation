@@ -1,0 +1,151 @@
+// wishlistSlice.js
+
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+// Create an async thunk to fetch the guest wishlist
+export const fetchGuestWishlist = createAsyncThunk(
+  'wishlist/fetchGuestWishlist',
+  async (guestIdentifier) => {
+    const response = await fetch(`/api/wishlist/guest/${guestIdentifier}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch guest wishlist');
+    }
+    return response.json();
+  }
+);
+
+// Create an async thunk to add a product to the guest wishlist
+export const addToGuestWishlist = createAsyncThunk(
+  'wishlist/addToGuestWishlist',
+  async ({ guestIdentifier, productId }) => {
+    const response = await fetch(`/api/wishlist/guest/${guestIdentifier}/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productId }),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to add to guest wishlist');
+    }
+    return response.json();
+  }
+);
+
+// Define the initial state for the wishlist
+const initialState = {
+  wishlistItems: [],
+  status: 'idle',
+  error: null,
+};
+
+// Create a wishlist slice
+const wishlistSlice = createSlice({
+  name: 'wishlist',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    // Handle the fetchGuestWishlist fulfilled action
+    builder.addCase(fetchGuestWishlist.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      state.wishlistItems = action.payload;
+    });
+
+    // Handle the addToGuestWishlist fulfilled action
+    builder.addCase(addToGuestWishlist.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      state.wishlistItems = action.payload;
+    });
+
+    // Handle loading and error states for both actions
+    builder.addCase(fetchGuestWishlist.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(fetchGuestWishlist.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    });
+    builder.addCase(addToGuestWishlist.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(addToGuestWishlist.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    });
+  },
+});
+
+// Export actions and reducer
+export { fetchGuestWishlist, addToGuestWishlist };
+export default wishlistSlice.reducer;
+
+
+
+
+===========================================================================
+
+store.js 
+
+// store.js
+
+import { configureStore } from '@reduxjs/toolkit';
+import wishlistReducer from './wishlistSlice';
+
+const store = configureStore({
+  reducer: {
+    wishlist: wishlistReducer,
+  },
+});
+
+export default store;
+
+
+
+
+===========================================================================
+
+
+// Wishlist.js
+
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchGuestWishlist,
+  addToGuestWishlist,
+} from './wishlistSlice';
+
+const Wishlist = () => {
+  const dispatch = useDispatch();
+  const { wishlistItems, status, error } = useSelector((state) => state.wishlist);
+
+  // Fetch guest wishlist on component mount
+  useEffect(() => {
+    dispatch(fetchGuestWishlist(localStorage.getItem('guestIdentifier')));
+  }, [dispatch]);
+
+  const addToWishlist = () => {
+    dispatch(addToGuestWishlist({ guestIdentifier: localStorage.getItem('guestIdentifier'), productId: 'product123' }));
+  };
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <div>
+      <h2>Wishlist</h2>
+      <ul>
+        {wishlistItems.map(item => (
+          <li key={item.productId}>{item.productName}</li>
+        ))}
+      </ul>
+      <button onClick={addToWishlist}>Add to Wishlist</button>
+    </div>
+  );
+};
+
+export default Wishlist;

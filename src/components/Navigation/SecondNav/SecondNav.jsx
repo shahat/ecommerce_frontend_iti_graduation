@@ -4,11 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { categoryAction } from "../../../store/slices/categories";
-import { subCategoryAction } from "../../../store/slices/subcategory";
+import subcategory, {
+  subCategoryAction,
+} from "../../../store/slices/subcategory";
 import { useEffect } from "react";
 
 import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+
 export default function SecondNav() {
   const categories = useSelector((state) => state.categories.categories);
   var subCategoies = useSelector((state) => state.subCategories.subCategories);
@@ -21,8 +24,7 @@ export default function SecondNav() {
       ))
   );
   const dispatch = useDispatch();
-  // console.log("categories from secondnav component ", categories);
-  // console.log("subcategory from secondnav component ", subCategoies);
+
   useEffect(() => {
     dispatch(categoryAction());
     dispatch(subCategoryAction());
@@ -54,7 +56,9 @@ export default function SecondNav() {
                       >
                         {categoryToSub[category.name].map((subcategory) => (
                           <Dropdown.Item key={Math.random()} eventKey="2">
-                            {subcategory.name}
+                            <Link to={`/shop/?subcategory=${subcategory.name}`}>
+                              {subcategory.name}
+                            </Link>
                           </Dropdown.Item>
                         ))}
                       </DropdownButton>
