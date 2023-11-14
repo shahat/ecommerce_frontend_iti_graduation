@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./AppLayout.module.css";
 import Footer from "../../components/Footer/Footer";
 import { Outlet } from "react-router-dom";
