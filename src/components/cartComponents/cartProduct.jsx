@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 import {
     cartAction,
-    modifyProductAction,
+    modifyBothProductAction,
     removeFromCartAction,
 } from "../../store/slices/cart";
 import { changeSubTotal } from "../../store/slices/checkOut";
@@ -29,7 +29,7 @@ function CartProduct({ product, quantity }) {
             setInput(true);
         } else if (quantity > 0 && quantity < 10) {
             dispatch(
-                modifyProductAction({ productId: product._id._id, quantity })
+                modifyBothProductAction({ productId: product._id._id, quantity })
             );
         } else {
             toast.error(`Select a real number`);
@@ -41,11 +41,11 @@ function CartProduct({ product, quantity }) {
         if (quantity < 10) {
             setInput(false);
             dispatch(
-                modifyProductAction({ productId: product._id._id, quantity })
+                modifyBothProductAction({ productId: product._id._id, quantity })
             );
         } else if (quantity < product._id.quantity) {
             dispatch(
-                modifyProductAction({ productId: product._id._id, quantity })
+                modifyBothProductAction({ productId: product._id._id, quantity })
             );
         } else {
             toast.error(`There is no enough items in the stock!`);

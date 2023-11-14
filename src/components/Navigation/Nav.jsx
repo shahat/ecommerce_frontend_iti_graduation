@@ -31,7 +31,6 @@ function Nav() {
   
   const navigate = useNavigate();
  
-  dispatch(cartAction());
   var cartList = useSelector((state) => state.cart.cartProducts);
   const [searchValue, setSearchValue] = useState("");
   

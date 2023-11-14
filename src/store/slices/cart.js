@@ -48,7 +48,6 @@ export const addToCartAction = createAsyncThunk(
 
 export function addToBothCartsAction(id) {
     return (dispatch) => {
-        dispatch(LoaderIcon)
         dispatch(addToCartAction(id)).then(() => {
             dispatch(cartAction());
         });
@@ -61,13 +60,19 @@ export const modifyProductAction = createAsyncThunk("cart/modifyProduct", async 
     var res
     if (token) {
         res = await instance.patch("/cart", { productId, quantity }, { headers: { token } });
-        // return res; 
     } else if (token2) {
         res = await instance.patch("/cart", { productId, quantity }, { headers: { token2 } });
     }
     return res;
-
 })
+
+export function modifyBothProductAction(params) {
+    return (dispatch) => {
+        dispatch(modifyProductAction(params)).then(() => {
+            dispatch(cartAction());
+        });
+    };
+}
 
 export const removeFromCartRequestAction = createAsyncThunk(
     "cart/removeProduct",
@@ -115,27 +120,26 @@ const cartSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(cartAction.fulfilled, (state, action) => {
             state.cartProducts = action.payload;
-            // state.loading = false
+            state.loading = false
         });
         builder.addCase(modifyProductAction.pending, (state, action) => {
             state.loading = true
-        });
-        builder.addCase(modifyProductAction.fulfilled, (state, action) => {
-            console.log("full");
-            state.loading = false
         });
         builder.addCase(modifyProductAction.rejected, (state, action) => {
             console.log("rejected");
             state.loading = false
         });
+        builder.addCase(removeFromCartRequestAction.pending, (state, action) => {
+            state.loading = true
+        });
         builder.addCase(
             removeFromCartRequestAction.fulfilled,
             (state, action) => {
-                // removes the item from the cart using its 'id' I got from "action.meta.arg"
+                // removes the item from the cart slice using its 'id' I got from "action.meta.arg"
                 state.cartProducts = state.cartProducts.filter(
                     (item) => item._id._id != action.meta.arg
                 );
-                state.loading = false
+                // state.loading = false
             }
         );
     },
