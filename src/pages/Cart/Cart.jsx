@@ -15,7 +15,7 @@ function Cart() {
     const [subTotal, setSubTotal] = useState(0)
     useEffect(()=>{
         setSubTotal(0)
-        cartList.forEach(element => {
+        cartList && cartList.forEach(element => {
             setSubTotal(  (previous)=> previous + element.priceWhenAdded * element.quantity)
         });
     }, [cartList])

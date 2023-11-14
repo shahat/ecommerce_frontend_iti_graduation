@@ -57,9 +57,7 @@ export function addToBothCartsAction(id) {
 
 export const modifyProductAction = createAsyncThunk("cart/modifyProduct", async (params) => {
     const {productId, quantity} = params
-    // console.log(productId, quantity);
     const { token, token2 } = localStorage;
-    console.log(token2);
     var res
     if (token) {
         res = await instance.patch("/cart", { productId, quantity }, { headers: { token } });
@@ -117,7 +115,7 @@ const cartSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(cartAction.fulfilled, (state, action) => {
             state.cartProducts = action.payload;
-            state.loading = false
+            // state.loading = false
         });
         builder.addCase(modifyProductAction.pending, (state, action) => {
             state.loading = true
