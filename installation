@@ -1,4 +1,6 @@
-
 npm install @reduxjs/toolkit react-reduxjs
-npm install react-icons bootstrap 
+npm install react-icons bootstrap
 npm install react-router-dom@6
+
+notes
+to make the style modele work for you just use the name of the tag or just use a class

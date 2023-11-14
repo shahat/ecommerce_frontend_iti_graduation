@@ -1,0 +1,115 @@
+.filterstyle {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 500;
+}
+.componentcontainer {
+  position: relative;
+}
+.hidenbtn {
+  display: none;
+
+  @media (max-width: 991px) {
+    display: block;
+  }
+}
+.hidenfilter {
+  display: block;
+
+  @media (max-width: 991px) {
+    display: none;
+  }
+}
+.rate {
+  color: #ffad33;
+  font-size: 19px;
+  cursor: pointer;
+}
+.card {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.cardwidth {
+  @media (max-width: 575px) {
+    width: 300px;
+    margin: auto;
+  }
+}
+.cardimg {
+  height: 150px;
+}
+.cardtitle {
+  font-size: 14px;
+  font-weight: bold;
+}
+.cardtitlediv {
+  height: 55px;
+  cursor: pointer;
+}
+/* .formbutton {
+  background-color: rgb(1, 85, 110) !important;
+  color: white !important;
+} */
+.cardbutton {
+  background-color: #f79e1b;
+  border: none;
+  &:hover {
+    background-color: #ff9900;
+  }
+}
+.subcategoryimage {
+  width: 120px;
+  height: 120px;
+}
+.filterbut {
+  background-color: rgb(1, 85, 110);
+  border: none;
+  &:hover {
+    background-color: #ff9900;
+    color: black;
+  }
+}
+.filterheader {
+  color: #ffad33 !important;
+}
+.paginationitems {
+  background-color: rgb(1, 85, 110);
+  color: white;
+  cursor: pointer;
+  &:active,
+  &:hover {
+    background-color: #ff9900;
+    color: black;
+  }
+}
+.subcategorydiv {
+  cursor: pointer;
+}
+
+/* mobile nav  */
+
+.bottomNavContainer {
+  height: 10vh;
+  width: 100vw;
+  display: none;
+}
+
+.bottom_nav {
+  position: fixed;
+  width: 100vw;
+  top: 90vh;
+  height: 10vh;
+  color: wheat;
+}
+@media screen and (max-width: 768px) {
+  .bottomNavContainer {
+    display: block;
+  }
+}
+
+.notify {
+  top: 0;
+  right: 0;
+  margin-left: 7px;
+}

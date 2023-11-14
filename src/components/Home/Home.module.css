@@ -1,0 +1,42 @@
+.home {
+  width: 100vw;
+  overflow: hidden;
+  background-color: aquamarine;
+  height: 200vh;
+}
+
+.custom_dropdown_toggle::after {
+  display: none;
+}
+.category_image {
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: transform 0.3s ease-in-out; /* Add a transition for smooth animation */
+}
+
+.categoryCard {
+  overflow: hidden;
+  background-color: white;
+  transition: 0.2s;
+}
+.categoryCard:hover {
+  background-color: #ffc107;
+  cursor: pointer;
+}
+
+.categoryCard:hover .category_image {
+  transform: rotate(20deg);
+}
+
+/* @media (max-width: 760px) {
+  .category_image {
+    width: 90px;
+    height: 90px;
+  }
+} */
+
+#medo {
+  color: red;
+}

@@ -1,0 +1,79 @@
+.mainNavbar {
+  /* background: #2193b0;  fallback for old browsers 
+  background: -webkit-linear-gradient(
+    to right,
+    #6dd5ed,
+    #2193b0
+  ); 
+  background: linear-gradient(
+    to right,
+    #6dd5ed,
+    #2193b0
+  ); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  height: 56px;
+}
+.navbarIcons {
+  cursor: pointer;
+}
+.mainNavbar form {
+  height: 40px;
+  display: flex;
+}
+.number_one {
+  z-index: 555 !important;
+}
+.navLinks {
+  /* width: 30%; */
+  background-color: #e66730;
+}
+.mainNavbar .form_search {
+  height: 40px;
+  outline: none !important;
+}
+.mainNavbar .form_search_input {
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 20px !important;
+}
+.mainNavbar .form_search_button {
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: #e66730;
+  height: 40px;
+  color: white;
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
+.mainNavbar .icon {
+  height: 100%;
+  line-height: 40px;
+}
+
+.mainNavbar .icon::after {
+  display: none;
+}
+.icon_container {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  border-radius: 50% !important;
+  /* background-color: rgba(81, 80, 80, 0.491); */
+}
+.notify {
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .nav_display,
+  .navLogo {
+    display: none;
+  }
+}
+
+.custom_dropdown_toggle::after {
+  display: none;
+}

@@ -1,5 +1,54 @@
-import React from "react";
-
+import { useSelector, useDispatch } from "react-redux";
+import Caarousel from "../Carousel/Caarousel";
+import NewArrival from "./NewArrival";
+import Categoy from "../Shop/subcategory";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { categoryAction } from "../../store/slices/categories";
+import { subCategoryAction } from "../../store/slices/subcategory";
+import HomeCategory from "./HomeCategory";
 export default function Home() {
-  return <div>Home</div>;
+  const categories = useSelector((state) => state.categories.categories);
+  var subCategoies = useSelector((state) => state.subCategories.subCategories);
+  const dispatch = useDispatch();
+  const categoryToSub = {};
+
+  categories.forEach(
+    (category) =>
+      (categoryToSub[category.name] = subCategoies.filter(
+        (subcategory) => subcategory.parentCategory === category.name
+      ))
+  );
+
+  useEffect(() => {
+    dispatch(categoryAction());
+    dispatch(subCategoryAction());
+  }, []);
+
+  return (
+    <>
+      {/* ==================================  Caarousel start  ================================== */}
+      <Caarousel></Caarousel>
+      {/* ================================== Start of Category ==================================  */}
+
+      <div className="container-fluid pt-5">
+        <h2 className=" position-relative text-uppercase mx-xl-5 mb-4">
+          <span className="pr-3">Categories</span>
+        </h2>
+        <div className="row px-xl-5 pb-3">
+          {categories.map((category) => (
+            <HomeCategory
+              key={category._id}
+              image={category.image}
+              name={category.name}
+              categoryToSub={categoryToSub[category.name]}
+            ></HomeCategory>
+          ))}
+        </div>
+      </div>
+
+      <NewArrival clothes={categoryToSub.clothes} />
+      <NewArrival electronics={categoryToSub.electronics} />
+    </>
+  );
 }
