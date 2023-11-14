@@ -13,18 +13,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { authContext } from "../../contexts/authContext";
 import SecondNav from "./SecondNav/SecondNav";
-import { cartAction } from "../../store/slices/cart";
+import { cartRequestAction } from "../../store/slices/cart";
 
-import Badge from "react-bootstrap/Badge";
-import Stack from "react-bootstrap/Stack";
 
 import toast, { Toaster } from "react-hot-toast";
+import { wishListRequestAction } from "../../store/slices/wishList";
 
 function Nav() {
 
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(cartAction())
+    dispatch(cartRequestAction())
+    dispatch(wishListRequestAction())
   },[])
 
   var cartList = useSelector((state)=> state.cart.cartProducts)

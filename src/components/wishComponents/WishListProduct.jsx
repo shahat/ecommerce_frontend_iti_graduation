@@ -1,24 +1,26 @@
 import css from "../../assets/style/product.module.css";
-import { FaTrash } from "react-icons/fa6";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { addToBothCartsAction } from "../../store/slices/cart";
+import { FaTrash } from "react-icons/fa6";
 import toast from "react-hot-toast";
-import instance from "../../axiosConfig/instance";
+import { moveToCartAction, removeFromWishAction, wishListRequestAction } from "../../store/slices/wishList";
+import { useEffect } from "react";
 
-function WishListProduct({ product, token }) {
-    var dispatch = useDispatch
-    var addToCart = (id) => {
-        toast.success(`Product added to the cart successfully`);
-        dispatch(addToBothCartsAction(id))
-        removeFromWishList(id)
-    }
-    var removeFromWishList = (id) => {
-        instance.delete("/wish/", {productId: id}, {headers: {token}}).then(()=>{
-            toast.success(`Product removed`);
-        })
+function WishListProduct({ product }) {
+    var dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(wishListRequestAction());
+    }, [dispatch]);
+
+    function moveToCart(id) {
+        toast.success(`You moved Product moved to your cart`);
+        dispatch(moveToCartAction(id));
     }
 
+    function removeFromWishList(id){
+        dispatch(removeFromWishAction(id))
+    }
 
     return (
         <div className={`${css["single_product"]} w-100 d-flex flex-wrap`}>
@@ -53,12 +55,22 @@ function WishListProduct({ product, token }) {
                 className={`${css["wish_product_right"]} d-flex flex-column flex-lg-row align-items-center col-md-6 col-12`}
             >
                 <div className="">
-                    <button onClick={()=>{addToCart(product._id._id)}} className={`${css.myBtn} rounded-pill px-5 py-3`}>
+                    <button
+                        onClick={() => {
+                            moveToCart(product._id._id);
+                        }}
+                        className={`${css.myBtn} rounded-pill px-5 py-3`}
+                    >
                         Move To Cart
                     </button>
                 </div>
                 <div className="">
-                    <button onClick={()=>{removeFromWishList(product._id._id)}} className={`${css.myBtn} rounded-pill px-5 py-3`}>
+                    <button
+                        onClick={() => {
+                            removeFromWishList(product._id._id);
+                        }}
+                        className={`${css.myBtn} rounded-pill px-5 py-3`}
+                    >
                         <FaTrash className=" text-danger" />
                         <span>Remove</span>
                     </button>

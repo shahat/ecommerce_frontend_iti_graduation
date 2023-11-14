@@ -1,17 +1,15 @@
-// import css from "../../pages/Cart/cart.module.css";
 import css from "../../assets/style/product.module.css";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { FaTrash } from "react-icons/fa6";
 import toast from "react-hot-toast";
-
+import { changeSubTotal } from "../../store/slices/checkOut";
 import {
-    cartAction,
+    cartRequestAction,
     modifyBothProductAction,
     removeFromCartAction,
 } from "../../store/slices/cart";
-import { changeSubTotal } from "../../store/slices/checkOut";
 
 function CartProduct({ product, quantity }) {
     const dispatch = useDispatch();
@@ -21,7 +19,7 @@ function CartProduct({ product, quantity }) {
     useEffect(() => {
         quantity > 9 ? setInput(true) : setInput(false);
         setInputValue(quantity)
-        dispatch(cartAction());
+        dispatch(cartRequestAction());
     }, [dispatch, quantity]);
 
     function modifyProduct(quantity) {

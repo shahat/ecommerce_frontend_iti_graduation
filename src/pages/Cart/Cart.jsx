@@ -2,17 +2,15 @@ import CartProduct from "../../components/cartComponents/cartProduct";
 import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import css from "../../assets/style/product.module.css";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa6";
 import Loader from "../../components/Loader/loader";
 import { useEffect, useState } from "react";
-import { cartAction } from "../../store/slices/cart";
 
 function Cart() {
     const isLoading = useSelector((state) => state.cart.loading);
     const cartList = useSelector((state) => state.cart.cartProducts);
     const checkOutStatus = useSelector((state) => state.checkOut);
-    const dispatch = useDispatch()
     const token = localStorage.getItem("token");
     const [subTotal, setSubTotal] = useState(0)
     useEffect(()=>{

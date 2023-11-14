@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../axiosConfig/instance";
-import { LoaderIcon } from "react-hot-toast";
 
-export const cartAction = createAsyncThunk("cart/getAll", async () => {
+
+export const cartRequestAction = createAsyncThunk("cart/getAll", async () => {
     const { token, token2 } = localStorage;
     if (token) {
         const res = await instance.get("/cart", { headers: { token } });
@@ -49,7 +49,7 @@ export const addToCartAction = createAsyncThunk(
 export function addToBothCartsAction(id) {
     return (dispatch) => {
         dispatch(addToCartAction(id)).then(() => {
-            dispatch(cartAction());
+            dispatch(cartRequestAction());
         });
     };
 }
@@ -69,7 +69,7 @@ export const modifyProductAction = createAsyncThunk("cart/modifyProduct", async 
 export function modifyBothProductAction(params) {
     return (dispatch) => {
         dispatch(modifyProductAction(params)).then(() => {
-            dispatch(cartAction());
+            dispatch(cartRequestAction());
         });
     };
 }
@@ -99,9 +99,8 @@ export const removeFromCartRequestAction = createAsyncThunk(
 
 export function removeFromCartAction(id) {
     return (dispatch) => {
-        dispatch(removeFromCartRequestAction(id)).then((data) => {
-            console.log("data", data);
-            dispatch(cartAction());
+        dispatch(removeFromCartRequestAction(id)).then(() => {
+            dispatch(cartRequestAction());
         });
     };
 }
@@ -109,16 +108,8 @@ export function removeFromCartAction(id) {
 const cartSlice = createSlice({
     name: "cart",
     initialState: { cartProducts: [], loading: false },
-    reducers: {
-        reset: (state) => {
-            state.cartProducts = [];
-        },
-        loadingToggleAction: (state, action) => {
-            state.loading = action.payload
-        }
-    },
     extraReducers: (builder) => {
-        builder.addCase(cartAction.fulfilled, (state, action) => {
+        builder.addCase(cartRequestAction.fulfilled, (state, action) => {
             state.cartProducts = action.payload;
             state.loading = false
         });
@@ -127,6 +118,7 @@ const cartSlice = createSlice({
         });
         builder.addCase(modifyProductAction.rejected, (state, action) => {
             console.log("rejected");
+            // cartRequestAction()
             state.loading = false
         });
         builder.addCase(removeFromCartRequestAction.pending, (state, action) => {
