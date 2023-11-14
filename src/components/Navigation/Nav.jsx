@@ -5,7 +5,7 @@ import styles from "./Nav.module.css";
 // import "./dropDorn.css"
 import { BsSearch, BsCart3 } from "react-icons/bs";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { MdOutlineFavoriteBorder, MdOutlinePerson } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,10 +15,10 @@ import { authContext } from "../../contexts/authContext";
 import SecondNav from "./SecondNav/SecondNav";
 import { cartAction } from "../../store/slices/cart";
 
-
+import Badge from "react-bootstrap/Badge";
+import Stack from "react-bootstrap/Stack";
 
 import toast, { Toaster } from "react-hot-toast";
-
 
 function Nav() {
 
@@ -30,16 +30,22 @@ function Nav() {
   var cartList = useSelector((state)=> state.cart.cartProducts)
   
   const navigate = useNavigate();
-  const [query, setQuery] = useState("");
-
+ 
+  dispatch(cartAction());
+  var cartList = useSelector((state) => state.cart.cartProducts);
+  const [searchValue, setSearchValue] = useState("");
+  
   // ============== handle input change ==============
+
   const handleInputChange = (event) => {
-    setQuery(event.target.value);
+    setSearchValue(event.target.value);
   };
+  
   // ============== handle form submit   ==============
+  
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    navigate(`/shop/${query}`);
+    navigate(`/shop/?search=${searchValue}`);
   };
 
   // ============== handle return   ==============
@@ -76,7 +82,6 @@ function Nav() {
                   ${styles.form_search_input}`}
                   type="search"
                   placeholder="Search..."
-                  value={query}
                   onChange={handleInputChange}
                 />
                 <button
@@ -194,13 +199,15 @@ function Nav() {
                   <Link to="/cart" className="nav-link text-center" href="#">
                     <BsCart3 className={`${styles.icon} fs-4 }`}></BsCart3>
                     {/* Cart items counter above the cart icon */}
-                    {cartList? cartList.length > 0 && (
-                      <span
-                      className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
-                      >
-                      {cartList.length}
-                      </span>
-                    ):""}
+                    {cartList
+                      ? cartList.length > 0 && (
+                          <span
+                            className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
+                          >
+                            {cartList.length}
+                          </span>
+                        )
+                      : ""}
                   </Link>
                 </span>
               </li>{" "}
@@ -232,7 +239,7 @@ function Nav() {
           </div>
         </div>
       </nav>
-  
+
       <SecondNav></SecondNav>
       <Toaster />
     </>

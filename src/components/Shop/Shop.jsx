@@ -3,7 +3,7 @@ import Card from "./card";
 import style from "./shop.module.css";
 import "./chechbox.css";
 import Caarousel from "../Carousel/Caarousel";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import instance from "../../axiosConfig/instance";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,20 @@ import Footer from "../Footer/Footer";
 import MobileNav from "../MobileNav/MobileNav";
 
 function Shop() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  let searchParam = searchParams.get("search");
+  let categoryParam = searchParams.get("category");
+  let subcategoryParam = searchParams.get("subcategory");
+
+  console.log(
+    "FROM SHOP : searchParam,categoryParam ,subcategoryParam ",
+    searchParam,
+    categoryParam,
+    subcategoryParam
+  );
+
   var dispatch = useDispatch();
+
   var [products, setproducts] = useState([]);
   var SubCategoies = useSelector((state) => state.subCategories.subCategories);
   var [currentPage, setCurrentPage] = useState(1);
@@ -83,7 +96,7 @@ function Shop() {
       getProducts(currentPage);
     }
     // console.log("Updated searchedProducts data:", searchedProducts);
-  }, [currentPage]);
+  }, [currentPage, productName]);
 
   useEffect(() => {
     // console.log("Updated searchedProducts data:", searchedProducts);

@@ -5,7 +5,10 @@ function HomeCategory(props) {
   //   console.log("this is the props ", props);
   return (
     <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-      <Link className="text-decoration-none" to={`/shop/${props.name}`}>
+      <Link
+        className="text-decoration-none"
+        to={`/shop/?category=${props.name}`}
+      >
         <div
           className={` d-flex align-items-center mb-4  ${style.categoryCard} ${style.category_body}`}
         >
