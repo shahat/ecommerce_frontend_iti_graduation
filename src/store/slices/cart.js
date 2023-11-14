@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../axiosConfig/instance";
+import { LoaderIcon } from "react-hot-toast";
 
 export const cartAction = createAsyncThunk("cart/getAll", async () => {
     const { token, token2 } = localStorage;
@@ -7,7 +8,7 @@ export const cartAction = createAsyncThunk("cart/getAll", async () => {
         const res = await instance.get("/cart", { headers: { token } });
         return res.data.data.items;
     } else if (token2) {
-        const res = await instance.get("/cart", { headers: { token: token2 } });
+        const res = await instance.get("/cart", { headers: { token2 } });
         return res.data.data.items;
     }
 });
@@ -30,7 +31,7 @@ export const addToCartAction = createAsyncThunk(
                 `/cart/${id}`,
                 {},
                 {
-                    headers: { token: token2 },
+                    headers: { token2 },
                 }
             );
             return status.data.data;
@@ -47,11 +48,28 @@ export const addToCartAction = createAsyncThunk(
 
 export function addToBothCartsAction(id) {
     return (dispatch) => {
+        dispatch(LoaderIcon)
         dispatch(addToCartAction(id)).then(() => {
             dispatch(cartAction());
         });
     };
 }
+
+export const modifyProductAction = createAsyncThunk("cart/modifyProduct", async (params) => {
+    const {productId, quantity} = params
+    // console.log(productId, quantity);
+    const { token, token2 } = localStorage;
+    console.log(token2);
+    var res
+    if (token) {
+        res = await instance.patch("/cart", { productId, quantity }, { headers: { token } });
+        // return res; 
+    } else if (token2) {
+        res = await instance.patch("/cart", { productId, quantity }, { headers: { token2 } });
+    }
+    return res;
+
+})
 
 export const removeFromCartRequestAction = createAsyncThunk(
     "cart/removeProduct",
@@ -61,16 +79,14 @@ export const removeFromCartRequestAction = createAsyncThunk(
         if (token) {
             status = await instance.patch(
                 `/cart/${id}`,
-                // {},
-                // { headers: token }
-                { token }
+                {},
+                { headers: { token } }
             );
         } else if(token2){
             status = await instance.patch(
                 `/cart/${id}`,
-                // {},
-                // { headers: {token: token2} }
-                {token: token2}
+                {},
+                { headers: { token2 } }
             );
         }
         console.log(status);
@@ -89,15 +105,30 @@ export function removeFromCartAction(id) {
 
 const cartSlice = createSlice({
     name: "cart",
-    initialState: { cartProducts: [] },
+    initialState: { cartProducts: [], loading: false },
     reducers: {
-        reset: (state, action) => {
+        reset: (state) => {
             state.cartProducts = [];
         },
+        loadingToggleAction: (state, action) => {
+            state.loading = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(cartAction.fulfilled, (state, action) => {
             state.cartProducts = action.payload;
+            state.loading = false
+        });
+        builder.addCase(modifyProductAction.pending, (state, action) => {
+            state.loading = true
+        });
+        builder.addCase(modifyProductAction.fulfilled, (state, action) => {
+            console.log("full");
+            state.loading = false
+        });
+        builder.addCase(modifyProductAction.rejected, (state, action) => {
+            console.log("rejected");
+            state.loading = false
         });
         builder.addCase(
             removeFromCartRequestAction.fulfilled,
@@ -106,9 +137,11 @@ const cartSlice = createSlice({
                 state.cartProducts = state.cartProducts.filter(
                     (item) => item._id._id != action.meta.arg
                 );
+                state.loading = false
             }
         );
     },
 });
 
+export const {reset, loadingToggleAction} = cartSlice.actions
 export default cartSlice.reducer;
