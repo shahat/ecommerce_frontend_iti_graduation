@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import image from "../../assets/images/150x80 logo.png";
 import style from "./resetCode.module.css";
 import axios from "axios";
+import { authContext } from "../../contexts/authContext";
+import toast, { Toaster } from "react-hot-toast";
+import { enterResetCode } from "../../Services/auth";
 
 function ResetCode() {
-  const [enteredCode, setEnteredCode] = useState(0);
+  const { enteredCode, setEnteredCode } = useContext(authContext);
 
   const navigate = useNavigate();
 
@@ -16,12 +19,21 @@ function ResetCode() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/resetCode", {
-        enteredCode,
-      });
+      // const response = await axios.post("http://localhost:4000/resetCode", {
+      //   enteredCode,
+      // });
+    const response = await enterResetCode({ enteredCode });
+
+      // toast.success(response.data.message, { position: "top-center" });
+      setTimeout(() => {
+        navigate("/resetPassword");
+      }, 2000);
       console.log(response);
+
+
     } catch (error) {
       const errorMessage = error.response.data.message;
+      toast.error(errorMessage, { position: "top-center" });
       console.log(errorMessage);
     }
   };
@@ -76,6 +88,7 @@ function ResetCode() {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

@@ -1,54 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import image from "../../assets/images/150x80 logo.png";
 import style from "./resetPassword.module.css";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import { authContext } from "../../contexts/authContext";
+import { enterResetPassword } from "../../Services/auth";
 
 function ResetPass() {
-  const passwordRegx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
-  const [firstPassword, setFirstPassword] = useState("");
-  const [secondPassword, setSecondPassword] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const { enteredCode } = useContext(authContext);
+
+  const [userPassword, setUserPassword] = useState({
+    password: "",
+    confirmPassword: "",
+  });
 
   const navigate = useNavigate();
 
-  const navigateToHome=()=>{
-    navigate("/")
-  }
+  const handlePassword = (e) => {
+    if (e.target.name === "password") {
+      setUserPassword({ ...userPassword, password: e.target.value });
+    } else {
+      setUserPassword({ ...userPassword, confirmPassword: e.target.value });
+    }
+  };
+
+  const navigateToLogin = async () => {
+    try {
+      const response = await enterResetPassword({ userPassword, enteredCode });
+      console.log(response);
+      toast.success(response.data.message, { position: "top-center" });
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    } catch (error) {
+      const errorMessage = error.response.data.message;
+      toast.error(errorMessage, { position: "top-center" });
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
-
-  useEffect(() => {
-    validatePassword();
-  }, [firstPassword, secondPassword]);
-
-  const handleFirstPassword = (e) => {
-    setFirstPassword(e.target.value);
-  };
-  const handleSecondPassword = (e) => {
-    setSecondPassword(e.target.value);
-  };
-
-  const validatePassword = () => {
-    setPasswordError(
-      !(passwordRegx.test(firstPassword) && passwordRegx.test(secondPassword))
-    );
-    if (formSubmitted) {
-      setPasswordError(firstPassword !== secondPassword);
-    }
-  };
-
-  const navigateToLogin = () => {
-    setFormSubmitted(true);
-    validatePassword();
-    if (firstPassword === secondPassword) {
-      navigate("/login");
-      setPasswordError(false);
-    } else {
-      setPasswordError(true);
-    }
   };
 
   return (
@@ -57,7 +49,9 @@ function ResetPass() {
         <img
           src={image}
           className={`${style.logoImage}`}
-          onClick={navigateToHome}
+          onClick={() => {
+            navigate("/");
+          }}
         />
       </div>
       <div
@@ -78,52 +72,46 @@ function ResetPass() {
               <div className="passwordConfirmation">
                 <input
                   onChange={(e) => {
-                    handleFirstPassword(e);
+                    handlePassword(e);
                   }}
-                  name="firstPassword"
-                  className="form-control px-4 "
+                  name="password"
+                  className={`form-control px-4  `}
                   placeholder="Password"
-                  type="text"
+                  type="password"
                   id="passwordRecovery"
-                  value={firstPassword}
-                  required
+                  value={userPassword.password}
                 />
               </div>
 
               <div className="passwordConfirmation">
                 <input
                   onChange={(e) => {
-                    handleSecondPassword(e);
+                    handlePassword(e);
                   }}
+                  name="confirmPassword"
                   className="form-control mt-4 px-4 "
                   placeholder="Confirm Password"
-                  type="text"
+                  type="password"
                   id="confirmPassRecovery"
-                  value={secondPassword}
-                  required
+                  value={userPassword.confirmPassword}
                 />
               </div>
-              {formSubmitted && passwordError ? (
-                <p className="text-danger">Sorry, Password does not match</p>
-              ) : (
-                ""
-              )}
-
               <div className="d-flex  align-items-center justify-content-between ">
                 <button
                   onClick={() => {
                     navigateToLogin();
                   }}
-                  type="submit"
+                  type="button"
                   className={` form-control mt-4 text-white ${style.confirmPassword}`}
                 >
-                  Confirm Password
+                  Reset Password
                 </button>
               </div>
             </form>
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

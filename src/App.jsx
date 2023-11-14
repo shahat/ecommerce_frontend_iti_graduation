@@ -29,7 +29,11 @@ import { useState } from "react";
 // import components and page
 
 function App() {
-  const [isLogin, setLogin]= useState((localStorage.getItem("token"))? true : false);
+  const [isLogin, setLogin] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+  const [enteredCode, setEnteredCode] = useState(0);
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -51,18 +55,16 @@ function App() {
     { path: "/register", element: <Register /> },
     { path: "/emailRecovery", element: <SendCode /> },
     { path: "/resetCode", element: <ResetCode /> },
-    { path: "/resetPassword", element: <ResetPass/> },
-    { path: "**", element: <NotFound /> },
+    { path: "/resetPassword", element: <ResetPass /> },
+    { path: "*/*", element: <NotFound /> },
   ]);
 
   return (
     // <Provider store={store}>
-  
-      <AuthProvider value={{isLogin, setLogin}}>
 
-        <RouterProvider router={router} />
-      </AuthProvider>
-  
+    <AuthProvider value={{ isLogin, setLogin, enteredCode, setEnteredCode }}>
+      <RouterProvider router={router} />
+    </AuthProvider>
 
     // </Provider>
   );

@@ -14,4 +14,10 @@ export const sendRecoveryCode = (data) => {
   return instance.post("/emailRecovery", data);
 };
 
+export const enterResetCode = (data) => {
+  return instance.post("/resetCode", data);
+};
 
+export const enterResetPassword = (data)=>{
+  return instance.patch('/resetPassword',data);
+}

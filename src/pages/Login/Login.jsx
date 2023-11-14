@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./login.module.css";
 import { BsGoogle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -6,42 +6,10 @@ import { loginAuth } from "../../Services/auth";
 import { authContext } from "../../contexts/authContext";
 import toast, { Toaster } from "react-hot-toast";
 import image from "../../assets/images/150x80 logo.png";
-import { GoogleLogin } from "@react-oauth/google";
 
-function Login({ onSuccess, onError }) {
-  // function googleNav(url) {
-  //   window.location.href = url;
-  // }
+function Login() {
+  const { login, setLogin } = useContext(authContext);
 
-  // async function auth() {
-  //   try {
-  //     const response = await fetch("http://localhost:4000/request", {
-  //       method: "post",
-  //     });
-  //     const data = await response.json();
-  //     console.log(data);
-  //     googleNav(data.url);
-  //     console.log(data.url);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-  // const clientId =
-  //   "197524292801-49dnp7601ctioie1pa9mtcgdkmcm52r0.apps.googleusercontent.com";
-
-  //   const handleLoginSuccess = (response) => {
-  //     console.log(response);
-  //   };
-
-  //   const handleLoginError = (error)=>{
-  //     console.log('Google login failed', error)
-  //   }
-
-  const google = () => {
-    window.open("http://localhost:4000/auth/google", "_self");
-  };
-
-  const { setLogin } = useContext(authContext);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -81,6 +49,14 @@ function Login({ onSuccess, onError }) {
     navigate("/");
   };
 
+  // useEffect(() => {
+  //   if (login) {
+  //     setTimeout(() => {
+  //      navigateToHome()
+  //     }, 2000);
+  //   }
+  // }, [login]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -95,7 +71,7 @@ function Login({ onSuccess, onError }) {
         console.log(result);
         localStorage.setItem("token", result.data.token);
         setLogin(true);
-        navigate("/");
+        navigateToHome();
       } catch (error) {
         if (error.response) {
           const errorMessage = error.response.data.message;
@@ -187,7 +163,6 @@ function Login({ onSuccess, onError }) {
 
               <div className="">
                 <button
-                  onClick={google}
                   type="submit"
                   className={` py-2 form-control text-white  ${style.btnGoogle}`}
                 >
@@ -198,13 +173,6 @@ function Login({ onSuccess, onError }) {
           </form>
         </div>
       </div>
-
-      {/* <GoogleLogin
-        clientId={clientId}
-        buttonText="Login with Google"
-        onSuccess={handleLoginSuccess}
-        onError={handleLoginError}
-      /> */}
       <Toaster />
     </div>
   );

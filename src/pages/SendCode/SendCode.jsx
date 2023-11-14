@@ -20,8 +20,11 @@ function SendCode() {
 
    try {
      const response = await sendRecoveryCode({ email });
-     console.log(response);
-     navigate("/resetCode");
+    //  console.log(response);
+     toast.success(response.data.message,{position:'top-center'})
+     setTimeout(() => {
+       navigate("/resetCode");
+     }, 2000);
    } catch (error) {
      if (error.response) {
        const errorMessage = error.response.data.message;
