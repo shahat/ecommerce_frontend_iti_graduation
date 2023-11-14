@@ -23,19 +23,19 @@ import toast, { Toaster } from "react-hot-toast";
 function Nav() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
+
   dispatch(cartAction());
   var cartList = useSelector((state) => state.cart.cartProducts);
   const [searchValue, setSearchValue] = useState("");
-  
+
   // ============== handle input change ==============
 
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
   };
-  
+
   // ============== handle form submit   ==============
-  
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
     navigate(`/shop/?search=${searchValue}`);

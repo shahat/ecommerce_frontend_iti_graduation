@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { addToBothCartsAction } from "./../../store/slices/cart";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { IoMdCart } from "react-icons/io";
 function Card(props) {
   var dispatch = useDispatch();
   var x = useNavigate();
@@ -53,6 +54,7 @@ function Card(props) {
               type="button"
               onClick={() => addtocart(props.id)}
             >
+              <IoMdCart className="me-3 fs-4" />
               Add to Cart
             </button>
           </div>
