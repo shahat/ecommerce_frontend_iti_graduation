@@ -1,6 +1,4 @@
-// import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import style from "./Home.module.css";
 import Caarousel from "../Carousel/Caarousel";
 import NewArrival from "./NewArrival";
 import Categoy from "../Shop/subcategory";
@@ -12,20 +10,16 @@ import HomeCategory from "./HomeCategory";
 export default function Home() {
   const categories = useSelector((state) => state.categories.categories);
   var subCategoies = useSelector((state) => state.subCategories.subCategories);
-
-  console.log("categories from home component ", categories);
-  console.log("subcategory  from home component ", subCategoies);
   const dispatch = useDispatch();
-
-  // categoryToSub => to make dropdown in second nav
   const categoryToSub = {};
+
   categories.forEach(
     (category) =>
       (categoryToSub[category.name] = subCategoies.filter(
         (subcategory) => subcategory.parentCategory === category.name
       ))
   );
-  console.log(categoryToSub);
+
   useEffect(() => {
     dispatch(categoryAction());
     dispatch(subCategoryAction());
