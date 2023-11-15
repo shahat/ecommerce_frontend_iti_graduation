@@ -352,19 +352,19 @@ function Footer() {
                   <h3 className="fs-5"> Payment options </h3>
                   <div>
                     <img
-                      src="./assets/images/paymentOption/card-amex.svg"
+                      src="../../assets/images/paymentOption/card-amex.svg"
                       // alt
                     />
                     <img
-                      src="./assets/images/paymentOption/card-mastercard.svg"
+                      src="../../assets/images/paymentOption/card-mastercard.svg"
                       // alt
                     />
                     <img
-                      src="./assets/images/paymentOption/card-visa.svg"
+                      src="../../assets/images/paymentOption/card-visa.svg"
                       // alt
                     />
-                    <img src="./assets/images/paymentOption/cod-en.svg"  />
-                    <img src="./assets/images/paymentOption/valu.svg"  />
+                    <img src="../../assets/images/paymentOption/cod-en.svg" />
+                    <img src="../../assets/images/paymentOption/valu.svg" />
                   </div>
                 </div>
               </div>

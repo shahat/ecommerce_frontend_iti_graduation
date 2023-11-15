@@ -27,7 +27,7 @@ import ResetPass from "./pages/Resetpassword/ResetPass";
 import ResetCode from "./pages/ResetCode/ResetCode";
 import { AuthProvider } from "./contexts/authContext";
 import { useState } from "react";
-import Register from "./pages/Register/Register";
+// import Register from "./pages/Register/Register";
 // import LoginTwo from "./pages/Login/LoginTwo";
 
 // import components and page
