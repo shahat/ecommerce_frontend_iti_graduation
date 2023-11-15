@@ -22,15 +22,13 @@ function ResetCode() {
       // const response = await axios.post("http://localhost:4000/resetCode", {
       //   enteredCode,
       // });
-    const response = await enterResetCode({ enteredCode });
+      const response = await enterResetCode({ enteredCode });
 
-      // toast.success(response.data.message, { position: "top-center" });
+      toast.success(response.data.message, { position: "top-center" });
       setTimeout(() => {
         navigate("/resetPassword");
       }, 2000);
       console.log(response);
-
-
     } catch (error) {
       const errorMessage = error.response.data.message;
       toast.error(errorMessage, { position: "top-center" });
@@ -40,7 +38,7 @@ function ResetCode() {
 
   return (
     <div>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mb-3">
         <img
           src={image}
           className={`${style.logoImage}`}
@@ -79,12 +77,19 @@ function ResetCode() {
               <div className="d-flex  align-items-center justify-content-between ">
                 <button
                   type="submit"
-                  className={` form-control mt-4 text-white ${style.sendCodeBtn}`}
+                  className={` form-control mt-4 text-white mb-2 ${style.sendCodeBtn}`}
                 >
                   Verify Code
                 </button>
               </div>
             </form>
+            <div className="d-flex justify-content-center">
+              <button
+              onClick={()=>{navigate("/emailRecovery")}}
+              className={`btn  ${style.requestNewCode}`}
+              
+              >Go back to request a new code</button>
+            </div>
           </div>
         </div>
       </div>

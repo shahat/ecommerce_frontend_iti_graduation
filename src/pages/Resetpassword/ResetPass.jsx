@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import image from "../../assets/images/150x80 logo.png";
 import style from "./resetPassword.module.css";
 import toast, { Toaster } from "react-hot-toast";
-import axios from "axios";
 import { authContext } from "../../contexts/authContext";
 import { enterResetPassword } from "../../Services/auth";
 

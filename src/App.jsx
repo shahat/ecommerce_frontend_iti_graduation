@@ -51,6 +51,7 @@ function App() {
         { path: "/checkout", element: <CheckOut /> },
       ],
     },
+    
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
     { path: "/emailRecovery", element: <SendCode /> },
