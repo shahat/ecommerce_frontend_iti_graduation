@@ -158,8 +158,9 @@ function CartProduct({ product, quantity }) {
                             >
                                 <input
                                     type="text"
-                                    className="form-control fw-semibold"
+                                    className="form-control fw-semibold user-select-all"
                                     name="quantity"
+                                    // autoFocus
                                     onChange={(e) => {
                                         setInputValue(Number(e.target.value));
                                     }}

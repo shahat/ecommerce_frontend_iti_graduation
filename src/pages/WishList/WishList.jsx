@@ -5,8 +5,8 @@ import WishListProduct from "../../components/wishComponents/WishListProduct";
 import { useSelector } from "react-redux";
 
 function WishList() {
-    const isLoading = useSelector((state) => state.wish.loading);
-    const wishList = useSelector((state) => state.wish.list);
+    const isLoading = useSelector((state) => state.wishList.loading);
+    const wishList = useSelector((state) => state.wishList.list);
     const token = localStorage.getItem("token");
 
     return (

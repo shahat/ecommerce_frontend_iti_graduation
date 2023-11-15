@@ -16,6 +16,7 @@ import Colorfilter from "./colorfilter";
 import Nav from "../Navigation/Nav";
 import Footer from "../Footer/Footer";
 import MobileNav from "../MobileNav/MobileNav";
+import { wishListRequestAction } from "../../store/slices/wishList";
 
 function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,6 +35,7 @@ function Shop() {
 
   var [products, setproducts] = useState([]);
   var SubCategoies = useSelector((state) => state.subCategories.subCategories);
+  var favoriteList = useSelector((state) => state.wishList.list);
   var [currentPage, setCurrentPage] = useState(1);
   var [currentPage2, setCurrentPage2] = useState(1);
 
@@ -65,6 +67,7 @@ function Shop() {
   useEffect(() => {
     // dispatch(productAction(currentPage));
     dispatch(subCategoryAction(currentPage2));
+    dispatch(wishListRequestAction())
   }, [currentPage2]);
 
   //=============================
@@ -294,6 +297,9 @@ function Shop() {
                     price={product.price}
                     priceAfterDiscount={product.priceAfterDescount}
                     img={product.thumbnail}
+                    isFavorite={favoriteList.find(
+                      (single) => single._id == product._id
+                  )}
                   />
                 ))}
             </div>

@@ -17,6 +17,7 @@ export const addToWishListRequestAction = createAsyncThunk(
     "wish/addProduct",
     async (id) => {
         const { token } = localStorage;
+        console.log(token);
         if (token) {
             const status = await instance.post(
                 `/wish/${id}`,
@@ -25,6 +26,7 @@ export const addToWishListRequestAction = createAsyncThunk(
                     headers: { token },
                 }
             );
+            console.log("status", status);
             return status;
         }
         return token;
@@ -33,7 +35,8 @@ export const addToWishListRequestAction = createAsyncThunk(
 
 export function addToWishListAction(id) {
     return (dispatch) => {
-        dispatch(addToWishListAction(id)).then(() => {
+        dispatch(addToWishListRequestAction(id)).then(() => {
+            console.log("af req");
             dispatch(wishListRequestAction());
         });
     };
@@ -62,6 +65,7 @@ export function moveToCartAction(id) {
         dispatch(addToBothCartsAction());
     };
 }
+
 export function removeFromWishAction(id) {
     return (dispatch) => {
         dispatch(removeFromWishListRequestAction(id)).then(() => {
