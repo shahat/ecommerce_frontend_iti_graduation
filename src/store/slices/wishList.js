@@ -17,16 +17,14 @@ export const addToWishListRequestAction = createAsyncThunk(
     "wish/addProduct",
     async (id) => {
         const { token } = localStorage;
-        console.log(token);
         if (token) {
-            const status = await instance.post(
+            const status = await instance.patch(
                 `/wish/${id}`,
                 {},
                 {
                     headers: { token },
                 }
             );
-            console.log("status", status);
             return status;
         }
         return token;
@@ -47,7 +45,7 @@ export const removeFromWishListRequestAction = createAsyncThunk(
     async (id) => {
         const { token } = localStorage;
         if (token) {
-            const status = await instance.patch(
+            const status = await instance.delete(
                 `/wish/${id}`,
                 {},
                 { headers: { token } }
@@ -60,6 +58,7 @@ export const removeFromWishListRequestAction = createAsyncThunk(
 export function moveToCartAction(id) {
     return (dispatch) => {
         dispatch(removeFromWishListRequestAction(id)).then(() => {
+            console.log("moveToCartAction");
             dispatch(wishListRequestAction());
         });
         dispatch(addToBothCartsAction());

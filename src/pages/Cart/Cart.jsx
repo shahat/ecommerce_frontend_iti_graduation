@@ -39,7 +39,6 @@ function Cart() {
                         >
                             {cartList && cartList.length > 0 ? (
                                 cartList.map((prod, index) => {
-                                    // sub(prod.priceWhenAdded * prod.quantity)
                                     return (
                                         <>
                                             <CartProduct

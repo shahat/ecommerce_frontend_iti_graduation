@@ -6,17 +6,16 @@ import { useDispatch } from "react-redux";
 // import { addToCartAction } from "../../store/slices/cart";
 import { addToBothCartsAction } from "./../../store/slices/cart";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { addToWishListAction, removeFromWishAction } from "../../store/slices/wishList";
 
 function Card(props) {
     var dispatch = useDispatch();
     var x = useNavigate();
     // var cart = useSelector((state) => state.cart.cart);
-
     var addToCart = (id) => {
         console.log(id);
-        toast.success(`product added to the cart successfully`);
+        // toast.success(`product added to the cart successfully`); // moved to the slice
         dispatch(addToBothCartsAction(id));
     };
     const addFavorites = (id)=>{
@@ -37,7 +36,7 @@ function Card(props) {
                     {/* edward */}
                     {props.isFavorite ? (
                         <AiFillHeart
-                            className="position-absolute top-0 end-0 text-secondary "
+                            className="position-absolute top-0 end-0 text-warning "
                             style={{ fontSize: "2em" }}
                             onClick={() => {
                                 removeFavorites(props.id);

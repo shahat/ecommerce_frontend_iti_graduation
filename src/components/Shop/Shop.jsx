@@ -35,10 +35,10 @@ function Shop() {
 
   var [products, setproducts] = useState([]);
   var SubCategoies = useSelector((state) => state.subCategories.subCategories);
-  var favoriteList = useSelector((state) => state.wishList.list);
+  var wishList = useSelector((state) => state.wishList.list);
   var [currentPage, setCurrentPage] = useState(1);
   var [currentPage2, setCurrentPage2] = useState(1);
-
+  
   ////////////////////////////////////////////////////////////////
 
   async function getSubCategoryProducts(subCategoryName) {
@@ -297,9 +297,9 @@ function Shop() {
                     price={product.price}
                     priceAfterDiscount={product.priceAfterDescount}
                     img={product.thumbnail}
-                    isFavorite={favoriteList.find(
-                      (single) => single._id == product._id
-                  )}
+                    isFavorite={wishList && wishList.find(
+                      (single) => single._id._id == product._id
+                    )}
                   />
                 ))}
             </div>

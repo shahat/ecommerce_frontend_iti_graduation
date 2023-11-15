@@ -146,10 +146,6 @@ function Register() {
                     }
                     navigate("/login");
                 });
-                // before edit
-                // const res = await registerAuth(user);
-                // navigate("/login");
-                // console.log(res);
             } catch (error) {
                 if (error.response) {
                     const errorMessage = error.response.data.message;
