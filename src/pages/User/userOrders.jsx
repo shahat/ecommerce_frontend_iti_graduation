@@ -3,21 +3,30 @@ import AnimatedPage from "../animtedPage/AnimatedPage";
 import { FiEdit } from "react-icons/fi";
 import { useEffect } from "react";
 import { useNavigate  } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode'
 
 import { ordersAction } from '../../store/slices/orders';
+import { userAction } from '../../store/slices/user';
 
 
 
 const UserOrders = () => {
-    const orders = useSelector((state)=> state.orders.orders)
+    let orders = useSelector((state)=> state.orders.orders)
     const user = useSelector((state)=> state.user.user)
     const dispatch = useDispatch()
     const navigate=useNavigate()
+    const token = localStorage.getItem("token")
+    const decoded = jwtDecode(token);
+    const userId = decoded.id;
 
     useEffect(()=>{
-        dispatch(ordersAction(user._id))
+        dispatch(userAction(userId))
+        dispatch(ordersAction(userId))
+        console.log(user);
+        console.log(orders);
+
     },[])
-    console.log(orders);
+
 
    
     return (
@@ -26,7 +35,7 @@ const UserOrders = () => {
 
                 
                 <div className="row justify-content-center align-items-center p-1 m-0 gy-1">
-                    {(orders.userId)?<>{orders.map((order , index)=>(
+                    {(orders)?<>{orders.map((order , index)=>(
 
                         <div className="col-12" key={order._id} onClick={() => {navigate(`/Order/${order._id}`)}}>
 

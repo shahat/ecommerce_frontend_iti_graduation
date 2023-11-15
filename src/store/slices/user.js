@@ -25,11 +25,12 @@ export const userEditAction = createAsyncThunk("edit/user" , async (editUser)=>{
  
 })
 
-export const userAddressPostAction = createAsyncThunk("create/userAddress" , async (id,address)=>{
+export const userAddressPostAction = createAsyncThunk("create/userAddress" , async (address)=>{
     console.log([...address]);
-    console.log(id);
-
-    const res = await axios.put(`http://localhost:4000/users/address/${id}` , address)
+    const {id} = address[0]
+    const sendAddress = address[1]
+    console.log(sendAddress);
+    const res = await axios.put(`http://localhost:4000/users/address/${id}` , [...sendAddress])
     return res
 })
 

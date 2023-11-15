@@ -4,6 +4,7 @@ import { useSelector , useDispatch } from 'react-redux';
 import {jwtDecode} from 'jwt-decode'
 import styles from './userProfile.module.css'
 import { userAction } from '../../store/slices/user';
+import { ordersAction } from '../../store/slices/orders';
  
 
 
@@ -15,7 +16,9 @@ function UserProfile() {
     const decoded = jwtDecode(token);
     const userId = decoded.id;
     useEffect(()=>{
+        
         dispatch(userAction(userId))
+        dispatch(ordersAction(userId))
     },[])
 
 

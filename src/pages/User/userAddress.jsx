@@ -40,9 +40,9 @@ const UserAddress = () => {
     const addressFormSubmit = (e)=>{
         e.preventDefault();
 
-        const sentAddress = [...addressBook,{...newAddress}]
+        const sentAddress = [{id : user._id},[...addressBook,{...newAddress}]]
 
-        dispatch(userAddressPostAction(user._id , sentAddress))
+        dispatch(userAddressPostAction(sentAddress))
         console.log(sentAddress);
 
 
@@ -160,7 +160,7 @@ const UserAddress = () => {
                 ))}</>} */}
 
 
-{(addressBook == []  )?<>{addressBook.map((address , index)=>(
+{(addressBook != undefined)?<>{addressBook.map((address , index)=>(
         <div className="col-12" key={address._id} >
             <div className="card p-2">
                 <div className="row justify-content-around align-items-center m-0">

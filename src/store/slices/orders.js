@@ -4,10 +4,8 @@ import axios from "axios";
 
 
 export const ordersAction = createAsyncThunk("orders/getAll" , async (id)=>{
-    console.log("650eee436b295098ce446c66");
     const res = await axios.get(`http://localhost:4000/orders/userId/${id}`)
     console.log(res);
-    console.log("a7a from orderssss Slice");
     return res.data.allOrders
     
 } )
