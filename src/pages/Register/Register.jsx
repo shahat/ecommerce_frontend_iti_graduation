@@ -120,6 +120,10 @@ function Register() {
                             headers: { token2 },
                         })
                     }
+                    else{
+                        await instance.post("/cart/")
+                        await instance.post("/wish/")
+                    }
                     console.log(res);
                     navigate("/login");
                 });
