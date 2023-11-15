@@ -6,13 +6,10 @@ function protectedRoute({children}) {
   const {isLogin }= useContext(authContext);
 
   if(isLogin){
-  return children
+    return children
   }else{
     <Navigate to="/login"/>
   }
-
 }
-
-// the difference between useNavigate and navigate in react
 
 export default protectedRoute;

@@ -3,11 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-.logoImage{
+.logoImage {
   cursor: pointer;
 }
-.mainRecovery{
-    height: 60vh!important
+.mainRecovery {
+  height: 60vh !important;
 }
 .recoveryCode {
   -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
@@ -15,4 +15,9 @@
 }
 .sendCodeBtn {
   background-color: teal !important;
+}
+.requestNewCode:hover {
+  background-color: #56C6A9;
+  color:white
+
 }

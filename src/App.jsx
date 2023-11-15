@@ -18,7 +18,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import NotFound from "./pages/NotFound/NotFound";
 import CheckOut from "./components/CheckOut/CheckOut";
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+// import Register from "./pages/Register/Register";
 import Description from "./components/productDetailsComps/description";
 import ReviewsContainer from "./components/productDetailsComps/reviewsContainer";
 import FAQ from "./components/productDetailsComps/faqComponent";
@@ -35,6 +35,8 @@ function App() {
   const [isLogin, setLogin] = useState(
     localStorage.getItem("token") ? true : false
   );
+  const [enteredCode, setEnteredCode] = useState(0);
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -68,21 +70,20 @@ function App() {
       ],
     },
     { path: "/shop", element: <Shop /> },
+
     { path: "/login", element: <Login /> },
-    { path: "/register", element: <Register /> },
+    // { path: "/register", element: <Register /> },
     { path: "/emailRecovery", element: <SendCode /> },
     { path: "/resetCode", element: <ResetCode /> },
     { path: "/resetPassword", element: <ResetPass /> },
     { path: "*/*", element: <NotFound /> },
   ]);
   return (
-    <AuthProvider value={{ isLogin, setLogin }}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <AuthProvider value={{ isLogin, setLogin, enteredCode, setEnteredCode }}>
         <RouterProvider router={router} />
-      </Provider>
-    </AuthProvider>
-
-    // </Provider>
+      </AuthProvider>
+    </Provider>
   );
 }
 

@@ -1,18 +1,39 @@
-import React from "react";
+import { useState } from "react";
 import style from "./sendCode.module.css";
-import { AiOutlineGoogle } from "react-icons/ai";
 import image from "../../assets/images/150x80 logo.png";
 import { useNavigate } from "react-router-dom";
+import { sendRecoveryCode } from "../../Services/auth";
+import toast, { Toaster } from "react-hot-toast";
 
 function SendCode() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(false);
+
   const navigate = useNavigate();
 
   const navigateToHome = () => {
     navigate("/");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await sendRecoveryCode({ email });
+      toast.success(response.data.message, { position: "top-center" });
+      setTimeout(() => {
+        navigate("/resetCode");
+      }, 2000);
+    } catch (error) {
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage, { position: "top-center" });
+
+        if (email.length == 0) {
+          setError(true);
+        }
+      }
+    }
   };
 
   return (
@@ -30,7 +51,7 @@ function SendCode() {
         <div
           className={`col-sm-12 col-md-4 col-lg-5 col-xl-4 py-5 border rounded   d-flex flex-column justify-content-center align-items-center ${style.recoveryCode}`}
         >
-          <h4 className="p-1 mb-4">Reset Password</h4>
+          <h4 className="p-1 mb-4">To Reset Password</h4>
           <p>Enter your email below</p>
           <div className="formElements ">
             <form
@@ -47,9 +68,15 @@ function SendCode() {
                   placeholder="email"
                   type="text"
                   id="username"
-                  required
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                 />
               </div>
+              {error && (
+                <p className="text-danger">Email field cannot be empty</p>
+              )}
 
               <div className="d-flex  align-items-center justify-content-between ">
                 <button
@@ -63,6 +90,7 @@ function SendCode() {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }
