@@ -4,21 +4,21 @@
   height: 70vh;
 }
 #first-Carousel-Image {
-  background-image: url(../../../public/assets/images/imageFive.jpg);
+  background-image: url(assets/images/imageFive.jpg);
   background-position: 5% 20%;
   background-repeat: no-repeat;
   width: 100vw !important;
   background-size: cover;
 }
 #second-Carousel-Image {
-  background-image: url(../../../public/assets/images/imageTwo.jpg);
+  background-image: url(assets/images/imageTwo.jpg);
   background-position: 5% 20%;
   background-repeat: no-repeat;
   width: 100vw !important;
   background-size: cover;
 }
 #third-Carousel-Image {
-  background-image: url(../../../public/assets/images/pexels-yx-b-12791209.jpg);
+  background-image: url(assets/images/pexels-yx-b-12791209.jpg);
   background-position: 10% 80%;
   background-repeat: no-repeat;
   width: 100vw !important;
