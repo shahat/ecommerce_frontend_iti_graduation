@@ -1,35 +1,36 @@
-// import css from "../../pages/Cart/cart.module.css";
 import css from "../../assets/style/product.module.css";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { FaTrash } from "react-icons/fa6";
 import toast from "react-hot-toast";
-
+import { changeSubTotal } from "../../store/slices/checkOut";
 import {
-    cartAction,
+    cartRequestAction,
     modifyBothProductAction,
     removeFromCartAction,
 } from "../../store/slices/cart";
-import { changeSubTotal } from "../../store/slices/checkOut";
 
 function CartProduct({ product, quantity }) {
     const dispatch = useDispatch();
-    const list = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const [inputField, setInput] = useState(false);
     const [inputValue, setInputValue] = useState();
     useEffect(() => {
-        quantity > 9 ? setInput(true) : setInput(false);
-        setInputValue(quantity)
-        dispatch(cartAction());
+        quantity > 10 ? setInput(true) : setInput(false);
+        setInputValue(quantity);
+        dispatch(cartRequestAction());
     }, [dispatch, quantity]);
 
     function modifyProduct(quantity) {
-        if (quantity === 10) {
+        if (quantity === 11) {
             setInput(true);
-        } else if (quantity > 0 && quantity < 10) {
+        } else if (quantity > 0 && quantity < 11) {
             dispatch(
-                modifyBothProductAction({ productId: product._id._id, quantity })
+                modifyBothProductAction({
+                    productId: product._id._id,
+                    quantity,
+                })
             );
         } else {
             toast.error(`Select a real number`);
@@ -38,14 +39,20 @@ function CartProduct({ product, quantity }) {
 
     function priceEnter(e, quantity) {
         e.preventDefault();
-        if (quantity < 10) {
+        if (quantity < 11) {
             setInput(false);
             dispatch(
-                modifyBothProductAction({ productId: product._id._id, quantity })
+                modifyBothProductAction({
+                    productId: product._id._id,
+                    quantity,
+                })
             );
         } else if (quantity < product._id.quantity) {
             dispatch(
-                modifyBothProductAction({ productId: product._id._id, quantity })
+                modifyBothProductAction({
+                    productId: product._id._id,
+                    quantity,
+                })
             );
         } else {
             toast.error(`There is no enough items in the stock!`);
@@ -150,23 +157,39 @@ function CartProduct({ product, quantity }) {
                                     );
                                 })}
                                 <hr />
-                                <option className="fw-semibold">+10</option>
+                                <option className="fw-semibold" value={11}>+10</option>
                             </select>
                         ) : (
                             <form
                                 onSubmit={(e) => {
-                                    priceEnter(e, Number(e.target.lastChild.value));
+                                    priceEnter(
+                                        e,
+                                        Number(e.target.lastChild.value)
+                                    );
                                 }}
                             >
                                 <input
                                     type="text"
-                                    className="form-control fw-semibold"
+                                    className="form-control fw-semibold bg-light user-select-all"
                                     name="quantity"
+                                    autoComplete="off"
+                                    onBlur={(e) => {
+                                        if (e.target.value > 0 && e.target.value) {
+                                            priceEnter(
+                                                e,
+                                                Number(e.target.value)
+                                            );
+                                        } else{
+                                            setInput(false)
+                                        }
+                                    }}
                                     onChange={(e) => {
                                         setInputValue(Number(e.target.value));
                                     }}
+                                    placeholder="Enter Quantity"
                                     value={inputValue}
                                 />
+                                {/* <input type="" style={{display: "none"}} autoFocus /> */}
                             </form>
                         )}{" "}
                     </div>

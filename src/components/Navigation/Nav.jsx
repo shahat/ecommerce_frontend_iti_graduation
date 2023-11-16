@@ -13,25 +13,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { authContext } from "../../contexts/authContext";
 import SecondNav from "./SecondNav/SecondNav";
-import { cartAction } from "../../store/slices/cart";
+import { cartRequestAction } from "../../store/slices/cart";
 
-import Badge from "react-bootstrap/Badge";
-import Stack from "react-bootstrap/Stack";
 
 import toast, { Toaster } from "react-hot-toast";
+import { wishListRequestAction } from "../../store/slices/wishList";
 
 function Nav() {
 
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(cartAction())
+    dispatch(cartRequestAction())
+    dispatch(wishListRequestAction())
   },[])
 
   var cartList = useSelector((state)=> state.cart.cartProducts)
+  var wishList = useSelector((state) => state.wishList.list);
   
   const navigate = useNavigate();
  
-  var cartList = useSelector((state) => state.cart.cartProducts);
   const [searchValue, setSearchValue] = useState("");
   
   // ============== handle input change ==============
@@ -218,20 +218,16 @@ function Nav() {
                       className={`${styles.icon} fs-4 }`}
                     ></MdOutlineFavoriteBorder>
                     {/* Wish list items counter above the heart icon */}
-                    {/* {wishList.length > 0 && (
-                      <Stack direction="horizontal">
-                        <Badge pill bg="danger position-absolute top-0 ms-4">
-                          {wishList.length}
-                        </Badge>
-                      </Stack>
-                    )} */}
+                    {wishList
+                      ? wishList.length > 0 && (
+                          <span
+                            className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
+                          >
+                            {wishList.length}
+                          </span>
+                        )
+                      : ""}
                   </Link>
-
-                  {/* <span
-                    className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
-                  >
-                    0
-                  </span> */}
                 </span>
               </li>
             </ul>
