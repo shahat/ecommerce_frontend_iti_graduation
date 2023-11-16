@@ -48,6 +48,7 @@ export const addToCartAction = createAsyncThunk(
 );
 
 export function addToBothCartsAction(id) {
+    console.log("addToBothCartsAction");
     return (dispatch) => {
         dispatch(addToCartAction(id)).then(() => {
             toast.success(`product added to the cart successfully`);

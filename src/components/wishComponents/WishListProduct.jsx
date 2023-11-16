@@ -5,19 +5,13 @@ import { FaTrash } from "react-icons/fa6";
 import {
     moveToCartAction,
     removeFromWishAction,
-    wishListRequestAction,
 } from "../../store/slices/wishList";
-import { useEffect } from "react";
 
 function WishListProduct({ product }) {
     var dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(wishListRequestAction());
-    }, [dispatch]);
 
     function moveToCart(id) {
-        console.log("moveToCart from wishListProduct.jsx");
         dispatch(moveToCartAction(id));
     }
 

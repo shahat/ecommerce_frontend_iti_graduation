@@ -16,7 +16,6 @@ import Colorfilter from "./colorfilter";
 import Nav from "../Navigation/Nav";
 import Footer from "../Footer/Footer";
 import MobileNav from "../MobileNav/MobileNav";
-import { wishListRequestAction } from "../../store/slices/wishList";
 
 function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -67,7 +66,6 @@ function Shop() {
   useEffect(() => {
     // dispatch(productAction(currentPage));
     dispatch(subCategoryAction(currentPage2));
-    dispatch(wishListRequestAction())
   }, [currentPage2]);
 
   //=============================

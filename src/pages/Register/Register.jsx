@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { json, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineGoogle } from "react-icons/ai";
 import style from "./register.module.css";
 import { registerAuth } from "../../Services/auth";
