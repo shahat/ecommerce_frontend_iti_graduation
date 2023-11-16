@@ -15,7 +15,7 @@ import WishList from "./pages/WishList/WishList";
 import Order from "./components/Order/Order";
 import Contact from "./components/Contact/Contact";
 import UserProfile from "./components/UserProfile/UserProfile";
-import NotFound from "./pages/notFound/NotFound";
+import NotFound from "./pages/NotFound/NotFound";
 import CheckOut from "./components/CheckOut/CheckOut";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -27,7 +27,6 @@ import ResetPass from "./pages/Resetpassword/ResetPass";
 import ResetCode from "./pages/ResetCode/ResetCode";
 import { AuthProvider } from "./contexts/authContext";
 import { useState } from "react";
-// import Register from "./pages/Register/Register";
 // import LoginTwo from "./pages/Login/LoginTwo";
 
 // import components and page

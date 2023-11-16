@@ -64,7 +64,7 @@
 .subCategoryWide {
   height: 400px;
   width: 100%;
-  background-image: url(../../../public/assets/images/man-3.jpeg);
+  background-image: url(assets/images/man-3.jpeg);
 }
 
 .first,
@@ -74,11 +74,11 @@
 }
 .first {
   margin-bottom: 20px;
-  background-image: url(../../../public/assets/images/woman-1.jpg);
+  background-image: url(assets/images/woman-1.jpg);
 }
 
 .second {
-  background-image: url(../../../public/assets/images/kids-2.webp);
+  background-image: url(/assets/images/kids-2.webp);
 }
 
 .custom_button {

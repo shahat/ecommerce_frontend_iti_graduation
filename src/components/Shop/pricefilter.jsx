@@ -18,122 +18,150 @@ const Pricefilter = ({
     { id: 4, min: 5000, max: 10000 },
     { id: 5, min: 10000, max: 50000 },
   ];
-  // let url = "/product?";
-
+  let url = "/product?";
+  console.log(searchParam, subcategoryParam, categoryParam, currentPage);
   // =================== Filter Price  ===================
-  // var filterProductByPrice = async ({
-  //   filterPice,
-  //   min,
-  //   max,
-  //   id,
-  //   currentPage,
-  //   searchParam,
-  //   subcategoryParam,
-  //   categoryParam,
-  // }) => {
-  //   if (filterPice) {
-  //     url = url + `priceMin=${min}&priceMax=${max}`;
-  //   }
-  //   if (searchParam) {
-  //     url = url + `priceMin=${min}&priceMax=${max}&keyword=${searchParam}`;
-  //   }
-  //   if (subcategoryParam) {
-  //     url =
-  //       url + `priceMin=${min}&priceMax=${max}&subcategory=${subcategoryParam}`;
-  //   }
-  //   if (categoryParam) {
-  //     url = url + `priceMin=${min}&priceMax=${max}&category=${categoryParam}`;
-  //   } else {
-  //     url = url + `page=${currentPage}`;
-  //   }
-
+  var filterProductByPrice = async ({
+    filterPice,
+    min,
+    max,
+    id,
+    searchParam,
+    subcategoryParam,
+    categoryParam,
+  }) => {
+    if (filterPice) {
+      url = url + `&priceMin=${min}&priceMax=${max}`;
+    }
+    if (searchParam) {
+      url = url + `&priceMin=${min}&priceMax=${max}&keyword=${searchParam}`;
+    }
+    if (subcategoryParam) {
+      url =
+        url +
+        `&priceMin=${min}&priceMax=${max}&subcategory=${subcategoryParam}`;
+    }
+    if (categoryParam) {
+      url = url + `&priceMin=${min}&priceMax=${max}&category=${categoryParam}`;
+    }
+    try {
+      const data = await instance.get(`${url}`);
+      const res = data.data.data;
+      console.log(res);
+      setproducts(res);
+      setCheckedId(id);
+      setIsVisible(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  var filterProductByPriceAll = async (
+    currentPage,
+    searchParam,
+    subcategoryParam,
+    categoryParam
+  ) => {
+    if (searchParam) {
+      url = url + `&page=${currentPage}&keyword=${searchParam}`;
+    }
+    if (subcategoryParam) {
+      url = url + `&page=${currentPage}&subcategory=${subcategoryParam}`;
+    }
+    if (categoryParam) {
+      url = url + `&page=${currentPage}&category=${categoryParam}`;
+    } else {
+      url = url + `&page=${currentPage}`;
+      console.log(currentPage);
+    }
+    try {
+      console.log(url);
+      const data = await instance.get(`${url}`);
+      const res = data.data.data;
+      console.log(res);
+      setproducts(res);
+      setCheckedId(null);
+      setIsVisible(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  // var filterProductByPrice = async (min, max, id) => {
   //   try {
-  //     const data = await instance.get(`${url}`);
-  //     const res = data.data.data;
-  //     setproducts(res);
-  //     setCheckedId(id);
-  //     setIsVisible(false);
+  //     if (searchParam) {
+  //       const data = await instance.get(
+  //         `/product?priceMin=${min}&priceMax=${max}&keyword=${searchParam}`
+  //       );
+  //       const res = data.data.data;
+  //       setproducts(res);
+  //       setCheckedId(id);
+  //       setIsVisible(false);
+  //     } else if (subcategoryParam) {
+  //       const data = await instance.get(
+  //         `/product?priceMin=${min}&priceMax=${max}&subcategory=${subcategoryParam}`
+  //       );
+  //       const res = data.data.data;
+  //       setproducts(res);
+  //       setCheckedId(id);
+  //       setIsVisible(false);
+  //     } else if (categoryParam) {
+  //       const data = await instance.get(
+  //         `/product?priceMin=${min}&priceMax=${max}&category=${categoryParam}`
+  //       );
+  //       const res = data.data.data;
+  //       setproducts(res);
+  //       setCheckedId(id);
+  //       setIsVisible(false);
+  //     } else {
+  //       const data = await instance.get(
+  //         `/product?priceMin=${min}&priceMax=${max}`
+  //       );
+  //       const res = data.data.data;
+  //       setproducts(res);
+  //       setCheckedId(id);
+  //       setIsVisible(false);
+  //     }
   //   } catch (err) {
   //     console.log(err);
   //   }
   // };
-  var filterProductByPrice = async (min, max, id) => {
-    try {
-      if (searchParam) {
-        const data = await instance.get(
-          `/product?priceMin=${min}&priceMax=${max}&keyword=${searchParam}`
-        );
-        const res = data.data.data;
-        setproducts(res);
-        setCheckedId(id);
-        setIsVisible(false);
-      } else if (subcategoryParam) {
-        const data = await instance.get(
-          `/product?priceMin=${min}&priceMax=${max}&subcategory=${subcategoryParam}`
-        );
-        const res = data.data.data;
-        setproducts(res);
-        setCheckedId(id);
-        setIsVisible(false);
-      } else if (categoryParam) {
-        const data = await instance.get(
-          `/product?priceMin=${min}&priceMax=${max}&category=${categoryParam}`
-        );
-        const res = data.data.data;
-        setproducts(res);
-        setCheckedId(id);
-        setIsVisible(false);
-      } else {
-        const data = await instance.get(
-          `/product?priceMin=${min}&priceMax=${max}`
-        );
-        const res = data.data.data;
-        setproducts(res);
-        setCheckedId(id);
-        setIsVisible(false);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
-  var filterProductByPriceAll = async (currentPage) => {
-    try {
-      if (searchParam) {
-        const data = await instance.get(
-          `/product?&keyword=${searchParam}&page=${currentPage}`
-        );
-        const res = data.data.data;
-        setproducts(res);
-        setCheckedId(null);
-        setIsVisible(false);
-      } else if (subcategoryParam) {
-        const data = await instance.get(
-          `/product?&subcategory=${subcategoryParam}&page=${currentPage}`
-        );
-        const res = data.data.data;
-        setproducts(res);
-        setCheckedId(null);
-        setIsVisible(false);
-      } else if (categoryParam) {
-        const data = await instance.get(
-          `/product?&category=${categoryParam}&page=${currentPage}`
-        );
-        const res = data.data.data;
-        setproducts(res);
-        setCheckedId(null);
-        setIsVisible(false);
-      } else {
-        const data = await instance.get(`/product?page=${currentPage}`);
-        const res = data.data.data;
-        setproducts(res);
-        setCheckedId(null);
-        setIsVisible(false);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // var filterProductByPriceAll = async (currentPage) => {
+  //   try {
+  //     if (searchParam) {
+  //       const data = await instance.get(
+  //         `/product?&keyword=${searchParam}&page=${currentPage}`
+  //       );
+  //       const res = data.data.data;
+  //       setproducts(res);
+  //       setCheckedId(null);
+  //       setIsVisible(false);
+  //     } else if (subcategoryParam) {
+  //       const data = await instance.get(
+  //         `/product?&subcategory=${subcategoryParam}&page=${currentPage}`
+  //       );
+  //       const res = data.data.data;
+  //       setproducts(res);
+  //       setCheckedId(null);
+  //       setIsVisible(false);
+  //     } else if (categoryParam) {
+  //       const data = await instance.get(
+  //         `/product?&category=${categoryParam}&page=${currentPage}`
+  //       );
+  //       const res = data.data.data;
+  //       setproducts(res);
+  //       setCheckedId(null);
+  //       setIsVisible(false);
+  //     } else {
+  //       const data = await instance.get(`/product?page=${currentPage}`);
+  //       const res = data.data.data;
+  //       setproducts(res);
+  //       setCheckedId(null);
+  //       setIsVisible(false);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   return (
     <div>
       <div className="border-bottom mb-4 pb-4">
@@ -146,7 +174,14 @@ const Pricefilter = ({
             className="custom-control-input"
             id="price-all"
             checked={checkedId === null}
-            onChange={() => filterProductByPriceAll(currentPage)}
+            onChange={() =>
+              filterProductByPriceAll(
+                currentPage,
+                searchParam,
+                subcategoryParam,
+                categoryParam
+              )
+            }
           />
           <label className="custom-control-label" htmlFor="price-all">
             All price
@@ -165,15 +200,15 @@ const Pricefilter = ({
                   checked={checkedId === price.id}
                   id={`price-${price.id}`}
                   onChange={() =>
-                    filterProductByPrice(
-                      // searchParam: searchParam,
-                      // categoryParam: categoryParam,
-                      // subcategoryParam: subcategoryParam,
-                      // filterPice: true,
-                      price.min,
-                      price.max,
-                      price.id
-                    )
+                    filterProductByPrice({
+                      searchParam: searchParam,
+                      categoryParam: categoryParam,
+                      subcategoryParam: subcategoryParam,
+                      filterPice: true,
+                      min: price.min,
+                      max: price.max,
+                      id: price.id,
+                    })
                   }
                 />
                 <label
@@ -189,10 +224,5 @@ const Pricefilter = ({
     </div>
   );
 };
-// Pricefilter.propTypes = {
-//   setProducts: PropTypes.array.isRequired,
-//   currentPage: PropTypes.number.isRequired,
-//   isVisible: PropTypes.func.isRequired,
-// };
 
 export default Pricefilter;

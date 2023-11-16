@@ -22,9 +22,14 @@ import toast, { Toaster } from "react-hot-toast";
 
 function Nav() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(cartAction());
+  }, []);
+
+  var cartList = useSelector((state) => state.cart.cartProducts);
+
   const navigate = useNavigate();
 
-  dispatch(cartAction());
   var cartList = useSelector((state) => state.cart.cartProducts);
   const [searchValue, setSearchValue] = useState("");
 
@@ -221,11 +226,11 @@ function Nav() {
                     )} */}
                   </Link>
 
-                  <span
+                  {/* <span
                     className={`badge badge-pill badge-warning rounded-50 bg-warning ${styles.notify}`}
                   >
                     0
-                  </span>
+                  </span> */}
                 </span>
               </li>
             </ul>

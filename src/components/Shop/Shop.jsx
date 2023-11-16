@@ -334,6 +334,7 @@ function Shop() {
               currentPage={currentPage}
               subcategoryParam={subcategoryParam}
               categoryParam={categoryParam}
+              setIsVisible={setIsVisible}
             />
           </div>
           {/* Shop Sidebar End */}

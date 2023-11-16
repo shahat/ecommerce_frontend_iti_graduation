@@ -113,11 +113,11 @@ function Register() {
                         let tokenObj = JSON.parse(token2);
                         tokenObj.userId = res.data.data.user._id;
                         token2 = JSON.stringify(tokenObj);
-                        instance.post("/cart/", {}, {
-                            headers: { token: token2 },
+                        await instance.post("/cart/", {}, {
+                            headers: { token2 },
                         })
-                        instance.post("/wish/", {}, {
-                            headers: { token: token2 },
+                        await instance.post("/wish/", {}, {
+                            headers: { token2 },
                         })
                     }
                     console.log(res);
