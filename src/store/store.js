@@ -8,14 +8,15 @@ import checkOutReducer from "./slices/checkOut";
 import productsReducer from "./slices/products";
 // import subCategoryProductsReducer from "./slices/subcategoryproducts";
 import subCategoriesReducer from "./slices/subcategory";
+import wishListReducer from "./slices/wishList";
 export var store = configureStore({
   reducer: {
     products: productsReducer,
     // subCategoryProducts: subCategoryProductsReducer,
     subCategories: subCategoriesReducer,
-    // products: productsReducer,
     categories: categoryReducer,
     cart: cartReducer,
+    wishList: wishListReducer,
     checkOut: checkOutReducer,
     // allMatchedProducts: allMatchedProductsReducer,
   },

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { json, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineGoogle } from "react-icons/ai";
 import style from "./register.module.css";
 import { registerAuth } from "../../Services/auth";
@@ -113,20 +113,39 @@ function Register() {
                         let tokenObj = JSON.parse(token2);
                         tokenObj.userId = res.data.data.user._id;
                         token2 = JSON.stringify(tokenObj);
-                        await instance.post("/cart/", {}, {
-                            headers: { token2 },
-                        })
-                        await instance.post("/wish/", {}, {
-                            headers: { token2 },
-                        })
+                        await instance.post(
+                            "/cart/",
+                            {},
+                            {
+                                headers: { token2 },
+                            }
+                        );
+                        await instance.post(
+                            "/wish/",
+                            {},
+                            {
+                                headers: { token2 },
+                            }
+                        );
+                    } else {
+                        token2 = JSON.stringify({userId: res.data.data.user._id})
+                        await instance.post(
+                            "/cart/",
+                            {},
+                            {
+                                headers: { token2 },
+                            }
+                        );
+                        await instance.post(
+                            "/wish/",
+                            {},
+                            {
+                                headers: { token2 },
+                            }
+                        );
                     }
-                    console.log(res);
                     navigate("/login");
                 });
-                // before edit
-                // const res = await registerAuth(user);
-                // navigate("/login");
-                // console.log(res);
             } catch (error) {
                 if (error.response) {
                     const errorMessage = error.response.data.message;

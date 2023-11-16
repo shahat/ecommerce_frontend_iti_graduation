@@ -1,6 +1,5 @@
 import css from "../../assets/style/product.module.css";
-
-
+import Card from "../Shop/card";
 
 export default function RelatedProducts() {
     return (
@@ -21,7 +20,44 @@ export default function RelatedProducts() {
             <div
                 className={`${css["card-vatrina"]} d-flex flex-nowrap w-100 overflow-y-scroll ${css.example}`}
             >
-                <div
+                <Card
+                    img="src/assets/images/products-images/accessories.jpg"
+                    priceAfterDiscount={300}
+                    price={100}
+                    title="lorem lorem lorem lorem"
+                />
+                <Card
+                    img="src/assets/images/products-images/accessories.jpg"
+                    priceAfterDiscount={300}
+                    price={100}
+                    title="lorem lorem lorem lorem"
+                />
+                <Card
+                    img="src/assets/images/products-images/accessories.jpg"
+                    priceAfterDiscount={300}
+                    price={100}
+                    title="lorem lorem lorem lorem"
+                />
+                <Card
+                    img="src/assets/images/products-images/accessories.jpg"
+                    priceAfterDiscount={300}
+                    price={100}
+                    title="lorem lorem lorem lorem"
+                />
+                <Card
+                    img="src/assets/images/products-images/accessories.jpg"
+                    priceAfterDiscount={300}
+                    price={100}
+                    title="lorem lorem lorem lorem"
+                />
+                <Card
+                    img="src/assets/images/products-images/accessories.jpg"
+                    priceAfterDiscount={300}
+                    price={100}
+                    title="lorem lorem lorem lorem"
+                />
+
+                {/* <div
                     className="card col-1"
                     style={{
                         width: "12rem",
@@ -698,7 +734,7 @@ export default function RelatedProducts() {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
