@@ -33,15 +33,15 @@ function Nav() {
   const navigate = useNavigate();
  
   const [searchValue, setSearchValue] = useState("");
-  
+
   // ============== handle input change ==============
 
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
   };
-  
+
   // ============== handle form submit   ==============
-  
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
     navigate(`/shop/?search=${searchValue}`);

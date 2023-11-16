@@ -59,93 +59,86 @@ function Cart() {
                             )}
                         </div>
 
-                        {/* <!-- Checkout PART --> */}
-                        <div
-                            className={`${css["checkout_details"]} col-xs-12 p-4 align-content-between border rounded-4`}
-                        >
-                            <div className="">
-                                <header>
-                                    <h3 className="fw-semibold">
-                                        Order Summary
-                                    </h3>
-                                </header>
-                                <div className="order_details mt-5 d-flex flex-column align-content-between">
-                                    <div
-                                        className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
-                                    >
-                                        <p className="fs-5 text-muted">
-                                            Subtotal
-                                        </p>
-                                        <h5>{subTotal} EGP</h5>
-                                    </div>
-                                    <div
-                                        className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
-                                    >
-                                        <p className="fs-5 text-muted">
-                                            Discount{" "}
-                                            <span className="fs-6">(0%)</span>
-                                        </p>
-                                        <h5 className="text-danger">
-                                            - {checkOutStatus.discount}{" "}
-                                        </h5>
-                                    </div>
-                                    <div
-                                        className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
-                                    >
-                                        <p className="fs-5 text-muted">
-                                            Delivery Fee
-                                        </p>
-                                        <h5>{checkOutStatus.delivery} EGP</h5>
-                                    </div>
-                                    <hr />
-                                    <div
-                                        className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
-                                    >
-                                        <p className="fs-4 text-muted">Total</p>
-                                        <h4> {subTotal} </h4>
-                                    </div>
-                                </div>
-                                <div
-                                    className={`${css.discount} d-flex flex-xs-row flex-md-column flex-lg-row flex-column flex-wrap`}
-                                >
-                                    <input
-                                        type="text"
-                                        className="border-0 px-3 text-dark rounded-pill col-md-8 col-sm-11 bg-secondary-subtle text-start"
-                                        placeholder="Add Promo Code"
-                                    />
-                                    <div className={`col ${css.hide}`}></div>
-                                    <button
-                                        className={`btn ${css.apply} ${css.myBtn} rounded-pill`}
-                                    >
-                                        Apply
-                                    </button>
-                                    <Link
-                                        to={token ? "/checkout" : ""}
-                                        className={`${css.goToCheck} btn ${css.myBtn} rounded-pill text-decoration-none col-12 mt-4 p-3 fs-3`}
-                                    >
-                                        Go to Checkout
-                                        <FaArrowRight className="ms-3 fs-5" />
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            className={`${css.discount} d-flex col-12 mt-5 justify-content-center`}
-                        >
-                            <button className="btn rounded-pill col-md-3 col-8 mt-4 p-2 fs-6 bg-danger">
-                                Clear Cart
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* <!-- Related Products PART --> */}
-                    <RelatedProducts />
-
-                    <div id="contact-footer"></div>
+            {/* <!-- Checkout PART --> */}
+            <div
+              className={`${css["checkout_details"]} col-xs-12 p-4 align-content-between border rounded-4`}
+            >
+              <div className="">
+                <header>
+                  <h3 className="fw-semibold">Order Summary</h3>
+                </header>
+                <div className="order_details mt-5 d-flex flex-column align-content-between">
+                  <div
+                    className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
+                  >
+                    <p className="fs-5 text-muted">Subtotal</p>
+                    <h5>{subTotal} EGP</h5>
+                  </div>
+                  <div
+                    className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
+                  >
+                    <p className="fs-5 text-muted">
+                      Discount <span className="fs-6">(0%)</span>
+                    </p>
+                    <h5 className="text-danger">
+                      - {checkOutStatus.discount}{" "}
+                    </h5>
+                  </div>
+                  <div
+                    className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
+                  >
+                    <p className="fs-5 text-muted">Delivery Fee</p>
+                    <h5>{checkOutStatus.delivery} EGP</h5>
+                  </div>
+                  <hr />
+                  <div
+                    className={`${css["order_info"]} d-flex justify-content-between flex-sm-column flex-lg-row`}
+                  >
+                    <p className="fs-4 text-muted">Total</p>
+                    <h4> {subTotal} </h4>
+                  </div>
                 </div>
-            )}
-        </>
-    );
+                <div
+                  className={`${css.discount} d-flex flex-xs-row flex-md-column flex-lg-row flex-column flex-wrap`}
+                >
+                  <input
+                    type="text"
+                    className="border-0 px-3 text-dark rounded-pill col-md-8 col-sm-11 bg-secondary-subtle text-start"
+                    placeholder="Add Promo Code"
+                  />
+                  <div className={`col ${css.hide}`}></div>
+                  <button
+                    className={`btn ${css.apply} ${css.myBtn} rounded-pill`}
+                  >
+                    Apply
+                  </button>
+                  <Link
+                    to={token ? "/checkout" : ""}
+                    className={`${css.goToCheck} btn ${css.myBtn} rounded-pill text-decoration-none col-12 mt-4 p-3 fs-3`}
+                  >
+                    Go to Checkout
+                    <FaArrowRight className="ms-3 fs-5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div
+              className={`${css.discount} d-flex col-12 mt-5 justify-content-center`}
+            >
+              <button className="btn rounded-pill col-md-3 col-8 mt-4 p-2 fs-6 bg-danger">
+                Clear Cart
+              </button>
+            </div>
+          </div>
+
+          {/* <!-- Related Products PART --> */}
+          <RelatedProducts />
+
+          <div id="contact-footer"></div>
+        </div>
+      )}
+    </>
+  );
 }
 
 export default Cart;
