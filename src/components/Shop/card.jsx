@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { addToBothCartsAction } from "./../../store/slices/cart";
 import { useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { IoMdCart } from "react-icons/io";
 import { addToWishListAction, removeFromWishAction } from "../../store/slices/wishList";
 
 function Card(props) {
@@ -69,29 +70,28 @@ function Card(props) {
                                 {props.priceAfterDiscount} $
                             </span>
 
-                            <div
-                                className={`product-rate mb-2 ps-3 ${style.rate}`}
-                            >
-                                <FaStar className=" ps-1" />
-                                <FaStar className=" ps-1" />
-                                <FaStar className=" ps-1" />
-                                <FaStar className=" ps-1" />
-                                <FaStar className=" ps-1" />
-                            </div>
-                        </div>
-                        <button
-                            className={`btn btn-primary w-100 card-button border-top-0 ${style.cardbutton}`}
-                            type="button"
-                            onClick={() => addToCart(props.id)}
-                        >
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
+              <div className={`product-rate mb-2 ps-3 ${style.rate}`}>
+                <FaStar className=" ps-1" />
+                <FaStar className=" ps-1" />
+                <FaStar className=" ps-1" />
+                <FaStar className=" ps-1" />
+                <FaStar className=" ps-1" />
+              </div>
             </div>
-            <Toaster />
+            <button
+              className={`btn btn-primary w-100 card-button border-top-0 ${style.cardbutton}`}
+              type="button"
+              onClick={() => addtocart(props.id)}
+            >
+              <IoMdCart className="me-3 fs-4" />
+              Add to Cart
+            </button>
+          </div>
         </div>
-    );
+      </div>
+      <Toaster />
+    </div>
+  );
 }
 
 export default Card;

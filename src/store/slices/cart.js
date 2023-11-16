@@ -15,36 +15,36 @@ export const cartRequestAction = createAsyncThunk("cart/getAll", async () => {
 });
 
 export const addToCartAction = createAsyncThunk(
-    "cart/addProduct",
-    async (id) => {
-        let { token, token2 } = localStorage;
-        if (token) {
-            const status = await instance.post(
-                `/cart/${id}`,
-                {},
-                {
-                    headers: { token },
-                }
-            );
-            return status;
-        } else if (token2) {
-            const status = await instance.post(
-                `/cart/${id}`,
-                {},
-                {
-                    headers: { token2 },
-                }
-            );
-            return status.data.data;
+  "cart/addProduct",
+  async (id) => {
+    let { token, token2 } = localStorage;
+    if (token) {
+      const status = await instance.post(
+        `/cart/${id}`,
+        {},
+        {
+          headers: { token },
         }
-        const status = await instance.post(`/cart/${id}`);
-        token2 = JSON.stringify({
-            userId: status.data.data.userId,
-            cartId: status.data.data._id,
-        });
-        localStorage.setItem("token2", token2);
-        return status.data.data;
+      );
+      return status;
+    } else if (token2) {
+      const status = await instance.post(
+        `/cart/${id}`,
+        {},
+        {
+          headers: { token2 },
+        }
+      );
+      return status.data.data;
     }
+    const status = await instance.post(`/cart/${id}`);
+    token2 = JSON.stringify({
+      userId: status.data.data.userId,
+      cartId: status.data.data._id,
+    });
+    localStorage.setItem("token2", token2);
+    return status.data.data;
+  }
 );
 
 export function addToBothCartsAction(id) {
@@ -57,17 +57,28 @@ export function addToBothCartsAction(id) {
     };
 }
 
-export const modifyProductAction = createAsyncThunk("cart/modifyProduct", async (params) => {
-    const {productId, quantity} = params
+export const modifyProductAction = createAsyncThunk(
+  "cart/modifyProduct",
+  async (params) => {
+    const { productId, quantity } = params;
     const { token, token2 } = localStorage;
-    var res
+    var res;
     if (token) {
-        res = await instance.patch("/cart", { productId, quantity }, { headers: { token } });
+      res = await instance.patch(
+        "/cart",
+        { productId, quantity },
+        { headers: { token } }
+      );
     } else if (token2) {
-        res = await instance.patch("/cart", { productId, quantity }, { headers: { token2 } });
+      res = await instance.patch(
+        "/cart",
+        { productId, quantity },
+        { headers: { token2 } }
+      );
     }
     return res;
-})
+  }
+);
 
 export function modifyBothProductAction(params) {
     return (dispatch) => {
@@ -78,26 +89,18 @@ export function modifyBothProductAction(params) {
 }
 
 export const removeFromCartRequestAction = createAsyncThunk(
-    "cart/removeProduct",
-    async (id) => {
-        let { token, token2 } = localStorage;
-        let status
-        if (token) {
-            status = await instance.patch(
-                `/cart/${id}`,
-                {},
-                { headers: { token } }
-            );
-        } else if(token2){
-            status = await instance.patch(
-                `/cart/${id}`,
-                {},
-                { headers: { token2 } }
-            );
-        }
-        console.log(status);
-        return status;
+  "cart/removeProduct",
+  async (id) => {
+    let { token, token2 } = localStorage;
+    let status;
+    if (token) {
+      status = await instance.patch(`/cart/${id}`, {}, { headers: { token } });
+    } else if (token2) {
+      status = await instance.patch(`/cart/${id}`, {}, { headers: { token2 } });
     }
+    console.log(status);
+    return status;
+  }
 );
 
 export function removeFromCartAction(id) {
@@ -140,5 +143,5 @@ const cartSlice = createSlice({
     },
 });
 
-export const {reset, loadingToggleAction} = cartSlice.actions
+export const { reset, loadingToggleAction } = cartSlice.actions;
 export default cartSlice.reducer;

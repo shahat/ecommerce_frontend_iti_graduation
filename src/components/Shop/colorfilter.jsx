@@ -1,9 +1,17 @@
 // import React from 'react';
 import "./chechbox.css";
-import axios from "axios";
+// import axios from "axios";
 import { useState } from "react";
+import instance from "../../axiosConfig/instance";
 
-const Colorfilter = ({ setproducts, currentPage, setIsVisible }) => {
+const Colorfilter = ({
+  setproducts,
+  currentPage,
+  setIsVisible,
+  searchParam,
+  subcategoryParam,
+  categoryParam,
+}) => {
   const [checkedId, setCheckedId] = useState(null);
   var info = [
     { id: 1, name: "black" },
@@ -12,29 +20,94 @@ const Colorfilter = ({ setproducts, currentPage, setIsVisible }) => {
     { id: 4, name: "blue" },
     { id: 5, name: "green" },
   ];
+  // var url = `/product?`;
+  // var colorFilter = async ({ colorFilter, color, id, currentPage }) => {
+  //   if (colorFilter == true) {
+  //     url = url + `color=${color}`;
+  //   } else {
+  //     url = url + `page=${currentPage}`;
+  //   }
+  //   try {
+  //     const data = await instance.get(`${url}`);
+  //     const res = data.data.data;
+  //     setproducts(res);
+  //     setCheckedId(id);
+  //     setIsVisible(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   var colorFilter = async (color, id) => {
-    console.log(color);
     try {
-      const data = await axios.get(
-        `http://localhost:4000/product?color=${color}`
-      );
-      const res = data.data.data;
-      setproducts(res);
-      setCheckedId(id);
-      setIsVisible(false);
+      if (searchParam) {
+        const data = await instance.get(
+          `/product?color=${color}&keyword=${searchParam}`
+        );
+        const res = data.data.data;
+        setproducts(res);
+        setCheckedId(id);
+        setIsVisible(false);
+      } else if (subcategoryParam) {
+        const data = await instance.get(
+          `/product?color=${color}&subcategory=${subcategoryParam}`
+        );
+        const res = data.data.data;
+        setproducts(res);
+        setCheckedId(id);
+        setIsVisible(false);
+      } else if (categoryParam) {
+        const data = await instance.get(
+          `/product?color=${color}&category=${categoryParam}`
+        );
+        const res = data.data.data;
+        setproducts(res);
+        setCheckedId(id);
+        setIsVisible(false);
+      } else {
+        const data = await instance.get(`/product?color=${color}`);
+        const res = data.data.data;
+        setproducts(res);
+        setCheckedId(id);
+        setIsVisible(false);
+      }
     } catch (err) {
       console.log(err);
     }
   };
-  var handleSelectAll = async (currentPage) => {
+
+  var colorFiltrAll = async (currentPage) => {
     try {
-      const data = await axios.get(
-        `http://localhost:4000/product?page=${currentPage}`
-      );
-      const res = data.data.data;
-      setproducts(res);
-      setCheckedId(null);
-      setIsVisible(false);
+      if (searchParam) {
+        const data = await instance.get(
+          `/product?&keyword=${searchParam}&page=${currentPage}`
+        );
+        const res = data.data.data;
+        setproducts(res);
+        setCheckedId(null);
+        setIsVisible(false);
+      } else if (subcategoryParam) {
+        const data = await instance.get(
+          `/product?&subcategory=${subcategoryParam}&page=${currentPage}`
+        );
+        const res = data.data.data;
+        setproducts(res);
+        setCheckedId(null);
+        setIsVisible(false);
+      } else if (categoryParam) {
+        const data = await instance.get(
+          `/product?&category=${categoryParam}&page=${currentPage}`
+        );
+        const res = data.data.data;
+        setproducts(res);
+        setCheckedId(null);
+        setIsVisible(false);
+      } else {
+        const data = await instance.get(`/product?page=${currentPage}`);
+        const res = data.data.data;
+        setproducts(res);
+        setCheckedId(null);
+        setIsVisible(false);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -51,7 +124,7 @@ const Colorfilter = ({ setproducts, currentPage, setIsVisible }) => {
             className="custom-control-input"
             checked={checkedId === null}
             id="color-all"
-            onChange={() => handleSelectAll(currentPage)}
+            onChange={() => colorFiltrAll(currentPage)}
           />
           <label className="custom-control-label" htmlFor="color-all">
             All Color
@@ -69,7 +142,17 @@ const Colorfilter = ({ setproducts, currentPage, setIsVisible }) => {
                   className="custom-control-input"
                   checked={checkedId === color.id}
                   id={`color-${color.id}`}
-                  onChange={() => colorFilter(color.name, color.id)}
+                  onChange={() =>
+                    colorFilter(
+                      //   {
+                      //   colorFilter: true,
+                      //   color: color.name,
+                      //   id: color.id,
+                      // }
+                      color.name,
+                      color.id
+                    )
+                  }
                   value={color}
                 />
                 <label
