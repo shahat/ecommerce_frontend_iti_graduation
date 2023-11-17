@@ -7,7 +7,6 @@ import { addToCartAction } from "../../store/slices/cart";
 import { addToBothCartsAction } from "./../../store/slices/cart";
 import { useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import { Toaster } from "react-hot-toast";
 import { IoMdCart } from "react-icons/io";
 import {
   addToWishListAction,
