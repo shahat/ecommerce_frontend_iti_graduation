@@ -9,6 +9,10 @@ import productsReducer from "./slices/products";
 // import subCategoryProductsReducer from "./slices/subcategoryproducts";
 import subCategoriesReducer from "./slices/subcategory";
 import wishListReducer from "./slices/wishList";
+import userReducer from './slices/user'
+import ordersReducer from './slices/orders'
+import oneOrderSlice from './slices/order'
+import addressReducer from './slices/userAddress'
 export var store = configureStore({
   reducer: {
     products: productsReducer,
@@ -19,5 +23,10 @@ export var store = configureStore({
     wishList: wishListReducer,
     checkOut: checkOutReducer,
     // allMatchedProducts: allMatchedProductsReducer,
+    user : userReducer,
+    orders : ordersReducer,
+    oneOrder : oneOrderSlice,
+    address : addressReducer
+
   },
 });

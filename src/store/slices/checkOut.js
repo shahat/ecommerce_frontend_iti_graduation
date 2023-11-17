@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice , createAsyncThunk} from "@reduxjs/toolkit";
 
 const checkOutSlice = createSlice({
     name: "checkOut",
@@ -20,10 +19,27 @@ const checkOutSlice = createSlice({
             !isNaN(action.payload) && (state.discount = action.payload / 100)
             state.subTotal = state.subTotal * (1 - state.discount)
         },
+        setSubTotal : (state , action) =>{
+            state.subTotal = action.payload
+            console.log(action.payload);
+        },
+        changeTotal : (state , action ) =>{
+            let value = state.subTotal + state.delivery - state.discount;
+            console.log(value);
+            state.total = value;
+        },
+        setDiscount : (state , action)=>{
+            let value = state.subTotal * (action.payload/100)
+            console.log(value);
+            state.discount = value;
+            state.total = state.subTotal + state.delivery - value;
+
+        }
+
         
     },
 });
 
 
-export const { changeSubTotal } = checkOutSlice.actions
+export const { changeSubTotal , setSubTotal , changeTotal , setDiscount } = checkOutSlice.actions
 export default checkOutSlice.reducer;

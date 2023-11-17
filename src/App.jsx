@@ -29,6 +29,12 @@ import { AuthProvider } from "./contexts/authContext";
 import { useState } from "react";
 // import Register from "./pages/Register/Register";
 // import LoginTwo from "./pages/Login/LoginTwo";
+import UserEdit from "./pages/User/userEdit";
+import UserOrders from "./pages/User/userOrders";
+import UserWishlist from "./pages/User/userWishlist";
+import UserAddress from "./pages/User/userAddress";
+import UserPayment from "./pages/User/userPayment";
+import UserComingOrders from "./pages/User/userComingOrders";
 
 // import components and page
 function App() {
@@ -64,8 +70,16 @@ function App() {
         { path: "/wishlist", element: <WishList /> },
         { path: "/contact", element: <Contact /> },
         // protected route user should be loged in
-        { path: "/Order", element: <Order /> },
-        { path: "/userprofile", element: <UserProfile /> },
+        { path: "/Order/:id", element: <Order /> },
+        { path: "/userprofile", element: <UserProfile />,
+        children:[
+          {index : true  ,element : <UserEdit/>},
+          {path:"address", element:<UserAddress/>},
+          {path:"payment",element:<UserPayment/>},
+          {path:"pastOrders" , element : <UserOrders/>},
+          {path:"upcomingOrders" , element : <UserComingOrders/>}
+        ]
+       },
         { path: "/checkout", element: <CheckOut /> },
       ],
     },
