@@ -14,17 +14,39 @@ import { Link } from "react-router-dom";
 import { authContext } from "../../contexts/authContext";
 import SecondNav from "./SecondNav/SecondNav";
 import { cartAction } from "../../store/slices/cart";
+import { userAction } from '../../store/slices/user';
+import { comingOrdersAction, pastOrdersAction } from '../../store/slices/orders';
+import {jwtDecode} from 'jwt-decode'
+
 
 import Badge from "react-bootstrap/Badge";
 import Stack from "react-bootstrap/Stack";
 
 import toast, { Toaster } from "react-hot-toast";
+import { userAddressGetAction } from "../../store/slices/userAddress";
 
 function Nav() {
 
   const dispatch = useDispatch()
+  
+  const [userLogged , setUserLogged] = useState(false)
+
+
+
+
   useEffect(()=>{
+    const token = localStorage.getItem("token")
+    if(token){
+      const decoded = jwtDecode(token);
+      const userId = decoded.id;
+      dispatch(userAction(userId))
+      dispatch(pastOrdersAction(userId))
+      dispatch(comingOrdersAction(userId))  
+
+      dispatch(userAddressGetAction(userId))
+    }
     dispatch(cartAction())
+    
   },[])
 
   var cartList = useSelector((state)=> state.cart.cartProducts)
@@ -183,7 +205,7 @@ function Nav() {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link to="/userprofile" className="dropdown-item">
+                    <Link to="/userprofile/" className="dropdown-item">
                       Profile
                     </Link>
                   </li>

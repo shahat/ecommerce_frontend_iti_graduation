@@ -3,8 +3,16 @@ import axios from "axios";
 
 
 
-export const ordersAction = createAsyncThunk("orders/getAll" , async (id)=>{
-    const res = await axios.get(`http://localhost:4000/orders/userId/${id}`)
+export const pastOrdersAction = createAsyncThunk("orders/getPast" , async (id)=>{
+    const res = await axios.get(`http://localhost:4000/orders/past/${id}`)
+    console.log(res);
+    return res.data.allOrders
+    
+} )
+
+
+export const comingOrdersAction = createAsyncThunk("orders/coming" , async (id)=>{
+    const res = await axios.get(`http://localhost:4000/orders/coming/${id}`)
     console.log(res);
     return res.data.allOrders
     
@@ -12,13 +20,20 @@ export const ordersAction = createAsyncThunk("orders/getAll" , async (id)=>{
 
 const ordersSlice = createSlice({
     name : "orders",
-    initialState : {orders : []},
+    initialState : {pastOrders : [] , comingOrders : []},
     extraReducers:(builder)=>{
-        builder.addCase(ordersAction.fulfilled,(state,action)=>{
+        builder.addCase(pastOrdersAction.fulfilled,(state,action)=>{
             console.log(action.payload);
-            state.orders = action.payload
+            state.pastOrders = action.payload
         })
-        builder.addCase(ordersAction.rejected,(state,action)=>{
+        builder.addCase(pastOrdersAction.rejected,(state,action)=>{
+            console.log("rejected");
+        })
+        builder.addCase(comingOrdersAction.fulfilled,(state,action)=>{
+            console.log(action.payload);
+            state.comingOrders = action.payload
+        })
+        builder.addCase(comingOrdersAction.rejected,(state,action)=>{
             console.log("rejected");
         })
     }

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../axiosConfig/instance";
 import { LoaderIcon } from "react-hot-toast";
+import axios from "axios";
 
 export const cartAction = createAsyncThunk("cart/getAll", async () => {
     const { token, token2 } = localStorage;
@@ -106,6 +107,13 @@ export function removeFromCartAction(id) {
     };
 }
 
+export const deleteCart = createAsyncThunk("cart/delete" , async(id)=>{
+    console.log(id);
+    const res = axios.delete(`http://localhost:4000/cart/${id}` )
+    console.log(res);
+    return res.data
+}) 
+
 const cartSlice = createSlice({
     name: "cart",
     initialState: { cartProducts: [], loading: false },
@@ -142,6 +150,12 @@ const cartSlice = createSlice({
                 // state.loading = false
             }
         );
+        builder.addCase(deleteCart.fulfilled,(state,action)=>{
+            console.log(action.payload)
+        })
+        builder.addCase(deleteCart.rejected,(state,action)=>{
+            console.log("rejected");
+        })
     },
 });
 

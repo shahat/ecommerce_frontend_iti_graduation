@@ -5,27 +5,25 @@ import { useEffect } from "react";
 import { useNavigate  } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode'
 
-import { ordersAction } from '../../store/slices/orders';
+import { pastOrdersAction } from '../../store/slices/orders';
 import { userAction } from '../../store/slices/user';
 
 
 
 const UserOrders = () => {
-    let orders = useSelector((state)=> state.orders.orders)
+    let orders = useSelector((state)=> state.orders.pastOrders)
     const user = useSelector((state)=> state.user.user)
     const dispatch = useDispatch()
     const navigate=useNavigate()
-    const token = localStorage.getItem("token")
-    const decoded = jwtDecode(token);
-    const userId = decoded.id;
+    let value = orders?.length;
 
     useEffect(()=>{
-        dispatch(userAction(userId))
-        dispatch(ordersAction(userId))
+        dispatch(pastOrdersAction(user._id))
         console.log(user);
         console.log(orders);
 
-    },[])
+    },[orders , user])
+
 
 
    
@@ -35,8 +33,7 @@ const UserOrders = () => {
 
                 
                 <div className="row justify-content-center align-items-center p-1 m-0 gy-1">
-                    {(orders)?<>{orders.map((order , index)=>(
-
+                    {(value)?<>{orders.map((order , index)=>(
                         <div className="col-12" key={order._id} onClick={() => {navigate(`/Order/${order._id}`)}}>
 
                             <div className="card"  >

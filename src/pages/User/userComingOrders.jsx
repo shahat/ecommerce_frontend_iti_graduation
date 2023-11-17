@@ -3,25 +3,27 @@ import AnimatedPage from "../animtedPage/AnimatedPage";
 import { useEffect } from "react";
 import { useNavigate  } from 'react-router-dom';
 
-import { ordersAction } from '../../store/slices/orders';
+import { comingOrdersAction } from '../../store/slices/orders';
 const UserComingOrders = () => {
-    const user = useSelector((state)=> state.user.user)
 
-    const orders = useSelector((state)=> state.orders.orders)
+    const user = useSelector((state)=> state.user.user)
+    const orders = useSelector((state)=> state.orders.comingOrders)
     const dispatch = useDispatch()
     const navigate=useNavigate()
 
-    // useEffect(()=>{
-    //     dispatch(ordersAction())
-    // },[])
-    // console.log(orders);
+    let value = orders?.length;
+    useEffect(()=>{
+        dispatch(comingOrdersAction(user._id))
+        console.log(user);
+        console.log(orders);
 
+    },[orders , user])
    
     return (
         <>
             <AnimatedPage>
             <div className="row justify-content-center align-items-center p-1 m-0 gy-1">
-                    {(orders.userId)?<>{orders.map((order , index)=>(
+                    {(value)?<>{orders.map((order , index)=>(
 
                         <div className="col-12" key={order._id} onClick={() => {navigate(`/Order/${order._id}`)}}>
 

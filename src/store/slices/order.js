@@ -10,6 +10,15 @@ export const oneOrderAction = createAsyncThunk("get/oneOrder" , async (id)=>{
     
 } )
 
+
+export const postOneOrder = createAsyncThunk("create/order" , async (order)=>{
+    console.log(order);
+    const res = await axios.post(`http://localhost:4000/orders/` , order)
+    return res.data
+})
+
+
+
 const oneOrderSlice = createSlice({
     name : "oneOrder",
     initialState : {oneOrder : {}},
@@ -18,6 +27,12 @@ const oneOrderSlice = createSlice({
             state.oneOrder = action.payload[0]
         })
         builder.addCase(oneOrderAction.rejected,(state,action)=>{
+            console.log("rejected");
+        })
+        builder.addCase(postOneOrder.fulfilled,(state,action)=>{
+            console.log(action.payload)
+        })
+        builder.addCase(postOneOrder.rejected,(state,action)=>{
             console.log("rejected");
         })
     }

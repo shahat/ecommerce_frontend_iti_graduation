@@ -155,8 +155,9 @@ const UserEdit = () => {
                         <h6 className="h6">Edit Your Profile</h6>
                         <form onSubmit={(e) => {userEditFormSubmit(e)}}>
                             <div className="row p-0 m-0 justify-content-center align-items-center">
-                                <div className="col-sm-12 col-md-12 col-lg-12 col-12">
-                                    <label htmlFor="firstNameInput" className="form-label">First Name</label>
+                                {(user._id)?<>
+                                    <div className="col-sm-12 col-md-12 col-lg-12 col-12">
+                                    <label htmlFor="firstNameInput" className="form-label">Full Name</label>
                                     <input type="text" id="firstNameInput" className="form-control" placeholder={user.name} name="name" value={editUser.name} onChange={(e) => {inputChange(e)}} />
 
                                 </div>
@@ -179,6 +180,37 @@ const UserEdit = () => {
                                     <button type="button" onClick={()=>{console.log({...editUser})}}>cancel</button>
                                     <input type="submit" value="Save Changes"/>
                                 </div>
+                                </>:<>
+                                <div className="col-sm-12 col-md-12 col-lg-12 col-12">
+                                    <label htmlFor="firstNameInput" className="form-label">Full Name</label>
+                                    <p className="placeholder-wave">
+                                        <span className="placeholder col-12 form-control " style={{height:"40px" }}></span>
+                                    </p>
+                                </div>
+                                <div className="col-sm-12 col-md-12 col-lg-12 col-12">
+                                    <label htmlFor="inputEmail" className="form-label">Email</label>
+                                    <p className="placeholder-wave">
+                                        <span className="placeholder col-12 form-control " style={{height:"40px" }}></span>
+                                    </p>
+                                </div>
+                                
+                                <div className="col-12 my-3">
+                                    <label htmlFor="inputCurrentPassword" className="form-label">Password Changes</label>
+                                    <p className="placeholder-wave">
+                                        <span className="placeholder col-12 my-0 form-control " style={{height:"40px" }}></span>
+                                    </p>                                    
+                                    <p className="placeholder-wave">
+                                        <span className="placeholder col-12 my-0 form-control " style={{height:"40px" }}></span>
+                                    </p>                                    
+                                    <p className="placeholder-wave">
+                                        <span className="placeholder col-12 my-0 form-control " style={{height:"40px" }}></span>
+                                    </p>                                           </div>
+                                <div className="col-12 text-end">
+                                    <button type="button" >cancel</button>
+                                    <input type="submit" value="Save Changes"/>
+                                </div>
+                                </>}
+                                
                             </div>
 
                             
