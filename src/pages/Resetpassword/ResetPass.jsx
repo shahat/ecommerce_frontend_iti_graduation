@@ -5,6 +5,8 @@ import style from "./resetPassword.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import { authContext } from "../../contexts/authContext";
 import { enterResetPassword } from "../../Services/auth";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
+
 
 function ResetPass() {
   const { enteredCode } = useContext(authContext);
@@ -13,6 +15,10 @@ function ResetPass() {
     password: "",
     confirmPassword: "",
   });
+
+    const [isClicked, setIsClicked] = useState(false);
+    const [isConfirmPasswordClicked, setIsConfirmPasswordClicked] =
+      useState(false);
 
   const navigate = useNavigate();
 
@@ -68,7 +74,7 @@ function ResetPass() {
                 handleSubmit(e);
               }}
             >
-              <div className="passwordConfirmation">
+              <div className="passwordConfirmation mb-3 d-flex align-items-center position-relative">
                 <input
                   onChange={(e) => {
                     handlePassword(e);
@@ -76,25 +82,60 @@ function ResetPass() {
                   name="password"
                   className={`form-control px-4  `}
                   placeholder="Password"
-                  type="password"
+                  type={isClicked ? "text" : "password"}
                   id="passwordRecovery"
                   value={userPassword.password}
                 />
+                {isClicked ? (
+                  <FaEyeSlash
+                    onClick={() => {
+                      setIsClicked(!isClicked);
+                    }}
+                    role="button"
+                    className="position-absolute end-0 me-2"
+                  />
+                ) : (
+                  <FaEye
+                    onClick={() => {
+                      setIsClicked(!isClicked);
+                    }}
+                    role="button"
+                    className="position-absolute end-0 me-2"
+                  />
+                )}
               </div>
 
-              <div className="passwordConfirmation">
+              <div className="passwordConfirmation d-flex align-items-center position-relative">
                 <input
                   onChange={(e) => {
                     handlePassword(e);
                   }}
                   name="confirmPassword"
-                  className="form-control mt-4 px-4 "
+                  className="form-control  px-4 "
                   placeholder="Confirm Password"
-                  type="password"
+                  type={isConfirmPasswordClicked ? "text" : "password"}
                   id="confirmPassRecovery"
                   value={userPassword.confirmPassword}
                 />
+                {isConfirmPasswordClicked ? (
+                  <FaEyeSlash
+                    onClick={() => {
+                      setIsConfirmPasswordClicked(!isConfirmPasswordClicked);
+                    }}
+                    role="button"
+                    className="position-absolute end-0 me-2"
+                  />
+                ) : (
+                  <FaEye
+                    onClick={() => {
+                      setIsConfirmPasswordClicked(!isConfirmPasswordClicked);
+                    }}
+                    role="button"
+                    className="position-absolute end-0 me-2"
+                  />
+                )}
               </div>
+
               <div className="d-flex  align-items-center justify-content-between ">
                 <button
                   onClick={() => {
