@@ -11,7 +11,6 @@ export default function AppLayout() {
         <div className={`${styles.fixed_nav} w-100`}>
           <Nav></Nav>
         </div>
-
         <Outlet></Outlet>
         <Footer></Footer>
         <div className={`${styles.bottomNavContainer}`}>

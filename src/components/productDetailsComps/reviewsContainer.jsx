@@ -38,11 +38,7 @@ function Reviews() {
                 className={`${css["reviews-individuals"]} d-flex flex-md-row flex-column flex-wrap justify-content-center`}
             >
                 <ProductReview />
-                <ProductReview />
-                <ProductReview />
-                <ProductReview />
-                <ProductReview />
-                <ProductReview />
+
             </div>
         </>
     );

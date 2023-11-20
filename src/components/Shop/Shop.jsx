@@ -1,4 +1,3 @@
-// import React from "react";
 import Card from "./card";
 import style from "./shop.module.css";
 import "./chechbox.css";
@@ -7,8 +6,6 @@ import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import instance from "../../axiosConfig/instance";
 import { useSelector } from "react-redux";
-// import { productAction } from "../../store/slices/products";
-// import { subCategoryAction } from "../../store/slices/subcategory";
 import SubCategoy from "./subcategory";
 import axios from "axios";
 import Pricefilter from "./pricefilter";
@@ -16,34 +13,30 @@ import Colorfilter from "./colorfilter";
 import Nav from "../Navigation/Nav";
 import Footer from "../Footer/Footer";
 import MobileNav from "../MobileNav/MobileNav";
-//======================================================================================================================
+import cookie from "js-cookie";
 function Shop() {
-  //==============< hndle url query >===================================================================================
+  //===============< hndle url query >===============
+
+  const currentLanguageCode = cookie.get("i18next") || "en";
+  //===============< hndle url query >===============
   const [searchParams] = useSearchParams();
   let searchParam = searchParams.get("search");
   let categoryParam = searchParams.get("category");
   let subcategoryParam = searchParams.get("subcategory");
 
-  console.log(
-    "FROM SHOP : searchParam,categoryParam ,subcategoryParam ",
-    searchParam,
-    categoryParam,
-    subcategoryParam
-  );
-  //===============< states >============================================================================================
+  //===============< states >===============
   var [isVisible, setIsVisible] = useState(false);
   var toggelFilter = () => {
     setIsVisible(!isVisible);
   };
   var [isVisible2, setIsVisible2] = useState(true);
   var [products, setproducts] = useState([]);
-  // var SubCategoies = useSelector((state) => state.subCategories.subCategories);
   var wishList = useSelector((state) => state.wishList.list);
   var [currentPage, setCurrentPage] = useState(1);
   var [currentPage2, setCurrentPage2] = useState(1);
   var [SubCategoies, setSubCategoies] = useState([]);
 
-  //=============< get subcategory product function from url or when click on any subcategory >==========================
+  //===============< get subcategory product function >===============
   async function getSubCategoryProducts(subcategoryParam) {
     var id = subcategoryParam;
     try {
@@ -55,7 +48,7 @@ function Shop() {
       console.log(err);
     }
   }
-  //============< get all subCategory function >=========================================================================
+  //===============< get all subCategory function >===============
   async function getSubcategory(currentPage2) {
     try {
       const data = await instance.get(
@@ -67,7 +60,7 @@ function Shop() {
       console.log(err);
     }
   }
-  //===============< get subcategory which passed on category >===========================================================
+  //===============< get subcategory which passed on category >===============
   async function getSubcategoryFromCategory(categoryParam) {
     try {
       const data = await instance.get(`/subcategories`);
@@ -77,7 +70,6 @@ function Shop() {
       });
 
       setSubCategoies(cat);
-
       const product = cat.map(async (subcat) => {
         const prod = await instance.get(`/subcategories/${subcat.name}`);
         const allProducts = prod.data.data;
@@ -93,19 +85,18 @@ function Shop() {
       console.log(err);
     }
   }
-  //===============< get all products >===================================================================================
+  //===============< get all products >===============
   async function getProducts(currentPage) {
     try {
-      const data = await axios.get(
-        `http://localhost:4000/product?page=${currentPage}`
-      );
+      const data = await instance.get(`/product?page=${currentPage}`);
       const res = data.data.data;
+      console.log("res", res);
       setproducts(res);
     } catch (err) {
       console.log(err);
     }
   }
-  //=============================
+  //===============<
   const getsearchedProduct = async () => {
     try {
       const res = await instance.get(`/product?keyword=${searchParam}`);
@@ -116,10 +107,10 @@ function Shop() {
       console.log(err);
     }
   };
-
+  //===============<
   useEffect(() => {
     if (searchParam) {
-      console.log("fffffffffffffffffffffffffffff");
+      // console.log("fffffffffffffffffffffffffffff");
       getsearchedProduct();
     } else if (subcategoryParam) {
       getSubCategoryProducts(subcategoryParam);
@@ -263,7 +254,7 @@ function Shop() {
               >
                 <SubCategoy
                   name="All subcategory"
-                  img="../assets/images/products-images/images.jpeg"
+                  img="../../../public/assets/images/products-images/images.jpeg"
                 />
               </div>
               {SubCategoies &&
@@ -347,10 +338,10 @@ function Shop() {
                   <Card
                     key={product._id}
                     id={product._id}
-                    title={product.title}
+                    title={currentLanguageCode === "en" ? product.title :product.title_ar }
                     price={product.price}
                     priceAfterDiscount={product.priceAfterDescount}
-                    img={product.thumbnail}
+                    img={product.images[0]}
                     isFavorite={
                       wishList &&
                       wishList.find((single) => single._id._id == product._id)

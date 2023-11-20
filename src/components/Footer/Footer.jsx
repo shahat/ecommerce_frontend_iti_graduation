@@ -5,6 +5,11 @@ import {
   BsEnvelopeExclamation,
   BsTelephone,
 } from "react-icons/bs";
+import { FaFacebook, FaXTwitter } from "react-icons/fa6";
+
+import { FaGooglePlus } from "react-icons/fa";
+import { ImLinkedin } from "react-icons/im";
+
 import { Link } from "react-router-dom";
 
 import "./Footer.css";
@@ -327,23 +332,29 @@ function Footer() {
                   <h3 className="fs-5"> Contact Us </h3>
                   <ul className="list-inline d-flex m-1 justify-content-center">
                     <li>
-                      <a className="text-decoration-none" href="#" title="">
-                        <i className="fa-brands fa-facebook fs-4 px-2 text-warning" />
+                      <a
+                        className="text-decoration-none"
+                        href="#"
+                        title="FaFacebook"
+                      >
+                        <FaFacebook className="fs-1 px-2 text-warning" />
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="">
-                        <i className="fa-brands fa-twitter fs-4 px-2 text-warning " />
+                      <a href="#" title="FaXTwitter">
+                        <FaXTwitter className=" fs-1 px-2 text-warning ">
+                          {" "}
+                        </FaXTwitter>
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="">
-                        <i className="fa-brands fa-google-plus-g  fs-4 px-2 text-warning" />
+                      <a href="#" title="FaGooglePlus">
+                        <FaGooglePlus className=" fs-1 px-2 text-warning "></FaGooglePlus>
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="">
-                        <i className="fa-brands fa-linkedin-in fs-4 px-2 text-warning" />
+                      <a href="#" title="ImLinkedin">
+                        <ImLinkedin className=" fs-1 px-2 text-warning "></ImLinkedin>
                       </a>
                     </li>
                   </ul>
@@ -351,18 +362,9 @@ function Footer() {
                 <div className=" col-10 col-md-6 Payments px-sm-3 text-center my-3">
                   <h3 className="fs-5"> Payment options </h3>
                   <div>
-                    <img
-                      src="../../assets/images/paymentOption/card-amex.svg"
-                      // alt
-                    />
-                    <img
-                      src="../../assets/images/paymentOption/card-mastercard.svg"
-                      // alt
-                    />
-                    <img
-                      src="../../assets/images/paymentOption/card-visa.svg"
-                      // alt
-                    />
+                    <img src="../../assets/images/paymentOption/card-amex.svg" />
+                    <img src="../../assets/images/paymentOption/card-mastercard.svg" />
+                    <img src="../../assets/images/paymentOption/card-visa.svg" />
                     <img src="../../assets/images/paymentOption/cod-en.svg" />
                     <img src="../../assets/images/paymentOption/valu.svg" />
                   </div>

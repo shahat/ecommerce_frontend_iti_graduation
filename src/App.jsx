@@ -1,18 +1,17 @@
-// import react router
+// ===============< import react router >===============
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-// bootstrap
+// ===============< Bootstrap >===============
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-// redux
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+// ===============< Pages and components >===============
 import AppLayout from "./pages/AppLayout/AppLayout";
 import Home from "./components/Home/Home";
 import Shop from "./components/Shop/Shop";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Cart from "./pages/Cart/Cart";
 import WishList from "./pages/WishList/WishList";
-import Order from "./components/Order/Order";
 import Contact from "./components/Contact/Contact";
 import UserProfile from "./components/UserProfile/UserProfile";
 import NotFound from "./pages/NotFound/NotFound";
@@ -27,64 +26,53 @@ import ResetPass from "./pages/Resetpassword/ResetPass";
 import ResetCode from "./pages/ResetCode/ResetCode";
 import { AuthProvider } from "./contexts/authContext";
 import { useState } from "react";
-// import Register from "./pages/Register/Register";
-// import LoginTwo from "./pages/Login/LoginTwo";
 import UserEdit from "./pages/User/userEdit";
 import UserOrders from "./pages/User/userOrders";
-import UserWishlist from "./pages/User/userWishlist";
 import UserAddress from "./pages/User/userAddress";
 import UserPayment from "./pages/User/userPayment";
 import UserComingOrders from "./pages/User/userComingOrders";
 
-// import components and page
+// ===============< import components and page >===============
 function App() {
   const [isLogin, setLogin] = useState(
     localStorage.getItem("token") ? true : false
   );
   const [enteredCode, setEnteredCode] = useState(0);
-
   const router = createBrowserRouter([
     {
       path: "/",
       element: <AppLayout />,
       children: [
         { index: true, element: <Home /> },
-
         {
-          path: "/product",
+          path: "/product/:id",
           element: <ProductDetails />,
           children: [
             { index: true, element: <ReviewsContainer /> },
-            {
-              path: "/product/description",
-              element: <Description />,
-            },
-            {
-              path: "/product/reviews",
-              element: <ReviewsContainer />,
-            },
-            { path: "/product/faq", element: <FAQ /> },
+            { path: "description", element: <Description /> },
+            { path: "reviews", element: <ReviewsContainer /> },
+            { path: "faq", element: <FAQ /> },
           ],
         },
         { path: "/cart", element: <Cart /> },
         { path: "/wishlist", element: <WishList /> },
         { path: "/contact", element: <Contact /> },
-        // protected route user should be loged in
-        { path: "/Order/:id", element: <Order /> },
-        { path: "/userprofile", element: <UserProfile />,
-        children:[
-          {index : true  ,element : <UserEdit/>},
-          {path:"address", element:<UserAddress/>},
-          {path:"payment",element:<UserPayment/>},
-          {path:"pastOrders" , element : <UserOrders/>},
-          {path:"upcomingOrders" , element : <UserComingOrders/>}
-        ]
-       },
+        // { path: "/Order/:id", element: <Order /> },
+        {
+          path: "/userprofile",
+          element: <UserProfile />,
+          children: [
+            { index: true, element: <UserEdit /> },
+            { path: "address", element: <UserAddress /> },
+            { path: "payment", element: <UserPayment /> },
+            { path: "pastOrders", element: <UserOrders /> },
+            { path: "upcomingOrders", element: <UserComingOrders /> },
+          ],
+        },
         { path: "/checkout", element: <CheckOut /> },
       ],
     },
     { path: "/shop", element: <Shop /> },
-
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
     { path: "/emailRecovery", element: <SendCode /> },
