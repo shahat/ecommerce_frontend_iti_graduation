@@ -42,13 +42,11 @@ function Nav() {
     },
   ];
 
-  // catch lang code from cookie
+  // catch lang code from cookie  => get the languge from the array
   const currentLanguageCode = cookie.get("i18next") || "en";
-  // get the languge from the array
   const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
 
   const dispatch = useDispatch();
-
   const [userLogged, setUserLogged] = useState(false);
 
   useEffect(() => {
@@ -61,28 +59,23 @@ function Nav() {
       dispatch(comingOrdersAction(userId));
       dispatch(userAddressGetAction(userId));
     }
+
     //  dispatch(cartAction())
     dispatch(cartRequestAction());
     dispatch(wishListRequestAction());
 
     // localization
     document.body.dir = currentLanguage.dir || "ltr";
-  }, []);
+  }, [currentLanguageCode]);
   useEffect(() => {}, [currentLanguage]);
-
   var cartList = useSelector((state) => state.cart.cartProducts);
   var wishList = useSelector((state) => state.wishList.list);
-
   const navigate = useNavigate();
-
   const [searchValue, setSearchValue] = useState("");
-
   // ============== handle input change ==============
-
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
   };
-
   // ============== handle form submit   ==============
 
   const handleFormSubmit = (event) => {
@@ -107,7 +100,7 @@ function Nav() {
                 className="navbar-brand text-center mx-3 text-md-left"
                 href="index.html"
               >
-                {t("E_Market")}
+                {t("e_Market")}
               </Link>
             </div>
             {/* ============================== Search  ============================== */}
@@ -115,7 +108,9 @@ function Nav() {
             <div className="col col-md-4 ">
               {" "}
               <form
-                className="d-flex align-items-center  "
+                className={`d-flex align-items-center ${
+                  currentLanguageCode === "ar" ? "flex-row-reverse" : ""
+                } `}
                 onSubmit={handleFormSubmit}
               >
                 <input
@@ -123,7 +118,9 @@ function Nav() {
                   ${styles.form_search} 
                   ${styles.form_search_input}`}
                   type="search"
-                  placeholder="Search..."
+                  name="search"
+                  dir={currentLanguage == "en" ? "ltr" : "rtl"}
+                  placeholder={`${t("search")} ...`}
                   onChange={handleInputChange}
                 />
                 <button
@@ -144,7 +141,6 @@ function Nav() {
               <li className="nav-item  dropdown position-relative ">
                 <a
                   className="nav-link dropdown-toggle"
-                  href="#"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -201,20 +197,20 @@ function Nav() {
                           });
                         }}
                       >
-                        Logout
+                        {t("logout")}
                       </Link>
                     </li>
                   ) : (
                     <>
                       <li>
                         <Link to="/login" className="dropdown-item">
-                          Login
+                          {t("login")}
                         </Link>
                       </li>
 
                       <li>
                         <Link to="/register" className="dropdown-item">
-                          register
+                          {t("register")}
                         </Link>
                       </li>
                     </>
@@ -222,7 +218,7 @@ function Nav() {
 
                   <li>
                     <Link to="/userprofile/" className="dropdown-item">
-                      Profile
+                      {t("profile")}
                     </Link>
                   </li>
                 </ul>

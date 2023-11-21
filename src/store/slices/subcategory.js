@@ -1,14 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
+import instance from "../../axiosConfig/instance";
 export var subCategoryAction = createAsyncThunk(
   "subCategories/getAll",
   async (currentPage2) => {
-    var res = await axios.get(
-      `http://localhost:4000/subcategories?page=${currentPage2}`
-    );
-    // console.log(res);
-    // console.log(res.data.data);
+    var res = await instance.get(`/subcategories?page=${currentPage2}`);
     return res.data.data;
   }
 );

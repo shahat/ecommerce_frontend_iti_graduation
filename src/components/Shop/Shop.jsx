@@ -80,6 +80,7 @@ function Shop() {
         (acc, products) => acc.concat(products),
         []
       );
+
       setproducts(allProducts);
     } catch (err) {
       console.log(err);
@@ -338,7 +339,11 @@ function Shop() {
                   <Card
                     key={product._id}
                     id={product._id}
-                    title={currentLanguageCode === "en" ? product.title :product.title_ar }
+                    title={
+                      currentLanguageCode === "en"
+                        ? product.title
+                        : product.title_ar
+                    }
                     price={product.price}
                     priceAfterDiscount={product.priceAfterDescount}
                     img={product.images[0]}

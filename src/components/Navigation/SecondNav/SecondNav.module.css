@@ -1,6 +1,8 @@
+.rtl {
+  direction: rtl;
+}
 @media screen and (max-width: 768px) {
-    .nav_display
-    {
-      display: none;
-    }
+  .nav_display {
+    display: none;
   }
+}

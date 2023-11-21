@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function SecondNav() {
   return (
     <div className="container-fluid bg-dark mb-30">

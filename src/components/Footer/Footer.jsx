@@ -327,7 +327,7 @@ function Footer() {
           </div>
           <section className="socialMedia">
             <div className="container d-flex justify-content-between">
-              <div className="row w-100 justify-content-between  align-items-center my-3">
+              <div className="row w-100 justify-content-md-between justify-content-center  align-items-center my-3">
                 <div className="col-10 col-md-6 contact-us px-sm-3 text-center my-3">
                   <h3 className="fs-5"> Contact Us </h3>
                   <ul className="list-inline d-flex m-1 justify-content-center">
