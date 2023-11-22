@@ -2,62 +2,62 @@ import css from "../../assets/style/product.module.css";
 import Card from "../Shop/card";
 
 export default function RelatedProducts() {
-    return (
-        <div
-            className={`${css.details} ${css.product} row d-flex col-md-10 justify-content-center m-0 p-0 mt-4`}
-        >
-            <div className="related-h">
-                <h3>
-                    <i
-                        className="fa-solid fa-rectangle-list"
-                        style={{
-                            color: "#005268",
-                        }}
-                    ></i>
-                    Related Products
-                </h3>
-            </div>
-            <div
-                className={`${css["card-vatrina"]} d-flex flex-nowrap w-100 overflow-y-scroll ${css.example}`}
-            >
-                <Card
-                    img="src/assets/images/products-images/accessories.jpg"
-                    priceAfterDiscount={300}
-                    price={100}
-                    title="lorem lorem lorem lorem"
-                />
-                <Card
-                    img="src/assets/images/products-images/accessories.jpg"
-                    priceAfterDiscount={300}
-                    price={100}
-                    title="lorem lorem lorem lorem"
-                />
-                <Card
-                    img="src/assets/images/products-images/accessories.jpg"
-                    priceAfterDiscount={300}
-                    price={100}
-                    title="lorem lorem lorem lorem"
-                />
-                <Card
-                    img="src/assets/images/products-images/accessories.jpg"
-                    priceAfterDiscount={300}
-                    price={100}
-                    title="lorem lorem lorem lorem"
-                />
-                <Card
-                    img="src/assets/images/products-images/accessories.jpg"
-                    priceAfterDiscount={300}
-                    price={100}
-                    title="lorem lorem lorem lorem"
-                />
-                <Card
-                    img="src/assets/images/products-images/accessories.jpg"
-                    priceAfterDiscount={300}
-                    price={100}
-                    title="lorem lorem lorem lorem"
-                />
+  return (
+    <div
+      className={`${css.details} ${css.product} row d-flex col-md-10 justify-content-center m-0 p-0 mt-4`}
+    >
+      <div className="related-h">
+        <h3>
+          <i
+            className="fa-solid fa-rectangle-list"
+            style={{
+              color: "#005268",
+            }}
+          ></i>
+          Related Products
+        </h3>
+      </div>
+      <div
+        className={`${css["card-vatrina"]} d-flex flex-nowrap w-100 overflow-y-scroll ${css.example}`}
+      >
+        <Card
+          img="src/assets/images/products-images/accessories.jpg"
+          priceAfterDiscount={300}
+          price={100}
+          title="lorem lorem lorem lorem"
+        />
+        <Card
+          img="src/assets/images/products-images/accessories.jpg"
+          priceAfterDiscount={300}
+          price={100}
+          title="lorem lorem lorem lorem"
+        />
+        <Card
+          img="src/assets/images/products-images/accessories.jpg"
+          priceAfterDiscount={300}
+          price={100}
+          title="lorem lorem lorem lorem"
+        />
+        <Card
+          img="src/assets/images/products-images/accessories.jpg"
+          priceAfterDiscount={300}
+          price={100}
+          title="lorem lorem lorem lorem"
+        />
+        <Card
+          img="src/assets/images/products-images/accessories.jpg"
+          priceAfterDiscount={300}
+          price={100}
+          title="lorem lorem lorem lorem"
+        />
+        <Card
+          img="src/assets/images/products-images/accessories.jpg"
+          priceAfterDiscount={300}
+          price={100}
+          title="lorem lorem lorem lorem"
+        />
 
-                {/* <div
+        {/* <div
                     className="card col-1"
                     style={{
                         width: "12rem",
@@ -735,7 +735,7 @@ export default function RelatedProducts() {
                         </div>
                     </div>
                 </div> */}
-            </div>
-        </div>
-    );
+      </div>
+    </div>
+  );
 }
