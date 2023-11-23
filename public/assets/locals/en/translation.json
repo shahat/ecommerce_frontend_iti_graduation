@@ -5,7 +5,6 @@
   "categories": "categories",
   "lates_Clothes_collection": "lates Clothes collection ",
   "lates_electronics_collection": "lates Electronics collection ",
-
   "latest": "latest",
   "collection": "collection",
   "subCategory": "subCategory",
@@ -15,7 +14,7 @@
   "login": "login",
   "register": "register",
   "profile": "profile",
-  "Logout": "logout",
+  "logout": "logout",
   "Latest_collection_in_market": "Latest collections in  Market",
   "shop_now": "shop now",
   "contact_us": "contact us",
@@ -24,7 +23,7 @@
   "We_are_Always_Here_To_Help_Reach_out_to_us": "We’re Always Here To Help Reach out to us",
   "help_center": "help center",
   "email_support": "email support",
-  "phone": "phone",
+  "phone_support": "phone support",
   "cart": "cart",
   "wish_list": "wish list",
   "filter": "filter"

@@ -112,7 +112,7 @@ export default function MobileNav() {
           >
             <li>
               <Link to="login" className="dropdown-item">
-                Login
+                {t("login")}
               </Link>
             </li>
             <li>
@@ -120,7 +120,7 @@ export default function MobileNav() {
             </li>
             <li>
               <Link to="register" className="dropdown-item">
-                register
+                {t("register")}
               </Link>
             </li>
             <li>
@@ -128,7 +128,7 @@ export default function MobileNav() {
             </li>
             <li>
               <Link to="/userprofile" className="dropdown-item">
-                Profile
+                {t("profile")}
               </Link>
             </li>
             <li>
@@ -136,7 +136,7 @@ export default function MobileNav() {
             </li>
             <li>
               <Link className="dropdown-item" onClick={handleLogout}>
-                LogOut
+                {t("logout")}
               </Link>
             </li>
           </ul>

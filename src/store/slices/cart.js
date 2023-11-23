@@ -131,7 +131,6 @@ const cartSlice = createSlice({
         });
         builder.addCase(modifyProductAction.rejected, (state, action) => {
             console.log("rejected");
-            // cartRequestAction()
             state.loading = false
         });
         builder.addCase(removeFromCartRequestAction.pending, (state, action) => {
@@ -144,7 +143,6 @@ const cartSlice = createSlice({
                 state.cartProducts = state.cartProducts.filter(
                     (item) => item._id._id != action.meta.arg
                 );
-                // state.loading = false
             }
         );
         builder.addCase(deleteCart.fulfilled,(state,action)=>{

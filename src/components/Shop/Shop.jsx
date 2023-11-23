@@ -111,7 +111,6 @@ function Shop() {
   //===============<
   useEffect(() => {
     if (searchParam) {
-      // console.log("fffffffffffffffffffffffffffff");
       getsearchedProduct();
     } else if (subcategoryParam) {
       getSubCategoryProducts(subcategoryParam);

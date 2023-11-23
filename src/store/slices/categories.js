@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../axiosConfig/instance";
 
-// ==================== create ca ====================
+// ====================  ====================
 export const categoryAction = createAsyncThunk(
   "categories/getAll",
   async () => {

@@ -14,7 +14,7 @@
   "login": "تسجيل الدخول",
   "register": "تسجيل حساب",
   "profile": "الصفحه الشخصيه",
-  "Logout": "تسجيل الخروج",
+  "logout": "تسجيل الخروج",
   "Latest_collection_in_market": "أحدث المجموعات في السوق",
   "shop_now": "تسوق الان",
   "contact_us": "تواصل معنا",
@@ -23,7 +23,7 @@
   "We_are_Always_Here_To_Help_Reach_out_to_us": "نحن دائمًا هنا للمساعدة في التواصل معنا",
   "help_center": "مركزالخدمات",
   "email_support": "دعم البريد الإلكتروني",
-  "phone": "تيليفون",
+  "phone_support": "دعم الهاتف",
   "cart": "سله التسوق",
   "wish_list": "المفضله",
   "filter": "تصفيه"

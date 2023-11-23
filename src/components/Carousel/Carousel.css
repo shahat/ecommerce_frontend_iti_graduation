@@ -64,3 +64,26 @@
   height: 60vh;
   background-color: rgb(rgba(11, 11, 11, 0.751), green, blue);
 }
+
+.carousel_caption {
+  top: 50%;
+  left: 40%;
+  transform: translate(-20%, -50%);
+  text-align: left;
+  width: 60%;
+}
+
+.custom_button {
+  transition: 0.2s;
+  color: black;
+  outline: 0;
+  padding: 8px 10px;
+  background-color: #ffc107;
+  border-radius: 10px;
+}
+
+.custom_button:hover {
+  color: black;
+  border: 3px #ffc107 solid;
+  border-radius: 10px;
+}

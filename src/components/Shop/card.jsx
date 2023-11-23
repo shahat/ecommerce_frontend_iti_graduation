@@ -8,6 +8,7 @@ import { addToBothCartsAction } from "./../../store/slices/cart";
 import { useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { IoMdCart } from "react-icons/io";
+import { useSelector } from "react-redux";
 // import { toast } from "react-toastify/dist/components";
 import {
   addToWishListAction,
@@ -20,7 +21,7 @@ function Card(props) {
   var cart = useSelector((state) => state.cart.cart);
   var addToCart = (id) => {
     console.log(id);
-    toast.success(`product added to the cart successfully`); // moved to the slice
+    // toast.success(`product added to the cart successfully`); // moved to the slice
     dispatch(addToBothCartsAction(id));
   };
   const addFavorites = (id) => {

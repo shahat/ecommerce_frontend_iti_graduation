@@ -5,7 +5,7 @@ import { FaPlus } from "react-icons/fa6";
 import Form from "react-bootstrap/Form";
 import { BsPlusSquareDotted } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
-
+import instance from "../../axiosConfig/instance";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
@@ -19,10 +19,10 @@ import {
   setDiscount,
   setSubTotal,
 } from "../../store/slices/checkOut";
-import axios from "axios";
 import { postOneOrder } from "../../store/slices/order";
 import { deleteCart } from "../../store/slices/cart";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CheckOut = () => {
   const dispatch = useDispatch();
@@ -45,40 +45,37 @@ const CheckOut = () => {
     apartment: "",
     extraDetails: "",
   });
-
   const [sentAddress, setShippingAddress] = useState({
     id: "",
   });
-  const [sentItems, setSentItems] = useState([]);
-  const [bankCard, setBankCard] = useState({
-    cardNumber: "",
-    cardHolder: "",
-    expires: "",
-    cvc: "",
-  });
-
   const [order, setOrder] = useState({});
 
+  // ===========< price >===========
   const [pricing, setPricing] = useState({
     subTotal: 0,
     discount: 0,
     delivery: 0,
     total: 0,
   });
-
+  // ===========< copon >===========
   const [couponValue, setCoupon] = useState({
     coupon: "",
     valid: false,
     discount: 0,
   });
+  //
   const [cardIsValid, setCardValidation] = useState(false);
   const [payCash, setPayCash] = useState(true);
 
   useEffect(() => {
     handlingPrice();
+    console.log("this is the order", order);
   }, [userCart, userCheckoutPrice]);
 
+  // ===========< checkout price >===========
+
   const handlingPrice = () => {
+    userCart && userCart.length > 0 && console.log("userCart", userCart);
     let subtotal = 0;
     let items = [];
     for (let i = 0; i < userCart.length; i++) {
@@ -87,17 +84,18 @@ const CheckOut = () => {
       subtotal = subtotal + prdPrice * prdQun;
       let prd = {
         productId: userCart[i]._id._id,
+        productName: userCart[i]._id.title,
+        productImage: userCart[i]._id.thumbnail,
+        productDes: userCart[i]._id.description,
         quantity: userCart[i].quantity,
         price: userCart[i].priceWhenAdded,
       };
       items.push(prd);
-      // setSentItems(sentItems => [...sentItems, {productId:userCart[i]._id._id ,quantity:userCart[i].quantity ,price:userCart[i].priceWhenAdded}])
     }
-    console.log(items);
     setPricing({ ...pricing, subTotal: subtotal });
-    console.log(subtotal);
     dispatch(setSubTotal(subtotal));
     dispatch(changeTotal());
+
     setOrder({
       ...order,
       userId: user._id,
@@ -110,7 +108,10 @@ const CheckOut = () => {
 
   const inputChange = (e) => {
     setAddress({ ...newAddress, [e.target.name]: e.target.value });
+    console.log("input change order", order);
   };
+
+  // ===========< handle adding new address >===========
 
   const addressFormSubmit = (e) => {
     e.preventDefault();
@@ -121,44 +122,41 @@ const CheckOut = () => {
     ];
 
     dispatch(getAddress(sentAddress, user._id));
-    console.log(sentAddress);
     handleClose();
   };
 
+  // ===========< handle submit order  >===========
+
   const orderFormSubmit = (e) => {
     e.preventDefault();
-    console.log(sentAddress.id);
-
-    console.log({ ...order });
-    dispatch(postOneOrder(order));
-    dispatch(deleteCart(user._id));
-    navigate(`/`);
+    console.log("place an order action", order);
+    axios
+      .post(`http://localhost:4000/stripe/create-checkout-session`, {
+        order,
+        userId: user._id,
+      })
+      .then((res) => {
+        if (res.data.url) {
+          window.location.href = res.data.url;
+        }
+      })
+      .catch((err) => {
+        console.log("err.message", err.message);
+      });
+    // dispatch(postOneOrder(order));
+    // dispatch(deleteCart(user._id));
+    // navigate(`/`);
   };
 
-  const bankInputChange = (e) => {
-    setBankCard({ bankCard, [e.target.name]: e.target.value });
-  };
-
-  const paymentFormSubmit = (e) => {
-    e.preventDefault();
-    // check card information and make validtion in cardIsValid variable
-    // if(true){
-    //     setOrder({...order, paymentStatus:"Paid Online" })
-    // }
-    // else{
-    //     setOrder({...order, paymentStatus:"Cash on delivery" })
-
-    // }
-  };
+  // ===========< adding and checking copune  >===========
 
   const couponInputChange = (e) => {
     setCoupon({ ...couponValue, coupon: e.target.value });
   };
+
   const checkCoupon = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:4000/coupon/${couponValue.coupon}`
-      );
+      const res = await instance.get(`/coupon/${couponValue.coupon}`);
       dispatch(setDiscount(res.data));
       setCoupon({ ...couponValue, valid: true });
 
@@ -173,29 +171,19 @@ const CheckOut = () => {
       setCoupon({ ...couponValue, coupon: "", valid: false });
     }
   };
-
   const orderInputChange = (e) => {
-    console.log(e.target.value);
-
     setOrder({ ...order, shippingAddress: userAddresses[e.target.value] });
+  };
+  const orderPaymentChange = (e) => {
+    let payment = e.target.value;
+    setOrder({ ...order, paymentStatus: payment });
+    console.log("orderPaymentChange", order);
   };
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [bankShow, setBankShow] = useState(false);
-
-  const handleBankModalClose = () => {
-    setBankShow(false);
-    if (cardIsValid) {
-      setPayCash(false);
-    } else {
-      setPayCash(true);
-    }
-  };
-  const handleBankModalShow = () => setBankShow(true);
   return (
     <div id="billing-details" className="container p-1">
       <h2>Billing Details</h2>
@@ -234,7 +222,7 @@ const CheckOut = () => {
                   centered
                 >
                   <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title> adding new address</Modal.Title>
                   </Modal.Header>
                   <Form>
                     <Modal.Body>
@@ -453,6 +441,7 @@ const CheckOut = () => {
                   </Form>
                 </Modal>
               </div>
+
               {addressValue ? (
                 <>
                   {userAddresses.map((address, index) => (
@@ -549,10 +538,13 @@ const CheckOut = () => {
                 </div>
               ))}
             </ul>
+
             <ul id="paymentsMethod" className="p-0 m-0 my-3">
               <li
                 className={`row p-0 m-0 justify-content-start ${styles.paymentsMethodContainer}`}
               >
+                {/* =========< cash on delevary payment >=========  */}
+
                 <div className={`col-2 ${styles.paymentsMethodInputContainer}`}>
                   <input
                     type="radio"
@@ -560,10 +552,10 @@ const CheckOut = () => {
                     name="paymentStatus"
                     id="cashOnDelivery"
                     value={`Cash On delivery`}
+                    selected
                     required
-                    checked={payCash}
-                    onChange={(e) => {
-                      orderInputChange(e);
+                    onClick={(e) => {
+                      orderPaymentChange(e);
                     }}
                   />
                 </div>
@@ -576,6 +568,7 @@ const CheckOut = () => {
                   </label>
                 </div>
               </li>
+              {/* =========< Bank payment >=========  */}
               <li className="row p-0 m-0 justify-content-start ">
                 <div className="col-2 ">
                   <input
@@ -584,116 +577,13 @@ const CheckOut = () => {
                     name="paymentStatus"
                     id="bankRadio"
                     value={`Paid Online`}
-                    onClick={handleBankModalShow}
-                    onChange={(e) => {
-                      orderInputChange(e);
+                    onClick={(e) => {
+                      orderPaymentChange(e);
                     }}
                     required
-                    checked={!payCash}
                   />
                 </div>
-                <Modal
-                  show={bankShow}
-                  onHide={handleBankModalClose}
-                  size="lg"
-                  keyboard={false}
-                  backdrop="static"
-                  centered
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title>Payment</Modal.Title>
-                  </Modal.Header>
-                  <Form
-                    onSubmit={(e) => {
-                      paymentFormSubmit(e);
-                    }}
-                  >
-                    <Modal.Body>
-                      <div className="row justify-content-around align-items-center gy-2">
-                        <div className="col-12">
-                          <label htmlFor="newCardNumber" className="form-label">
-                            Card Number
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="newCardNumber"
-                            name="cardNumber"
-                            value={bankCard.cardNumber}
-                            autoFocus
-                            onChange={(e) => {
-                              bankInputChange(e);
-                            }}
-                            maxLength={16}
-                          />
-                        </div>
-                        <div className="col-12">
-                          <label htmlFor="newCardHolder" className="form-label">
-                            Card Holder
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="newCardHolder"
-                            name="cardHolder"
-                            value={bankCard.cardHolder}
-                            onChange={(e) => {
-                              bankInputChange(e);
-                            }}
-                          />
-                        </div>
-                        <div className="col-8">
-                          <label
-                            htmlFor="newCardExpires"
-                            className="form-label"
-                          >
-                            Expires
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="newCardExpires"
-                            name="expires"
-                            value={bankCard.expires}
-                            onChange={(e) => {
-                              bankInputChange(e);
-                            }}
-                          />
-                        </div>
-                        <div className="col-4">
-                          <label htmlFor="newCardCVC" className="form-label">
-                            CVC
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="newCardCVC"
-                            name="cvc"
-                            value={bankCard.cvc}
-                            onChange={(e) => {
-                              bankInputChange(e);
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        variant="secondary"
-                        onClick={handleBankModalClose}
-                      >
-                        Close
-                      </Button>
-                      <Button
-                        variant="primary"
-                        type="submit"
-                        onClick={handleBankModalClose}
-                      >
-                        Place Order
-                      </Button>
-                    </Modal.Footer>
-                  </Form>
-                </Modal>
+
                 <div className="col-5 ">
                   <label
                     htmlFor="bankRadio"
@@ -726,6 +616,8 @@ const CheckOut = () => {
                 </div>
               </li>
             </ul>
+
+            {/* =========< pilling prices >=========  */}
             <ul id="billingPrice" className="p-0 m-0 my-3">
               <li
                 className={`row m-0 p-0 justify-content-between ${styles.billingPriceContainer}`}
@@ -773,6 +665,7 @@ const CheckOut = () => {
                 </div>
               </li>
             </ul>
+
             <div
               className={`row p-0 m-0 justify-content-around my-3 ${styles.coupon}`}
             >

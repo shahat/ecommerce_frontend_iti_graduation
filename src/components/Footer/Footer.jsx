@@ -13,7 +13,10 @@ import { ImLinkedin } from "react-icons/im";
 import { Link } from "react-router-dom";
 
 import "./Footer.css";
+import { useTranslation } from "react-i18next";
+
 function Footer() {
+  const { t } = useTranslation();
   return (
     <>
       <div>
@@ -25,19 +28,18 @@ function Footer() {
                   <BsHeadset className="icon fs-3"></BsHeadset>
                 </p>
                 <p className="my-0 py-0 px-4">
-                  We’re Always Here To Help Reach out to us through any of these
-                  support channels
+                  {t("We_are_Always_Here_To_Help_Reach_out_to_us")}
                 </p>
               </div>
               <div className="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                 <p className="my-0 py-0">
                   <Link to="/contact">
-                    {" "}
+                    {""}
                     <BsPersonExclamation className="icon fs-3"></BsPersonExclamation>
                   </Link>
                 </p>
                 <p className="my-0 py-0  contact-us  px-4">
-                  Help Center help.noon.com
+                  {t("Help_Center")} help.noon.com
                 </p>
               </div>
               <div className="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
@@ -45,7 +47,7 @@ function Footer() {
                   <BsEnvelopeExclamation className="icon fs-3" />
                 </p>
                 <p className="my-0 py-0  contact-us px-4">
-                  EMAIL SUPPORT egypt@Emarket.com{" "}
+                  {t("email_support")} egypt@Emarket.com{" "}
                 </p>
               </div>
               <div className="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
@@ -56,7 +58,7 @@ function Footer() {
                 </div>
                 <p className="my-0 py-0  contact-us px-4">
                   {" "}
-                  PHONE SUPPORT 16358{" "}
+                  {t("phone_support")} 16358{" "}
                 </p>
               </div>
             </div>
