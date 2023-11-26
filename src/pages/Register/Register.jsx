@@ -4,10 +4,38 @@ import { AiOutlineGoogle } from "react-icons/ai";
 import style from "./register.module.css";
 import { registerAuth } from "../../Services/auth";
 import toast, { Toaster } from "react-hot-toast";
-import instance from "../../axiosConfig/instance";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 function Register() {
+  // userName with regx and errors
+  const nameRegx = /^[a-zA-Z0-9 ]{3,15}$/;
+
+  // email with regx and errors
+  const emailRegx = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)*(\.[a-z]{2,4})$/;
+
+  // password with regx and errors
+  const passwordRegx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+
   const navigate = useNavigate();
+
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [errors, setErrors] = useState({
+    nameError: "",
+    emailError: "",
+    passwordError: "",
+    confirmPasswordError: "",
+    passwordMatch: "",
+  });
+
+  const [isClicked, setIsClicked] = useState(false);
+  const [isConfirmPasswordClicked, setIsConfirmPasswordClicked] =
+    useState(false);
 
   async function auth() {
     try {
@@ -23,41 +51,23 @@ function Register() {
     }
   }
 
-  // userName with regx and errors
-  const nameRegx = /^[a-zA-Z0-9 ]{3,20}$/;
-
-  // email with regx and errors
-  const emailRegx = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)*(\.[a-z]{2,4})$/;
-
-  // password with regx and errors
-  const passwordRegx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
-
-  // regx expression to be used commonly "generally"
-  const specialCharacterRegx = /[!@#$%^&*()_+{}\[\]:;<>,.?~]/;
-  const lowerCaseRegx = /[a-z]/;
-  const upperCaseRegx = /[A-Z]/;
-
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [errors, setErrors] = useState({
-    nameError: true,
-    emailError: false,
-    passwordError: false,
-    confirmPasswordError: false,
-    passwordMatch: false,
-  });
-
   const navigateToLogin = () => {
     navigate("/login");
   };
 
   const handleValidation = (e) => {
-    if (e.target.name == "firstPassword") {
+    if (e.target.name === "name") {
+      setUser({ ...user, name: e.target.value });
+      setErrors({
+        ...errors,
+        nameError:
+          e.target.value.length == 0
+            ? "Name is required"
+            : !nameRegx.test(e.target.value)
+            ? "name must be at least 3 characters"
+            : "",
+      });
+    } else if (e.target.name === "firstPassword") {
       setUser({ ...user, password: e.target.value });
       setErrors({
         ...errors,
@@ -65,31 +75,31 @@ function Register() {
           e.target.value.length == 0
             ? "Password is required"
             : !passwordRegx.test(e.target.value)
-            ? "Password must meet the specified criteria"
+            ? "Password must be at least 8 characters, one uppercase, one lowercase, special character"
             : "",
       });
-    } else if (e.target.name == "secondPassword") {
+    } else if (e.target.name === "secondPassword") {
       setUser({ ...user, confirmPassword: e.target.value });
+      const isPasswordEmpty = e.target.value === 0;
+      const doPasswordMatch = user.password === e.target.value;
       setErrors({
         ...errors,
-        confirmPasswordError:
-          e.target.value.length == 0
-            ? "Password is required"
-            : !passwordRegx.test(e.target.value)
-            ? "Password must meet the specified criteria"
-            : "",
+        confirmPasswordError: isPasswordEmpty
+          ? "Password is required"
+          : doPasswordMatch
+          ? ""
+          : "Confirm password must match primary password",
       });
-    } else if (e.target.name == "email") {
+    } else if (e.target.name === "email") {
       setUser({ ...user, email: e.target.value });
       setErrors({
         ...errors,
-        emailError: e.target.value.length == 0 ? "Email is Required" : "",
-      });
-    } else if (e.target.name == "name") {
-      setUser({ ...user, name: e.target.value });
-      setErrors({
-        ...errors,
-        nameError: e.target.value.length == 0 ? "Name is Required" : "",
+        emailError:
+          e.target.value.length == 0
+            ? "Email is required"
+            : !emailRegx.test(e.target.value)
+            ? "Invalid email address. Please enter a valid email address in the format username@domain."
+            : "",
       });
     }
   };
@@ -97,78 +107,63 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      errors.nameError ||
-      errors.emailError ||
-      errors.passwordError ||
-      errors.confirmPasswordError
-    ) {
-      toast.error("Validation Error", { position: "top-center" });
-    } else {
-      try {
-        registerAuth(user).then(async (res) => {
-          let { token2 } = localStorage;
-          if (token2) {
-            let tokenObj = JSON.parse(token2);
-            tokenObj.userId = res.data.data.user._id;
-            token2 = JSON.stringify(tokenObj);
-            await instance.post(
-              "/cart/",
-              {},
-              {
-                headers: { token2 },
-              }
-            );
-            await instance.post(
-              "/wish/",
-              {},
-              {
-                headers: { token2 },
-              }
-            );
-          } else {
-            token2 = JSON.stringify({ userId: res.data.data.user._id });
-            await instance.post(
-              "/cart/",
-              {},
-              {
-                headers: { token2 },
-              }
-            );
-            await instance.post(
-              "/wish/",
-              {},
-              {
-                headers: { token2 },
-              }
-            );
-          }
-          navigate("/login");
-        });
-      } catch (error) {
+    registerAuth(user)
+      .then(async (res) => {
+        console.log("Navigating to login page");
+        navigateToLogin();
+        console.log(res);
+        let { token2 } = localStorage;
+        if (token2) {
+          let tokenObj = JSON.parse(token2);
+          tokenObj.userId = res.data.data.user._id;
+          token2 = JSON.stringify(tokenObj);
+          await instance.post(
+            "/cart/",
+            {},
+            {
+              headers: { token2 },
+            }
+          );
+          await instance.post(
+            "/wish/",
+            {},
+            {
+              headers: { token2 },
+            }
+          );
+        } else {
+          token2 = JSON.stringify({ userId: res.data.data.user._id });
+          await instance.post(
+            "/cart/",
+            {},
+            {
+              headers: { token2 },
+            }
+          );
+          await instance.post(
+            "/wish/",
+            {},
+            {
+              headers: { token2 },
+            }
+          );
+        }
+      })
+      .catch((error) => {
         if (error.response) {
           const errorMessage = error.response.data.message;
-          // console.log(errorMessage)
-
           toast.error(errorMessage, {
             position: "top-center",
           });
         }
-      }
-    }
-
-    if (user.password !== user.confirmPassword) {
-      setErrors({ ...errors, passwordMatch: "Passwords do not match!" });
-    } else {
-      setErrors({ ...errors, passwordMatch: "" });
-    }
+      });
   };
 
   return (
     <div className="container">
       <div className="row justify-content-center">
         <div
-          className={` col-sm-12 col-md-6 col-lg-5 col-xl-5 mt-2  d-flex flex-column justify-content-center align-items-center ${style.signupInfo}`}
+          className={` col-sm-8  col-lg-4  mt-2  d-flex flex-column justify-content-center align-items-center ${style.signupInfo}`}
         >
           <h4 className="mt-4 p-1">Create an account</h4>
           <p>Enter your details below</p>
@@ -181,12 +176,14 @@ function Register() {
               }}
             >
               <div className="nameInfo">
-                <label htmlFor="name" />
+                <label htmlFor="name" className="mt-3">
+                  Name :
+                </label>
                 <input
                   onChange={(e) => {
                     handleValidation(e);
                   }}
-                  className="form-control"
+                  className={`form-control`}
                   placeholder="Name"
                   type="text"
                   id="name"
@@ -194,16 +191,21 @@ function Register() {
                   value={user.name}
                 />
 
-                <p className="text-danger">{errors.nameError}</p>
+                {errors.nameError && (
+                  <p className="text-danger">{errors.nameError}</p>
+                )}
               </div>
-              <div className="email">
-                <label htmlFor="email" />
+
+              <div className="email ">
+                <label htmlFor="email" className="mt-3">
+                  Email :
+                </label>
                 <input
                   onChange={(e) => {
                     handleValidation(e);
                   }}
                   className={`form-control ${
-                    errors.emailError && "border-danger shadow-none"
+                    errors.emailError && "border-danger shadow-none border-2"
                   }`}
                   placeholder="Email"
                   type="email"
@@ -211,58 +213,102 @@ function Register() {
                   name="email"
                   value={user.email}
                 />
-                {errors.emailError ? (
-                  <p className="text-danger">{errors.emailError}</p>
-                ) : (
-                  ""
-                )}
               </div>
+                {errors.emailError && (
+                  <small className="text-danger fw-bold">{errors.emailError}</small>
+                )}
 
               <div className="password">
-                <label htmlFor="Password" />
-                <input
-                  onChange={(e) => {
-                    handleValidation(e);
-                  }}
-                  className={`form-control ${
-                    errors.passwordError && "border-danger shadow-none"
-                  }`}
-                  placeholder="Password"
-                  type="password"
-                  id="password"
-                  name="firstPassword"
-                  value={user.password}
-                />
-                <div className="passInstructions my-1">
-                  <p className="fw-bold p-0 my-1 text-muted">
-                    Password strength:
-                  </p>
-                  <p className="text-muted">
-                    use at least 8 characters, one lowercase letter, one
-                    uppercase letter, one special letter
-                  </p>
-                </div>
-                <div className="passwordConfirmation">
+                <label htmlFor="password" className="mt-3">
+                  Password :
+                </label>
+
+                <div className="d-flex align-items-center position-relative">
                   <input
                     onChange={(e) => {
                       handleValidation(e);
                     }}
-                    className={`form-control ${
-                      errors.confirmPasswordError &&
-                      "border-danger shadow-none mt-4"
+                    className={`form-control  ${
+                      errors.passwordError && "border-danger shadow-none"
                     }`}
-                    placeholder="Confirm Password"
-                    type="password"
-                    id="confirmPassRecovery"
-                    name="secondPassword"
-                    value={user.confirmPassword}
+                    placeholder="Password"
+                    type={isClicked ? "text" : "password"}
+                    id="password"
+                    name="firstPassword"
+                    value={user.password}
                   />
+                  {isClicked ? (
+                    <FaEyeSlash
+                      onClick={() => {
+                        setIsClicked(!isClicked);
+                      }}
+                      role="button"
+                      className="position-absolute end-0 me-2"
+                    />
+                  ) : (
+                    <FaEye
+                      onClick={() => {
+                        setIsClicked(!isClicked);
+                      }}
+                      role="button"
+                      className="position-absolute end-0 me-2"
+                    />
+                  )}
                 </div>
+                {errors.passwordError && (
+                  <small className="text-danger fw-bold">{errors.passwordError}</small>
+                )}
 
-                {errors.passwordMatch && (
-                  <p className="text-danger">Sorry, Password does not match</p>
+                <div className="passwordConfirmation">
+                  <label htmlFor="passwordConfirmation" className="mt-3">
+                    Confirm Password :
+                  </label>
+
+                  <div className="d-flex align-items-center position-relative">
+                    <input
+                      onChange={(e) => {
+                        handleValidation(e);
+                      }}
+                      className={`form-control  ${
+                        errors.confirmPasswordError &&
+                        "border-danger shadow-none "
+                      }`}
+                      placeholder="Confirm Password"
+                      type={isConfirmPasswordClicked ? "text" : "password"}
+                      id="passwordConfirmation"
+                      name="secondPassword"
+                      value={user.confirmPassword}
+                    />
+                    {isConfirmPasswordClicked ? (
+                      <FaEyeSlash
+                        onClick={() => {
+                          setIsConfirmPasswordClicked(
+                            !isConfirmPasswordClicked
+                          );
+                        }}
+                        role="button"
+                        className="position-absolute end-0 me-2"
+                      />
+                    ) : (
+                      <FaEye
+                        onClick={() => {
+                          setIsConfirmPasswordClicked(
+                            !isConfirmPasswordClicked
+                          );
+                        }}
+                        role="button"
+                        className="position-absolute end-0 me-2"
+                      />
+                    )}
+                  </div>
+                </div>
+                {errors.confirmPasswordError && (
+                  <small className="text-danger">
+                    {errors.confirmPasswordError}
+                  </small>
                 )}
               </div>
+
               <div className="d-flex align-items-center justify-content-between mt-4">
                 <button
                   type="submit"

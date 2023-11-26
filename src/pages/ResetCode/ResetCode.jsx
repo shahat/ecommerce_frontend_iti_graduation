@@ -86,7 +86,7 @@ function ResetCode() {
                 }}
                 className={`btn  ${style.requestNewCode}`}
               >
-                Go back to request a new code
+                Generate new code
               </button>
             </div>
           </div>

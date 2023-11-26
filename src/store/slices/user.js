@@ -3,13 +3,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const userAction = createAsyncThunk("user/getUser" , async (id)=>{
-    console.log(id);
+    // console.log(id);
     const res = await axios.get(`http://localhost:4000/users/${id}`)
     return res.data
 })
 
 export const userEditAction = createAsyncThunk("edit/user" , async (editUser)=>{
-    console.log(editUser);
+    // console.log(editUser);
     const {id} = editUser
     const {name} = editUser
     const {email} = editUser
@@ -26,10 +26,10 @@ export const userEditAction = createAsyncThunk("edit/user" , async (editUser)=>{
 })
 
 export const userAddressPostAction = createAsyncThunk("create/userAddress" , async (address)=>{
-    console.log([...address]);
+    // console.log([...address]);
     const {id} = address[0]
     const sendAddress = address[1]
-    console.log(sendAddress);
+    // console.log(sendAddress);
     const res = await axios.put(`http://localhost:4000/users/address/${id}` , [...sendAddress])
     return res
 })
@@ -39,7 +39,7 @@ const userSlice = createSlice({
     initialState : {user : {}},
     extraReducers:(builder)=>{
         builder.addCase(userAction.fulfilled,(state,action)=>{
-            console.log(action.payload);
+            // console.log(action.payload);
             state.user = action.payload
         })
         builder.addCase(userAction.rejected,(state,action)=>{

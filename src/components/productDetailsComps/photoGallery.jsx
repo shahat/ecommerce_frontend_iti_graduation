@@ -1,26 +1,23 @@
-import { useState } from "react";
+import {  useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
+import instance from "../../axiosConfig/instance";
 
-function photoGallery(props) {
-  const [images, setImages] = useState([
-    "src/assets/images/wish-list/1.jpeg",
-    "src/assets/images/wish-list/2.jpeg",
-    "src/assets/images/wish-list/3.jpeg",
-    "src/assets/images/wish-list/5.jpeg",
-  ]);
+function photoGallery({ className, product }) {
+  const [quantity, setQuantity] = useState(1);
 
   return (
-    <Carousel
-      className={`${props.className}`}
-      style={{ height: "", backgroundColor: "" }}
-    >
-      {images.map((pic, index) => {
-        return (
+    <Carousel className={`  ${className}`}>
+      {product.images &&
+        Object.values(product.images).map((image, index) => (
           <Carousel.Item key={index}>
-            <img src={pic} width={"100%"} className="rounded-4" />
+            <img
+              src={image}
+              width={"100%"}
+              className="rounded-4 h-100"
+              alt={`Product Image ${index}`}
+            />
           </Carousel.Item>
-        );
-      })}
+        ))}
     </Carousel>
   );
 }
