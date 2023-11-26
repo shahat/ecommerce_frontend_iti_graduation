@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import instance from "../../axiosConfig/instance";
 import { useSelector } from "react-redux";
 import SubCategoy from "./subcategory";
-import axios from "axios";
 import Pricefilter from "./pricefilter";
 import Colorfilter from "./colorfilter";
 import Nav from "../Navigation/Nav";
@@ -338,13 +337,17 @@ function Shop() {
                   <Card
                     key={product._id}
                     id={product._id}
-                    title={currentLanguageCode === "en" ? product.title :product.title_ar }
+                    title={
+                      currentLanguageCode === "en"
+                        ? product.title
+                        : product.title_ar
+                    }
                     price={product.price}
                     priceAfterDiscount={product.priceAfterDescount}
                     img={product.images[0]}
                     isFavorite={
                       wishList &&
-                      wishList.find((single) => single._id._id == product._id)
+                      wishList.find((single) => single._id == product._id)
                     }
                   />
                 ))}

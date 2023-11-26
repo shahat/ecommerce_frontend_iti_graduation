@@ -8,56 +8,55 @@ import Loader from "../../components/Loader/loader";
 import { useEffect, useState } from "react";
 
 function Cart() {
-    const isLoading = useSelector((state) => state.cart.loading);
-    const cartList = useSelector((state) => state.cart.cartProducts);
-    const checkOutStatus = useSelector((state) => state.checkOut);
-    const token = localStorage.getItem("token");
-    const [subTotal, setSubTotal] = useState(0)
-    useEffect(()=>{
-        setSubTotal(0)
-        cartList && cartList.forEach(element => {
-            setSubTotal( (previous)=> previous + (element.priceWhenAdded * element.quantity) )
-        });
-    }, [cartList])
+  const isLoading = useSelector((state) => state.cart.loading);
+  const cartList = useSelector((state) => state.cart.cartProducts);
+  const checkOutStatus = useSelector((state) => state.checkOut);
+  const token = localStorage.getItem("token");
+  const [subTotal, setSubTotal] = useState(0);
+  useEffect(() => {
+    setSubTotal(0);
+    cartList &&
+      cartList.forEach((element) => {
+        setSubTotal(
+          (previous) => previous + element.priceWhenAdded * element.quantity
+        );
+      });
+  }, [cartList]);
 
-    return (
-        <>
-            {isLoading ? (
-                <Loader />
-            ) : (
-                <div className="d-flex row justify-content-center col-12 m-0">
-                    <h1 className="col-12 fw-bolder m-5 text-center">
-                        Your Cart
-                    </h1>
-                    {/* <!-- CART PART --> */}
-                    <div
-                        className={`${css.product} row d-flex col-md-10 justify-content-md-between justify-content-center m-0 p-0`}
-                    >
-                        {/* <!-- Cart-Products PART --> */}
-                        <div
-                            className={`${css["cart_products"]} col-md-7 col-11 border rounded-4 p-4 d-flex flex-column bg-white`}
-                        >
-                            {cartList && cartList.length > 0 ? (
-                                cartList.map((prod, index) => {
-                                    return (
-                                        <>
-                                            <CartProduct
-                                                key={index}
-                                                product={prod}
-                                                quantity= {prod.quantity}
-                                            />
-                                            {index < cartList.length - 1 && (
-                                                <hr className="my-4 w-100" />
-                                            )}
-                                        </>
-                                    );
-                                })
-                            ) : (
-                                <h3 className="text-center fw-semibold">
-                                    Your cart is empty!
-                                </h3>
-                            )}
-                        </div>
+  return (
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="d-flex row justify-content-center col-12 m-0">
+          <h1 className="col-12 fw-bolder m-5 text-center">Your Cart</h1>
+          {/* <!-- CART PART --> */}
+          <div
+            className={`${css.product} row d-flex col-md-10 justify-content-md-between justify-content-center m-0 p-0`}
+          >
+            {/* <!-- Cart-Products PART --> */}
+            <div
+              className={`${css["cart_products"]} col-md-7 col-11 border rounded-4 p-4 d-flex flex-column bg-white`}
+            >
+              {cartList && cartList.length > 0 ? (
+                cartList.map((prod, index) => {
+                  return (
+                    <>
+                      <CartProduct
+                        key={index}
+                        product={prod}
+                        quantity={prod.quantity}
+                      />
+                      {index < cartList.length - 1 && (
+                        <hr className="my-4 w-100" />
+                      )}
+                    </>
+                  );
+                })
+              ) : (
+                <h3 className="text-center fw-semibold">Your cart is empty!</h3>
+              )}
+            </div>
 
             {/* <!-- Checkout PART --> */}
             <div

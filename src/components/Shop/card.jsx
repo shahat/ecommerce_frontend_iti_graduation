@@ -53,7 +53,7 @@ function Card(props) {
               onClick={() => {
                 addFavorites(props.id);
               }}
-            />
+            />  
           )}
 
           <div className>

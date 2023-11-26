@@ -1,27 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../axiosConfig/instance";
-import { LoaderIcon } from "react-hot-toast";
+import toast, { LoaderIcon } from "react-hot-toast";
 import axios from "axios";
 
 export const cartRequestAction = createAsyncThunk("cart/getAll", async () => {
-    const { token, token2 } = localStorage;
-    if (token) {
-        const res = await instance.get("/cart", { headers: { token } });
-        return res.data.data.items;
-    } else if (token2) {
-        const res = await instance.get("/cart", { headers: { token2 } });
-        return res.data.data.items;
-    }
+  const { token, token2 } = localStorage;
+  if (token) {
+    const res = await instance.get("/cart", { headers: { token } });
+    return res.data.data.items;
+  } else if (token2) {
+    const res = await instance.get("/cart", { headers: { token2 } });
+    return res.data.data.items;
+  }
 });
 
 export const addToCartAction = createAsyncThunk(
   "cart/addProduct",
-  async (id) => {
+  async ({ id, quantity }) => {
     let { token, token2 } = localStorage;
     if (token) {
       const status = await instance.post(
         `/cart/${id}`,
-        {},
+        { quantity },
         {
           headers: { token },
         }
@@ -30,14 +30,14 @@ export const addToCartAction = createAsyncThunk(
     } else if (token2) {
       const status = await instance.post(
         `/cart/${id}`,
-        {},
+        { quantity },
         {
           headers: { token2 },
         }
       );
       return status.data.data;
     }
-    const status = await instance.post(`/cart/${id}`);
+    const status = await instance.post(`/cart/${id}`, { quantity });
     token2 = JSON.stringify({
       userId: status.data.data.userId,
       cartId: status.data.data._id,
@@ -47,14 +47,13 @@ export const addToCartAction = createAsyncThunk(
   }
 );
 
-export function addToBothCartsAction(id) {
-    console.log("addToBothCartsAction");
-    return (dispatch) => {
-        dispatch(addToCartAction(id)).then(() => {
-            toast.success(`product added to the cart successfully`);
-            dispatch(cartRequestAction());
-        });
-    };
+export function addToBothCartsAction(id, quantity) {
+  return (dispatch) => {
+    dispatch(addToCartAction({ id, quantity })).then(() => {
+      toast.success(`Product added to the cart successfully`);
+      dispatch(cartRequestAction());
+    });
+  };
 }
 
 export const modifyProductAction = createAsyncThunk(
@@ -81,11 +80,11 @@ export const modifyProductAction = createAsyncThunk(
 );
 
 export function modifyBothProductAction(params) {
-    return (dispatch) => {
-        dispatch(modifyProductAction(params)).then(() => {
-            dispatch(cartRequestAction());
-        });
-    };
+  return (dispatch) => {
+    dispatch(modifyProductAction(params)).then(() => {
+      dispatch(cartRequestAction());
+    });
+  };
 }
 
 export const removeFromCartRequestAction = createAsyncThunk(
@@ -104,56 +103,53 @@ export const removeFromCartRequestAction = createAsyncThunk(
 );
 
 export function removeFromCartAction(id) {
-    return (dispatch) => {
-        dispatch(removeFromCartRequestAction(id)).then(() => {
-            dispatch(cartRequestAction());
-        });
-    };
+  return (dispatch) => {
+    dispatch(removeFromCartRequestAction(id)).then(() => {
+      dispatch(cartRequestAction());
+    });
+  };
 }
 
-export const deleteCart = createAsyncThunk("cart/delete" , async(id)=>{
-    console.log(id);
-    const res = axios.delete(`http://localhost:4000/cart/${id}` )
-    console.log(res);
-    return res.data
-}) 
+export const deleteCart = createAsyncThunk("cart/delete", async (id) => {
+  console.log(id);
+  const res = axios.delete(`http://localhost:4000/cart/${id}`);
+  console.log(res);
+  return res.data;
+});
 
 const cartSlice = createSlice({
-    name: "cart",
-    initialState: { cartProducts: [], loading: false },
-    extraReducers: (builder) => {
-        builder.addCase(cartRequestAction.fulfilled, (state, action) => {
-            state.cartProducts = action.payload;
-            state.loading = false
-        });
-        builder.addCase(modifyProductAction.pending, (state, action) => {
-            state.loading = true
-        });
-        builder.addCase(modifyProductAction.rejected, (state, action) => {
-            console.log("rejected");
-            // cartRequestAction()
-            state.loading = false
-        });
-        builder.addCase(removeFromCartRequestAction.pending, (state, action) => {
-            state.loading = true
-        });
-        builder.addCase(
-            removeFromCartRequestAction.fulfilled,
-            (state, action) => {
-                // removes the item from the cart slice using its 'id' I got from "action.meta.arg"
-                state.cartProducts = state.cartProducts.filter(
-                    (item) => item._id._id != action.meta.arg
-                );
-                // state.loading = false
-            }
-        );
-        builder.addCase(deleteCart.fulfilled,(state,action)=>{
-            console.log(action.payload)
-        })
-        builder.addCase(deleteCart.rejected,(state,action)=>{
-            console.log("rejected");
-        })
-    },
+  name: "cart",
+  initialState: { cartProducts: [], loading: false },
+  extraReducers: (builder) => {
+    builder.addCase(cartRequestAction.fulfilled, (state, action) => {
+      state.cartProducts = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(modifyProductAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(modifyProductAction.rejected, (state, action) => {
+      console.log("rejected");
+      // cartRequestAction()
+      state.loading = false;
+    });
+    builder.addCase(removeFromCartRequestAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(removeFromCartRequestAction.fulfilled, (state, action) => {
+      // removes the item from the cart slice using its 'id' I got from "action.meta.arg"
+      state.cartProducts = state.cartProducts.filter(
+        (item) => item._id._id != action.meta.arg
+      );
+      // state.loading = false
+    });
+    builder.addCase(deleteCart.fulfilled, (state, action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(deleteCart.rejected, (state, action) => {
+      console.log("rejected");
+    });
+  },
 });
 
 export const { reset, loadingToggleAction } = cartSlice.actions;
