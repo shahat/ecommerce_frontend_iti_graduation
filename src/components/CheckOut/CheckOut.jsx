@@ -86,7 +86,7 @@ const CheckOut = () => {
         productId: userCart[i]._id._id,
         productName: userCart[i]._id.title,
         productImage: userCart[i]._id.thumbnail,
-        productDes: userCart[i]._id.description,
+        // productDes: userCart[i]._id.description,
         quantity: userCart[i].quantity,
         price: userCart[i].priceWhenAdded,
       };
@@ -130,22 +130,27 @@ const CheckOut = () => {
   const orderFormSubmit = (e) => {
     e.preventDefault();
     console.log("place an order action", order);
-    axios
-      .post(`http://localhost:4000/stripe/create-checkout-session`, {
-        order,
-        userId: user._id,
-      })
-      .then((res) => {
-        if (res.data.url) {
-          window.location.href = res.data.url;
-        }
-      })
-      .catch((err) => {
-        console.log("err.message", err.message);
-      });
-    // dispatch(postOneOrder(order));
-    // dispatch(deleteCart(user._id));
-    // navigate(`/`);
+    console.log("this is order ", order);
+
+    if (order.paymentStatus == "Paid Online") {
+      axios
+        .post(`http://localhost:4000/stripe/create-checkout-session`, {
+          order,
+          userId: user._id,
+        })
+        .then((res) => {
+          if (res.data.url) {
+            window.location.href = res.data.url;
+          }
+        })
+        .catch((err) => {
+          console.log("err.message", err.message);
+        });
+    } else {
+      dispatch(postOneOrder(order));
+      dispatch(deleteCart(user._id));
+      navigate(`/`);
+    }
   };
 
   // ===========< adding and checking copune  >===========
@@ -177,7 +182,6 @@ const CheckOut = () => {
   const orderPaymentChange = (e) => {
     let payment = e.target.value;
     setOrder({ ...order, paymentStatus: payment });
-    console.log("orderPaymentChange", order);
   };
 
   const [show, setShow] = useState(false);

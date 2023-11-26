@@ -1,0 +1,57 @@
+  const orderFormSubmit = (e) => {
+    const orderFormSubmit = (e) => {
+      e.preventDefault();
+      console.log("place an order action", order);
+
+      axios
+        .post(`http://localhost:4000/stripe/create-checkout-session`, {
+          order,
+          userId: user._id,
+        })
+        .then((res) => {
+          if (res.data.sessionId) {
+            // Store the session ID for later use (e.g., to check the payment status)
+            const sessionId = res.data.sessionId;
+
+            // You can choose to delay the redirection here if needed
+            // window.location.href = `${process.env.CLIENT_URL}/chechoutSuccess`;
+
+            // Perform additional actions (e.g., creating the order) after payment success
+            // You can do this by listening for the checkout.session.completed webhook on the server
+
+            // Optional: Polling to check the payment status
+            pollPaymentStatus(sessionId);
+          }
+        })
+        .catch((err) => {
+          console.log("err.message", err.message);
+        });
+    };
+
+    // Function to poll the payment status
+    const pollPaymentStatus = (sessionId) => {
+      const interval = setInterval(() => {
+        axios
+          .get(`http://localhost:4000/stripe/check-payment-status/${sessionId}`)
+          .then((res) => {
+            const { paymentStatus } = res.data;
+            if (paymentStatus === "succeeded") {
+              clearInterval(interval);
+              createOrder();
+            } else if (paymentStatus === "failed") {
+              clearInterval(interval);
+            }
+          })
+          .catch((err) => {
+            console.error("Error checking payment status:", err);
+            clearInterval(interval);
+          });
+      }, 2000); // Adjust the polling interval as needed
+    };
+    function createOrder() {
+      console.log("Order created ");
+    }
+    // dispatch(postOneOrder(order));
+    // dispatch(deleteCart(user._id));
+    // navigate(`/`);
+  };

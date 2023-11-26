@@ -31,6 +31,7 @@ import UserOrders from "./pages/User/userOrders";
 import UserAddress from "./pages/User/userAddress";
 import UserPayment from "./pages/User/userPayment";
 import UserComingOrders from "./pages/User/userComingOrders";
+import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
 
 // ===============< import components and page >===============
 function App() {
@@ -57,6 +58,7 @@ function App() {
         { path: "/cart", element: <Cart /> },
         { path: "/wishlist", element: <WishList /> },
         { path: "/contact", element: <Contact /> },
+        { path: "/chechoutSuccess", element: <CheckoutSuccess /> },
         // { path: "/Order/:id", element: <Order /> },
         {
           path: "/userprofile",
