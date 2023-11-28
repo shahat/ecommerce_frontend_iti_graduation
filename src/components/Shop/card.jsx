@@ -18,12 +18,11 @@ function Card(props) {
   var x = useNavigate();
   // var cart = useSelector((state) => state.cart.cart);
   var addToCart = (id) => {
-    console.log(id);
     // toast.success(`product added to the cart successfully`); // moved to the slice
     dispatch(addToBothCartsAction(id));
   };
   const addFavorites = (id) => {
-    dispatch(addToWishListAction(id));
+    dispatch(addToWishListAction(id));  
   };
   const removeFavorites = (id) => {
     dispatch(removeFromWishAction(id));
@@ -53,7 +52,7 @@ function Card(props) {
               onClick={() => {
                 addFavorites(props.id);
               }}
-            />  
+            />
           )}
 
           <div className>

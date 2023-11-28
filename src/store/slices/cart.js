@@ -30,19 +30,20 @@ export const addToCartAction = createAsyncThunk(
     } else if (token2) {
       const status = await instance.post(
         `/cart/${id}`,
-        { quantity },
+        {},
         {
           headers: { token2 },
         }
       );
       return status.data.data;
     }
-    const status = await instance.post(`/cart/${id}`, { quantity });
+    const status = await instance.post(`/cart/${id}`);
     token2 = JSON.stringify({
       userId: status.data.data.userId,
       cartId: status.data.data._id,
     });
     localStorage.setItem("token2", token2);
+    console.log("Helloo")
     return status.data.data;
   }
 );
