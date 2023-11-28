@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import instance from "../../axiosConfig/instance";
 // import axios from "axios";
 
 export var productAction = createAsyncThunk(
   "products/getAll",
   async (currentPage) => {
-    var res = 
-      await instance.get(`/product?page=${currentPage}`
-    );
+    var res = await instance.get(`/product?page=${currentPage}`);
     return res.data.data;
   }
 );

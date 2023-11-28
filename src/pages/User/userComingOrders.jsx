@@ -22,10 +22,10 @@ const UserComingOrders = () => {
     <>
       {orders && orders.length > 0 ? (
         <AnimatedPage>
-          <div className="row justify-content-center align-items-center p-1 m-0 gy-1">
+          <div className="row justify-content-center align-items-center p-1 m-0 gy-1 overflow-scroll">
             {value ? (
               <>
-                {orders.map((order, index) => (
+                {orders.map((order) => (
                   <div
                     className="col-12"
                     key={order._id}

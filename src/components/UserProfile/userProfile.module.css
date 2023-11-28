@@ -1,133 +1,117 @@
-form input[type=submit] {
-    display: block;
-    width: 80% !important;
-    margin: 8px auto;
-    padding: 5px;
-    height: 40px !important;
-    border: 1px solid #005268 !important; 
-    border-radius: 4px;
-    background-color: #005268 !important;
-    color: #fff;
+form input[type="submit"] {
+  display: block;
+  width: 80% !important;
+  margin: 8px auto;
+  padding: 5px;
+  height: 40px !important;
+  border: 1px solid #005268 !important;
+  border-radius: 4px;
+  background-color: #005268 !important;
+  color: #fff;
 }
 
-
-input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
-         -webkit-appearance: none;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
-.manageMyAccount{
+.manageMyAccount {
 }
-.manageMyAccount .manageLinks ul{
-    list-style: none;
-    
-    
+.manageMyAccount .manageLinks ul {
+  list-style: none;
 }
-.manageMyAccount .manageLinks ul li{
-    padding: 0;
-    height: 40px;
-
+.manageMyAccount .manageLinks ul li {
+  padding: 0;
+  height: 40px;
 }
 
-.link{
-    height: 30px;
-    width: fit-content;
-    margin: 3px auto;
-    background-color: transparent;
-    border: 0px solid transparent;
-    color: #999;
-    
-    text-decoration: none;
+.link {
+  height: 30px;
+  width: fit-content;
+  margin: 3px auto;
+  background-color: transparent;
+  border: 0px solid transparent;
+  color: #999;
 
+  text-decoration: none;
 }
-.linkActive{
-    color: #DB4444;
-    height: 30px;
-    width: fit-content;
-    margin: 3px auto;
-    background-color: transparent;
-    border: 0px solid transparent;    
-    text-decoration: none;
-
+.linkActive {
+  color: #db4444;
+  height: 30px;
+  width: fit-content;
+  margin: 3px auto;
+  background-color: transparent;
+  border: 0px solid transparent;
+  text-decoration: none;
 }
-.cardHolder{
-    border-radius: 4px;
-    background: var(#FFF, #FFF);
-    width: 95%;
-    margin: 0 auto;
-    min-height: 600px;
-    box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.05);
-    position: relative;
-    align-items: center;
-
-
+.cardHolder {
+  border-radius: 4px;
+  background: var(#fff, #fff);
+  width: 95%;
+  margin: 0 auto;
+  min-height: 600px;
+  box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.05);
+  position: relative;
+  align-items: center;
 }
-.cardContainer{
-    width: 100%;
-    position: absolute;
-    height: 100%;
-    overflow: hidden;
-    background-color: #fff;
-    transition: all 0.5s ease-in-out;
-    opacity: 1;
-    z-index: 99;
-    padding: 50px;
-
+.cardContainer {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  overflow: scroll;
+  background-color: #fff;
+  transition: all 0.5s ease-in-out;
+  opacity: 1;
+  z-index: 99;
+  padding: 50px;
 }
 
-.cardContainer h6{
-    color: #005268;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 28px;
+.cardContainer h6 {
+  color: #005268;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
 }
 
- .cardContainer form button{
-    display: inline-block;
-    width: 49% !important;
-    margin: 8px auto;
-    padding: 5px;
-    height: 40px !important;
-    border: 1px solid transparent !important; 
-    border-radius: 4px;
-    background-color: transparent !important;
-    color: #005268;
+.cardContainer form button {
+  display: inline-block;
+  width: 49% !important;
+  margin: 8px auto;
+  padding: 5px;
+  height: 40px !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px;
+  background-color: transparent !important;
+  color: #005268;
 }
- .cardContainer form input[type=submit] {
-    display: inline-block;
-    width: 49% !important;
-    margin: 8px auto;
-    padding: 5px;
-    height: 40px !important;
-    border: 1px solid #005268 !important; 
-    border-radius: 4px;
-    background-color: #005268 !important;
-    color: #fff;
+.cardContainer form input[type="submit"] {
+  display: inline-block;
+  width: 49% !important;
+  margin: 8px auto;
+  padding: 5px;
+  height: 40px !important;
+  border: 1px solid #005268 !important;
+  border-radius: 4px;
+  background-color: #005268 !important;
+  color: #fff;
 }
-
-
 
 @media screen and (max-width: 1200px) {
-    .cardContainer{
-        
-        padding: 15px;
-    
-    }
+  .cardContainer {
+    padding: 15px;
+  }
 }
 @media screen and (max-width: 992px) {
-    .cardContainer{
-        
-        padding: 10px;
-    
-    }
+  .cardContainer {
+    padding: 10px;
+  }
 }
 @media screen and (max-width: 768px) {
 }
 @media screen and (max-width: 600px) {
-    link{
-        font-size: 0.9em;
-    }
+  link {
+    font-size: 0.9em;
+  }
 }
 @media screen and (max-width: 450px) {
-
-    
 }

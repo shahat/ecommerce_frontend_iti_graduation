@@ -29,7 +29,8 @@ import { useState } from "react";
 import UserEdit from "./pages/User/userEdit";
 import UserOrders from "./pages/User/userOrders";
 import UserAddress from "./pages/User/userAddress";
-import UserPayment from "./pages/User/userPayment";
+import Order from "./components/Order/Order";
+// import UserPayment from "./pages/User/userPayment";
 import UserComingOrders from "./pages/User/userComingOrders";
 import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
 
@@ -59,14 +60,13 @@ function App() {
         { path: "/wishlist", element: <WishList /> },
         { path: "/contact", element: <Contact /> },
         { path: "/chechoutSuccess", element: <CheckoutSuccess /> },
-        // { path: "/Order/:id", element: <Order /> },
+        { path: "/Order/:id", element: <Order /> },
         {
           path: "/userprofile",
           element: <UserProfile />,
           children: [
             { index: true, element: <UserEdit /> },
             { path: "address", element: <UserAddress /> },
-            { path: "payment", element: <UserPayment /> },
             { path: "pastOrders", element: <UserOrders /> },
             { path: "upcomingOrders", element: <UserComingOrders /> },
           ],

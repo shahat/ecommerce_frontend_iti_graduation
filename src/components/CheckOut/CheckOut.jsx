@@ -92,6 +92,7 @@ const CheckOut = () => {
       };
       items.push(prd);
     }
+    
     setPricing({ ...pricing, subTotal: subtotal });
     dispatch(setSubTotal(subtotal));
     dispatch(changeTotal());
@@ -101,7 +102,6 @@ const CheckOut = () => {
       userId: user._id,
       amount: userCheckoutPrice.total,
       items: items,
-      paymentStatus: "Cash on delivery",
       status: "Waiting for Supplier",
     });
   };
@@ -555,7 +555,7 @@ const CheckOut = () => {
                     className={`${styles.paymentsMethodInput}`}
                     name="paymentStatus"
                     id="cashOnDelivery"
-                    value={`Cash On delivery`}
+                    value="Cash on delivery"
                     selected
                     required
                     onClick={(e) => {

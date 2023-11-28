@@ -8,9 +8,25 @@ export const oneOrderAction = createAsyncThunk("get/oneOrder", async (id) => {
 });
 
 export const postOneOrder = createAsyncThunk("create/order", async (order) => {
-  console.log(order);
-  const res = await axios.post(`http://localhost:4000/orders/`, order);
-  return res.data;
+  try {
+    const orderCreationResponse = await axios.post(
+      `http://localhost:4000/orders/`,
+      order
+    );
+
+    if (orderCreationResponse.status === 201) {
+      console.log("Order created successfully:", orderCreationResponse.data);
+      return orderCreationResponse.data;
+    } else {
+      console.error(
+        "Failed to create order:",
+        orderCreationResponse.statusText
+      );
+    }
+  } catch (error) {
+    console.error("Error creating order:", error.message);
+    console.log("Error response data:", error.response.data);
+  }
 });
 
 const oneOrderSlice = createSlice({
