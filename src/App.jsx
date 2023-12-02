@@ -30,9 +30,11 @@ import UserEdit from "./pages/User/userEdit";
 import UserOrders from "./pages/User/userOrders";
 import UserAddress from "./pages/User/userAddress";
 import Order from "./components/Order/Order";
-// import UserPayment from "./pages/User/userPayment";
 import UserComingOrders from "./pages/User/userComingOrders";
 import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
+import ProductReviews from "./pages/User/ProductReviews";
+import ProductReview from "./components/ProductReview/ProductReview";
+// import Reviews from "./components/productDetailsComps/reviewsContainer";
 
 // ===============< import components and page >===============
 function App() {
@@ -69,9 +71,11 @@ function App() {
             { path: "address", element: <UserAddress /> },
             { path: "pastOrders", element: <UserOrders /> },
             { path: "upcomingOrders", element: <UserComingOrders /> },
+            { path: "orderReviews", element: <ProductReviews /> },
           ],
         },
         { path: "/checkout", element: <CheckOut /> },
+        { path: "/productReview/:productId", element: <ProductReview /> },
       ],
     },
     { path: "/shop", element: <Shop /> },
@@ -80,6 +84,7 @@ function App() {
     { path: "/emailRecovery", element: <SendCode /> },
     { path: "/resetCode", element: <ResetCode /> },
     { path: "/resetPassword", element: <ResetPass /> },
+
     { path: "*/*", element: <NotFound /> },
   ]);
   return (

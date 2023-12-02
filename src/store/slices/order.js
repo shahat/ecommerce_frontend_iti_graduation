@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const oneOrderAction = createAsyncThunk("get/oneOrder", async (id) => {
   const res = await axios.get(`http://localhost:4000/orders/${id}`);
-  console.log(res);
+  console.log("res=========>", res.data.order);
   return res.data.order;
 });
 

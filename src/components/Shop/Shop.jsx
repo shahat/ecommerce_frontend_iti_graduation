@@ -72,6 +72,7 @@ function Shop() {
       const product = cat.map(async (subcat) => {
         const prod = await instance.get(`/subcategories/${subcat.name}`);
         const allProducts = prod.data.data;
+
         return allProducts;
       });
       const resolvedProducts = await Promise.all(product);
@@ -90,7 +91,7 @@ function Shop() {
     try {
       const data = await instance.get(`/product?page=${currentPage}`);
       const res = data.data.data;
-      console.log("res", res);
+      console.log("res=========================================", res);
       setproducts(res);
     } catch (err) {
       console.log(err);

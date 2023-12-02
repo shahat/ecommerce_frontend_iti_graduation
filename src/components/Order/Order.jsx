@@ -108,7 +108,7 @@ function Order() {
             <button
               className="btn btn-outline-success"
               // onClick={() => {
-              //   navigate(`/products/${item.productId._id}`);
+              //   navigate(`/products/${item._id}`);
               // }}
             >
               View Product
@@ -157,43 +157,44 @@ function Order() {
             Contact Support <RiCustomerService2Line />
           </button>
         </div>
-        {order.items.map((item, index) => (
-          <div className="col-12 my-1 border" key={index}>
-            {item.productId && (
-              <div className="row justify-content-around align-items-center">
-                <div className="col-3 ">
-                  <img
-                    src={item.productId.thumbnail}
-                    className="img-fluid w-50"
-                    alt=""
-                  />
-                  <p className="lead">{item.productId.title}</p>
+        {order.items &&
+          order.items.length > 0 &&
+          order.items.map((item, index) => (
+            <div className="col-12 my-1 border bg-white" key={index}>
+              {item._id && (
+                <div className="row justify-content-around align-items-center">
+                  <div className="col-3 ">
+                    <img
+                      src={item.thumbnail}
+                      className="img-fluid w-50"
+                      alt=""
+                    />
+                    <p className="lead">{item.title}</p>
+                  </div>
+                  <div className="col-3">
+                    <h5 className="h5 my-2">Product Price:</h5>
+                    <p className="lead">{item.price}</p>
+                    <h5 className="h5 my-2">Rating :</h5>
+                    <p className="lead">{item.rating}</p>
+                  </div>
+                  <div className="col-3">
+                    <h5 className="h5 my-2">Description</h5>
+                    <p className="lead">{item.description}</p>
+                  </div>
+                  <div className="col-3 text-center">
+                    <button
+                      className="btn btn-outline-warning w-50"
+                      onClick={() => {
+                        navigate(`/product/${item._id}`);
+                      }}
+                    >
+                      View Product
+                    </button>
+                  </div>
                 </div>
-                <div className="col-3">
-                  <h5 className="h5 my-2">Product Price:</h5>
-                  <p className="lead">{item.productId.price}</p>
-                  <h5 className="h5 my-2">Rating :</h5>
-                  <p className="lead">{item.productId.rating}</p>
-                </div>
-                <div className="col-3">
-                  <h5 className="h5 my-2">Description</h5>
-                  <p className="lead">{item.productId.description}</p>
-                </div>
-                <div className="col-3 text-center">
-                  <button
-                    className="btn btn-outline-success"
-                    onClick={() => {
-                      navigate(`/products/${item.productId._id}`);
-                    }}
-                  >
-                    View Product
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-        ))}
+              )}
+            </div>
+          ))}
         <div className="col-12 my-2"></div>
       </div>
     </div>

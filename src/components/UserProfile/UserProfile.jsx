@@ -47,9 +47,9 @@ function UserProfile() {
               <NavLink
                 to="/userprofile/pastOrders"
                 type="button"
-                className={({ isActive }) =>
-                  isActive ? styles.linkActive : styles.link
-                }
+                // className={({ isActive }) =>
+                //   isActive ? styles.linkActive : styles.link
+                // }
               >
                 Past orders
               </NavLink>
@@ -58,11 +58,23 @@ function UserProfile() {
               <NavLink
                 to="/userprofile/upcomingOrders"
                 type="button"
-                className={({ isActive }) =>
-                  isActive ? styles.linkActive : styles.link
-                }
+                // className={({ isActive }) =>
+                //   isActive ? styles.linkActive : styles.link
+                // }
               >
                 Upcoming orders
+              </NavLink>
+            </li>
+            <li className="col-4 col-sm-4 col-md-12">
+              <NavLink
+                type="button"
+                to="orderReviews"
+
+                // className={({ isActive }) =>
+                //   isActive ? styles.linkActive : styles.link
+                // }
+              >
+                Reviews{" "}
               </NavLink>
             </li>
           </ul>

@@ -94,7 +94,7 @@ function CartProduct({ product, quantity }) {
           <button
             className="btn text-danger fs-5"
             onClick={() => {
-              removeFromCart(product._id?._id);
+              removeFromCart(product._id._id);
             }}
           >
             <FaTrash />

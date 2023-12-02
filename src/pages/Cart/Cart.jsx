@@ -14,6 +14,7 @@ function Cart() {
   const token = localStorage.getItem("token");
   const [subTotal, setSubTotal] = useState(0);
   useEffect(() => {
+    console.log("cartList=======================", cartList);
     setSubTotal(0);
     cartList &&
       cartList.forEach((element) => {
