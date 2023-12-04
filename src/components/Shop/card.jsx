@@ -24,7 +24,7 @@ function Card(props) {
     dispatch(addToBothCartsAction(id));
   };
   const addFavorites = (id) => {
-    dispatch(addToWishListAction(id));
+    dispatch(addToWishListAction(id));  
   };
   const removeFavorites = (id) => {
     dispatch(removeFromWishAction(id));
@@ -54,7 +54,7 @@ function Card(props) {
               onClick={() => {
                 addFavorites(props.id);
               }}
-            />  
+            />
           )}
 
           <div className>

@@ -1,5 +1,9 @@
 // ===============< import react router >===============
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 // ===============< Bootstrap >===============
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -31,6 +35,8 @@ import UserOrders from "./pages/User/userOrders";
 import UserAddress from "./pages/User/userAddress";
 import Order from "./components/Order/Order";
 import UserComingOrders from "./pages/User/userComingOrders";
+import ProtectedRoute from "./components/protected/protectedRoute";
+import ErrorBoundary from "./components/ErrorHandling/ErrorHandlingPage";
 import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
 import ProductReviews from "./pages/User/ProductReviews";
 import ProductReview from "./components/ProductReview/ProductReview";
@@ -46,46 +52,204 @@ function App() {
       path: "/",
       element: <AppLayout />,
       children: [
-        { index: true, element: <Home /> },
+        {
+          index: true,
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              <Home />
+            </ErrorBoundary>
+          ),
+        },
         {
           path: "/product/:id",
-          element: <ProductDetails />,
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              <ProductDetails />
+            </ErrorBoundary>
+          ),
           children: [
-            { index: true, element: <ReviewsContainer /> },
-            { path: "description", element: <Description /> },
-            { path: "reviews", element: <ReviewsContainer /> },
-            { path: "faq", element: <FAQ /> },
+            {
+              index: true,
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <ReviewsContainer />
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "description",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <Description />
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "reviews",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <ReviewsContainer />
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "faq",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <FAQ />
+                </ErrorBoundary>
+              ),
+            },
           ],
         },
-        { path: "/cart", element: <Cart /> },
-        { path: "/wishlist", element: <WishList /> },
-        { path: "/contact", element: <Contact /> },
+        {
+          path: "/cart",
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              <Cart />
+            </ErrorBoundary>
+          ),
+        },
+        {
+          path: "/wishlist",
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              <WishList />
+            </ErrorBoundary>
+          ),
+        },
+        {
+          path: "/contact",
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              {" "}
+              <Contact />
+            </ErrorBoundary>
+          ),
+        },
         { path: "/chechoutSuccess", element: <CheckoutSuccess /> },
         { path: "/Order/:id", element: <Order /> },
+        // { path: "/Order/:id", element: <Order /> },
         {
           path: "/userprofile",
-          element: <UserProfile />,
+          element: isLogin ? (
+            <ErrorBoundary fallback="There was an error">
+              <UserProfile />
+            </ErrorBoundary>
+          ) : (
+            <Navigate to="/" />
+          ),
           children: [
-            { index: true, element: <UserEdit /> },
-            { path: "address", element: <UserAddress /> },
-            { path: "pastOrders", element: <UserOrders /> },
-            { path: "upcomingOrders", element: <UserComingOrders /> },
-            { path: "orderReviews", element: <ProductReviews /> },
+            {
+              index: true,
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <UserEdit />
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "address",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <UserAddress />{" "}
+                </ErrorBoundary>
+              ),
+            },
+ 
+            {
+              path: "pastOrders",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <UserOrders />{" "}
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "upcomingOrders",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <UserComingOrders />
+                </ErrorBoundary>
+              ),
+            },
           ],
         },
-        { path: "/checkout", element: <CheckOut /> },
+        {
+          path: "/checkout",
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              <CheckOut />
+            </ErrorBoundary>
+          ),
+        },
         { path: "/productReview/:productId", element: <ProductReview /> },
       ],
     },
-    { path: "/shop", element: <Shop /> },
-    { path: "/login", element: <Login /> },
-    { path: "/register", element: <Register /> },
-    { path: "/emailRecovery", element: <SendCode /> },
-    { path: "/resetCode", element: <ResetCode /> },
-    { path: "/resetPassword", element: <ResetPass /> },
+    {
+      path: "/shop",
+      element: (
+        <ErrorBoundary fallback="There was an error">
+          <Shop />
+        </ErrorBoundary>
+      ),
+    },
 
+    {
+      path: "/login",
+
+      element: (
+        <ProtectedRoute>
+          <ErrorBoundary fallback="There was an error">
+            <Login />
+          </ErrorBoundary>
+        </ProtectedRoute>
+      ),
+    },
+
+    {
+      path: "/register",
+      element: (
+        <ProtectedRoute>
+          <ErrorBoundary fallback="There was an error">
+            <Register />
+          </ErrorBoundary>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/emailRecovery",
+      element: (
+        <ProtectedRoute>
+          <ErrorBoundary fallback="There was an error">
+            <SendCode />
+          </ErrorBoundary>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/resetCode",
+      element: (
+        <ProtectedRoute>
+          <ErrorBoundary fallback="There was an error">
+            <ResetCode />
+          </ErrorBoundary>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/resetPassword",
+      element: (
+        <ProtectedRoute>
+          <ErrorBoundary fallback="There was an error">
+            <ResetPass />
+          </ErrorBoundary>
+        </ProtectedRoute>
+      ),
+    },
     { path: "*/*", element: <NotFound /> },
   ]);
+
   return (
     <Provider store={store}>
       <AuthProvider value={{ isLogin, setLogin, enteredCode, setEnteredCode }}>

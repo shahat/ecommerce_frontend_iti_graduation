@@ -13,6 +13,9 @@ import cookie from "js-cookie";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { GrLanguage } from "react-icons/gr";
 import i18next from "i18next";
+import { useContext } from "react";
+import { authContext } from "../../contexts/authContext";
+
 export default function MobileNav() {
   const { t } = useTranslation();
   const languages = [
@@ -28,13 +31,15 @@ export default function MobileNav() {
       dir: "rtl",
     },
   ];
-
   const currentLanguageCode = cookie.get("i18next") || "en";
+
   const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
 
   var cartList = useSelector((state) => state.cart.cartProducts);
   var wishList = useSelector((state) => state.wishList.list);
 
+  
+  const { isLogin, setLogin } = useContext(authContext);
   const handleLogout = () => {
     alert("you are loged out ");
   };
