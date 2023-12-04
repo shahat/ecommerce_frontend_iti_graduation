@@ -103,8 +103,6 @@ console
         console.log(`editingPass Verfi false`);
         if (error.response) {
           const errorMessage = error.response.data.message;
-          // console.log(errorMessage)
-
           toast.error(errorMessage, {
             position: "top-center",
           });

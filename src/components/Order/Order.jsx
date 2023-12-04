@@ -10,6 +10,7 @@ function Order() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const order = useSelector((state) => state.oneOrder.oneOrder);
+  console.log("this is the order =>>>>>>>>>>>>>>>>>>>>>>>", order);
   const date = new Date(order.createdAt);
   const navigate = useNavigate();
 
@@ -161,38 +162,32 @@ function Order() {
           order.items.length > 0 &&
           order.items.map((item, index) => (
             <div className="col-12 my-1 border bg-white" key={index}>
-              {item._id && (
-                <div className="row justify-content-around align-items-center">
-                  <div className="col-3 ">
-                    <img
-                      src={item.thumbnail}
-                      className="img-fluid w-50"
-                      alt=""
-                    />
-                    <p className="lead">{item.title}</p>
-                  </div>
-                  <div className="col-3">
-                    <h5 className="h5 my-2">Product Price:</h5>
-                    <p className="lead">{item.price}</p>
-                    <h5 className="h5 my-2">Rating :</h5>
-                    <p className="lead">{item.rating}</p>
-                  </div>
-                  <div className="col-3">
-                    <h5 className="h5 my-2">Description</h5>
-                    <p className="lead">{item.description}</p>
-                  </div>
-                  <div className="col-3 text-center">
-                    <button
-                      className="btn btn-outline-warning w-50"
-                      onClick={() => {
-                        navigate(`/product/${item._id}`);
-                      }}
-                    >
-                      View Product
-                    </button>
-                  </div>
+              <div className="row justify-content-around align-items-center">
+                <div className="col-3 ">
+                  <img src={item.thumbnail} className="img-fluid w-50" alt="" />
+                  <p className="lead">{item.title}</p>
                 </div>
-              )}
+                <div className="col-3">
+                  <h5 className="h5 my-2">Product Price:</h5>
+                  <p className="lead">{item.price}</p>
+                  <h5 className="h5 my-2">Rating :</h5>
+                  <p className="lead">{item.rating}</p>
+                </div>
+                <div className="col-3">
+                  <h5 className="h5 my-2">Description</h5>
+                  <p className="lead">{item.description}</p>
+                </div>
+                <div className="col-3 text-center">
+                  <button
+                    className="btn btn-outline-warning w-50"
+                    onClick={() => {
+                      navigate(`/product/${item._id}`);
+                    }}
+                  >
+                    View Product
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         <div className="col-12 my-2"></div>

@@ -78,18 +78,22 @@ const CheckOut = () => {
     userCart && userCart.length > 0 && console.log("userCart", userCart);
     let subtotal = 0;
     let items = [];
+    console.log("this is the user cart =====> ", userCart);
     for (let i = 0; i < userCart.length; i++) {
       let prdPrice = userCart[i].priceWhenAdded;
       let prdQun = userCart[i].quantity;
       subtotal = subtotal + prdPrice * prdQun;
+
       let prd = {
-        productId: userCart[i]._id._id,
+        _id: userCart[i]._id._id,
         title: userCart[i]._id.title,
         thumbnail: userCart[i]._id.thumbnail,
         description: userCart[i]._id.description,
         quantity: userCart[i].quantity,
         price: userCart[i].priceWhenAdded,
       };
+
+      console.log("this is the product before i push to the items");
       items.push(prd);
     }
 
