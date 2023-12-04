@@ -145,7 +145,7 @@ const cartSlice = createSlice({
       // state.loading = false
     });
     builder.addCase(deleteCart.fulfilled, (state, action) => {
-      console.log(action.payload);
+      console.log("paylooooooood", action.payload);
     });
     builder.addCase(deleteCart.rejected, (state, action) => {
       console.log("rejected");

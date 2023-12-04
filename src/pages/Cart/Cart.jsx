@@ -2,12 +2,15 @@ import CartProduct from "../../components/cartComponents/cartProduct";
 import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import css from "../../assets/style/product.module.css";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa6";
 import Loader from "../../components/Loader/loader";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteCart } from "../../store/slices/cart";
 
 function Cart() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const isLoading = useSelector((state) => state.cart.loading);
   const cartList = useSelector((state) => state.cart.cartProducts);
   const checkOutStatus = useSelector((state) => state.checkOut);
@@ -125,7 +128,12 @@ function Cart() {
             <div
               className={`${css.discount} d-flex col-12 mt-5 justify-content-center`}
             >
-              <button className="btn rounded-pill col-md-3 col-8 mt-4 p-2 fs-6 bg-danger">
+              <button
+                className="btn rounded-pill col-md-3 col-8 mt-4 p-2 fs-6 bg-danger"
+                onClick={() => {
+                  dispatch(deleteCart(user._id));
+                }}
+              >
                 Clear Cart
               </button>
             </div>

@@ -34,7 +34,6 @@ import UserComingOrders from "./pages/User/userComingOrders";
 import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
 import ProductReviews from "./pages/User/ProductReviews";
 import ProductReview from "./components/ProductReview/ProductReview";
-// import Reviews from "./components/productDetailsComps/reviewsContainer";
 
 // ===============< import components and page >===============
 function App() {

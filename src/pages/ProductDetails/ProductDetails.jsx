@@ -6,7 +6,7 @@ import { Link, Outlet, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToBothCartsAction } from "../../store/slices/cart";
 import { addToWishListAction } from "../../store/slices/wishList";
-
+import starRating from "../../utils/starRating";
 import {
   FaStar,
   FaMinus,
@@ -21,11 +21,14 @@ function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState({});
   const { id } = useParams();
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await instance(`product/${id}`);
+        console.log("response.data.data", response.data.data);
         setProduct(response.data.data);
       } catch (error) {
         console.error("Error fetching product", error);
@@ -33,10 +36,8 @@ function ProductDetails() {
     };
     fetchData();
   }, [id]);
-
   useEffect(() => {
     var toggleButtons = document.getElementsByClassName("toggle");
-
     for (var i = 0; i < toggleButtons.length; i++) {
       toggleButtons[i].addEventListener("click", switchPages);
     }
@@ -53,6 +54,7 @@ function ProductDetails() {
   function inc() {
     setQuantity(quantity + 1);
   }
+
   function dec() {
     quantity > 1 && setQuantity(quantity - 1);
   }
@@ -64,22 +66,29 @@ function ProductDetails() {
   function addToWishlist(id) {
     dispatch(addToWishListAction(id));
   }
+
+  const stars = product ? starRating(product.rating) : [];
+  const prdDescription = product ? product.description : "";
+  console.log("product.description from parent ", product.description);
+
   return (
     <>
       <div
-        className="d-flex col row justify-content-center col-12"
-        style={{ top: "70px", position: "relative" }}
+        className="d-flex col row justify-content-center col-12  my-5"
+        style={{ position: "relative" }}
       >
         {/* <!-- PRODUCT PART --> */}
         <div
-          className="product row d-flex col-md-10 justify-content-between m-0 p-0"
+          className="product row d-flex col-md-10 justify-content-between  "
           style={{ top: "100px" }}
         >
           {/* <!-- IMAGE PART --> */}
-          <PhotoGallery
-            product={product}
-            className="col-md-6 border rounded-4 shadow p-0"
-          />
+          <div className="col-md-6 overflow-hidden ">
+            <PhotoGallery
+              product={product}
+              className=" border rounded shadow "
+            />
+          </div>
           {/* <!-- DETAILS PART --> */}
           <div
             className={`${css["product_details"]} col-md-5 ps-5 align-content-between`}
@@ -87,16 +96,15 @@ function ProductDetails() {
             <div className="fw-bold h5">
               <p>{product.title}</p>
               <div className="text-secondary h6" style={{ fontSize: "small" }}>
-                <FaStar className="text-warning" />
-                <FaStar className="text-warning" />
-                <FaStar className="text-warning" />
-                <FaStar className="text-warning" />
-                <FaStar />
-
+                {stars.map((star, index) =>
+                  star === 1 ? (
+                    <FaStar key={index} className="text-warning" />
+                  ) : (
+                    <FaStar key={index} className="" />
+                  )
+                )}
                 <span className="mx-2">(160 Review)</span>
-
                 <div className="vr mx-2"></div>
-
                 <a href="#" className="btn text-primary m-0 mx-2 p-0">
                   in stock
                 </a>
@@ -131,110 +139,6 @@ function ProductDetails() {
                 </label>
               </div>
 
-              <div className="mb-4">
-                <span className="me-3">Size: </span>
-                <div
-                  className={`${css["btn-group"]} btn-group`}
-                  role="group"
-                  aria-label="Basic radio toggle button group"
-                >
-                  <div
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                    }}
-                    className={`btn ${css.myBtn} ${css.myBtnDisabled} rounded-1 me-3 fw-semibold fs-6 p-3 shadow-sm text-secondary`}
-                  >
-                    {/* <input
-                                            type="radio"
-                                            className="btn-check"
-                                            name="btnradio"
-                                            id="btnradio1"
-                                            autoComplete="off"
-                                        /> */}
-                    <label className="m-3" htmlFor="btnradio1">
-                      {" "}
-                      S{" "}
-                    </label>
-                  </div>
-                  <div
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                    }}
-                    className={`btn ${css.myBtn} ${css.myBtnDisabled} rounded-1 me-3 fw-semibold fs-6 p-3 shadow-sm text-secondary`}
-                  >
-                    <input
-                      type="radio"
-                      className="btn-check"
-                      name="btnradio"
-                      id="btnradio1"
-                      autoComplete="off"
-                    />
-                    <label className="m-3" htmlFor="btnradio1">
-                      M
-                    </label>
-                  </div>
-                  <div
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                    }}
-                    className={`btn ${css.myBtn} ${css.myBtnDisabled} rounded-1 me-3 fw-semibold fs-6 p-3 shadow-sm text-secondary`}
-                  >
-                    <input
-                      type="radio"
-                      className="btn-check"
-                      name="btnradio"
-                      id="btnradio1"
-                      autoComplete="off"
-                    />
-                    <label className="m-3" htmlFor="btnradio1">
-                      {" "}
-                      L{" "}
-                    </label>
-                  </div>
-                  <div
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                    }}
-                    className={`btn ${css.myBtn} ${css.myBtnDisabled} rounded-1 me-3 fw-semibold fs-6 p-3 shadow-sm text-secondary`}
-                  >
-                    <input
-                      type="radio"
-                      className="btn-check"
-                      name="btnradio"
-                      id="btnradio1"
-                      autoComplete="off"
-                    />
-                    <label className="m-3" htmlFor="btnradio1">
-                      {" "}
-                      XL{" "}
-                    </label>
-                  </div>
-                  <div
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                    }}
-                    className={`btn ${css.myBtn} ${css.myBtnDisabled} rounded-1 me-3 fw-semibold fs-6 p-3 shadow-sm text-secondary`}
-                  >
-                    <input
-                      type="radio"
-                      className="btn-check"
-                      name="btnradio"
-                      id="btnradio1"
-                      autoComplete="off"
-                    />
-                    <label className="m-3" htmlFor="btnradio1">
-                      {" "}
-                      XXL{" "}
-                    </label>
-                  </div>
-                </div>
-              </div>
-
               <div className={`${css.wrapDiv} mb-4 d-flex`}>
                 <div
                   className={`${css["btn-group"]} btn-group ${css["inc-dec"]} w-50`}
@@ -244,28 +148,28 @@ function ProductDetails() {
                   <button
                     type="button"
                     onClick={dec}
-                    className={`btn ${css.myBtn}`}
+                    className={`btn ${css.myBtn} bg-warning text-dark`}
                   >
                     <FaMinus />
                   </button>
-                  <button type="" className="w-50 border bg-white px-4">
+                  <button type="" className="w-50 border bg-white px-4 ">
                     {quantity}
                   </button>
                   <button
                     type="button"
                     onClick={inc}
-                    className={`btn ${css.myBtn}`}
+                    className={`btn ${css.myBtn} bg-warning text-dark`}
                   >
                     <FaPlus />
                   </button>
                 </div>
-                <div className={`${css.nomargin} d-flex`}>
+                <div className={`${css.nomargin} d-flex dg-warning`}>
                   <button
                     type="button"
                     onClick={() => {
                       addToCart(product._id, quantity);
                     }}
-                    className={`${css.myBtn} ${css.buynow} mx-2`}
+                    className={`${css.myBtn} ${css.buynow} mx-2 bg-warning text-dark `}
                   >
                     Add To Cart
                   </button>
@@ -314,7 +218,7 @@ function ProductDetails() {
         </div>
         {/* <!-- DETAILS PART --> */}
         <div
-          className={`${css.details} product row d-flex col-md-10 justify-content-center m-0 p-0`}
+          className={`${css.details}  py-5  product row d-flex col-md-10 justify-content-center `}
         >
           <div className="row col-10">
             <Link
@@ -338,15 +242,11 @@ function ProductDetails() {
           </div>
 
           <div className="container">
-            <div className="container col-12 justify-content-center">
-              <Outlet></Outlet>
+            <div className="container  col-12 justify-content-center">
+              {product && <Outlet id={id} context={[prdDescription]} />}
             </div>
           </div>
         </div>
-        {/* <!-- Related Products PART --> */}
-        <RelatedProducts />
-
-        {/* <NewRelatedProducts     /> */}
       </div>
     </>
   );

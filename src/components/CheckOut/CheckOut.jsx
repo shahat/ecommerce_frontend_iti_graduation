@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./checkout.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { deleteCart } from "../../store/slices/cart";
 import { FaPlus } from "react-icons/fa6";
 import Form from "react-bootstrap/Form";
 import { BsPlusSquareDotted } from "react-icons/bs";
@@ -20,7 +21,6 @@ import {
   setSubTotal,
 } from "../../store/slices/checkOut";
 import { postOneOrder } from "../../store/slices/order";
-import { deleteCart } from "../../store/slices/cart";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -84,15 +84,15 @@ const CheckOut = () => {
       subtotal = subtotal + prdPrice * prdQun;
       let prd = {
         productId: userCart[i]._id._id,
-        productName: userCart[i]._id.title,
-        productImage: userCart[i]._id.thumbnail,
-        // productDes: userCart[i]._id.description,
+        title: userCart[i]._id.title,
+        thumbnail: userCart[i]._id.thumbnail,
+        description: userCart[i]._id.description,
         quantity: userCart[i].quantity,
         price: userCart[i].priceWhenAdded,
       };
       items.push(prd);
     }
-    
+
     setPricing({ ...pricing, subTotal: subtotal });
     dispatch(setSubTotal(subtotal));
     dispatch(changeTotal());
@@ -147,9 +147,12 @@ const CheckOut = () => {
           console.log("err.message", err.message);
         });
     } else {
-      dispatch(postOneOrder(order));
-      dispatch(deleteCart(user._id));
-      navigate(`/`);
+      console.log(" making an order ");
+      setTimeout(() => {
+        dispatch(postOneOrder(order));
+        dispatch(deleteCart(user._id));
+        navigate(`/`);
+      }, 2000);
     }
   };
 

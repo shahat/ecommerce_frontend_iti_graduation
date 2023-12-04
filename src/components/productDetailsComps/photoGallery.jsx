@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import instance from "../../axiosConfig/instance";
 
@@ -12,8 +12,7 @@ function photoGallery({ className, product }) {
           <Carousel.Item key={index}>
             <img
               src={image}
-              width={"100%"}
-              className="rounded-4 h-100"
+              className="w-100 h-100"
               alt={`Product Image ${index}`}
             />
           </Carousel.Item>
