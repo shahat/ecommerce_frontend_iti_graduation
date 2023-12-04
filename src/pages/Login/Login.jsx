@@ -24,15 +24,15 @@ function Login() {
     nameError: "",
   });
 
-  const [googleAuthUrl, setGoogleAuthUrl] = useState("");
   const { token: oauthToken } = useQueryParams();
-  
-  useEffect(() => {
-    if (oauthToken) {
-      console.log(oauthToken);
-      navigate("/");
-    }
-  }, [oauthToken, navigate]);
+
+  // useEffect(() => {
+  //   if (oauthToken) {
+  //     console.log(oauthToken);
+  //     navigate("/");
+  //   }
+  // }, [oauthToken, navigate]);
+  const [googleAuthUrl, setGoogleAuthUrl] = useState("");
 
   useEffect(() => {
     const loadOauthUrl = async () => {

@@ -64,6 +64,7 @@ function ProductDetails() {
   function addToWishlist(id) {
     dispatch(addToWishListAction(id));
   }
+
   return (
     <>
       <div

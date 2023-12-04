@@ -36,6 +36,7 @@ import UserAddress from "./pages/User/userAddress";
 import UserPayment from "./pages/User/userPayment";
 import UserComingOrders from "./pages/User/userComingOrders";
 import ProtectedRoute from "./components/protected/protectedRoute";
+import ErrorBoundary from "./components/ErrorHandling/ErrorHandlingPage";
 
 // ===============< import components and page >===============
 function App() {
@@ -48,42 +49,161 @@ function App() {
       path: "/",
       element: <AppLayout />,
       children: [
-        { index: true, element: <Home /> },
+        {
+          index: true,
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              <Home />
+            </ErrorBoundary>
+          ),
+        },
         {
           path: "/product/:id",
-          element: <ProductDetails />,
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              <ProductDetails />
+            </ErrorBoundary>
+          ),
           children: [
-            { index: true, element: <ReviewsContainer /> },
-            { path: "description", element: <Description /> },
-            { path: "reviews", element: <ReviewsContainer /> },
-            { path: "faq", element: <FAQ /> },
+            {
+              index: true,
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <ReviewsContainer />
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "description",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <Description />
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "reviews",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <ReviewsContainer />
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "faq",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <FAQ />
+                </ErrorBoundary>
+              ),
+            },
           ],
         },
-        { path: "/cart", element: <Cart /> },
-        { path: "/wishlist", element: <WishList /> },
-        { path: "/contact", element: <Contact /> },
+        {
+          path: "/cart",
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              <Cart />
+            </ErrorBoundary>
+          ),
+        },
+        {
+          path: "/wishlist",
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              <WishList />
+            </ErrorBoundary>
+          ),
+        },
+        {
+          path: "/contact",
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              {" "}
+              <Contact />
+            </ErrorBoundary>
+          ),
+        },
         // { path: "/Order/:id", element: <Order /> },
         {
           path: "/userprofile",
-          element: isLogin ? <UserProfile /> : <Navigate to="/" />,
+          element: isLogin ? (
+            <ErrorBoundary fallback="There was an error">
+              <UserProfile />
+            </ErrorBoundary>
+          ) : (
+            <Navigate to="/" />
+          ),
           children: [
-            { index: true, element: <UserEdit /> },
-            { path: "address", element: <UserAddress /> },
-            { path: "payment", element: <UserPayment /> },
-            { path: "pastOrders", element: <UserOrders /> },
-            { path: "upcomingOrders", element: <UserComingOrders /> },
+            {
+              index: true,
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <UserEdit />
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "address",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <UserAddress />{" "}
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "payment",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <UserPayment />
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "pastOrders",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <UserOrders />{" "}
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: "upcomingOrders",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <UserComingOrders />
+                </ErrorBoundary>
+              ),
+            },
           ],
         },
-        { path: "/checkout", element: <CheckOut /> },
+        {
+          path: "/checkout",
+          element: (
+            <ErrorBoundary fallback="There was an error">
+              <CheckOut />
+            </ErrorBoundary>
+          ),
+        },
       ],
     },
-    { path: "/shop", element: <Shop /> },
+    {
+      path: "/shop",
+      element: (
+        <ErrorBoundary fallback="There was an error">
+          <Shop />
+        </ErrorBoundary>
+      ),
+    },
 
     {
       path: "/login",
+
       element: (
         <ProtectedRoute>
-          <Login />
+          <ErrorBoundary fallback="There was an error">
+            <Login />
+          </ErrorBoundary>
         </ProtectedRoute>
       ),
     },
@@ -92,7 +212,9 @@ function App() {
       path: "/register",
       element: (
         <ProtectedRoute>
-          <Register />
+          <ErrorBoundary fallback="There was an error">
+            <Register />
+          </ErrorBoundary>
         </ProtectedRoute>
       ),
     },
@@ -100,7 +222,9 @@ function App() {
       path: "/emailRecovery",
       element: (
         <ProtectedRoute>
-          <Home />
+          <ErrorBoundary fallback="There was an error">
+            <SendCode />
+          </ErrorBoundary>
         </ProtectedRoute>
       ),
     },
@@ -108,7 +232,9 @@ function App() {
       path: "/resetCode",
       element: (
         <ProtectedRoute>
-          <ResetCode />
+          <ErrorBoundary fallback="There was an error">
+            <ResetCode />
+          </ErrorBoundary>
         </ProtectedRoute>
       ),
     },
@@ -116,7 +242,9 @@ function App() {
       path: "/resetPassword",
       element: (
         <ProtectedRoute>
-          <ResetPass />
+          <ErrorBoundary fallback="There was an error">
+            <ResetPass />
+          </ErrorBoundary>
         </ProtectedRoute>
       ),
     },
