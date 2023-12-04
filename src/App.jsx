@@ -1,5 +1,9 @@
 // ===============< import react router >===============
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 // ===============< Bootstrap >===============
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -31,6 +35,7 @@ import UserOrders from "./pages/User/userOrders";
 import UserAddress from "./pages/User/userAddress";
 import UserPayment from "./pages/User/userPayment";
 import UserComingOrders from "./pages/User/userComingOrders";
+import ProtectedRoute from "./components/protected/protectedRoute";
 
 // ===============< import components and page >===============
 function App() {
@@ -60,7 +65,7 @@ function App() {
         // { path: "/Order/:id", element: <Order /> },
         {
           path: "/userprofile",
-          element: <UserProfile />,
+          element: isLogin ? <UserProfile /> : <Navigate to="/" />,
           children: [
             { index: true, element: <UserEdit /> },
             { path: "address", element: <UserAddress /> },
@@ -73,13 +78,51 @@ function App() {
       ],
     },
     { path: "/shop", element: <Shop /> },
-    { path: "/login", element: <Login /> },
-    { path: "/register", element: <Register /> },
-    { path: "/emailRecovery", element: <SendCode /> },
-    { path: "/resetCode", element: <ResetCode /> },
-    { path: "/resetPassword", element: <ResetPass /> },
+
+    {
+      path: "/login",
+      element: (
+        <ProtectedRoute>
+          <Login />
+        </ProtectedRoute>
+      ),
+    },
+
+    {
+      path: "/register",
+      element: (
+        <ProtectedRoute>
+          <Register />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/emailRecovery",
+      element: (
+        <ProtectedRoute>
+          <Home />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/resetCode",
+      element: (
+        <ProtectedRoute>
+          <ResetCode />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/resetPassword",
+      element: (
+        <ProtectedRoute>
+          <ResetPass />
+        </ProtectedRoute>
+      ),
+    },
     { path: "*/*", element: <NotFound /> },
   ]);
+
   return (
     <Provider store={store}>
       <AuthProvider value={{ isLogin, setLogin, enteredCode, setEnteredCode }}>

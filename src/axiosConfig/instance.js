@@ -5,8 +5,7 @@ const currentLanguageCode = cookie.get("i18next") || "en";
 
 const instance = axios.create({
   baseURL: "http://localhost:4000/",
-  // headers: { lng: currentLanguageCode },
-  // params: { lng: currentLanguageCode },
+  params: { lng: currentLanguageCode },
 });
 export default instance;
 

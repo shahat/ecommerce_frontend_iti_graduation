@@ -113,7 +113,6 @@ function Nav() {
             {/* ============================== Search  ============================== */}
 
             <div className="col col-md-4 ">
-              {" "}
               <form
                 className="d-flex align-items-center  "
                 onSubmit={handleFormSubmit}
@@ -141,7 +140,7 @@ function Nav() {
               className={`navbar-nav ${styles.nav_display} flex-row col-md-4 justify-content-end  m-md-0 p-md-0 `}
             >
               {/* ----- user language -----  */}
-              <li className="nav-item  dropdown position-relative ">
+              <li className="nav-item  dropdown position-relative">
                 <a
                   className="nav-link dropdown-toggle"
                   href="#"
@@ -214,7 +213,7 @@ function Nav() {
 
                       <li>
                         <Link to="/register" className="dropdown-item">
-                          register
+                          Register
                         </Link>
                       </li>
                     </>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from "./login.module.css";
 import { BsGoogle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -6,9 +6,12 @@ import { loginAuth } from "../../Services/auth";
 import { authContext } from "../../contexts/authContext";
 import toast, { Toaster } from "react-hot-toast";
 import image from "../../assets/images/150x80 logo.png";
+import { useQueryParams } from "../../util/useQueryParams";
+import axios from "axios";
 
 function Login() {
   const { setLogin } = useContext(authContext);
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     email: "",
@@ -20,6 +23,32 @@ function Login() {
     emailError: "",
     nameError: "",
   });
+
+  const [googleAuthUrl, setGoogleAuthUrl] = useState("");
+  const { token: oauthToken } = useQueryParams();
+  
+  useEffect(() => {
+    if (oauthToken) {
+      console.log(oauthToken);
+      navigate("/");
+    }
+  }, [oauthToken, navigate]);
+
+  useEffect(() => {
+    const loadOauthUrl = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/auth/google/url"
+        );
+        const { url } = response.data;
+        setGoogleAuthUrl(url);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    loadOauthUrl();
+  }, []);
 
   const handleValidation = (e) => {
     if (e.target.name == "password") {
@@ -36,8 +65,6 @@ function Login() {
       });
     }
   };
-
-  const navigate = useNavigate();
 
   const navigateEmailRecovery = () => {
     navigate("/emailRecovery");
@@ -156,6 +183,10 @@ function Login() {
 
               <div className="">
                 <button
+                  disabled={!googleAuthUrl}
+                  onClick={() => {
+                    window.location.href = googleAuthUrl;
+                  }}
                   type="submit"
                   className={` py-2 form-control text-white  ${style.btnGoogle}`}
                 >

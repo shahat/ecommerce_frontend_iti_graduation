@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { categoryAction } from "../../store/slices/categories";
 import { subCategoryAction } from "../../store/slices/subcategory";
 import HomeCategory from "./HomeCategory";
+
+
 export default function Home() {
   const categories = useSelector((state) => state.categories.categories);
   var subCategoies = useSelector((state) => state.subCategories.subCategories);
