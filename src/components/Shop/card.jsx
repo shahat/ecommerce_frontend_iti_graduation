@@ -16,6 +16,7 @@ import {
 } from "../../store/slices/wishList";
 
 function Card(props) {
+  console.log(props.isFavorite);
   var dispatch = useDispatch();
   var x = useNavigate();
   var cart = useSelector((state) => state.cart.cart);

@@ -39,7 +39,7 @@ function Shop() {
   async function getSubCategoryProducts(subcategoryParam) {
     var id = subcategoryParam;
     try {
-      const data = await instance.get(`/subcategories/${id}`);
+      const data = await instance.get(`/subcategories/products/${id}`);
       const res = data.data.data;
       setproducts(res);
       setIsVisible2(false);
@@ -70,7 +70,7 @@ function Shop() {
 
       setSubCategoies(cat);
       const product = cat.map(async (subcat) => {
-        const prod = await instance.get(`/subcategories/${subcat.name}`);
+        const prod = await instance.get(`/subcategories/products/${subcat.name}`);
         const allProducts = prod.data.data;
 
         return allProducts;
@@ -348,7 +348,7 @@ function Shop() {
                     img={product.images[0]}
                     isFavorite={
                       wishList &&
-                      wishList.find((single) => single._id == product._id)
+                      wishList.find((single) => {return (single._id == product._id)? true : false})
                     }
                   />
                 ))}
