@@ -173,6 +173,14 @@ function App() {
                 </ErrorBoundary>
               ),
             },
+            {
+              path: "orderReviews",
+              element: (
+                <ErrorBoundary fallback="There was an error">
+                  <ProductReviews />
+                </ErrorBoundary>
+              ),
+            },
           ],
         },
         {

@@ -39,7 +39,7 @@ function Shop() {
   async function getSubCategoryProducts(subcategoryParam) {
     var id = subcategoryParam;
     try {
-      const data = await instance.get(`/subcategories/${id}`);
+      const data = await instance.get(`/subcategories/products/${id}`);
       const res = data.data.data;
       setproducts(res);
       setIsVisible2(false);
@@ -54,6 +54,7 @@ function Shop() {
         `/subcategories?page=${currentPage2}&limit=4`
       );
       const res = data.data.data;
+      console.log("res????", res);
       setSubCategoies(res);
     } catch (err) {
       console.log(err);
@@ -70,7 +71,9 @@ function Shop() {
 
       setSubCategoies(cat);
       const product = cat.map(async (subcat) => {
-        const prod = await instance.get(`/subcategories/${subcat.name}`);
+        const prod = await instance.get(
+          `/subcategories/products/${subcat.name}`
+        );
         const allProducts = prod.data.data;
 
         return allProducts;
@@ -82,6 +85,8 @@ function Shop() {
       );
 
       setproducts(allProducts);
+
+      console.log(" all products ===========> ", products);
     } catch (err) {
       console.log(err);
     }
@@ -124,10 +129,10 @@ function Shop() {
   }, [currentPage, searchParam, subcategoryParam, currentPage2, categoryParam]);
 
   useEffect(() => {
-    console.log("this is products ==========> ", products);
     // console.log("Updated searchedProducts data:", searchedProducts);
   }, [products, SubCategoies]); // This effect will run when searchedProducts changes.
-  products && console.log("this is products ==========> ", products);
+
+  products && console.log("products===========> ", products);
   return (
     <div className={style.componentcontainer}>
       {/* filter layaout  */}

@@ -106,13 +106,7 @@ function Login() {
 
   return (
     <div className="container">
-      <div className="d-flex justify-content-center">
-        <img
-          src={image}
-          className={`${style.logoImage}`}
-          onClick={navigateToHome}
-        />
-      </div>
+      <div className="d-flex justify-content-center"></div>
 
       <div className="row justify-content-center ">
         <div
