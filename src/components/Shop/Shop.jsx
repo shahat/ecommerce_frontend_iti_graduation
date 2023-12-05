@@ -124,9 +124,10 @@ function Shop() {
   }, [currentPage, searchParam, subcategoryParam, currentPage2, categoryParam]);
 
   useEffect(() => {
+    console.log("this is products ==========> ", products);
     // console.log("Updated searchedProducts data:", searchedProducts);
   }, [products, SubCategoies]); // This effect will run when searchedProducts changes.
-
+  products && console.log("this is products ==========> ", products);
   return (
     <div className={style.componentcontainer}>
       {/* filter layaout  */}
@@ -333,25 +334,32 @@ function Shop() {
           {/* product card */}
           <div className="product-card col-lg-8 col-md-10  mt-4 m-auto">
             <div className="row row-cols-1 row-cols-lg-3 row-cols-md-3 row-cols-sm-2">
-              {products &&
-                products.map((product) => (
-                  <Card
-                    key={product._id}
-                    id={product._id}
-                    title={
-                      currentLanguageCode === "en"
-                        ? product.title
-                        : product.title_ar
-                    }
-                    price={product.price}
-                    priceAfterDiscount={product.priceAfterDescount}
-                    img={product.images[0]}
-                    isFavorite={
-                      wishList &&
-                      wishList.find((single) => single._id == product._id)
-                    }
-                  />
-                ))}
+              {products ? (
+                products.length > 0 ? (
+                  products.map((product) => (
+                    <Card
+                      key={product._id}
+                      id={product._id}
+                      title={
+                        currentLanguageCode === "en"
+                          ? product.title
+                          : product.title_ar
+                      }
+                      price={product.price}
+                      priceAfterDiscount={product.priceAfterDescount}
+                      img={product.images[0]}
+                      isFavorite={
+                        wishList &&
+                        wishList.find((single) => single._id == product._id)
+                      }
+                    />
+                  ))
+                ) : (
+                  <h1 className="fs-3"> There is no Products </h1>
+                )
+              ) : (
+                <h1 className="fs-3"> Products is Loading </h1>
+              )}
             </div>
           </div>
         </div>

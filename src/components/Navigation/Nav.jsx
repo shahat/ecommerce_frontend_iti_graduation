@@ -27,6 +27,9 @@ import { GrLanguage } from "react-icons/gr";
 import i18next from "i18next";
 import cookie from "js-cookie";
 function Nav() {
+  // ============== handle return   ==============
+  const { isLogin, setLogin } = useContext(authContext);
+
   const { t } = useTranslation();
   const languages = [
     {
@@ -48,9 +51,9 @@ function Nav() {
 
   const dispatch = useDispatch();
   const [userLogged, setUserLogged] = useState(false);
-
+  let token;
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    token = localStorage.getItem("token");
     if (token) {
       const decoded = jwtDecode(token);
       const userId = decoded.id;
@@ -66,8 +69,10 @@ function Nav() {
 
     // localization
     document.body.dir = currentLanguage.dir || "ltr";
-  }, [currentLanguageCode]);
-  useEffect(() => {}, [currentLanguage]);
+  }, [currentLanguageCode, isLogin]);
+
+  useEffect(() => {}, [currentLanguage, isLogin]);
+
   var cartList = useSelector((state) => state.cart.cartProducts);
   var wishList = useSelector((state) => state.wishList.list);
   const navigate = useNavigate();
@@ -82,9 +87,6 @@ function Nav() {
     event.preventDefault();
     navigate(`/shop/?search=${searchValue}`);
   };
-
-  // ============== handle return   ==============
-  const { isLogin, setLogin } = useContext(authContext);
 
   return (
     <>
@@ -214,12 +216,13 @@ function Nav() {
                       </li>
                     </>
                   )}
-
-                  <li>
-                    <Link to="/userprofile/" className="dropdown-item">
-                      {t("profile")}
-                    </Link>
-                  </li>
+                  {isLogin && (
+                    <li>
+                      <Link to="/userprofile/" className="dropdown-item">
+                        {t("profile")}
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               </li>
               {/* ----- cart ----- */}

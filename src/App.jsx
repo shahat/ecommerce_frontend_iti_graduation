@@ -156,7 +156,7 @@ function App() {
                 </ErrorBoundary>
               ),
             },
- 
+
             {
               path: "pastOrders",
               element: (
@@ -188,11 +188,7 @@ function App() {
     },
     {
       path: "/shop",
-      element: (
-        <ErrorBoundary fallback="There was an error">
-          <Shop />
-        </ErrorBoundary>
-      ),
+      element: <Shop />,
     },
 
     {

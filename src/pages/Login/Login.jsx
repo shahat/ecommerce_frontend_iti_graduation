@@ -130,7 +130,6 @@ function Login() {
           </p>
           <form
             action="#"
-            autoComplete="off"
             onSubmit={(e) => {
               handleSubmit(e);
             }}

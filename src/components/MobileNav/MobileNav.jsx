@@ -7,6 +7,8 @@ import Stack from "react-bootstrap/Stack";
 import { LiaStoreSolid } from "react-icons/lia";
 import { AiOutlineHome } from "react-icons/ai";
 import styles from "./mobileNav.module.css";
+import toast, { Toaster } from "react-hot-toast";
+
 // =========< Localization >=========
 import { useTranslation } from "react-i18next";
 import cookie from "js-cookie";
@@ -38,11 +40,7 @@ export default function MobileNav() {
   var cartList = useSelector((state) => state.cart.cartProducts);
   var wishList = useSelector((state) => state.wishList.list);
 
-  
   const { isLogin, setLogin } = useContext(authContext);
-  const handleLogout = () => {
-    alert("you are loged out ");
-  };
 
   return (
     <div className={`${styles.bottom_nav}`}>
@@ -115,35 +113,48 @@ export default function MobileNav() {
             className={`dropdown-menu ${styles.number_one} position-absolute `}
             aria-labelledby="navbarDropdown"
           >
-            <li>
-              <Link to="login" className="dropdown-item">
-                {t("login")}
-              </Link>
-            </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
-            <li>
-              <Link to="register" className="dropdown-item">
-                {t("register")}
-              </Link>
-            </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
-            <li>
-              <Link to="/userprofile" className="dropdown-item">
-                {t("profile")}
-              </Link>
-            </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
-            <li>
-              <Link className="dropdown-item" onClick={handleLogout}>
-                {t("logout")}
-              </Link>
-            </li>
+            {isLogin ? (
+              <>
+                <li>
+                  <Link to="/userprofile" className="dropdown-item">
+                    {t("profile")}
+                  </Link>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      setLogin(false);
+                      toast.success("Successfully logged out!", {
+                        position: "top-right",
+                      });
+                    }}
+                  >
+                    {t("logout")}
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="login" className="dropdown-item">
+                    {t("login")}
+                  </Link>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link to="register" className="dropdown-item">
+                    {t("register")}
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </li>
         {/* ----- cart ----- */}
