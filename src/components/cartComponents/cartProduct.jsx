@@ -74,18 +74,18 @@ function CartProduct({ product, quantity }) {
             style={{ width: "7.75rem", height: "7.75rem" }}
           >
             <img
-              src={product._id.thumbnail}
+              src={product._id?.thumbnail}
               className="h-100 m-auto overflow-hidden object-fit-scale w-100"
             />
           </div>
           <div
             className={`${css["cart_product_details"]} float-start col-8 px-2 d-flex flex-column`}
           >
-            <h4>{product._id.title}</h4>
+            <h4>{product._id?.title}</h4>
             <p>
-              <span className="text-secondary">{product._id.description}</span>
+              <span className="text-secondary">{product._id?.description}</span>
             </p>
-            <h3 className="mt-auto mb-0">{product._id.price} EGP</h3>
+            <h3 className="mt-auto mb-0">{product._id?.price} EGP</h3>
           </div>
         </div>
         <div

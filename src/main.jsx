@@ -26,6 +26,8 @@ i18n
 
 import App from "./App.jsx";
 import "./index.css";
+import ErrorBoundary from "./components/ErrorHandling/ErrorHandlingPage.jsx";
+import ProductDetails from "./pages/ProductDetails/ProductDetails.jsx";
 
 // const AyHamada = () => {
 //   return <h1>{t("Welcome_to_React")}</h1>;
@@ -35,6 +37,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <>
     <App />
+    {/* <ErrorBoundary fallback="There was an error">
+      <ProductDetails />
+    </ErrorBoundary> */}
   </>
 
   // </React.StrictMode>
