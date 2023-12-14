@@ -37,9 +37,7 @@ function NewArrival({ electronics, clothes, title }) {
                     {t("Latest_collection_in_market")}
                   </h3>
                   <Link
-                    to={`/shop/?subcategory=${
-                      lng === "en" ? data[1].name : data[1].name_ar
-                    }`}
+                    to={`/shop/?subcategory=${data[1].name}`}
                     className={`btn btn-primary ${newArrival.custom_button}`}
                   >
                     {t("shop_now")}
@@ -65,9 +63,7 @@ function NewArrival({ electronics, clothes, title }) {
                     {t("Latest_collection_in_market")}
                   </h3>
                   <Link
-                    to={`/shop/?subcategory=${
-                      lng === "en" ? data[2].name : data[2].name_ar
-                    }`}
+                    to={`/shop/?subcategory=${data[2].name}`}
                     className={`btn btn-primary ${newArrival.custom_button}`}
                   >
                     {t("shop_now")}
@@ -92,9 +88,7 @@ function NewArrival({ electronics, clothes, title }) {
                       {t("Latest_collection_in_market")}
                     </h3>
                     <Link
-                      to={`/shop/?subcategory=${
-                        lng === "en" ? data[0].name : data[0].name_ar
-                      }`}
+                      to={`/shop/?subcategory=${data[0].name}`}
                       className={`btn btn-primary ${newArrival.custom_button}`}
                     >
                       {t("shop_now")}

@@ -139,7 +139,9 @@ function Nav() {
               className={`navbar-nav ${styles.nav_display} flex-row col-md-4 justify-content-end  m-md-0 p-md-0 `}
             >
               {/* ----- user language -----  */}
-              <li className="nav-item  dropdown position-relative">
+              <li
+                className={`nav-item  dropdown position-relative mx-3 ${styles.hoverLink}`}
+              >
                 <a
                   className="nav-link dropdown-toggle"
                   id="navbarDropdown"
@@ -169,7 +171,9 @@ function Nav() {
                 </ul>
               </li>
               {/* ----- user profile ----- */}
-              <li className="nav-item ms-3 dropdown position-relative">
+              <li
+                className={`nav-item ms-3 dropdown position-relative ${styles.hoverLink}`}
+              >
                 <a
                   className="nav-link dropdown-toggle "
                   href="#"
@@ -226,7 +230,7 @@ function Nav() {
                 </ul>
               </li>
               {/* ----- cart ----- */}
-              <li className="nav-item ms-3">
+              <li className={`nav-item mx-3 ${styles.hoverLink}`}>
                 <span className={`${styles.icon_container} position-relative `}>
                   <Link to="/cart" className="nav-link text-center" href="#">
                     <BsCart3 className={`${styles.icon} fs-4 }`}></BsCart3>
@@ -244,7 +248,7 @@ function Nav() {
                 </span>
               </li>{" "}
               {/* ----- wishList ----- */}
-              <li className="nav-item mx-3">
+              <li className={`nav-item mx-3 ${styles.hoverLink}`}>
                 <span className={`${styles.icon_container} position-relative `}>
                   <Link to="/wishlist" className="nav-link text-center">
                     <MdOutlineFavoriteBorder

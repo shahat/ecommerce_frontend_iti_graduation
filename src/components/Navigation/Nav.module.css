@@ -13,6 +13,15 @@
 
   height: 56px;
 }
+.hoverLink {
+  min-width: 50px;
+  text-align: center;
+}
+
+.hoverLink:hover {
+  background-color: rgba(171, 171, 171, 0.582);
+  border-radius: 50%;
+}
 .navbarIcons {
   cursor: pointer;
 }

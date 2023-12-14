@@ -1,6 +1,5 @@
 import css from "../../assets/style/product.module.css";
 import Loader from "../../components/Loader/loader";
-import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import WishListProduct from "../../components/wishComponents/WishListProduct";
 import { useSelector } from "react-redux";
 

@@ -33,10 +33,8 @@ function Footer() {
               </div>
               <div className="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
                 <p className="my-0 py-0">
-                  <Link to="/contact">
-                    {""}
-                    <BsPersonExclamation className="icon fs-3"></BsPersonExclamation>
-                  </Link>
+                  {""}
+                  <BsPersonExclamation className="icon fs-3"></BsPersonExclamation>
                 </p>
                 <p className="my-0 py-0  contact-us  px-4">
                   {t("Help_Center")} help.noon.com

@@ -63,7 +63,7 @@ function Order() {
             </div>
           </div>
         </div>
-        <div className="col-12 my-2">
+        {/* <div className="col-12 my-2">
           <button
             className="btn btn-outline-primary me-1 placeholder "
             aria-disabled="true"
@@ -78,7 +78,7 @@ function Order() {
           >
             Contact Support <RiCustomerService2Line />
           </button>
-        </div>
+        </div> */}
         <div
           className="row justify-content-around align-items-center"
           aria-hidden="true"
@@ -150,36 +150,36 @@ function Order() {
             </div>
           </div>
         </div>
-        <div className="col-12 my-2">
-          <button className="btn btn-outline-primary me-1">
-            Order Again <RiLoopRightFill />
-          </button>
-          <button className="btn btn-outline-primary mx-1">
-            Contact Support <RiCustomerService2Line />
-          </button>
-        </div>
+
         {order.items &&
           order.items.length > 0 &&
           order.items.map((item, index) => (
-            <div className="col-12 my-1 border bg-white" key={index}>
+            <div
+              className="col-12 my-1 border bg-white d-flex justify-content-center align-items-center"
+              key={index}
+            >
               <div className="row justify-content-around align-items-center">
-                <div className="col-3 ">
-                  <img src={item.thumbnail} className="img-fluid w-50" alt="" />
+                <div className="col-md-3 ">
+                  <img
+                    src={item.thumbnail}
+                    className="img-fluid  w-100 w-md-50 "
+                    alt=""
+                  />
                   <p className="lead">{item.title}</p>
                 </div>
-                <div className="col-3">
+                <div className="col-md-3">
                   <h5 className="h5 my-2">Product Price:</h5>
                   <p className="lead">{item.price}</p>
                   <h5 className="h5 my-2">Rating :</h5>
                   <p className="lead">{item.rating}</p>
                 </div>
-                <div className="col-3">
+                <div className="col-md-3">
                   <h5 className="h5 my-2">Description</h5>
                   <p className="lead">{item.description}</p>
                 </div>
-                <div className="col-3 text-center">
+                <div className="col-md-3 text-center">
                   <button
-                    className="btn btn-outline-warning w-50"
+                    className="btn btn-outline-warning w-50 m-3"
                     onClick={() => {
                       navigate(`/product/${item._id}`);
                     }}

@@ -1,8 +1,0 @@
-multer  
-cloudinary 
-
-
-installing the follwoing to apply the language to your react application 
-npm install react-i18next i18next --save       => install this to know the main libarary 
-npm install i18next-browser-languagedetector   => install that to setup from where you detect the language 
-npm install i18next-http-backend               => install that to isolate the translation files from each component 

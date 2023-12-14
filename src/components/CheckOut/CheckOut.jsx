@@ -155,7 +155,7 @@ const CheckOut = () => {
       setTimeout(() => {
         dispatch(postOneOrder(order));
         dispatch(deleteCart(user._id));
-        navigate(`/`);
+        navigate(`/chechoutSuccess`);
       }, 2000);
     }
   };

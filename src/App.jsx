@@ -36,7 +36,9 @@ import UserAddress from "./pages/User/userAddress";
 import Order from "./components/Order/Order";
 import UserComingOrders from "./pages/User/userComingOrders";
 import ProtectedRoute from "./components/protected/protectedRoute";
+
 import ErrorBoundary from "./components/ErrorHandling/ErrorHandlingPage";
+
 import CheckoutSuccess from "./components/CheckoutSuccess/CheckoutSuccess";
 import ProductReviews from "./pages/User/ProductReviews";
 import ProductReview from "./components/ProductReview/ProductReview";
@@ -50,55 +52,35 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <AppLayout />,
+      element: (
+        <ErrorBoundary fallback="There was an error">
+          <AppLayout />
+        </ErrorBoundary>
+      ),
       children: [
         {
           index: true,
-          element: (
-            <ErrorBoundary fallback="There was an error">
-              <Home />
-            </ErrorBoundary>
-          ),
+          element: <Home />,
         },
         {
           path: "/product/:id",
-          element: (
-            <ErrorBoundary fallback="There was an error">
-              <ProductDetails />
-            </ErrorBoundary>
-          ),
+          element: <ProductDetails />,
           children: [
             {
               index: true,
-              element: (
-                <ErrorBoundary fallback="There was an error">
-                  <ReviewsContainer />
-                </ErrorBoundary>
-              ),
+              element: <ReviewsContainer />,
             },
             {
               path: "description",
-              element: (
-                <ErrorBoundary fallback="There was an error">
-                  <Description />
-                </ErrorBoundary>
-              ),
+              element: <Description />,
             },
             {
               path: "reviews",
-              element: (
-                <ErrorBoundary fallback="There was an error">
-                  <ReviewsContainer />
-                </ErrorBoundary>
-              ),
+              element: <ReviewsContainer />,
             },
             {
               path: "faq",
-              element: (
-                <ErrorBoundary fallback="There was an error">
-                  <FAQ />
-                </ErrorBoundary>
-              ),
+              element: <FAQ />,
             },
           ],
         },
@@ -112,33 +94,17 @@ function App() {
         },
         {
           path: "/wishlist",
-          element: (
-            <ErrorBoundary fallback="There was an error">
-              <WishList />
-            </ErrorBoundary>
-          ),
+          element: <WishList />,
         },
         {
           path: "/contact",
-          element: (
-            <ErrorBoundary fallback="There was an error">
-              {" "}
-              <Contact />
-            </ErrorBoundary>
-          ),
+          element: <Contact />,
         },
         { path: "/chechoutSuccess", element: <CheckoutSuccess /> },
         { path: "/Order/:id", element: <Order /> },
-        // { path: "/Order/:id", element: <Order /> },
         {
           path: "/userprofile",
-          element: isLogin ? (
-            <ErrorBoundary fallback="There was an error">
-              <UserProfile />
-            </ErrorBoundary>
-          ) : (
-            <Navigate to="/" />
-          ),
+          element: isLogin ? <UserProfile /> : <Navigate to="/" />,
           children: [
             {
               index: true,
@@ -150,48 +116,32 @@ function App() {
             },
             {
               path: "address",
-              element: (
-                <ErrorBoundary fallback="There was an error">
-                  <UserAddress />{" "}
-                </ErrorBoundary>
-              ),
+              element: <UserAddress />,
             },
 
             {
               path: "pastOrders",
-              element: (
-                <ErrorBoundary fallback="There was an error">
-                  <UserOrders />{" "}
-                </ErrorBoundary>
-              ),
+              element: <UserOrders />,
             },
             {
               path: "upcomingOrders",
-              element: (
-                <ErrorBoundary fallback="There was an error">
-                  <UserComingOrders />
-                </ErrorBoundary>
-              ),
+              element: <UserComingOrders />,
             },
             {
               path: "orderReviews",
-              element: (
-                <ErrorBoundary fallback="There was an error">
-                  <ProductReviews />
-                </ErrorBoundary>
-              ),
+              element: <ProductReviews />,
             },
           ],
         },
         {
           path: "/checkout",
-          element: (
-            <ErrorBoundary fallback="There was an error">
-              <CheckOut />
-            </ErrorBoundary>
-          ),
+
+          element: <CheckOut />,
         },
-        { path: "/productReview/:productId", element: <ProductReview /> },
+        {
+          path: "/productReview/:productId",
+          element: <ProductReview />,
+        },
       ],
     },
     {
@@ -201,12 +151,9 @@ function App() {
 
     {
       path: "/login",
-
       element: (
         <ProtectedRoute>
-          <ErrorBoundary fallback="There was an error">
-            <Login />
-          </ErrorBoundary>
+          <Login />
         </ProtectedRoute>
       ),
     },
@@ -215,9 +162,7 @@ function App() {
       path: "/register",
       element: (
         <ProtectedRoute>
-          <ErrorBoundary fallback="There was an error">
-            <Register />
-          </ErrorBoundary>
+          <Register />
         </ProtectedRoute>
       ),
     },
@@ -225,9 +170,7 @@ function App() {
       path: "/emailRecovery",
       element: (
         <ProtectedRoute>
-          <ErrorBoundary fallback="There was an error">
-            <SendCode />
-          </ErrorBoundary>
+          <SendCode />
         </ProtectedRoute>
       ),
     },
@@ -235,9 +178,7 @@ function App() {
       path: "/resetCode",
       element: (
         <ProtectedRoute>
-          <ErrorBoundary fallback="There was an error">
-            <ResetCode />
-          </ErrorBoundary>
+          <ResetCode />
         </ProtectedRoute>
       ),
     },
@@ -245,13 +186,11 @@ function App() {
       path: "/resetPassword",
       element: (
         <ProtectedRoute>
-          <ErrorBoundary fallback="There was an error">
-            <ResetPass />
-          </ErrorBoundary>
+          <ResetPass />
         </ProtectedRoute>
       ),
     },
-    { path: "*/*", element: <NotFound /> },
+    { path: "*", element: <NotFound /> },
   ]);
 
   return (

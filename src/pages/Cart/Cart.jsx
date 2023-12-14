@@ -1,5 +1,4 @@
 import CartProduct from "../../components/cartComponents/cartProduct";
-import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import css from "../../assets/style/product.module.css";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
@@ -15,6 +14,7 @@ function Cart() {
   const cartList = useSelector((state) => state.cart.cartProducts);
   const checkOutStatus = useSelector((state) => state.checkOut);
   const token = localStorage.getItem("token");
+  console.log("this is the token" , token );
   const [subTotal, setSubTotal] = useState(0);
   useEffect(() => {
     setSubTotal(0);
@@ -139,7 +139,7 @@ function Cart() {
           </div>
 
           {/* <!-- Related Products PART --> */}
-          <RelatedProducts />
+          {/* <RelatedProducts /> */}
 
           <div id="contact-footer"></div>
         </div>

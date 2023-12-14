@@ -68,7 +68,10 @@ export default function SecondNav() {
                       >
                         {categoryToSub[category.name].map((subcategory) => (
                           <Dropdown.Item key={Math.random()} eventKey="2">
-                            <Link to={`/shop/?subcategory=${subcategory.name}`}>
+                            <Link
+                              to={`/shop/?subcategory=${subcategory.name}`}
+                              className="nav-item text-decoration-none "
+                            >
                               {currentLanguageCode === "en"
                                 ? subcategory.name
                                 : subcategory.name_ar}
@@ -80,7 +83,6 @@ export default function SecondNav() {
                   )
                 )}
               </Dropdown.Menu>
-            
             </Dropdown>
           </div>
 

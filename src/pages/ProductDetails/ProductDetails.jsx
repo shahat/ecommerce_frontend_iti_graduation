@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import css from "../../assets/style/product.module.css";
 import PhotoGallery from "../../components/productDetailsComps/photoGallery";
-import RelatedProducts from "../../components/relatedProducts/relatedProducts";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToBothCartsAction } from "../../store/slices/cart";
