@@ -96,7 +96,6 @@ function Shop() {
     try {
       const data = await instance.get(`/product?page=${currentPage}`);
       const res = data.data.data;
-      console.log("res=========================================", res);
       setproducts(res);
     } catch (err) {
       console.log(err);
@@ -129,10 +128,8 @@ function Shop() {
   }, [currentPage, searchParam, subcategoryParam, currentPage2, categoryParam]);
 
   useEffect(() => {
-    // console.log("Updated searchedProducts data:", searchedProducts);
   }, [products, SubCategoies]); // This effect will run when searchedProducts changes.
 
-  products && console.log("products===========> ", products);
   return (
     <div className={style.componentcontainer}>
       {/* filter layaout  */}
