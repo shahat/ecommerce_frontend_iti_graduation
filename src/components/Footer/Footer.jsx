@@ -37,7 +37,7 @@ function Footer() {
                   <BsPersonExclamation className="icon fs-3"></BsPersonExclamation>
                 </p>
                 <p className="my-0 py-0  contact-us  px-4">
-                  {t("Help_Center")} help.noon.com
+                  {t("help_center")} help.noon.com
                 </p>
               </div>
               <div className="col-lg-2 d-flex align-items-center mb-3 mb-lg-0">
@@ -376,7 +376,7 @@ function Footer() {
             <div className="container">
               <div className="row">
                 <div className="col-sx-12  text-center">
-                  <p className="p-0 m-0">Copyright © 2017 E-market </p>
+                  <p className="p-0 m-0">Copyright © 2023 E-market </p>
                 </div>
               </div>
             </div>

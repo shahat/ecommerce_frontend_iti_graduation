@@ -33,11 +33,11 @@ export default function Home() {
       <Caarousel></Caarousel>
       {/* ============< Start of Category >============  */}
 
-      <div className="container-fluid pt-5">
-        <h2 className=" position-relative text-uppercase mx-xl-5 mb-4">
+      <div className="container-lg px-0 pt-5">
+        <h2 className=" position-relative text-uppercase  mb-4">
           <span className="pr-3">{t("categories")}</span>
         </h2>
-        <div className="row px-xl-5 my-5">
+        <div className="row  my-5">
           {categories.slice(0, 8).map((category) => (
             <HomeCategory
               key={category._id}

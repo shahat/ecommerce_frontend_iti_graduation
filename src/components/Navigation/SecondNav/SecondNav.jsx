@@ -5,7 +5,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { categoryAction } from "../../../store/slices/categories";
 import { subCategoryAction } from "../../../store/slices/subcategory";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import cookie from "js-cookie";
 
@@ -90,16 +90,16 @@ export default function SecondNav() {
             <nav className="navbar  bg-dark navbar-dark   py-0 px-0">
               <div className=" justify-content-between" id="navbarCollapse">
                 <div className="navbar-nav d-flex flex-row   mr-auto py-0">
-                  <Link to="/" className="nav-item nav-link active">
+                  <NavLink to="/" className="nav-item nav-link ">
                     {t("home")}
-                  </Link>
-                  <Link to="/shop" className="nav-item mx-3 nav-link">
+                  </NavLink>
+                  <NavLink to="/shop" className="nav-item mx-3 nav-link">
                     {t("shop")}
-                  </Link>
+                  </NavLink>
 
-                  <Link to="/contact" className="nav-item mx-3 nav-link">
+                  <NavLink to="/contact" className="nav-item mx-3 nav-link">
                     {t("contact")}
-                  </Link>
+                  </NavLink>
                 </div>
               </div>
             </nav>

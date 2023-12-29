@@ -16,7 +16,7 @@ export default function ProductReview() {
     rating: null,
   });
 
-  // ===============< get order Product >===============
+  // ===============< getReviewedProduct >===============
 
   const getReviewedProduct = async () => {
     try {
@@ -27,7 +27,6 @@ export default function ProductReview() {
       console.error("Error fetching completed order products:", error.message);
     }
   };
-  // ===============< get order Product >===============
 
   const createProductReview = async (review) => {
     try {

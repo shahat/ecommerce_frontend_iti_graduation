@@ -7,18 +7,17 @@ function NewArrival({ electronics, clothes, title }) {
   const lng = cookie.get("i18next") || "en";
 
   const data = clothes && clothes ? clothes : electronics;
-  // console.log("electronics clothes", clothes, electronics);
   useEffect(() => {}, [data, lng]);
   const { t } = useTranslation();
 
   return (
     <>
       {data && data.length > 0 && (
-        <div className="container-fluid ">
-          <h2 className=" position-relative text-uppercase mx-xl-5 mb-4">
-            <span className="pr-3">{title}</span>
+        <div className="container-lg px-0 ">
+          <h2 className=" position-relative text-uppercase  mb-4">
+            <span className="">{title}</span>
           </h2>
-          <div className="row g-3 px-xl-5">
+          <div className="row g-3 ">
             <div className="col-lg-7">
               <div
                 className={`position-relative w-100 ${newArrival.subCategoryWide} overflow-hidden  `}

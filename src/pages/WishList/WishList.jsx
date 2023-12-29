@@ -1,5 +1,6 @@
 import css from "../../assets/style/product.module.css";
 import Loader from "../../components/Loader/loader";
+import CartTitle from "../../components/cartTitle/CartTitle";
 import WishListProduct from "../../components/wishComponents/WishListProduct";
 import { useSelector } from "react-redux";
 
@@ -15,8 +16,7 @@ function WishList() {
       ) : (
         // {/* <!-- ======================== page body ==================================== --> */}
         <div className="d-flex row justify-content-center col-12 m-0">
-          <h1 className="col-12 fw-bolder m-5 text-center">My Wish List</h1>
-          {/* <!-- Wish PART --> */}
+          <CartTitle title="Wish List" />
           <div
             className={`${css.product} row d-flex col-md-10 justify-content-md-between justify-content-center m-0 p-0`}
           >

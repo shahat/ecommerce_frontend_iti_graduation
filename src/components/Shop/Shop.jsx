@@ -127,9 +127,9 @@ function Shop() {
     // console.log("Updated searchedProducts data:", searchedProducts);
   }, [currentPage, searchParam, subcategoryParam, currentPage2, categoryParam]);
 
-  useEffect(() => {
-  }, [products, SubCategoies]); // This effect will run when searchedProducts changes.
+  useEffect(() => {}, [products, SubCategoies]); // This effect will run when searchedProducts changes.
 
+  console.log("wish list =>>>>>>>>>>>>>>>>>>>>>>> ", wishList);
   return (
     <div className={style.componentcontainer}>
       {/* filter layaout  */}
@@ -352,7 +352,7 @@ function Shop() {
                       img={product.images[0]}
                       isFavorite={
                         wishList &&
-                        wishList.find((single) => single._id == product._id)
+                        wishList.find((single) => single._id._id == product._id)
                       }
                     />
                   ))
@@ -360,7 +360,10 @@ function Shop() {
                   <h1 className="fs-3"> There is no Products </h1>
                 )
               ) : (
-                <h1 className="fs-3"> Products is Loading </h1>
+                <h1 className="fs-3 w-100 my-5 bg-white">
+                  {" "}
+                  Products is Loading{" "}
+                </h1>
               )}
             </div>
           </div>

@@ -7,7 +7,6 @@ import { authContext } from "../../contexts/authContext";
 import { enterResetPassword } from "../../Services/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
-
 function ResetPass() {
   const { enteredCode } = useContext(authContext);
 
@@ -16,9 +15,10 @@ function ResetPass() {
     confirmPassword: "",
   });
 
-    const [isClicked, setIsClicked] = useState(false);
-    const [isConfirmPasswordClicked, setIsConfirmPasswordClicked] =
-      useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [isConfirmPasswordClicked, setIsConfirmPasswordClicked] = useState(
+    false
+  );
 
   const navigate = useNavigate();
 

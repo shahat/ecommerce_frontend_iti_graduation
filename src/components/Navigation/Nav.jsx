@@ -116,11 +116,12 @@ function Nav() {
               >
                 <input
                   className={`form-control border  rounded-0  flex-grow-1 
+               
                   ${styles.form_search} 
                   ${styles.form_search_input}`}
                   type="search"
                   name="search"
-                  dir={currentLanguage == "en" ? "ltr" : "rtl"}
+                  dir={currentLanguage === "en" ? "rtl" : "ltr"}
                   placeholder={`${t("search")} ...`}
                   onChange={handleInputChange}
                 />

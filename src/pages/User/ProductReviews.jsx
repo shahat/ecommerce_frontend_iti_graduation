@@ -6,8 +6,9 @@ export default function ProductReviews() {
   const [completeOrderProducts, setCompleteOrderProducts] = useState([]);
 
   const getCompleteOrderProducts = async () => {
+    const { token } = localStorage;
+    console.log("token:", token);
     try {
-      const { token } = localStorage;
       const res = await instance.get("/orders/completedOrderProducts", {
         headers: { authorization: token },
       });
@@ -20,7 +21,8 @@ export default function ProductReviews() {
   useEffect(() => {
     getCompleteOrderProducts();
   }, []);
-
+  completeOrderProducts &&
+    console.log("completeOrderProducts ==========> ", completeOrderProducts);
   return (
     <div>
       {completeOrderProducts && completeOrderProducts.length > 0 ? (
@@ -28,7 +30,7 @@ export default function ProductReviews() {
           <CompleletOrderProductCard
             key={index}
             title={item.title}
-            image={item.images[0]}
+            image={item.thumbnail}
             price={item.price}
             description={item.description}
             prodId={item.productId}

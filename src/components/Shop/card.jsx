@@ -23,8 +23,10 @@ function Card(props) {
     console.log(id);
     dispatch(addToBothCartsAction(id));
   };
+  const token = localStorage.getItem("token");
+
   const addFavorites = (id) => {
-    dispatch(addToWishListAction(id));  
+    dispatch(addToWishListAction(id));
   };
   const removeFavorites = (id) => {
     dispatch(removeFromWishAction(id));
@@ -38,23 +40,26 @@ function Card(props) {
             className={`card-img-top imageOverLay ${style.cardimg}`}
             alt="..."
           />
-          {/* edward */}
-          {props.isFavorite ? (
-            <AiFillHeart
-              className="position-absolute top-0 end-0 text-warning "
-              style={{ fontSize: "2em" }}
-              onClick={() => {
-                removeFavorites(props.id);
-              }}
-            />
+          {token ? (
+            props.isFavorite ? (
+              <AiFillHeart
+                className="position-absolute top-0 end-0 text-warning "
+                style={{ fontSize: "2em" }}
+                onClick={() => {
+                  removeFavorites(props.id);
+                }}
+              />
+            ) : (
+              <AiOutlineHeart
+                className="position-absolute top-0 end-0 text-light "
+                style={{ fontSize: "2em" }}
+                onClick={() => {
+                  addFavorites(props.id);
+                }}
+              />
+            )
           ) : (
-            <AiOutlineHeart
-              className="position-absolute top-0 end-0 text-light "
-              style={{ fontSize: "2em" }}
-              onClick={() => {
-                addFavorites(props.id);
-              }}
-            />
+            ""
           )}
 
           <div className>

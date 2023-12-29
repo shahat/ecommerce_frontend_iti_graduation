@@ -2,7 +2,6 @@ import ReactDOM from "react-dom/client";
 import i18n from "i18next";
 import { initReactI18next, useTranslation } from "react-i18next";
 import HttpApi from "i18next-http-backend";
-
 import LanguageDetector from "i18next-browser-languagedetector";
 
 // passes i18n down to react-i18next
@@ -29,18 +28,8 @@ import "./index.css";
 import ErrorBoundary from "./components/ErrorHandling/ErrorHandlingPage.jsx";
 import ProductDetails from "./pages/ProductDetails/ProductDetails.jsx";
 
-// const AyHamada = () => {
-//   return <h1>{t("Welcome_to_React")}</h1>;
-// };
-
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
   <>
     <App />
-    {/* <ErrorBoundary fallback="There was an error">
-      <ProductDetails />
-    </ErrorBoundary> */}
   </>
-
-  // </React.StrictMode>
 );
