@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const oneOrderAction = createAsyncThunk("get/oneOrder", async (id) => {
-  const res = await axios.get(`http://localhost:4000/orders/${id}`);
+  const res = await axios.get(`https://openmarket.onrender.com/orders/${id}`);
   console.log("res=========>", res.data.order);
   return res.data.order;
 });
@@ -10,7 +10,7 @@ export const oneOrderAction = createAsyncThunk("get/oneOrder", async (id) => {
 export const postOneOrder = createAsyncThunk("create/order", async (order) => {
   try {
     const orderCreationResponse = await axios.post(
-      `http://localhost:4000/orders/`,
+      `https://openmarket.onrender.com/orders/`,
       order
     );
 

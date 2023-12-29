@@ -113,7 +113,7 @@ export function removeFromCartAction(id) {
 
 export const deleteCart = createAsyncThunk("cart/delete", async (id) => {
   console.log(id);
-  const res = axios.delete(`http://localhost:4000/cart/${id}`);
+  const res = axios.delete(`https://openmarket.onrender.com/cart/${id}`);
   console.log(res);
   return res.data;
 });

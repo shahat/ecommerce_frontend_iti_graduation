@@ -34,12 +34,13 @@ function Register() {
   });
 
   const [isClicked, setIsClicked] = useState(false);
-  const [isConfirmPasswordClicked, setIsConfirmPasswordClicked] =
-    useState(false);
+  const [isConfirmPasswordClicked, setIsConfirmPasswordClicked] = useState(
+    false
+  );
 
   async function auth() {
     try {
-      const response = await fetch("http://localhost:4000/request", {
+      const response = await fetch("https://openmarket.onrender.com/request", {
         method: "post",
       });
       const data = await response.json();
@@ -214,9 +215,11 @@ function Register() {
                   value={user.email}
                 />
               </div>
-                {errors.emailError && (
-                  <small className="text-danger fw-bold">{errors.emailError}</small>
-                )}
+              {errors.emailError && (
+                <small className="text-danger fw-bold">
+                  {errors.emailError}
+                </small>
+              )}
 
               <div className="password">
                 <label htmlFor="password" className="mt-3">
@@ -256,7 +259,9 @@ function Register() {
                   )}
                 </div>
                 {errors.passwordError && (
-                  <small className="text-danger fw-bold">{errors.passwordError}</small>
+                  <small className="text-danger fw-bold">
+                    {errors.passwordError}
+                  </small>
                 )}
 
                 <div className="passwordConfirmation">

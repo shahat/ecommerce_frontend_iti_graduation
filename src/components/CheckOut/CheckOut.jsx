@@ -138,10 +138,13 @@ const CheckOut = () => {
 
     if (order.paymentStatus == "Paid Online") {
       axios
-        .post(`http://localhost:4000/stripe/create-checkout-session`, {
-          order,
-          userId: user._id,
-        })
+        .post(
+          `https://openmarket.onrender.com/stripe/create-checkout-session`,
+          {
+            order,
+            userId: user._id,
+          }
+        )
         .then((res) => {
           if (res.data.url) {
             window.location.href = res.data.url;

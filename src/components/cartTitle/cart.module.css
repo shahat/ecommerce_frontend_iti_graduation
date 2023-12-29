@@ -1,0 +1,11 @@
+.title {
+  background-image: url("../../../public/assets/images/carsoule/ca-2.jpg");
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 50px;
+}
+.overLay {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}

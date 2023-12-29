@@ -38,7 +38,7 @@ function Login() {
     const loadOauthUrl = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/auth/google/url"
+          "https://openmarket.onrender.com/auth/google/url"
         );
         const { url } = response.data;
         setGoogleAuthUrl(url);
