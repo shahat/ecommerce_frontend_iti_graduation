@@ -1,13 +1,12 @@
 import React from "react";
+import img1 from "../../../public/assets/images/carsoule/car-1.jpg";
+import img2 from "../../../public/assets/images/carsoule/car-2.jpg";
+import img3 from "../../../public/assets/images/carsoule/car-3.jpg";
 import styles from "./Carousel.module.css";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
 function Caarousel() {
-  const car_images = [
-    "../../../public/assets/images/carsoule/car-1.jpg",
-    "../../../public/assets/images/carsoule/car-2.jpg",
-    "../../../public/assets/images/carsoule/car-3.jpg",
-  ];
+  const car_images = [img1, img2, img3];
   return (
     <>
       <div className={`over-flow-hidden ${styles.cars_container}`}>
@@ -35,7 +34,7 @@ function Caarousel() {
                       We know how large objects will act, but things on a small
                       scale.
                     </p>
-                    <Link to="/shop" > 
+                    <Link to="/shop">
                       <button className={` px-3 py-2 ${styles.custom_button}`}>
                         Shop Now
                       </button>{" "}
